@@ -1,11 +1,21 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Welcome } from './pages/Welcome.js'
+import { InputInfo } from './pages/InputInfo.js';
 
-function App() {
+export default function App() {
   return (
-    <>
-      <Welcome />
-    </>
+    <Router>
+      <Routes>
+        <Route 
+          path='/'
+          index element={<Welcome/>}
+        />
+        <Route 
+          path='/info'
+          index element={<InputInfo/>}
+        />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
