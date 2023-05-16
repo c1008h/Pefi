@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-export const IncomeBtn = () => {
+export const IncomeBtn = (showIncomeForm) => {
     const [showPrompt, setShowPrompt] = useState(false);
     const [incomeType, setIncomeType] = useState('');
     const [payFrequency, setPayFrequency] = useState('');
     const [isRecurring, setIsRecurring] = useState(false);
     const [amount, setAmount] = useState('');
     const [payer, setPayer] = useState('');
-  
+
     const handleAddIncome = () => {
       setShowPrompt(true);
     };
@@ -24,12 +24,14 @@ export const IncomeBtn = () => {
       setPayer('');
       setShowPrompt(false);
     };
-  
+    const handlePromptClose = () => {
+        setShowPrompt(false);
+      };
     return (
       <>
-        <button onClick={handleAddIncome}>Add Income</button>
-        {showPrompt && (
+        {showIncomeForm && (
           <div>
+            <h3>Add Income Details</h3>
             <form onSubmit={handleSubmit}>
               <label>
                 Income Type:
@@ -72,6 +74,7 @@ export const IncomeBtn = () => {
                 />
               </label>
               <button type="submit">Submit</button>
+              <button onClick={handlePromptClose}>Cancel</button>
             </form>
           </div>
         )}

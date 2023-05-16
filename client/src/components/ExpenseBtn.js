@@ -14,8 +14,7 @@ export function ExpenseBtn(showExpenseForm) {
 
   return (
     <div>
-      <button onClick={handleButtonClick}>Add Expense</button>
-      {showPrompt && (
+      {showExpenseForm && (
         <div className="prompt">
           <h3>Add Expense Details</h3>
           <form>

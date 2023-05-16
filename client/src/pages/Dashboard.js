@@ -33,32 +33,33 @@ export const Dashboard = () => {
         setShowForm(false);
       };
     return (
-        <>
+        <div className='container' style={{flexDirection:'row'}}>
             <h2>Dashboard</h2>
-            <Calendar
-                onChange={onDateChange}
-                value={date}
-                onClickDay={onTileClick}
-            />
-            <ExpenseBtn 
-                onClick={openExpenseForm}
-                showExpenseForm={showExpenseForm}
-            />
-            <IncomeBtn 
-                onClick={openIncomeForm}
-                showIncomeForm={showIncomeForm}
-            />
-            {/* {showExpenseForm && <ExpenseForm />}
-      {showIncomeForm && <IncomeForm />} */}
-            {/* {showForm && (
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="amount">Amount:</label>
-                    <input type="number" id="amount" />
-                    <button type="submit">Add</button>
-                </form>
-            </div> */}
-        {/* )} */}
-        </>
+            <div >
+                <Calendar
+                    onChange={onDateChange}
+                    value={date}
+                    onClickDay={onTileClick}
+                />
+                <button
+                    onClick={openExpenseForm}
+                    showExpenseForm={showExpenseForm} >
+                        Add Expense
+                </button>
+                <button 
+                    onClick={openIncomeForm}
+                    showIncomeForm={showIncomeForm}>
+                        Add Income
+                </button>  
+            </div>
+
+            <div style={{}}>
+                {showExpenseForm && <ExpenseBtn />}            
+                {showIncomeForm && <IncomeBtn />}
+            </div>     
+            
+            <h5>Net Worth</h5>
+          
+        </div>
     )
 }
