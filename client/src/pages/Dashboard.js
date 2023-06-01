@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Calendar from 'react-calendar'
 import { ExpenseBtn } from '../components/ExpenseBtn'
 import { IncomeBtn } from '../components/IncomeBtn';
+import { CalendarEl } from '../components/Calendar'
+
 export const Dashboard = () => {
-    const [date, setDate] = useState(new Date());
     const [showForm, setShowForm] = useState(false);
     const [showExpenseForm, setShowExpenseForm] = useState(false);
     const [showIncomeForm, setShowIncomeForm] = useState(false);
@@ -18,29 +18,17 @@ export const Dashboard = () => {
       setShowExpenseForm(false);
     };
 
-    const onDateChange = (date) => {
-        setDate(date);
-      };
-    
-      const onTileClick = (date) => {
-        setDate(date);
-        setShowForm(true);
-      };
-    
-      const handleSubmit = (event) => {
-        event.preventDefault();
-        // TODO: handle form submission
-        setShowForm(false);
-      };
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      // TODO: handle form submission
+      setShowForm(false);
+    };
     return (
         <div className='container' style={{flexDirection:'row'}}>
             <h2>Dashboard</h2>
             <div >
-                <Calendar
-                    onChange={onDateChange}
-                    value={date}
-                    onClickDay={onTileClick}
-                />
+                <CalendarEl />
+                
                 <button
                     onClick={openExpenseForm}
                     showExpenseForm={showExpenseForm} >
