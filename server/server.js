@@ -1,27 +1,12 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors')
-// require('dotenv').config({path: __dirname+'/../.env'});
+const cors = require('cors');
+const connectToMongoDB = require('./config/connection')
 
-// Importing ApolloServer
-const { ApolloServer } = require('apollo-server-express');
-
-const { authMiddleware } = require('./utils/auth');
-const db = require('./config/connection');
-
-const { typeDefs, resolvers } = require('./schemas');
-
-const PORT = process.env.PORT || 3006;
 const app = express();
+const PORT = process.env.PORT || 3006;
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware,
-});
-
-app.use(cors())
-
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -33,21 +18,16 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
-app.use('/api/food', require('./routes/api/food'))
-app.use('/api/resturaunt', require('./routes/api/resturaunt'))
+app.use('/api/user', require('./routes/api/food'));
+app.use('/api/finance', require('./routes/api/restaurant'));
 
-// Create a new instance of an Apollo server with the GraphQL schema
-const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start(); 
-  server.applyMiddleware({ app });
-  
-  db.once('open', () => {
+// Call the connectToMongoDB function to establish the MongoDB connection
+connectToMongoDB()
+  .then(() => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-    })
+    });
   })
-};
-  
-// Call the async function to start the server
-startApolloServer(typeDefs, resolvers);
+  .catch((error) => {
+    console.error('Failed to start server:', error);
+  });

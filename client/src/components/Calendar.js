@@ -5,13 +5,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 export const CalendarEl = () => {
     const [spend, setSpend] = useState([])
 
-    const expense = (e) => {
-        console.log(e.target)
-    }
+    // const expense = (e) => {
+    //     console.log(e.target)
+    // }
 
     return (
         <DateCalendar
-            onClick={() => expense()}
+            // onClick={() => expense()}
             // defaultValue={initialValue}
             // loading={isLoading}
             // onMonthChange={handleMonthChange}
@@ -24,6 +24,7 @@ export const CalendarEl = () => {
             //     highlightedDays,
             //     } as any,
             // }}
+            selected
         />
     )
 }
