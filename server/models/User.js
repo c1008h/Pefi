@@ -20,6 +20,18 @@ const userSchema = new Schema(
             required: true,
             minlength: 8
         },
+        goals: {
+            type: Schema.Types.ObjectId,
+            ref: 'Goal'
+        },
+        incomes: {
+            type: Schema.Types.ObjectId,
+            ref: 'Income'
+        },
+        expenses: {
+            type: Schema.Types.ObjectId,
+            ref: 'Expense'
+        }
     },
     {
         toJSON: {
