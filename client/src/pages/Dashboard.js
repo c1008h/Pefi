@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ExpenseBtn } from '../components/ExpenseBtn'
 import { IncomeBtn } from '../components/IncomeBtn';
 import { CalendarEl } from '../components/Calendar'
+import FinanceDisplay from '../components/FinanceDisplay'
 
 export const Dashboard = () => {
     const [showForm, setShowForm] = useState(false);
@@ -27,8 +28,10 @@ export const Dashboard = () => {
         <div className='container' style={{flexDirection:'row'}}>
             <h2>Dashboard</h2>
             <div >
-                <CalendarEl />
-                
+                <div style={{display:'flex'}}>
+                    <CalendarEl />
+                    <FinanceDisplay />
+                </div>
                 <button
                     onClick={openExpenseForm}
                     showExpenseForm={showExpenseForm} >
@@ -45,9 +48,7 @@ export const Dashboard = () => {
                 {showExpenseForm && <ExpenseBtn />}            
                 {showIncomeForm && <IncomeBtn />}
             </div>     
-            
-            <h5>Net Worth</h5>
-          
+                      
         </div>
     )
 }
