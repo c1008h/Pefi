@@ -13,11 +13,11 @@ export function ExpenseBtn(showExpenseForm) {
   };
 
   return (
-    <div>
+    <div style={{display:'flex', flexDirection:'column'}}>
       {showExpenseForm && (
-        <div className="prompt">
+        <div className="prompt" >
           <h3>Add Expense Details</h3>
-          <form>
+          <form style={{display:'flex', flexDirection:'column'}}> 
             <label>
               Expense Amount:
               <input type="number" />

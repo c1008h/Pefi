@@ -30,9 +30,9 @@ export const IncomeBtn = (showIncomeForm) => {
     return (
       <>
         {showIncomeForm && (
-          <div>
+          <div style={{display:'flex', flexDirection:'column'}}>
             <h3>Add Income Details</h3>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{display:'flex', flexDirection:'column'}}>
               <label>
                 Income Type:
                 <input
