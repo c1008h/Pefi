@@ -7,8 +7,8 @@ export const CalendarEl = (event) => {
     const [currentMonth, setCurrentMonth] = useState(null)
     const [currentDay, setCurrentDay] = useState(null)
     const [currentYear, setCurrentYear] = useState(null)
+    // const [showButtons, setShowButtons] = useState(false)
 
-    // const date = new Date()
     useEffect(() => {
         const date = new Date()
         setCurrentDay(date.getDate())
@@ -49,10 +49,15 @@ export const CalendarEl = (event) => {
                 return
             }
         }
-      }
+    }
+
     return (
-        <DateCalendar
-            onClick={(e) => pickDate(e)}
-        />
+        <div style={{flexDirection:'column'}}>
+            <DateCalendar
+                onClick={(e) => pickDate(e)}
+            />
+            <h2>{currentMonth}/{currentDay}/{currentYear}</h2>
+        </div>
+
     )
 }
