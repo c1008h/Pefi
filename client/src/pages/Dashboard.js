@@ -21,9 +21,9 @@ export const Dashboard = () => {
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      // TODO: handle form submission
       setShowForm(false);
     };
+
     return (
         <div className='container' style={{flexDirection:'row'}}>
             <h2>Dashboard</h2>
@@ -44,7 +44,7 @@ export const Dashboard = () => {
                 </button>  
             </div>
 
-            <div style={{}}>
+            <div style={{width:'60%'}}>
                 {showExpenseForm && <ExpenseBtn />}            
                 {showIncomeForm && <IncomeBtn />}
             </div>     
