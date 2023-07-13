@@ -9,7 +9,7 @@ export const CalendarEl = (event) => {
     // const [showButtons, setShowButtons] = useState(false)
 
     const headerEl = document.getElementById(':r1:-grid-label')
-    console.log(headerEl.innerHTML)
+    // console.log(headerEl.innerHTML)
 
     useEffect(() => {
         const date = new Date()
@@ -39,9 +39,10 @@ export const CalendarEl = (event) => {
         if (selectedDateNode.classList.contains('MuiPickersYear-yearButton')) {
           setCurrentYear(parseInt(e.target.textContent))
         }
-        // if (selectedDateNode.classList.contains('MuiSvgIcon-root')) {
-        if (selectedDateNode.classList.contains('MuiPickersArrowSwitcher-root')) {
+        if (selectedDateNode.classList.contains('MuiSvgIcon-root')) {
+        // if (selectedDateNode.classList.contains('MuiPickersArrowSwitcher-root')) {
             // console.log(headerEl)
+            // console.log(selectedDateNode)
             // const findMonth = document.getElementByClassName('MuiPickersCalendarHeader-label')
             // console.log(findMonth.textContent)
             // console.log(e.target)
@@ -54,13 +55,28 @@ export const CalendarEl = (event) => {
             // } else {
             //     return
             // }
+            const arrow = selectedDateNode.getAttribute('data-mui-test');
+            const monthLabel = selectedDateNode.closest('.MuiPickersCalendarHeader-root')
+            .querySelector('.MuiPickersCalendarHeader-transitionContainer > div > h4').textContent;
+              
+            if (arrow === 'keyboard-arrow-left') {
+              setCurrentMonth((prevMonth) => (prevMonth - 1 === 0 ? 12 : prevMonth - 1));
+            } else if (arrow === 'keyboard-arrow-right') {
+              setCurrentMonth((prevMonth) => (prevMonth + 1 === 13 ? 1 : prevMonth + 1));
+            } else {
+              return;
+            }
+        
+            console.log(monthLabel);
         }
     }
+
 
     return (
         <div style={{flexDirection:'column'}}>
             <DateCalendar
-                onClick={(e) => pickDate(e)}
+                onClick={(date) => pickDate(date)}
+
             />
             <h2>{currentMonth}/{currentDay}/{currentYear}</h2>
         </div>
