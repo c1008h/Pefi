@@ -1,33 +1,61 @@
 const express = require('express');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
+
 const path = require('path');
+const { authMiddleware } = require('./utils/auth');
+
+const { typeDefs, resolvers } = require('./schemas');
+const db = require('./config/connection');
+
 const cors = require('cors');
-const connectToMongoDB = require('./config/connection')
 
 const app = express();
 const PORT = process.env.PORT || 3006;
-
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, './client/build')));
-}
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public/index.html'));
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
 
-app.use('/api/user', require('./routes/api/food'));
-app.use('/api/finance', require('./routes/api/restaurant'));
 
-// Call the connectToMongoDB function to establish the MongoDB connection
-connectToMongoDB()
-  .then(() => {
+// Create a new instance of an Apollo server with the GraphQL schema
+const startApolloServer = async () => {
+  await server.start();
+
+  app.use(cors());
+
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+
+  // Serve up static assets
+  app.use('/images', express.static(path.join(__dirname, '../client/images')));
+
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    });
+  }
+
+  db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
-  })
-  .catch((error) => {
-    console.error('Failed to start server:', error);
   });
+};
+
+// Call the async function to start the server
+startApolloServer();
+
+
+
+
+// app.use('/api/user', require('./routes/api/food'));
+// app.use('/api/finance', require('./routes/api/restaurant'));
+
