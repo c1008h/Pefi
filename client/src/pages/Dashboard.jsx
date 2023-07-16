@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ExpenseBtn } from '../components/ExpenseBtn'
 import { IncomeBtn } from '../components/IncomeBtn';
 import { CalendarEl } from '../components/Calendar'
@@ -34,12 +34,14 @@ export const Dashboard = () => {
                 </div>
                 <button
                     onClick={openExpenseForm}
-                    showExpenseForm={showExpenseForm} >
+                    // showExpenseForm={showExpenseForm} 
+                    >
                         Add Expense
                 </button>
                 <button 
                     onClick={openIncomeForm}
-                    showIncomeForm={showIncomeForm}>
+                    // showIncomeForm={showIncomeForm}
+                    >
                         Add Income
                 </button>  
             </div>
