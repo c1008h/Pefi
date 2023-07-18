@@ -94,10 +94,12 @@ const typeDefs = `
         updateIncome(id: ID!, input: IncomeInput!): Income
         updateExpense(id: ID!, input: ExpenseInput!): Expenses
 
-        deleteIncome(id: ID!): Boolean
-        deleteExpense(id: ID!): Boolean
-        deleteUser(id: ID!): Boolean
+
     }
 `;
 
 module.exports = typeDefs;
+
+        // deleteIncome(id: ID!): Boolean
+        // deleteExpense(id: ID!): Boolean
+        // deleteUser(id: ID!): Boolean

@@ -56,19 +56,19 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be logged in.');
       },
-      removeIncome: async (parent, { id } , context) => {
-        if (context.user) {
+      // removeIncome: async (parent, { id } , context) => {
+      //   if (context.user) {
           
-          const updatedUser = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $pull: { income: { id : id }} },
-            { new: true }
-          )
-          console.log('successfully removed income')
-          return updatedUser;
-        }
-        throw new AuthenticationError ('You need to be logged in.');
-      },
+      //     const updatedUser = await User.findByIdAndUpdate(
+      //       { _id: context.user._id },
+      //       { $pull: { income: { id : id }} },
+      //       { new: true }
+      //     )
+      //     console.log('successfully removed income')
+      //     return updatedUser;
+      //   }
+      //   throw new AuthenticationError ('You need to be logged in.');
+      // },
 
 
 
@@ -84,21 +84,21 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
-      deleteExpense: async (parent, { id } , context) => {
-        if (context.user) {
+      // deleteExpense: async (parent, { id } , context) => {
+      //   if (context.user) {
           
-          const updatedUser = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $pull: { expense: { id : id }} },
-            { new: true }
-          )
-          console.log('successfully removed expense')
-          return updatedUser;
-        }
-        throw new AuthenticationError ('You need to be logged in.');
-      },
+      //     const updatedUser = await User.findByIdAndUpdate(
+      //       { _id: context.user._id },
+      //       { $pull: { expense: { id : id }} },
+      //       { new: true }
+      //     )
+      //     console.log('successfully removed expense')
+      //     return updatedUser;
+      //   }
+      //   throw new AuthenticationError ('You need to be logged in.');
+      // },
 
-      createGoal: async (parent, { input }, context) => {
+      createGoals: async (parent, { input }, context) => {
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
@@ -110,19 +110,19 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
-      deleteGoal: async (parent, { id } , context) => {
-        if (context.user) {
+      // deleteGoal: async (parent, { id } , context) => {
+      //   if (context.user) {
           
-          const updatedUser = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $pull: { goal: { id : id }} },
-            { new: true }
-          )
-          console.log('successfully removed goal')
-          return updatedUser;
-        }
-        throw new AuthenticationError ('You need to be logged in.');
-      },
+      //     const updatedUser = await User.findByIdAndUpdate(
+      //       { _id: context.user._id },
+      //       { $pull: { goal: { id : id }} },
+      //       { new: true }
+      //     )
+      //     console.log('successfully removed goal')
+      //     return updatedUser;
+      //   }
+      //   throw new AuthenticationError ('You need to be logged in.');
+      // },
     }
 }
 module.exports = resolvers;

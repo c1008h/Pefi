@@ -1,8 +1,9 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const incomeSchema = new Schema({
-    incomeId: {
-        type: ID,
+    id: {
+        type: String,
+        required: true
     },
     amount: {
         type: Number,
@@ -23,5 +24,6 @@ const incomeSchema = new Schema({
     }
 })
 
-const Goal = model('Income', incomeSchema);
+const Income = model('Income', incomeSchema);
+
 module.exports = Income;

@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 
 const goalSchema = new Schema(
     {
+      id: {
+        type: String,
+        required: true
+      },
       yearOneSavings: {
         type: Number,
         required: 'You need to leave a goal!'

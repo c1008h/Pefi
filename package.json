@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "concurrently": "^8.2.0",
     "react-calendar": "^4.4.0"
   }
