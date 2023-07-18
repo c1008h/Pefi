@@ -16,13 +16,26 @@ const typeDefs = `
         threeYearGoal: Float
         fourYearGoal: Float
         fiveYearGoal: Float
+        oneYearYear: Float
+        twoYearYear: Float
+        threeYearYear: Float
+        fourYearYear: Float
+        fiveYearYear: Float
+
+
     }
     input GoalInput {
+        id: ID!
         oneYearGoal: Float
         twoYearGoal: Float
         threeYearGoal: Float
         fourYearGoal: Float
         fiveYearGoal: Float
+        oYearYear: Float
+        twoYearYear: Float
+        threeYearYear: Float
+        fourYearYear: Float
+        fiveYearYear: Float
     }
 
     type Income {
@@ -41,6 +54,7 @@ const typeDefs = `
         date: String
     }
     input IncomeInput {
+        id: ID!
         amount: Float
         frequency: String
         source: String
@@ -48,6 +62,7 @@ const typeDefs = `
     }
       
     input ExpenseInput {
+        id: ID!
         amount: Float
         frequency: String
         category: String
