@@ -70,11 +70,11 @@ const typeDefs = `
 
         updateUser(firstName: String, lastName: String, email: String, password: String): User
 
-        createGoals(userId: ID!, input: GoalInput!): Goals
+        createGoals(id: ID!, input: GoalInput!): Goals
         updateGoals(id: ID!, input: GoalInput!): Goals
 
-        createIncome(userId: ID!, amount: Float, frequency: String, source: String, date: String): Income
-        createExpense(userId: ID!, amount: Float, frequency: String, category: String, date: String): Expenses
+        createIncome(id: ID!, amount: Float, frequency: String, source: String, date: String): Income
+        createExpense(id: ID!, amount: Float, frequency: String, category: String, date: String): Expenses
 
         updateIncome(id: ID!, input: IncomeInput!): Income
         updateExpense(id: ID!, input: ExpenseInput!): Expenses
