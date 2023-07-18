@@ -4,12 +4,18 @@ const incomeSchema = new Schema({
     incomeId: {
         type: ID,
     },
-    income_total: {
+    amount: {
         type: Number,
         required: true,
     },
-    incomeType: {
+    source: {
+        type: String,
+        required: true
         
+    },
+    frequency: {
+        type: String,
+        required: true
     },
     date: {
         type: String,

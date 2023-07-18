@@ -4,12 +4,17 @@ const expenseSchema = new Schema({
     expenseId: {
         type: ID,
     },
-    expense_total: {
+    amount: {
         type: Number,
         required: true,
     },
-    expense_type: {
-        
+    frequency: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
     },
     date: {
         type: String,

@@ -1,64 +1,88 @@
 const typeDefs = `
-  type Goals {
-    _id: ID
-    name: String
-  }
+    type User {
+        _id: ID!
+        firstName: String!
+        lastName: String!
+        email: String!
+        income: [Income]
+        expenses: [Expenses]
+        goals: [Goals]
+    }
 
-  type Income {
-    _id: ID
-    name: String
-    description: String
-    price: Float
-    category: Category
-  }
+    type Goals {
+        id: ID!
+        oneYearGoal: Float
+        twoYearGoal: Float
+        threeYearGoal: Float
+        fourYearGoal: Float
+        fiveYearGoal: Float
+    }
+    input GoalInput {
+        oneYearGoal: Float
+        twoYearGoal: Float
+        threeYearGoal: Float
+        fourYearGoal: Float
+        fiveYearGoal: Float
+    }
 
-  type Frequency {
-    daily: Boolean
-    weekly: Boolean
-    biweekly: Boolean
-    monthly: Boolean
-  }
+    type Income {
+        id: ID!
+        amount: Float
+        frequency: String
+        source: String
+        date: String
+    }
 
-  type Expenses {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
-  }
+    type Expenses {
+        id: ID!
+        amount: Float
+        frequency: String
+        category: String
+        date: String
+    }
+    input IncomeInput {
+        amount: Float
+        frequency: String
+        source: String
+        date: String
+    }
+      
+    input ExpenseInput {
+        amount: Float
+        frequency: String
+        category: String
+        date: String
+    }
+    type Auth {
+        token: ID
+        user: User
+    }
 
-  type Category {
-    _id: ID
-    name: String
-  }
+    type Query {
+        users: [User]
+        user(email: String!): User 
+        me: User
+    }
 
-  type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    income: [Income]
-    expenses: [Expenses]
-    goals: [Goals]
-  }
+    type Mutation {
+        login(email: String!, password: String!): Auth
+        addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
 
-  type Auth {
-    token: ID
-    user: User
-  }
+        updateUser(firstName: String, lastName: String, email: String, password: String): User
 
-  type Query {
-    categories: [Category]
-    user: User
-  }
+        createGoals(userId: ID!, input: GoalInput!): Goals
+        updateGoals(id: ID!, input: GoalInput!): Goals
 
-  type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    login(email: String!, password: String!): Auth
-  }
+        createIncome(userId: ID!, amount: Float, frequency: String, source: String, date: String): Income
+        createExpense(userId: ID!, amount: Float, frequency: String, category: String, date: String): Expenses
+
+        updateIncome(id: ID!, input: IncomeInput!): Income
+        updateExpense(id: ID!, input: ExpenseInput!): Expenses
+
+        deleteIncome(id: ID!): Boolean
+        deleteExpense(id: ID!): Boolean
+        deleteUser(id: ID!): Boolean
+    }
 `;
 
 module.exports = typeDefs;
