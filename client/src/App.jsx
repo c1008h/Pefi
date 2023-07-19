@@ -12,7 +12,8 @@ import store from './utils/store';
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import {Navbar} from './components/Navbar'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -41,6 +42,7 @@ export default function App() {
           <Provider store={store}>
             <Navbar />
             <Outlet />
+            <Footer />
           </Provider>
         </div>
       </ApolloProvider>

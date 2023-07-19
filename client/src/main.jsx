@@ -5,7 +5,7 @@ import { InputInfo } from './pages/InputInfo.jsx';
 import { Dashboard } from './pages/Dashboard.jsx'
 import 'react-calendar/dist/Calendar.css';
 import './style/calendar.css'
-// import './index.css';
+import './style/index.css';
 import App from './App.jsx';
 
 const router = createBrowserRouter([
