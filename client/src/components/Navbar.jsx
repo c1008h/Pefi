@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom'
 export default function Navbar () {
     const style = {
         diplay:'flex',
+        height: '20%',
         margin:'2px',
         backgroundColor:'red',
-        height: '20%'
-
+        justifyContent: 'space-between', 
     }
+    
     return (
         <nav style={style}>
-            <Link>Dashboard</Link>
-            <Link>Goals</Link>
-            <Link>Profile</Link>
-            <Link>Logout</Link>
+            <Link><span>Dashboard</span></Link>
+            <Link><span>Goals</span></Link>
+            <Link><span>Profile</span></Link>
         </nav>
     )
 }
