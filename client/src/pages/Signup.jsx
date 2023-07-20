@@ -20,6 +20,8 @@ export default function Signup() {
     try {
       const { data } = await addUser({
         variables: {
+          // firstName: firstName.trim(),
+          // lastName: lastName.trim(),
           email: email.trim(),
           password: password.trim()
         }

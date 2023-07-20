@@ -15,26 +15,26 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer';
 
-const httpLink = createHttpLink({
-  uri: '/graphql',
-});
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
-
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
-
 export default function App() {
+  const httpLink = createHttpLink({
+    uri: 'http://localhost:3006/graphql',
+  });
+  
+  const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('id_token');
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
+  
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+  
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ApolloProvider client={client}>

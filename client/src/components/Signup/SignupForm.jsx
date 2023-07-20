@@ -9,8 +9,8 @@ export const SignupForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(password)
-        console.log(confirmPassword)
+        // console.log(password)
+        // console.log(confirmPassword)
         if(confirmPassword === password) {
 
         // onSubmit(username, email, password);

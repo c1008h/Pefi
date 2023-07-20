@@ -54,8 +54,3 @@ const startApolloServer = async () => {
 startApolloServer();
 
 
-
-
-// app.use('/api/user', require('./routes/api/food'));
-// app.use('/api/finance', require('./routes/api/restaurant'));
-
