@@ -9,27 +9,32 @@ export default function Navbar () {
 
     const style = {
         diplay:'flex',
-        height: '20%',
+        height: '60px',
         margin:'2px',
         backgroundColor:'red',
         justifyContent: 'space-between', 
     }
-
+    const linkStyle = {
+        padding: '0 10px', // Adjust the padding as needed for spacing between links
+        textDecoration: 'none',
+        color: 'white',
+        fontWeight: 'bold',
+    };
     return (
         <nav style={style}>
             {authService.loggedIn() ? (
             <>
-                <Link to='/dashboard'><span>Dashboard</span></Link>
-                <Link to='/goals'><span>Goals</span></Link>
-                <Link to='/profile'><span>Profile</span></Link>
-                <Link to='/welcome' onClick={ logout }><span>Logout</span></Link>  
+                <Link to='/dashboard' style={linkStyle}>Dashboard</Link>
+                <Link to='/goals' style={linkStyle}>Goals</Link>
+                <Link to='/profile' style={linkStyle}>Profile</Link>
+                <Link to='/welcome' style={linkStyle} onClick={ logout }>Logout</Link>  
 
             </>
             ) : (
             <>
-                <Link><span>Personal Finance</span></Link>
-                <Link to='/signup'><span>Signup</span></Link>
-                <Link to='/login'><span>Login</span></Link>
+                <Link style={linkStyle}>Personal Finance</Link>
+                <Link to='/signup' style={linkStyle}>Signup</Link>
+                <Link to='/login' style={linkStyle}>Login</Link>
             </>
             )}
         </nav>
