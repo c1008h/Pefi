@@ -1,11 +1,12 @@
 import { useState } from 'react'
+import {Link} from 'react-router-dom'
 import { Form, Button, Card, Container } from 'react-bootstrap'
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const [passwordsMatch, setPasswordsMatch] = useState(true)
   // const [isChecked, setIsChecked] = useState(false);
 
   const isFormFilled = email !== '' && password !== '' && confirmPassword !== '';
@@ -17,12 +18,25 @@ export default function Signup() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Implement your form submission logic here
+    if (password !== confirmPassword) {
+      setPasswordsMatch(false)
+      setPassword('')
+      setConfirmPassword('')
+      alert('Passwords do not match. Please try again.')
+    } else {
+      setPasswordsMatch(true)
+      if (isFormFilled) {
+        console.log('Form submitted successfully!')
+      }
+    }
   };
   return (
     <Container style={{justifyContent:'center', justifyItems:'center', alignContent:'center'}}>
@@ -34,24 +48,28 @@ export default function Signup() {
         <Form.Group>
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange}/>
-          <Form.Text className="text-muted">
-            We&apos;ll never share your email with anyone else.
-          </Form.Text>
+
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
         </Form.Group>
 
         <Form.Group>
           <Form.Label>Confirm Password</Form.Label>
-          <Form.Control type="confirmpassword" placeholder="Confirm Password" value={confirmPassword} onChange={handleEmailChange}/>
+          <Form.Control type="password" placeholder="Confirm Password" value={confirmPassword} onChange={handleConfirmPasswordChange}/>
         </Form.Group>
-
-        <Button variant="primary" type="submit" disabled={!isFormFilled}>
+        <Form.Text className="text-muted">
+            We&apos;ll never share your email with anyone else.
+        </Form.Text>
+        <div>
+          <Button variant="primary" type="submit" disabled={!isFormFilled}>
           Submit
-        </Button>
+          </Button>
+          <Link>Login</Link>
+        </div>
+
       </Form>
     </Card>
     </Container>
