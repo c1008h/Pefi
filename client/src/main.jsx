@@ -11,9 +11,6 @@ import './style/index.css';
 import App from './App.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
 const router = createBrowserRouter([
   {
     path:'/',
