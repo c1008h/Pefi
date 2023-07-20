@@ -19,17 +19,17 @@ export default function Navbar () {
         <nav style={style}>
             {authService.loggedIn() ? (
             <>
-                <Link><span>Dashboard</span></Link>
-                <Link><span>Goals</span></Link>
-                <Link><span>Profile</span></Link>
-                <Link onClick={ logout }><span>Logout</span></Link>  
+                <Link to='/dashboard'><span>Dashboard</span></Link>
+                <Link to='/goals'><span>Goals</span></Link>
+                <Link to='/profile'><span>Profile</span></Link>
+                <Link to='/welcome' onClick={ logout }><span>Logout</span></Link>  
 
             </>
             ) : (
             <>
                 <Link><span>Personal Finance</span></Link>
-                <Link><span>Signup</span></Link>
-                <Link><span>Login</span></Link>
+                <Link to='/signup'><span>Signup</span></Link>
+                <Link to='/login'><span>Login</span></Link>
             </>
             )}
         </nav>
