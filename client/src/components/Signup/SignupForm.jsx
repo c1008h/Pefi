@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types'; // Import PropTypes
 
-export const SignupForm = () => {
+export const SignupForm = ({ onSubmit }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -13,7 +14,7 @@ export const SignupForm = () => {
         // console.log(confirmPassword)
         if(confirmPassword === password) {
 
-        // onSubmit(username, email, password);
+        onSubmit(email, password);
         setEmail('')
         setPassword('')
       } else {
@@ -76,3 +77,7 @@ export const SignupForm = () => {
       </Form>
     )
 }
+
+SignupForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
