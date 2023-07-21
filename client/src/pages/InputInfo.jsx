@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Income } from '../components/Income'
+import { Income } from '../components/InputInfo/Income'
 // import { Expenses } from '../components/Expenses'
 
 export const InputInfo = () => {

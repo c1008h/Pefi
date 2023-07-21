@@ -77,5 +77,5 @@ export const SignupForm = ({ onSubmit }) => {
 }
 
 SignupForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  };
+  onSubmit: PropTypes.func.isRequired,
+};

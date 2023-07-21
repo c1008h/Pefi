@@ -14,7 +14,7 @@ export const QUERY_ME = gql`
         source
         date
       }
-      expense {
+      expenses {
         id
         amount
         frequency
@@ -28,7 +28,7 @@ export const QUERY_ME = gql`
         threeYearGoal
         fourYearGoal
         fiveYearGoal
-        oYearYear
+        oneYearYear
         twoYearYear
         threeYearYear
         fourYearYear

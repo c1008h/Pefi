@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ExpenseBtn } from '../components/ExpenseBtn'
-import { IncomeBtn } from '../components/IncomeBtn';
-import { CalendarEl } from '../components/Calendar'
-import FinanceDisplay from '../components/FinanceDisplay'
+import { ExpenseBtn } from '../components/Dashboard/ExpenseBtn.jsx'
+import { IncomeBtn } from '../components/Dashboard/IncomeBtn.jsx';
+import { CalendarEl } from '../components/Dashboard/Calendar.jsx'
+import FinanceDisplay from '../components/Dashboard/FinanceDisplay.jsx'
 
 export const Dashboard = () => {
     const [showForm, setShowForm] = useState(false);
