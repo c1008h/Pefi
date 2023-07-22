@@ -135,3 +135,16 @@ export const CREATE_GOALS = gql`
         }
     }
 `
+export const CREATE_FINANCE = gql`
+  mutation createFinance($input: FinanceInput!){
+    createFinance(input: $input) {
+      email
+      finance {
+        id
+        digital
+        cash
+        invested
+        saved
+      }
+    }
+`

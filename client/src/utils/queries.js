@@ -34,6 +34,13 @@ export const QUERY_ME = gql`
         fourYearYear
         fiveYearYear
       }
+      finance {
+        id
+        digital
+        cash
+        invested
+        savings
+      }
     }
   }
 `;

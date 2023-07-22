@@ -21,9 +21,8 @@ const typeDefs = `
         threeYearYear: Float
         fourYearYear: Float
         fiveYearYear: Float
-
-
     }
+
     input GoalInput {
         id: ID!
         oneYearGoal: Float
@@ -37,7 +36,20 @@ const typeDefs = `
         fourYearYear: Float
         fiveYearYear: Float
     }
-
+    type Finance {
+        id: ID!
+        digital: Float
+        cash: Float
+        invested: Float
+        saved: Float
+    }
+    input FinanceInput {
+        id: ID!
+        digital: Float
+        cash: Float
+        invested: Float
+        saved: Float
+    }
     type Income {
         id: ID!
         amount: Float
@@ -88,12 +100,14 @@ const typeDefs = `
         createGoals(id: ID!, input: GoalInput!): Goals
         updateGoals(id: ID!, input: GoalInput!): Goals
 
+        createFinance(id: ID!, input: FinanceInput!): Finance
+        updateFinance(id: ID!, input: FinanceInput!): Finance
+
         createIncome(id: ID!, amount: Float, frequency: String, source: String, date: String): Income
         createExpense(id: ID!, amount: Float, frequency: String, category: String, date: String): Expenses
 
         updateIncome(id: ID!, input: IncomeInput!): Income
         updateExpense(id: ID!, input: ExpenseInput!): Expenses
-
 
     }
 `;

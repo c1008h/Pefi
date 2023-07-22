@@ -23,6 +23,8 @@ export default function FinanceForm() {
       <Form.Control />
       </Form.Group>
         <Button>Save</Button>
+        <Button>Cancel</Button>
+
     </Form>
   )
 }

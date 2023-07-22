@@ -5,10 +5,10 @@ import { useState } from 'react';
 export default function ProfileForm({userData}) {
     const [firstName, setFirstName] = useState(userData.firstName || '')
     const [lastName, setLastName] = useState(userData.lastName || '')
-    const [email, setEmail] = useState(userData.email || '')
+    const [email, setEmail] = useState(userData.email)
     const [password, setPassword] = useState()
 
-    console.log(userData.email)
+    // console.log(userData.email)
     console.log(email)
     function saveFirst(e) {
         setFirstName(e.target.value)
@@ -26,7 +26,7 @@ export default function ProfileForm({userData}) {
     return (
         <Container>
         <h2>Profile</h2>
-        <Card>
+        <Card style={{padding:'5%'}}>
             <Form>
                 <Form.Group>
                     <Form.Label>First Name:</Form.Label>
@@ -57,6 +57,7 @@ export default function ProfileForm({userData}) {
                     <Form.Control></Form.Control>
                 </Form.Group>
                 <Button tyoe='submit'>Save</Button>
+                <Button>Cancel</Button>
             </Form>
         </Card>
         </Container>

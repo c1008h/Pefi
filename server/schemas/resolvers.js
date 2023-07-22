@@ -123,6 +123,18 @@ const resolvers = {
       //   }
       //   throw new AuthenticationError ('You need to be logged in.');
       // },
+      createFinance: async (parent, { input }, context) => {
+        if (context.user) {
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { goal: input } },
+                { new: true }
+            )
+            console.log('successfully input finance')
+            return updatedUser;
+        }
+        throw new AuthenticationError ('You need to be log in first.');
+      },
     }
 }
 module.exports = resolvers;
