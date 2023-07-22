@@ -26,6 +26,7 @@ export default function Navbar () {
             <>
                 <Link to='/dashboard' style={linkStyle}>Dashboard</Link>
                 <Link to='/goals' style={linkStyle}>Goals</Link>
+                <Link to='finance' style={linkStyle}>Finance</Link>
                 <Link to='/profile' style={linkStyle}>Profile</Link>
                 <Link to='/welcome' style={linkStyle} onClick={ logout }>Logout</Link>  
 

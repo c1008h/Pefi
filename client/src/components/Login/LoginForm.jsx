@@ -3,13 +3,9 @@ import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'; // Import PropTypes
 
 export default function LoginForm({ handleFormSubmit, handleChange, formState }) {
-  // };
   return (
-    // <Container style={{justifyContent:'center', justifyItems:'center', alignContent:'center'}}>
-    <Card style={{padding:'2%', width:'50%'}}>
-    {/* <Card.Title>Signup!</Card.Title> */}
 
-    <Form onSubmit={handleFormSubmit}>
+    <Form onSubmit={handleFormSubmit} style={{padding:'15%', justifyContent:'center'}}>
         <h1>Login</h1>
 
         <Form.Group>
@@ -56,8 +52,7 @@ export default function LoginForm({ handleFormSubmit, handleChange, formState })
         </div>
 
       </Form>
-      </Card>
-  // </Container>
+
   )
 }
 
