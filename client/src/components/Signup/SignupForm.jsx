@@ -24,7 +24,7 @@ export const SignupForm = ({ onSubmit }) => {
 
     return(
         <Form onSubmit={handleSubmit} style={{padding:'15%', justifyContent:'center'}}>
-  
+        <h2>Signup</h2>
         <Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
