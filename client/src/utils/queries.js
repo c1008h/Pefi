@@ -39,7 +39,7 @@ export const QUERY_ME = gql`
         digital
         cash
         invested
-        savings
+        saved
       }
     }
   }
