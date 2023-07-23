@@ -29,13 +29,13 @@ export default function Profile() {
   }, [data])
   console.log(userData)
 
-  // const token = authService.loggedIn() ? authService.getToken() : null;
-  // if(!token) {
-  //     return <h2>Please login first</h2>
-  // }
-  // if(loading) {
-  //     return <h2>LOADING...</h2>
-  // }
+  const token = authService.loggedIn() ? authService.getToken() : null;
+  if(!token) {
+      return <h2>Please login first</h2>
+  }
+  if(loading) {
+      return <h2>LOADING...</h2>
+  }
 
   return (
     <ProfileForm 

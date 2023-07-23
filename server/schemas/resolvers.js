@@ -127,7 +127,7 @@ const resolvers = {
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { goal: input } },
+                { $addToSet: { finance: input } },
                 { new: true }
             )
             console.log('successfully input finance')

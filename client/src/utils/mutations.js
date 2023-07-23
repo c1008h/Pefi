@@ -136,7 +136,7 @@ export const CREATE_GOALS = gql`
     }
 `
 export const CREATE_FINANCE = gql`
-  mutation createFinance($input: FinanceInput!){
+  mutation createFinance($input: FinanceInput!) {
     createFinance(input: $input) {
       email
       finance {
@@ -147,4 +147,5 @@ export const CREATE_FINANCE = gql`
         saved
       }
     }
+  }
 `

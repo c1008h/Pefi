@@ -7,6 +7,7 @@ const typeDefs = `
         income: [Income]
         expenses: [Expenses]
         goals: [Goals]
+        finance: [Finance]
     }
 
     type Goals {
@@ -113,7 +114,3 @@ const typeDefs = `
 `;
 
 module.exports = typeDefs;
-
-        // deleteIncome(id: ID!): Boolean
-        // deleteExpense(id: ID!): Boolean
-        // deleteUser(id: ID!): Boolean
