@@ -1,6 +1,7 @@
-import { Container, Card, Form, Button } from 'react-bootstrap'
-import PropTypes from 'prop-types'; // Import PropTypes
 import { useState } from 'react';
+import PasswordModal from './PasswordModal';
+import PropTypes from 'prop-types'; // Import PropTypes
+import { Container, Card, Form, Button, Modal } from 'react-bootstrap'
 
 export default function ProfileForm({userData}) {
     const [firstName, setFirstName] = useState(userData.firstName || '')
@@ -8,6 +9,7 @@ export default function ProfileForm({userData}) {
     const [email, setEmail] = useState(userData.email)
     const [password, setPassword] = useState()
     const [isEditMode, setIsEditMode] = useState(false);
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
 
     // console.log(userData.email)
     // console.log(email)
@@ -21,15 +23,20 @@ export default function ProfileForm({userData}) {
         setEmail(userData.email || '');
         setPassword(''); // Reset the password field
         setIsEditMode(false);
-      };
+    };
     
-
-      const handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        // Handle form submission logic here, e.g., save the changes to the user profile
-        setIsEditMode(false); // Switch back to read-only mode after saving
-      };
-
+        setIsEditMode(false); 
+    };
+    const handleOpenPasswordModal = () => {
+        setShowPasswordModal(true);
+    };
+      
+    const handleClosePasswordModal = () => {
+        setShowPasswordModal(false);
+    };
+      
     return (
         <Container>
         <h2>Profile</h2>
@@ -79,22 +86,23 @@ export default function ProfileForm({userData}) {
                     />
                     )}
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control></Form.Control>
-                </Form.Group>
-
-
+                <div>
+                    <h4 onClick={handleOpenPasswordModal}>Change Password</h4>
+                    {showPasswordModal ? (
+                        <PasswordModal 
+                            show={showPasswordModal}
+                            handleClose={handleClosePasswordModal}
+                        />
+                    ) : null}
+                </div>
                 {isEditMode ? (
-            <>
-              <Button type="submit">Save</Button>
-              <Button variant="secondary" onClick={handleCancelClick}>
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <Button onClick={handleEditClick}>Edit Profile</Button>
-          )}
+                <>
+                    <Button type="submit">Save</Button>
+                    <Button variant="secondary" onClick={handleCancelClick}>Cancel</Button>
+                </>
+                ) : (
+                    <Button onClick={handleEditClick}>Edit Profile</Button>
+                )}
             </Form>
         </Card>
         </Container>

@@ -20,7 +20,7 @@ export default function FinanceForm({userData}) {
 console.log(userData.finance)
     return (
         <>
-            <Form>
+            <Form style={{padding:'10%'}}>
                 <Form.Group>
                     <Form.Label>Total Digital Money:</Form.Label>
                     {isEditMode ? (
@@ -33,7 +33,6 @@ console.log(userData.finance)
                     ) : (
                         <Form.Control 
                         type="number" 
-                        placeholder="Enter Digital Money" 
                         name='digital'
                         disabled
                         // value={formState.digital}
@@ -53,7 +52,6 @@ console.log(userData.finance)
                     ): (
                         <Form.Control 
                         type="number" 
-                        placeholder="Enter Cash" 
                         name='cash'
                         disabled
                         // value={formState.digital}
@@ -73,7 +71,6 @@ console.log(userData.finance)
                 ) : (
                     <Form.Control 
                     type="number" 
-                    placeholder="Enter invested" 
                     name='invested'
                     // value={formState.digital}
                     disabled
@@ -93,7 +90,6 @@ console.log(userData.finance)
                 ): (
                     <Form.Control 
                     type="number" 
-                    placeholder="Enter saved Money" 
                     name='saved'
                     // value={formState.saved}
                     disabled
