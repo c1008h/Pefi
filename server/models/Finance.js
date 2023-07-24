@@ -5,17 +5,17 @@ const financeSchema = new Schema({
         type: String,
     },
     digital: {
-        type: Number,
+        type: String,
     },
     cash: {
-        type: Number,
+        type: String,
         
     },
     invested: {
-        type: Number,
+        type: String,
     },
     saved: {
-        type: Number,
+        type: String,
     }
 })
 

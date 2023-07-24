@@ -7,21 +7,21 @@ export const QUERY_ME = gql`
       firstName
       lastName
       email
-      income {
+      incomeGroup {
         id
         amount
         frequency
         source
         date
       }
-      expenses {
+      expensesGroup {
         id
         amount
         frequency
         category
         date
       }
-      goals {
+      goalsGroup {
         id
         oneYearGoal
         twoYearGoal
@@ -34,7 +34,7 @@ export const QUERY_ME = gql`
         fourYearYear
         fiveYearYear
       }
-      finance {
+      financeGroup {
         id
         digital
         cash

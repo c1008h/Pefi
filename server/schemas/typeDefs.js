@@ -4,10 +4,10 @@ const typeDefs = `
         firstName: String
         lastName: String
         email: String!
-        income: [Income]
-        expenses: [Expenses]
-        goals: [Goals]
-        finance: [Finance]
+        incomeGroup: [Income]
+        expensesGroup: [Expenses]
+        goalsGroup: [Goals]
+        financeGroup: Finance
     }
 
     type Goals {
@@ -38,18 +38,18 @@ const typeDefs = `
         fiveYearYear: Float
     }
     type Finance {
-        id: ID!
-        digital: Float
-        cash: Float
-        invested: Float
-        saved: Float
+        id: ID
+        digital: String
+        cash: String
+        invested: String
+        saved: String
     }
     input FinanceInput {
-        id: ID!
-        digital: Float
-        cash: Float
-        invested: Float
-        saved: Float
+        id: ID
+        digital: String
+        cash: String
+        invested: String
+        saved: String
     }
     type Income {
         id: ID!
@@ -98,17 +98,17 @@ const typeDefs = `
 
         updateUser(firstName: String, lastName: String, email: String, password: String): User
 
-        createGoals(id: ID!, input: GoalInput!): Goals
-        updateGoals(id: ID!, input: GoalInput!): Goals
+        createGoals(id: ID!, input: GoalInput!): User
+        updateGoals(id: ID!, input: GoalInput!): User
 
-        createFinance(id: ID!, input: FinanceInput!): Finance
-        updateFinance(id: ID!, input: FinanceInput!): Finance
+        createFinance(id: ID, input: FinanceInput!): User
+        updateFinance(id: ID, input: FinanceInput!): User
 
-        createIncome(id: ID!, amount: Float, frequency: String, source: String, date: String): Income
-        createExpense(id: ID!, amount: Float, frequency: String, category: String, date: String): Expenses
+        createIncome(id: ID!, amount: Float, frequency: String, source: String, date: String): User
+        createExpense(id: ID!, amount: Float, frequency: String, category: String, date: String): User
 
-        updateIncome(id: ID!, input: IncomeInput!): Income
-        updateExpense(id: ID!, input: ExpenseInput!): Expenses
+        updateIncome(id: ID!, input: IncomeInput!): User
+        updateExpense(id: ID!, input: ExpenseInput!): User
 
     }
 `;

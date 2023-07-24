@@ -22,19 +22,19 @@ const userSchema = new Schema(
             required: true,
             minlength: 8
         },
-        goals: {
+        goalsGroup: {
             type: Schema.Types.ObjectId,
             ref: 'Goal'
         },
-        finance: {
+        financeGroup: {
             type: Schema.Types.ObjectId,
             ref: 'Finance'
         },
-        incomes: {
+        incomesGroup: {
             type: Schema.Types.ObjectId,
             ref: 'Income'
         },
-        expenses: {
+        expensesGroup: {
             type: Schema.Types.ObjectId,
             ref: 'Expense'
         }

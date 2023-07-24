@@ -47,7 +47,7 @@ const resolvers = {
         if (context.user) {
           const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: { income: input } },
+            { $addToSet: { incomeGroup: input } },
             { new: true }
         )
         console.log('successfully input income')
@@ -76,7 +76,7 @@ const resolvers = {
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { expense: input } },
+                { $addToSet: { expenseGroup: input } },
                 { new: true }
             )
             console.log('successfully input expense')
@@ -102,7 +102,7 @@ const resolvers = {
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { goal: input } },
+                { $addToSet: { goalGroup: input } },
                 { new: true }
             )
             console.log('successfully input goal')
@@ -127,7 +127,7 @@ const resolvers = {
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { finance: input } },
+                { $addToSet: { financeGroup: input } },
                 { new: true }
             )
             console.log('successfully input finance')

@@ -32,7 +32,7 @@ export const CREATE_INCOME = gql`
   mutation createIncome($input: IncomeInput!) {
     createIncome(input: $input) {
       email
-      income {
+      incomeGroup {
         id
         amount
         frequency
@@ -49,7 +49,7 @@ export const REMOVE_INCOME = gql`
       firstName
       lastName
       email
-      income {
+      incomeGroup {
         id
         amount
         frequency
@@ -86,7 +86,7 @@ export const CREATE_EXPENSE = gql`
   mutation createExpense($input: ExpenseInput!) {
     createExpense(input: $input) {
       email
-      expenses {
+      expensesGroup {
         id
         amount
         frequency
@@ -104,7 +104,7 @@ export const REMOVE_EXPENSE = gql`
       firstName
       lastName
       email
-      expenses {
+      expensesGroup {
         id
         amount
         frequency
@@ -119,7 +119,7 @@ export const CREATE_GOALS = gql`
     mutation createGoals($input: GoalInput!) {
         createGoals(input: $input) {
             email
-            goals {
+            goalsGroup {
                 id
                 oneYearGoal
                 twoYearGoal
@@ -138,8 +138,7 @@ export const CREATE_GOALS = gql`
 export const CREATE_FINANCE = gql`
   mutation createFinance($input: FinanceInput!) {
     createFinance(input: $input) {
-      email
-      finance {
+      financeGroup {
         id
         digital
         cash

@@ -1,9 +1,41 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'; // Import PropTypes
-
+import { useMutation, useQuery } from '@apollo/client';
+import { CREATE_FINANCE } from '../../utils/mutations';
+import {QUERY_ME} from "../../utils/queries";
 export default function FinanceForm({userData}) {
+    const [digital, setDigital] = useState()
+    const [cash, setCash] = useState()
+    const [invested, setInvested] = useState()
+    const [saved, setSaved] = useState()
+    const [financialData, setFinancialData] = useState({})
+
     const [isEditMode, setIsEditMode] = useState(false);
+    const { data } = useQuery(QUERY_ME)
+    useEffect(() => {
+        if (data) {
+            setFinancialData(data.me.financeGroup)
+            // setLoading(false)
+        }
+    },[data])
+    console.log(financialData)
+    const [createFinance] = useMutation(CREATE_FINANCE, {
+        update(cache, {data: { createFinance }}) {
+            const data = cache.readQuery({ query: QUERY_ME });
+            const me = data ? data.me : null;
+            if (!me) {
+                return;
+            }
+            
+            cache.writeQuery({
+                query: QUERY_ME,
+                data: { me: { ...me, financeGroup: [...me.financeGroup, createFinance] } },
+            });
+        }
+    })
+
+
     const handleUpdateClick = () => {
         setIsEditMode(true);
     };
@@ -12,12 +44,29 @@ export default function FinanceForm({userData}) {
         setIsEditMode(false);
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Handle form submission logic here
-        setIsEditMode(false); // Switch back to read-only mode after saving
+    const handleSubmit = async (id, digital, cash,invested,saved) => {
+        // event.preventDefault();
+        setIsEditMode(false); 
+
+        try {
+            await createFinance({ variables: { input: {
+                id: id,
+                digital: digital,
+                cash: cash,
+                invested: invested,
+                saved: saved
+            } } })
+
+            if(createFinance.error) { throw new Error('Something went wrong.')}
+
+        } catch (error) {
+            console.error(error)
+        }
     };
-console.log(userData.finance)
+    console.log(digital)
+    console.log(cash)
+    console.log(invested)
+    console.log(saved)
     return (
         <>
             <Form style={{padding:'10%'}}>
@@ -28,7 +77,8 @@ console.log(userData.finance)
                         type="number" 
                         placeholder="Enter Digital Money" 
                         name='digital'
-                        // value={formState.email} 
+                        // value{}
+                        onChange={(e) => setDigital(e.target.value)}
                     /> 
                     ) : (
                         <Form.Control 
@@ -48,6 +98,8 @@ console.log(userData.finance)
                         type="number" 
                         placeholder="Enter Cash" 
                         name='cash'
+                        onChange={(e) => setCash(e.target.value)}
+
                     />
                     ): (
                         <Form.Control 
@@ -67,6 +119,8 @@ console.log(userData.finance)
                     type="text" 
                     placeholder="Enter Total Invested " 
                     name='invested'
+                    onChange={(e) => setInvested(e.target.value)}
+
                 />
                 ) : (
                     <Form.Control 
@@ -86,6 +140,8 @@ console.log(userData.finance)
                     type="text" 
                     placeholder="Enter Total Saved" 
                     name='saved'
+                    onChange={(e) => setSaved(e.target.value)}
+
                 />
                 ): (
                     <Form.Control 
@@ -99,7 +155,7 @@ console.log(userData.finance)
 
                 {isEditMode ? (
                 <>
-                    <Button onClick={handleSubmit}>Save</Button>
+                    <Button onClick={handleSubmit( digital, cash,invested,saved)}>Save</Button>
                     <Button onClick={handleCancelClick}>Cancel</Button>
                 </>
                 ) : (
