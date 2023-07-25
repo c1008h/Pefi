@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'; // Import PropTypes
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_FINANCE } from '../../utils/mutations';
 import {QUERY_ME} from "../../utils/queries";
+import { authService } from '../../utils/auth';
 export default function FinanceForm({userData}) {
     const [digital, setDigital] = useState()
     const [cash, setCash] = useState()
@@ -20,6 +21,7 @@ export default function FinanceForm({userData}) {
         }
     },[data])
     console.log(financialData)
+
     const [createFinance] = useMutation(CREATE_FINANCE, {
         update(cache, {data: { createFinance }}) {
             const data = cache.readQuery({ query: QUERY_ME });
@@ -44,13 +46,14 @@ export default function FinanceForm({userData}) {
         setIsEditMode(false);
     };
 
-    const handleSubmit = async (id, digital, cash,invested,saved) => {
-        // event.preventDefault();
-        setIsEditMode(false); 
+    const handleSubmit = async (id, digital, cash, invested, saved) => {
+        const token = authService.loggedIn() ? authService.getToken() : null;
+        if(!token) {
+            return false
+        }        setIsEditMode(false); 
 
         try {
             await createFinance({ variables: { input: {
-                id: id,
                 digital: digital,
                 cash: cash,
                 invested: invested,
@@ -63,10 +66,6 @@ export default function FinanceForm({userData}) {
             console.error(error)
         }
     };
-    console.log(digital)
-    console.log(cash)
-    console.log(invested)
-    console.log(saved)
     return (
         <>
             <Form style={{padding:'10%'}}>
@@ -155,7 +154,7 @@ export default function FinanceForm({userData}) {
 
                 {isEditMode ? (
                 <>
-                    <Button onClick={handleSubmit( digital, cash,invested,saved)}>Save</Button>
+                    <Button onClick={() => handleSubmit(digital, cash, invested, saved)}>Save</Button>
                     <Button onClick={handleCancelClick}>Cancel</Button>
                 </>
                 ) : (

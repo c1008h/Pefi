@@ -35,7 +35,6 @@ export const QUERY_ME = gql`
         fiveYearYear
       }
       financeGroup {
-        id
         digital
         cash
         invested

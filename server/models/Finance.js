@@ -1,9 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const financeSchema = new Schema({
-    id: {
-        type: String,
-    },
     digital: {
         type: String,
     },

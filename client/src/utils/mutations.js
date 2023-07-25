@@ -19,7 +19,6 @@ export const ADD_USER = gql`
     addUser(email: $email, password: $password,) {
       token
       user {
-        _id
         firstName
         lastName
         email
@@ -33,7 +32,6 @@ export const CREATE_INCOME = gql`
     createIncome(input: $input) {
       email
       incomeGroup {
-        id
         amount
         frequency
         source
@@ -50,7 +48,6 @@ export const REMOVE_INCOME = gql`
       lastName
       email
       incomeGroup {
-        id
         amount
         frequency
         source
@@ -87,7 +84,6 @@ export const CREATE_EXPENSE = gql`
     createExpense(input: $input) {
       email
       expensesGroup {
-        id
         amount
         frequency
         category
@@ -105,7 +101,6 @@ export const REMOVE_EXPENSE = gql`
       lastName
       email
       expensesGroup {
-        id
         amount
         frequency
         category
@@ -120,7 +115,6 @@ export const CREATE_GOALS = gql`
         createGoals(input: $input) {
             email
             goalsGroup {
-                id
                 oneYearGoal
                 twoYearGoal
                 threeYearGoal
@@ -138,8 +132,8 @@ export const CREATE_GOALS = gql`
 export const CREATE_FINANCE = gql`
   mutation createFinance($input: FinanceInput!) {
     createFinance(input: $input) {
+      email
       financeGroup {
-        id
         digital
         cash
         invested

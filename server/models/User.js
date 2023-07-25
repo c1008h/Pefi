@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose')
 const bcrypt = require('bcrypt')
-
+const {Finance} = require('./Finance')
 const userSchema = new Schema(
     {
         firstName: {

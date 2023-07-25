@@ -38,14 +38,12 @@ const typeDefs = `
         fiveYearYear: Float
     }
     type Finance {
-        id: ID
         digital: String
         cash: String
         invested: String
         saved: String
     }
     input FinanceInput {
-        id: ID
         digital: String
         cash: String
         invested: String
@@ -53,7 +51,7 @@ const typeDefs = `
     }
     type Income {
         id: ID!
-        amount: Float
+        amount: String
         frequency: String
         source: String
         date: String
@@ -61,14 +59,14 @@ const typeDefs = `
 
     type Expenses {
         id: ID!
-        amount: Float
+        amount: String
         frequency: String
         category: String
         date: String
     }
     input IncomeInput {
         id: ID!
-        amount: Float
+        amount: String
         frequency: String
         source: String
         date: String
@@ -101,8 +99,8 @@ const typeDefs = `
         createGoals(id: ID!, input: GoalInput!): User
         updateGoals(id: ID!, input: GoalInput!): User
 
-        createFinance(id: ID, input: FinanceInput!): User
-        updateFinance(id: ID, input: FinanceInput!): User
+        createFinance(input: FinanceInput!): User
+        updateFinance(input: FinanceInput!): User
 
         createIncome(id: ID!, amount: Float, frequency: String, source: String, date: String): User
         createExpense(id: ID!, amount: Float, frequency: String, category: String, date: String): User
