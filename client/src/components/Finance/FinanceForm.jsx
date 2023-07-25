@@ -15,7 +15,7 @@ export default function FinanceForm({userData}) {
     const [isEditMode, setIsEditMode] = useState(false);
     const { data } = useQuery(QUERY_ME)
     useEffect(() => {
-        if (data) {
+        if (data && data.me && data.me.financeGroup) {
             setFinancialData(data.me.financeGroup)
             // setLoading(false)
         }

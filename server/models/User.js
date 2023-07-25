@@ -1,6 +1,21 @@
 const { Schema, model } = require('mongoose')
 const bcrypt = require('bcrypt')
-const {Finance} = require('./Finance')
+
+const financeSchema = new Schema({
+    digital: {
+      type: String,
+    },
+    cash: {
+      type: String,
+    },
+    invested: {
+      type: String,
+    },
+    saved: {
+      type: String,
+    }
+  });
+
 const userSchema = new Schema(
     {
         firstName: {
@@ -26,10 +41,12 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Goal'
         },
-        financeGroup: {
-            type: Schema.Types.ObjectId,
-            ref: 'Finance'
-        },
+        // financeGroup: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'Finance'
+        // },
+        financeGroup: [financeSchema], // Change to an array of financeSchema
+
         incomesGroup: {
             type: Schema.Types.ObjectId,
             ref: 'Income'
