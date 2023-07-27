@@ -20,10 +20,10 @@ export default function FinanceForm({userData}) {
             // setLoading(false)
         }
     },[data])
-    console.log(financialData)
+    console.log(userData)
 
     const [createFinance] = useMutation(CREATE_FINANCE, {
-        update(cache, {data: { createFinance: result }}) {
+        update(cache, {data: { createFinance: input }}) {
             const data = cache.readQuery({ query: QUERY_ME });
             const me = data ? data.me : null;
             if (!me) {
@@ -32,7 +32,7 @@ export default function FinanceForm({userData}) {
             
             cache.writeQuery({
                 query: QUERY_ME,
-                data: { me: { ...me, financeGroup: [...me.financeGroup, result] } },
+                data: { me: { ...me, financeGroup: [...me.financeGroup, input] } },
             });
         }
     })
