@@ -15,7 +15,8 @@ export default function Finance() {
     }
   }, [data])
   console.log(userData)
-    const token = authService.loggedIn() ? authService.getToken() : null;
+  
+  const token = authService.loggedIn() ? authService.getToken() : null;
   if(!token) {
       return <h2>Please login first</h2>
   }

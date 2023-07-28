@@ -1,26 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'; // Import PropTypes
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_FINANCE } from '../../utils/mutations';
 import {QUERY_ME} from "../../utils/queries";
-import { authService } from '../../utils/auth';
+// import { authService } from '../../utils/auth';
 export default function FinanceForm({userData}) {
-    const [digital, setDigital] = useState()
-    const [cash, setCash] = useState()
-    const [invested, setInvested] = useState()
-    const [saved, setSaved] = useState()
-    const [financialData, setFinancialData] = useState({})
+    const [digital, setDigital] = useState(userData.financeGroup.digital || '')
+    const [cash, setCash] = useState(userData.financeGroup.cash || '')
+    const [invested, setInvested] = useState(userData.financeGroup.invested || '')
+    const [saved, setSaved] = useState(userData.financeGroup.saved || '')
 
     const [isEditMode, setIsEditMode] = useState(false);
-    const { data } = useQuery(QUERY_ME)
-    useEffect(() => {
-        if (data && data.me && data.me.financeGroup) {
-            setFinancialData(data.me.financeGroup)
-            // setLoading(false)
-        }
-    },[data])
-    console.log(userData)
 
     const [createFinance] = useMutation(CREATE_FINANCE, {
         update(cache, {data: { createFinance: input }}) {
@@ -46,11 +37,9 @@ export default function FinanceForm({userData}) {
         setIsEditMode(false);
     };
 
-    const handleSubmit = async (id, digital, cash, invested, saved) => {
-        const token = authService.loggedIn() ? authService.getToken() : null;
-        if(!token) {
-            return false
-        }        setIsEditMode(false); 
+    const savingFinance = async (digital, cash, saved, invested) => {
+        setIsEditMode(false); 
+
 
         try {
             await createFinance({ variables: { input: {
@@ -66,9 +55,14 @@ export default function FinanceForm({userData}) {
             console.error(error)
         }
     };
+
     return (
         <>
-            <Form style={{padding:'10%'}}>
+            <Form style={{padding:'10%'}} 
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    savingFinance(digital, cash, saved, invested)
+                    }}>
                 <Form.Group>
                     <Form.Label>Total Digital Money:</Form.Label>
                     {isEditMode ? (
@@ -76,15 +70,15 @@ export default function FinanceForm({userData}) {
                         type="number" 
                         placeholder="Enter Digital Money" 
                         name='digital'
-                        // value{}
-                        onChange={(e) => setDigital(e.target.value)}
+                        value={digital}
+                        onChange={e => setDigital(e.target.value)}
                     /> 
                     ) : (
                         <Form.Control 
                         type="number" 
                         name='digital'
                         disabled
-                        // value={formState.digital}
+                        value={digital}
                         />
                     )}
                 </Form.Group>
@@ -97,7 +91,8 @@ export default function FinanceForm({userData}) {
                         type="number" 
                         placeholder="Enter Cash" 
                         name='cash'
-                        onChange={(e) => setCash(e.target.value)}
+                        value={cash}
+                        onChange={e => setCash(e.target.value)}
 
                     />
                     ): (
@@ -105,7 +100,7 @@ export default function FinanceForm({userData}) {
                         type="number" 
                         name='cash'
                         disabled
-                        // value={formState.digital}
+                        value={cash}
                         />
                     )}
                 </Form.Group>
@@ -118,14 +113,15 @@ export default function FinanceForm({userData}) {
                     type="text" 
                     placeholder="Enter Total Invested " 
                     name='invested'
-                    onChange={(e) => setInvested(e.target.value)}
+                    value={invested}
+                    onChange={e => setInvested(e.target.value)}
 
                 />
                 ) : (
                     <Form.Control 
                     type="number" 
                     name='invested'
-                    // value={formState.digital}
+                    value={invested}
                     disabled
                     />
                 )}
@@ -139,14 +135,15 @@ export default function FinanceForm({userData}) {
                     type="text" 
                     placeholder="Enter Total Saved" 
                     name='saved'
-                    onChange={(e) => setSaved(e.target.value)}
+                    value={saved}
+                    onChange={e => setSaved(e.target.value)}
 
                 />
                 ): (
                     <Form.Control 
                     type="number" 
                     name='saved'
-                    // value={formState.saved}
+                    value={saved}
                     disabled
                     />
                 )}
@@ -154,7 +151,7 @@ export default function FinanceForm({userData}) {
 
                 {isEditMode ? (
                 <>
-                    <Button onClick={() => handleSubmit(digital, cash, invested, saved)}>Save</Button>
+                    <Button type="submit">Save</Button>
                     <Button onClick={handleCancelClick}>Cancel</Button>
                 </>
                 ) : (
