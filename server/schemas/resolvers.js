@@ -126,17 +126,19 @@ const resolvers = {
       createFinance: async (parent, { input }, context) => {
         if (context.user) {
           const { digital, cash, invested, saved } = input; // Destructure the input fields
-
+          const finance = {
+            digital: digital,
+            cash: cash,
+            invested: invested,
+            saved: saved
+          };
+          console.log('finance', finance)
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { 
-                  "financeGroup.digital": digital,
-                  "financeGroup.cash": cash,
-                  "financeGroup.invested": invested,
-                  "financeGroup.saved": saved,
-                 } },
+                { financeGroup: finance }, // Set financeGroup to the finance object
                 { new: true }
             )
+            console.log(updatedUser)
             console.log('successfully input finance')
             return updatedUser;
         }

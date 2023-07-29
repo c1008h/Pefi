@@ -132,7 +132,6 @@ export const CREATE_GOALS = gql`
 export const CREATE_FINANCE = gql`
   mutation createFinance($input: FinanceInput!) {
     createFinance(input: $input) {
-      email
       financeGroup {
         digital
         cash

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'; // Import PropTypes
 import { useMutation } from '@apollo/client';
-import { CREATE_FINANCE } from '../../utils/mutations';
+import { CREATE_FINANCE } from '../../utils/mutations'
 import {QUERY_ME} from "../../utils/queries";
 // import { authService } from '../../utils/auth';
 export default function FinanceForm({userData}) {
@@ -14,16 +14,16 @@ export default function FinanceForm({userData}) {
     const [isEditMode, setIsEditMode] = useState(false);
 
     const [createFinance] = useMutation(CREATE_FINANCE, {
-        update(cache, {data: { createFinance: input }}) {
+        update(cache, { data: { createFinance: FinanceInput }}) {
             const data = cache.readQuery({ query: QUERY_ME });
             const me = data ? data.me : null;
             if (!me) {
                 return;
             }
-            
+
             cache.writeQuery({
                 query: QUERY_ME,
-                data: { me: { ...me, financeGroup: [...me.financeGroup, input] } },
+                data: { me: { ...me, financeGroup: [...me.financeGroup, FinanceInput] } },
             });
         }
     })
@@ -38,10 +38,13 @@ export default function FinanceForm({userData}) {
     };
 
     const savingFinance = async (digital, cash, saved, invested) => {
+        console.log('Saving finance:', digital, cash, saved, invested);
+
         setIsEditMode(false); 
 
         try {
-            await createFinance({ variables: { input: {
+            await createFinance({ 
+                variables: { input: {
                 digital: digital,
                 cash: cash,
                 invested: invested,
@@ -51,7 +54,7 @@ export default function FinanceForm({userData}) {
             if(createFinance.error) { throw new Error('Something went wrong.')}
 
         } catch (error) {
-            console.error(error)
+            console.error('Error:'. error)
         }
     };
 
