@@ -28,6 +28,10 @@ export default function ProfileForm({userData}) {
     
     const handleSubmit = async (firstName, lastName, email) => {
         setIsEditMode(false); 
+        if (!firstName || !lastName || !email) {
+            console.error('Error: Required fields are empty');
+            return;
+        }
 
         try {
             await updateUser({
@@ -37,6 +41,7 @@ export default function ProfileForm({userData}) {
                     email: email
                 }
             })
+            
         } catch (error) {
             console.error('Error:', error)
         }

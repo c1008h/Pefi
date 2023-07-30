@@ -48,7 +48,8 @@ const resolvers = {
             { email, firstName, lastName },
             { new: true }
           );
-  
+          console.log('successfully updated user information')
+
           return updatedUser;
         }
   
