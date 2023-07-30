@@ -8,13 +8,14 @@ export default function Finance() {
   const [userData, setUserData] = useState({})
   const [loading, setLoading] = useState(true)
   const { data } = useQuery(QUERY_ME)
+  console.log('data:', data)
   useEffect(() => {
     if (data) {
       setUserData(data.me)
       setLoading(false)
     }
   }, [data])
-  console.log(userData)
+  // console.log(userData)
   
   const token = authService.loggedIn() ? authService.getToken() : null;
   if(!token) {
