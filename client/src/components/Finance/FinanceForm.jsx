@@ -6,10 +6,10 @@ import { CREATE_FINANCE } from '../../utils/mutations'
 import {QUERY_ME} from "../../utils/queries";
 // import { authService } from '../../utils/auth';
 export default function FinanceForm({userData}) {
-    const [digital, setDigital] = useState(userData?.financeGroup?.digital || '')
-    const [cash, setCash] = useState(userData?.financeGroup?.cash || '')
-    const [invested, setInvested] = useState(userData?.financeGroup?.invested || '')
-    const [saved, setSaved] = useState(userData?.financeGroup?.saved || '')
+    const [digital, setDigital] = useState(userData?.financeGroup[0]?.digital || '')
+    const [cash, setCash] = useState(userData?.financeGroup[0]?.cash || '')
+    const [invested, setInvested] = useState(userData?.financeGroup[0]?.invested || '')
+    const [saved, setSaved] = useState(userData?.financeGroup[0]?.saved || '')
 
     const [isEditMode, setIsEditMode] = useState(false);
 
@@ -27,7 +27,6 @@ export default function FinanceForm({userData}) {
             });
         }
     })
-
 
     const handleUpdateClick = () => {
         setIsEditMode(true);

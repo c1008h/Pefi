@@ -41,7 +41,19 @@ const resolvers = {
         return { token, user };
       },
 
-
+      updateUser: async (parent, { email, firstName, lastName }, context) => {
+        if (context.user) {
+          const updatedUser = await User.findByIdAndUpdate(
+            context.user._id,
+            { email, firstName, lastName },
+            { new: true }
+          );
+  
+          return updatedUser;
+        }
+  
+        throw new AuthenticationError('You need to be logged in.');
+      },
 
       createIncome: async (parent, { input }, context) => {
         if (context.user) {

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import PasswordModal from './PasswordModal';
 import PropTypes from 'prop-types'; // Import PropTypes
 import { Container, Card, Form, Button, Modal } from 'react-bootstrap'
+import { useMutation } from '@apollo/client';
+import { UPDATE_USER } from '../../utils/mutations';
 
 export default function ProfileForm({userData}) {
     const [firstName, setFirstName] = useState(userData.firstName || '')
@@ -11,13 +13,12 @@ export default function ProfileForm({userData}) {
     const [isEditMode, setIsEditMode] = useState(false);
     const [showPasswordModal, setShowPasswordModal] = useState(false);
 
-    // console.log(userData.email)
-    // console.log(email)
-    const handleEditClick = () => {
-        setIsEditMode(false);
+    const [ updateUser ] = useMutation(UPDATE_USER)
+
+    const handleUpdateClick = () => {
+        setIsEditMode(true);
     };
     const handleCancelClick = () => {
-        // Restore the original user data when canceling the edit
         setFirstName(userData.firstName || '');
         setLastName(userData.lastName || '');
         setEmail(userData.email || '');
@@ -25,9 +26,20 @@ export default function ProfileForm({userData}) {
         setIsEditMode(false);
     };
     
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async (firstName, lastName, email) => {
         setIsEditMode(false); 
+
+        try {
+            await updateUser({
+                variables: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email
+                }
+            })
+        } catch (error) {
+            console.error('Error:', error)
+        }
     };
     const handleOpenPasswordModal = () => {
         setShowPasswordModal(true);
@@ -41,7 +53,11 @@ export default function ProfileForm({userData}) {
         <Container>
         <h2>Profile</h2>
         <Card style={{padding:'5%'}}>
-            <Form onSubmit={handleSubmit}>
+            <Form 
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    handleSubmit(firstName, lastName, email)
+                    }}>
                 <Form.Group>
                     <Form.Label>First Name:</Form.Label>
                     { isEditMode ? 
@@ -74,7 +90,7 @@ export default function ProfileForm({userData}) {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Email:</Form.Label>
-                    { isEditMode ? (
+                    {isEditMode ? (
                     <Form.Control 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -101,7 +117,7 @@ export default function ProfileForm({userData}) {
                     <Button variant="secondary" onClick={handleCancelClick}>Cancel</Button>
                 </>
                 ) : (
-                    <Button onClick={handleEditClick}>Edit Profile</Button>
+                    <Button onClick={handleUpdateClick}>Edit Profile</Button>
                 )}
             </Form>
         </Card>
