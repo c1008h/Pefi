@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
+
 
 export const IncomeBtn = (showIncomeForm) => {
     const [showPrompt, setShowPrompt] = useState(false);
@@ -82,3 +84,7 @@ export const IncomeBtn = (showIncomeForm) => {
       </>
     );
 }
+
+// IncomeBtn.propTypes = {
+//   value: PropTypes.object.isRequired
+// }

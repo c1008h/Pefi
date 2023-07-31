@@ -18,7 +18,7 @@ export const CalendarEl = (event) => {
     // console.log(dayjs(value.$d).format('MM/DD/YYYY'))
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        // <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div style={{flexDirection:'column'}} components={['DateCalendar', 'DateCalendar']} label={'"year", "month" and "day"'}>
                 <DateCalendar
                     value={value} 
@@ -28,6 +28,6 @@ export const CalendarEl = (event) => {
                 />
                 <h2>{dayjs(value.$d).format('MM/DD/YYYY')}</h2>
             </div>
-        </LocalizationProvider>
+        // </LocalizationProvider>
     )
 }

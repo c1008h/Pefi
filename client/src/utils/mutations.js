@@ -38,7 +38,6 @@ export const UPDATE_USER = gql`
 export const CREATE_INCOME = gql`
   mutation createIncome($input: IncomeInput!) {
     createIncome(input: $input) {
-      email
       incomeGroup {
         amount
         frequency
@@ -65,32 +64,9 @@ export const REMOVE_INCOME = gql`
   }
 `;
 
-// export const REMOVE_FOOD_ITEM = gql`
-//   mutation removeFoodItem($foodtype: String) {
-//     removeFoodItem(foodtype: $foodtype) {
-//       _id
-//       username
-//       email
-//       savedFoods {
-//         foodId
-//         foodtype
-//         name
-//         image_url
-//         is_closed
-//         url
-//         rating
-//         price
-//         display_phone
-//         distance
-//       }
-//     }
-//   }
-// `;
-
 export const CREATE_EXPENSE = gql`
   mutation createExpense($input: ExpenseInput!) {
     createExpense(input: $input) {
-      email
       expensesGroup {
         amount
         frequency

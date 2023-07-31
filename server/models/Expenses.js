@@ -16,12 +16,12 @@ const expenseSchema = new Schema({
     category: {
         type: String,
         required: true
-    },
-    date: {
-        type: String,
-        required: true
     }
-})
+    // date: {
+    //     type: String,
+    //     required: true
+    // }
+}, { timestamps: true } )
 
 const Expenses = model('Expenses', expenseSchema);
 

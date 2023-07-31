@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { ExpenseBtn } from '../components/Dashboard/ExpenseBtn.jsx'
 import { IncomeBtn } from '../components/Dashboard/IncomeBtn.jsx';
-import { CalendarEl } from '../components/Dashboard/Calendar.jsx'
+// import { CalendarEl } from '../components/Dashboard/Calendar.jsx'
 import FinanceDisplay from '../components/Dashboard/FinanceDisplay.jsx'
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
+import dayjs from 'dayjs';
+import { DateCalendar } from '@mui/x-date-pickers';
 
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
@@ -14,14 +16,21 @@ export const Dashboard = () => {
     const [showIncomeForm, setShowIncomeForm] = useState(false);
     const [loading, setLoading] = useState(true)
     const { data } = useQuery(QUERY_ME)
-
+    const [value, setValue] = useState(dayjs());
+   console.log(value.format('MM/DD/YYYY'))
     useEffect(() => {
         if (data) {
           setUserData(data.me)
           setLoading(false)
         }
     }, [data])
-
+    function handleDateChange(newValue) {
+        setValue(newValue)
+        console.log(dayjs(value.$d).format('MM/DD/YYYY'))
+    }
+    function handleMonthChange(date) {
+        setValue(date);
+      }
     // console.log(userData)
 
     const openExpenseForm = () => {
@@ -51,9 +60,15 @@ export const Dashboard = () => {
             <h2>Dashboard</h2>
             <div >
                 <div style={{display:'flex'}}>
-                    <CalendarEl 
-                        userData={userData}
-                    />
+                    <div style={{flexDirection:'column'}} components={['DateCalendar', 'DateCalendar']} label={'"year", "month" and "day"'}>
+                        <DateCalendar
+                            value={value} 
+                            onChange={handleDateChange}
+                            onMonthChange={handleMonthChange}
+                            views={['year', 'month', 'day']}
+                        />
+                        <h2>{dayjs(value.$d).format('MM/DD/YYYY')}</h2>
+                    </div>
                     <FinanceDisplay 
                         userData={userData}
                     />
@@ -75,10 +90,12 @@ export const Dashboard = () => {
             <div style={{width:'60%'}}>
                 {showExpenseForm && 
                 <ExpenseBtn 
+                    showExpenseForm={showExpenseForm}
+                    value={value}
                 />}            
                 {showIncomeForm && 
                 <IncomeBtn 
-
+                    value={value}
                 />}
             </div>     
                       
