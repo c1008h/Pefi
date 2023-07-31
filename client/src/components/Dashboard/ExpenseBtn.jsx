@@ -3,7 +3,8 @@ import { Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPENSE } from '../../utils/mutations';
 import PropTypes from 'prop-types'; // Import PropTypes
-
+import Select from 'react-select'
+import {genreList, frequencyOptions} from '../../constants/genres'
 export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   const [amount, setAmount] = useState()
   const [frequency, setFrequency] = useState()
@@ -22,7 +23,6 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   const handleButtonClick = () => {
     setShowPrompt(true);
   };
-
   const handlePromptClose = () => {
     setShowPrompt(false);
   };
@@ -46,7 +46,6 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
       console.log("Error:", error)
     }
   }
-
   return (
     <div style={{display:'flex', flexDirection:'column'}}>
       {showExpenseForm && (
@@ -68,20 +67,40 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
           </Form.Group>
           <Form.Group>
             <Form.Label>Expense Type:</Form.Label>
-            <Form.Control 
+            {/* <Form.Control 
               type='text'
               name='category'
+              list="categoryOptions"
               onChange={e => setCategory(e.target.value)}
+            />
+             <datalist id="categoryOptions">
+              {categoryOptions.map((option) => (
+                <option value={option} key={option} />
+              ))}
+            </datalist> */}
+            <Select 
+              options={genreList} 
+              onChange={(selectedOption) => setCategory(selectedOption.value)}
             />
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Is it a Reoccuring Expense?</Form.Label>
-            <Form.Control 
-              type='checkbox' 
+            <Form.Label>Frequency:</Form.Label>
+            {/* <Form.Control 
+              type='radio' 
               name='frequency'
               onChange={e => setFrequency(e.target.value)}
-            />
+            /> */}
+            {frequencyOptions.map((option) => (
+              <Form.Check 
+                type='radio'
+                key={option.value}
+                label={option.label}
+                name='frequency'
+                value={option.value}
+                onChange={(e) => setFrequency(e.target.value)}
+              />
+            ))}
           </Form.Group>
           <Form.Group>
             <Form.Label>Date:</Form.Label>
@@ -92,19 +111,6 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
               onChange={e => setDate(e.target.value)}
             />
           </Form.Group>
-
-            {reoccuring && (
-              <div>
-                <label>
-                  Start Date:
-                  <input type="date" />
-                </label>
-                <label>
-                  End Date:
-                  <input type="date" />
-                </label>
-              </div>
-            )}
             <Button type="submit">Add Expense</Button>
             <Button onClick={handlePromptClose}>Cancel</Button>
           </Form>
