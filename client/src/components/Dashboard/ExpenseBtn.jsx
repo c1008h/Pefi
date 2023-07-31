@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_EXPENSE } from '../../utils/mutations';
 import PropTypes from 'prop-types'; // Import PropTypes
 
-export function ExpenseBtn({ showExpenseForm, value }) {
+export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   const [amount, setAmount] = useState()
   const [frequency, setFrequency] = useState()
   const [category, setCategory] = useState()
@@ -14,6 +14,10 @@ export function ExpenseBtn({ showExpenseForm, value }) {
   const [createExpense] = useMutation(CREATE_EXPENSE)
 
   console.log(date)
+  const handleDateChange = (newValue) => {
+    setDate(newValue);
+    onDateChange(newValue); // Call the callback function to update the date in Dashboard
+  };
 
   const handleButtonClick = () => {
     setShowPrompt(true);
@@ -112,5 +116,6 @@ export function ExpenseBtn({ showExpenseForm, value }) {
 
 ExpenseBtn.propTypes = {
   value: PropTypes.object.isRequired,
-  showExpenseForm: PropTypes.bool.isRequired
+  showExpenseForm: PropTypes.bool.isRequired,
+  onDateChange: PropTypes.func.isRequired
 }

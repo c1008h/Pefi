@@ -17,7 +17,7 @@ export const Dashboard = () => {
     const [loading, setLoading] = useState(true)
     const { data } = useQuery(QUERY_ME)
     const [value, setValue] = useState(dayjs());
-   console.log(value.format('MM/DD/YYYY'))
+//    console.log(value.format('MM/DD/YYYY'))
     useEffect(() => {
         if (data) {
           setUserData(data.me)
@@ -91,6 +91,7 @@ export const Dashboard = () => {
                 {showExpenseForm && 
                 <ExpenseBtn 
                     showExpenseForm={showExpenseForm}
+                    onDateChange={handleDateChange}
                     value={value}
                 />}            
                 {showIncomeForm && 
