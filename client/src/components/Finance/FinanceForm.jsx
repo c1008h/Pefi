@@ -13,20 +13,7 @@ export default function FinanceForm({userData}) {
 
     const [isEditMode, setIsEditMode] = useState(false);
 
-    const [createFinance] = useMutation(CREATE_FINANCE, {
-        update(cache, { data: { createFinance: FinanceInput }}) {
-            const data = cache.readQuery({ query: QUERY_ME });
-            const me = data ? data.me : null;
-            if (!me) {
-                return;
-            }
-
-            cache.writeQuery({
-                query: QUERY_ME,
-                data: { me: { ...me, financeGroup: [...me.financeGroup, FinanceInput] } },
-            });
-        }
-    })
+    const [createFinance] = useMutation(CREATE_FINANCE)
 
     const handleUpdateClick = () => {
         setIsEditMode(true);

@@ -15,13 +15,11 @@ export default function FinanceDisplay({userData}) {
     setNetworth((digital + cash + saved + invested).toLocaleString())
   }, [userData])
 
-
-
-  console.log(userData.financeGroup[0])
+  // console.log(userData.financeGroup[0])
 
   return (
     <div>
-        <h5>Net Worth: {networth}</h5>
+        <h5>Net Worth: ${networth}</h5>
         <h5>Monthly Income:</h5>
         <h5>Monthly Expense:</h5>
 
