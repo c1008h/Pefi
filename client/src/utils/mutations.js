@@ -38,11 +38,12 @@ export const UPDATE_USER = gql`
 export const CREATE_INCOME = gql`
   mutation createIncome($input: IncomeInput!) {
     createIncome(input: $input) {
-      incomeGroup {
+      incomesGroup {
         amount
         frequency
-        source
+        category
         date
+        note
       }
     }
   }

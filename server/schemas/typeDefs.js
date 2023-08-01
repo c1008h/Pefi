@@ -4,7 +4,7 @@ const typeDefs = `
         firstName: String
         lastName: String
         email: String!
-        incomeGroup: [Income]
+        incomesGroup: [Income]
         expensesGroup: [Expenses]
         goalsGroup: [Goals]
         financeGroup: [Finance]
@@ -50,8 +50,9 @@ const typeDefs = `
     type Income {
         amount: String
         frequency: String
-        source: String
+        category: String
         date: String
+        note: String
     }
 
     type Expenses {
@@ -63,8 +64,9 @@ const typeDefs = `
     input IncomeInput {
         amount: String
         frequency: String
-        source: String
+        category: String
         date: String
+        note: String
     }
       
     input ExpenseInput {

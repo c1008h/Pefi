@@ -24,6 +24,6 @@ const incomeSchema = new Schema({
     }
 })
 
-const Income = model('Income', incomeSchema);
+// const Income = model('Income', incomeSchema);
 
-module.exports = Income;
+module.exports = incomeSchema;

@@ -22,9 +22,34 @@ export const genreList = [
 ]
 
 export const frequencyOptions = [
+    { label: 'One Time', value: 'one time' },
     { label: 'Daily', value: 'daily' },
     { label: 'Weekly', value: 'weekly' },
     { label: 'Bi-weekly', value: 'bi-weekly' },
     { label: 'Monthly', value: 'monthly' },
     { label: 'Yearly', value: 'yearly' },
+]
+
+export const incomeOptions = [
+    { label: 'Salary', value: 'salary' },
+    { label: 'Freelance/Contract Work', value: 'freelance' },
+    { label: 'Rental Income', value: 'rental-income' },
+    { label: 'Investment Income', value: 'investment-income' },
+    { label: 'Dividends and Capital Gains', value: 'dividends' },
+    { label: 'Side Hustle Income', value: 'side-hustle' },
+    { label: 'Pension/Retirement Income', value: 'pension' },
+    { label: 'Social Security/Government Benefits', value: 'social-security' },
+    { label: 'Royalties (e.g., from books, music, or patents)', value: 'royalties' },
+    { label: 'Commission-based Income', value: 'commission' },
+    { label: 'Tips and Gratuities', value: 'tips' },
+    { label: 'Alimony/Child Support', value: 'alimony' },
+    { label: 'Gifts and Inheritance', value: 'gifts' },
+    { label: 'Online Business Income', value: 'online-business' },
+    { label: 'Interest Income', value: 'interest' },
+    { label: 'Residual Income', value: 'residual' },
+    { label: 'Resell Income', value: 'resell' },
+    { label: 'Money Transfers', value: 'money-transfers' },
+    { label: 'Repayment from Loans', value: 'repayment-loans' },
+    { label: 'Wages', value: 'wages' },
+    { label: 'Cash', value: 'cash' },
 ]

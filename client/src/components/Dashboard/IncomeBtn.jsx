@@ -1,30 +1,48 @@
 import { useState } from 'react';
+import { Form, Button } from 'react-bootstrap'
+import { useMutation } from '@apollo/client';
+import { CREATE_INCOME } from '../../utils/mutations';
+import Select from 'react-select'
+import { frequencyOptions, incomeOptions } from '../../constants/genres'
 import PropTypes from 'prop-types'; // Import PropTypes
 
-
-export const IncomeBtn = (showIncomeForm) => {
+export const IncomeBtn = ({ showIncomeForm, value }) => {
     const [showPrompt, setShowPrompt] = useState(false);
-    const [incomeType, setIncomeType] = useState('');
-    const [payFrequency, setPayFrequency] = useState('');
+
+    const [amount, setAmount] = useState()
+    const [frequency, setFrequency] = useState()
+    const [category, setCategory] = useState()
+    const [date, setDate] = useState(value.format('MM/DD/YYYY'))
+    const [note, setNote] = useState('');
+
     const [isRecurring, setIsRecurring] = useState(false);
-    const [amount, setAmount] = useState('');
-    const [payer, setPayer] = useState('');
+    const [createIncome] = useMutation(CREATE_INCOME)
 
     const handleAddIncome = () => {
       setShowPrompt(true);
     };
   
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // Do something with the collected data, such as save it to state or a database
-      console.log({ incomeType, payFrequency, isRecurring, amount, payer });
-      // Reset the state and close the prompt
-      setIncomeType('');
-      setPayFrequency('');
-      setIsRecurring(false);
-      setAmount('');
-      setPayer('');
+    const handleSaveIncome = async (amount, frequency, category, date, note) => {
+      console.log('Inputting income:',  amount, frequency, category, date, note );
+
       setShowPrompt(false);
+
+      try {
+        await createIncome({
+          variables: { input: { 
+            amount: amount.trim(),
+            frequency: frequency,
+            category: category,
+            date: date,
+            note: note.trim()
+          }} 
+        })
+
+        if(createIncome.error) { throw new Error('Something went wrong.')}
+
+      } catch (error) {
+        console.log("Error:", error)
+      }
     };
     const handlePromptClose = () => {
         setShowPrompt(false);
@@ -34,57 +52,85 @@ export const IncomeBtn = (showIncomeForm) => {
         {showIncomeForm && (
           <div style={{display:'flex', flexDirection:'column'}}>
             <h3>Add Income Details</h3>
-            <form onSubmit={handleSubmit} style={{display:'flex', flexDirection:'column'}}>
-              <label>
-                Income Type:
-                <input
-                  type="text"
-                  value={incomeType}
-                  onChange={(e) => setIncomeType(e.target.value)}
+            <Form 
+              style={{display:'flex', flexDirection:'column'}}
+              onSubmit={(e) => {
+                e.preventDefault()
+                handleSaveIncome(amount, frequency, category, date, note)
+              }} 
+            >
+              <Form.Group>
+                <Form.Label>Amount:</Form.Label>
+                <Form.Control 
+                  type='text'
+                  name='amount'
+                  onChange={(e) => setAmount(e.target.value)}
+                  required
                 />
-              </label>
-              <label>
-                Pay Frequency:
-                <select value={payFrequency} onChange={(e) => setPayFrequency(e.target.value)}>
-                  <option value="daily">Daily</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="biweekly">Biweekly</option>
-                  <option value="monthly">Monthly</option>
-                </select>
-              </label>
-              <label>
-                Recurring:
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Income Type:</Form.Label>
+                <Select
+                  options={incomeOptions}
+                  onChange={(selectedOption) => setCategory(selectedOption.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Frequency:</Form.Label>
+                {frequencyOptions.map((option) => (
+                <Form.Check 
+                  type='radio'
+                  key={option.value}
+                  label={option.label}
+                  name='frequency'
+                  value={option.value}
+                  onChange={(e) => setFrequency(e.target.value)}
+                />
+                ))}
+              </Form.Group>
+             
+            
+                {/* Recurring:
                 <input
                   type="checkbox"
                   checked={isRecurring}
                   onChange={(e) => setIsRecurring(e.target.checked)}
                 />
-              </label>
-              <label>
-                Amount:
-                <input
-                  type="number"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+              </label> */}
+              <Form.Group>
+                <Form.Label>Date:</Form.Label>
+                <Form.Control 
+                  type='text'
+                  name='date'
+                  value={date}
+                  onChange={e => setDate(e.target.value)}
                 />
-              </label>
-              <label>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Note: </Form.Label>
+                <Form.Control
+                  type='text'
+                  name='note'
+                  onChange={e => setNote(e.target.value)}
+                />
+              </Form.Group>
+              {/* <label>
                 Payer:
                 <input
                   type="text"
                   value={payer}
-                  onChange={(e) => setPayer(e.target.value)}
                 />
-              </label>
-              <button type="submit">Submit</button>
-              <button onClick={handlePromptClose}>Cancel</button>
-            </form>
+              </label> */}
+              <Button type="submit">Submit</Button>
+              <Button onClick={handlePromptClose}>Cancel</Button>
+            </Form>
           </div>
         )}
       </>
     );
 }
 
-// IncomeBtn.propTypes = {
-//   value: PropTypes.object.isRequired
-// }
+IncomeBtn.propTypes = {
+  value: PropTypes.object.isRequired,
+  showIncomeForm: PropTypes.bool.isRequired
+}

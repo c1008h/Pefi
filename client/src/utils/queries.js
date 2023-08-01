@@ -7,11 +7,12 @@ export const QUERY_ME = gql`
       firstName
       lastName
       email
-      incomeGroup {
+      incomesGroup {
         amount
         frequency
-        source
+        category
         date
+        note
       }
       expensesGroup {
         amount

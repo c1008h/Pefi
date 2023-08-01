@@ -96,6 +96,8 @@ export const Dashboard = () => {
                 />}            
                 {showIncomeForm && 
                 <IncomeBtn 
+                    showIncomeForm={showIncomeForm}
+                    onDateChange={handleDateChange}
                     value={value}
                 />}
             </div>     

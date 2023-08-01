@@ -10,29 +10,26 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   const [frequency, setFrequency] = useState()
   const [category, setCategory] = useState()
   const [date, setDate] = useState(value.format('MM/DD/YYYY'))
-  const [showPrompt, setShowPrompt] = useState(false);
+  // const [showPrompt, setShowPrompt] = useState(false);
   const [reoccuring, setReoccuring] = useState(false)
   const [createExpense] = useMutation(CREATE_EXPENSE)
 
   console.log(date)
-  const handleDateChange = (newValue) => {
-    setDate(newValue);
-    onDateChange(newValue); // Call the callback function to update the date in Dashboard
-  };
+  // const handleDateChange = (newValue) => {
+  //   setDate(newValue);
+  //   onDateChange(newValue); // Call the callback function to update the date in Dashboard
+  // };
 
-  const handleButtonClick = () => {
-    setShowPrompt(true);
-  };
   const handlePromptClose = () => {
     setShowPrompt(false);
   };
   const handleSaveExpense = async (amount, frequency, category, date) => {
-    console.log('Creating expense:', amount, frequency, category, date)
+    console.log('Inputting expense:', amount, frequency, category, date)
 
     try {
       await createExpense({
         variables: { input: {
-          amount: amount,
+          amount: amount.trim(),
           frequency: frequency,
           category: category,
           date: date
@@ -50,11 +47,13 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
       {showExpenseForm && (
         <div className="prompt" >
           <h3>Add Expense Details</h3>
-          <Form style={{display:'flex', flexDirection:'column'}} 
-          onSubmit={(e) => {
-            e.preventDefault()
-            handleSaveExpense(amount, frequency, category, date)
-          }}> 
+          <Form 
+            style={{display:'flex', flexDirection:'column'}} 
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleSaveExpense(amount, frequency, category, date)
+            }}
+          > 
           <Form.Group>
             <Form.Label>Expense Amount:</Form.Label>
             <Form.Control 
@@ -66,17 +65,6 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
           </Form.Group>
           <Form.Group>
             <Form.Label>Expense Type:</Form.Label>
-            {/* <Form.Control 
-              type='text'
-              name='category'
-              list="categoryOptions"
-              onChange={e => setCategory(e.target.value)}
-            />
-             <datalist id="categoryOptions">
-              {categoryOptions.map((option) => (
-                <option value={option} key={option} />
-              ))}
-            </datalist> */}
             <Select 
               options={genreList} 
               onChange={(selectedOption) => setCategory(selectedOption.value)}
@@ -85,11 +73,6 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
 
           <Form.Group>
             <Form.Label>Frequency:</Form.Label>
-            {/* <Form.Control 
-              type='radio' 
-              name='frequency'
-              onChange={e => setFrequency(e.target.value)}
-            /> */}
             {frequencyOptions.map((option) => (
               <Form.Check 
                 type='radio'

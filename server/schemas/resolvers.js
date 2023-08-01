@@ -60,7 +60,7 @@ const resolvers = {
         if (context.user) {
           const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: { incomeGroup: input } },
+            { $addToSet: { incomesGroup: input } },
             { new: true }
         )
         console.log('successfully input income')
@@ -83,19 +83,18 @@ const resolvers = {
       //   throw new AuthenticationError ('You need to be logged in.');
       // },
       createExpense: async (parent, { input }, context) => {
-        console.log(input)
-        const { amount, frequency, category, date } = input; // Destructure the input fields
-        const expense = {
-          amount: amount,
-          frequency: frequency,
-          category: category,
-          date: date
-        };
+        // const { amount, frequency, category, date } = input; // Destructure the input fields
+        // const expense = {
+        //   amount: amount,
+        //   frequency: frequency,
+        //   category: category,
+        //   date: date
+        // };
 
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { expensesGroup: expense } },
+                { $addToSet: { expensesGroup: input } },
                 { new: true }
             )
             console.log('successfully input expense')
