@@ -8,21 +8,18 @@ export const QUERY_ME = gql`
       lastName
       email
       incomeGroup {
-        id
         amount
         frequency
         source
         date
       }
       expensesGroup {
-        id
         amount
         frequency
         category
         date
       }
       goalsGroup {
-        id
         oneYearGoal
         twoYearGoal
         threeYearGoal

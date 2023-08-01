@@ -11,7 +11,6 @@ const typeDefs = `
     }
 
     type Goals {
-        id: ID!
         oneYearGoal: Float
         twoYearGoal: Float
         threeYearGoal: Float
@@ -25,7 +24,6 @@ const typeDefs = `
     }
 
     input GoalInput {
-        id: ID!
         oneYearGoal: Float
         twoYearGoal: Float
         threeYearGoal: Float
@@ -50,7 +48,6 @@ const typeDefs = `
         saved: String
     }
     type Income {
-        id: ID!
         amount: String
         frequency: String
         source: String
@@ -58,14 +55,12 @@ const typeDefs = `
     }
 
     type Expenses {
-        id: ID!
         amount: String
         frequency: String
         category: String
         date: String
     }
     input IncomeInput {
-        id: ID!
         amount: String
         frequency: String
         source: String
@@ -73,8 +68,7 @@ const typeDefs = `
     }
       
     input ExpenseInput {
-        id: ID!
-        amount: Float
+        amount: String
         frequency: String
         category: String
         date: String
@@ -95,17 +89,17 @@ const typeDefs = `
         addUser(email: String!, password: String!): Auth
         updateUser(email: String!, firstName: String!, lastName: String!): User
 
-        createGoals(id: ID!, input: GoalInput!): User
-        updateGoals(id: ID!, input: GoalInput!): User
+        createGoals(input: GoalInput!): User
+        updateGoals(input: GoalInput!): User
 
         createFinance(input: FinanceInput!): User
         updateFinance(input: FinanceInput!): User
 
-        createIncome(id: ID!, amount: Float, frequency: String, source: String, date: String): User
-        createExpense(id: ID!, amount: Float, frequency: String, category: String, date: String): User
+        createIncome(input: IncomeInput!): User
+        createExpense(input: ExpenseInput!): User
 
-        updateIncome(id: ID!, input: IncomeInput!): User
-        updateExpense(id: ID!, input: ExpenseInput!): User
+        updateIncome(input: IncomeInput!): User
+        updateExpense(input: ExpenseInput!): User
 
     }
 `;

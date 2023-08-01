@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 const financeSchema = new Schema({
     digital: {
@@ -6,7 +6,6 @@ const financeSchema = new Schema({
     },
     cash: {
         type: String,
-        
     },
     invested: {
         type: String,
@@ -16,6 +15,6 @@ const financeSchema = new Schema({
     }
 })
 
-const Finance = model('Finance', financeSchema);
+// const Finance = model('Finance', financeSchema);
 
-module.exports = Finance;
+module.exports = financeSchema;

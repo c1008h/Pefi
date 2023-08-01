@@ -82,14 +82,20 @@ const resolvers = {
       //   }
       //   throw new AuthenticationError ('You need to be logged in.');
       // },
-
-
-
       createExpense: async (parent, { input }, context) => {
+        console.log(input)
+        const { amount, frequency, category, date } = input; // Destructure the input fields
+        const expense = {
+          amount: amount,
+          frequency: frequency,
+          category: category,
+          date: date
+        };
+
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { expenseGroup: input } },
+                { $addToSet: { expensesGroup: expense } },
                 { new: true }
             )
             console.log('successfully input expense')

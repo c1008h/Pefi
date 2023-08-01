@@ -1,12 +1,8 @@
 const { Schema, model } = require('mongoose');
 
 const expenseSchema = new Schema({
-    id: {
-        type: String,
-        required: true
-    },
     amount: {
-        type: Number,
+        type: String,
         required: true,
     },
     frequency: {
@@ -16,13 +12,13 @@ const expenseSchema = new Schema({
     category: {
         type: String,
         required: true
+    }, 
+    date: {
+        type: String,
+        required: true
     }
-    // date: {
-    //     type: String,
-    //     required: true
-    // }
 }, { timestamps: true } )
 
-const Expenses = model('Expenses', expenseSchema);
+// const Expenses = model('Expenses', expenseSchema);
 
-module.exports = Expenses;
+module.exports = expenseSchema;

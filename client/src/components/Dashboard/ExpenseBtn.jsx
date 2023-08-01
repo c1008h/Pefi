@@ -26,7 +26,6 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   const handlePromptClose = () => {
     setShowPrompt(false);
   };
-
   const handleSaveExpense = async (amount, frequency, category, date) => {
     console.log('Creating expense:', amount, frequency, category, date)
 

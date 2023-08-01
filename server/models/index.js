@@ -1,7 +1,7 @@
 const User = require('./User')
 const Goal = require('./Goals')
 const Income = require('./Income')
-const Expense = require('./Expenses')
-const Finance = require('./Finance')
+// const Expense = require('./Expenses')
+// const Finance = require('./Finance')
 
-module.exports = { User, Goal, Finance, Income, Expense }
+module.exports = { User, Goal, Income }
