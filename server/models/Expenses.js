@@ -17,7 +17,9 @@ const expenseSchema = new Schema({
         type: String,
         required: true
     }
-}, { timestamps: true } )
+}, 
+    { timestamps: true } 
+)
 
 // const Expenses = model('Expenses', expenseSchema);
 

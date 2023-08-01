@@ -68,6 +68,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
             <Select 
               options={genreList} 
               onChange={(selectedOption) => setCategory(selectedOption.value)}
+              required
             />
           </Form.Group>
 
@@ -81,6 +82,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
                 name='frequency'
                 value={option.value}
                 onChange={(e) => setFrequency(e.target.value)}
+                required
               />
             ))}
           </Form.Group>
@@ -91,6 +93,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
               name='date'
               value={date}
               onChange={e => setDate(e.target.value)}
+              required
             />
           </Form.Group>
             <Button type="submit">Add Expense</Button>

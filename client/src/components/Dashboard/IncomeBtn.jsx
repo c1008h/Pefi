@@ -73,6 +73,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
                 <Select
                   options={incomeOptions}
                   onChange={(selectedOption) => setCategory(selectedOption.value)}
+                  required
                 />
               </Form.Group>
               <Form.Group>
@@ -85,6 +86,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
                   name='frequency'
                   value={option.value}
                   onChange={(e) => setFrequency(e.target.value)}
+                  required
                 />
                 ))}
               </Form.Group>
@@ -104,6 +106,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
                   name='date'
                   value={date}
                   onChange={e => setDate(e.target.value)}
+                  required
                 />
               </Form.Group>
               <Form.Group>
