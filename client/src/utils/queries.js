@@ -11,6 +11,7 @@ export const QUERY_ME = gql`
         amount
         frequency
         category
+        type
         date
         note
       }
@@ -18,6 +19,7 @@ export const QUERY_ME = gql`
         amount
         frequency
         category
+        type
         date
       }
       goalsGroup {

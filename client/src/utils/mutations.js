@@ -42,6 +42,7 @@ export const CREATE_INCOME = gql`
         amount
         frequency
         category
+        type
         date
         note
       }
@@ -72,6 +73,7 @@ export const CREATE_EXPENSE = gql`
         amount
         frequency
         category
+        type
         date
       }
     }

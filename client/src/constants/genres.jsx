@@ -53,3 +53,8 @@ export const incomeOptions = [
     { label: 'Wages', value: 'wages' },
     { label: 'Cash', value: 'cash' },
 ]
+
+export const moneyType = [
+    { label: 'Cash', value: 'cash' },
+    { label: 'Digital', value: 'digital' }
+]

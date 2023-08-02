@@ -51,6 +51,7 @@ const typeDefs = `
         amount: String
         frequency: String
         category: String
+        type: String
         date: String
         note: String
     }
@@ -59,12 +60,14 @@ const typeDefs = `
         amount: String
         frequency: String
         category: String
+        type: String
         date: String
     }
     input IncomeInput {
         amount: String
         frequency: String
         category: String
+        type: String
         date: String
         note: String
     }
@@ -73,6 +76,7 @@ const typeDefs = `
         amount: String
         frequency: String
         category: String
+        type: String
         date: String
     }
     type Auth {

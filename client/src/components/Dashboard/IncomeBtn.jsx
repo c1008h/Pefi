@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { CREATE_INCOME } from '../../utils/mutations';
 import Select from 'react-select'
-import { frequencyOptions, incomeOptions } from '../../constants/genres'
+import { frequencyOptions, incomeOptions, moneyType } from '../../constants/genres'
 import PropTypes from 'prop-types'; // Import PropTypes
 
 export const IncomeBtn = ({ showIncomeForm, value }) => {
@@ -12,6 +12,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
     const [amount, setAmount] = useState()
     const [frequency, setFrequency] = useState()
     const [category, setCategory] = useState()
+    const [type, setType] = useState()
     const [date, setDate] = useState(value.format('MM/DD/YYYY'))
     const [note, setNote] = useState('');
 
@@ -22,8 +23,8 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
       setShowPrompt(true);
     };
   
-    const handleSaveIncome = async (amount, frequency, category, date, note) => {
-      console.log('Inputting income:',  amount, frequency, category, date, note );
+    const handleSaveIncome = async (amount, frequency, category, type, date, note) => {
+      console.log('Inputting income:',  amount, frequency, category, type, date, note );
 
       setShowPrompt(false);
 
@@ -33,6 +34,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
             amount: amount.trim(),
             frequency: frequency,
             category: category,
+            type: type,
             date: date,
             note: note.trim()
           }} 
@@ -56,7 +58,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
               style={{display:'flex', flexDirection:'column'}}
               onSubmit={(e) => {
                 e.preventDefault()
-                handleSaveIncome(amount, frequency, category, date, note)
+                handleSaveIncome(amount, frequency, category, type, date, note)
               }} 
             >
               <Form.Group>
@@ -69,10 +71,18 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Income Type:</Form.Label>
+                <Form.Label>Category:</Form.Label>
                 <Select
                   options={incomeOptions}
                   onChange={(selectedOption) => setCategory(selectedOption.value)}
+                  required
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Type:</Form.Label>
+                <Select 
+                  options={moneyType}
+                  onChange={(selectedOption) => setType(selectedOption.value)}
                   required
                 />
               </Form.Group>

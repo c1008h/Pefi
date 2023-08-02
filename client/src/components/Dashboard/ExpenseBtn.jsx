@@ -4,12 +4,13 @@ import { useMutation } from '@apollo/client';
 import { CREATE_EXPENSE } from '../../utils/mutations';
 import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
-import {genreList, frequencyOptions} from '../../constants/genres'
+import {genreList, frequencyOptions, moneyType} from '../../constants/genres'
 export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   const [amount, setAmount] = useState()
   const [frequency, setFrequency] = useState()
   const [category, setCategory] = useState()
   const [date, setDate] = useState(value.format('MM/DD/YYYY'))
+  const [type, setType] = useState()
   // const [showPrompt, setShowPrompt] = useState(false);
   const [reoccuring, setReoccuring] = useState(false)
   const [createExpense] = useMutation(CREATE_EXPENSE)
@@ -23,8 +24,8 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   const handlePromptClose = () => {
     setShowPrompt(false);
   };
-  const handleSaveExpense = async (amount, frequency, category, date) => {
-    console.log('Inputting expense:', amount, frequency, category, date)
+  const handleSaveExpense = async (amount, frequency, category, type, date) => {
+    console.log('Inputting expense:', amount, frequency, category, type, date)
 
     try {
       await createExpense({
@@ -32,6 +33,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
           amount: amount.trim(),
           frequency: frequency,
           category: category,
+          type: type,
           date: date
         }}
       })
@@ -51,7 +53,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
             style={{display:'flex', flexDirection:'column'}} 
             onSubmit={(e) => {
               e.preventDefault()
-              handleSaveExpense(amount, frequency, category, date)
+              handleSaveExpense(amount, frequency, category, type, date)
             }}
           > 
           <Form.Group>
@@ -64,10 +66,18 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Expense Type:</Form.Label>
+            <Form.Label>Category:</Form.Label>
             <Select 
               options={genreList} 
               onChange={(selectedOption) => setCategory(selectedOption.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Type:</Form.Label>
+            <Select 
+              options={moneyType}
+              onChange={(selectedOption) => setType(selectedOption.value)}
               required
             />
           </Form.Group>
