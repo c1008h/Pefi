@@ -1,6 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Expenses } = require('../models');
 const { signToken } = require('../utils/auth');
+const {calculateNetworth} = require('../utils/financialCalculations');
+// const Expenses = require('../models/Expenses');
 
 const resolvers = {
     Query: {
@@ -83,15 +85,16 @@ const resolvers = {
       //   throw new AuthenticationError ('You need to be logged in.');
       // },
       createExpense: async (parent, { input }, context) => {
-        // const { amount, frequency, category, date } = input; // Destructure the input fields
-        // const expense = {
-        //   amount: amount,
-        //   frequency: frequency,
-        //   category: category,
-        //   date: date
-        // };
-
         if (context.user) {
+          await Expenses.create({ input })
+          const user = await User.findOne({ _id: context.user._id });
+          const cash = parseFloat(user.financeGroup.find(group => group.type === 'cash').amount) || 0;
+          const digitalAssets = parseFloat(user.financeGroup.find(group => group.type === 'digital').amount) || 0;
+          const invested = parseFloat(user.financeGroup.find(group => group.type === 'invested').amount) || 0;
+          const saved = parseFloat(user.financeGroup.find(group => group.type === 'saved').amount) || 0;
+
+          // const netWorth = calculateNetworth(cash, digitalAssets, invested, saved);
+
             const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $addToSet: { expensesGroup: input } },

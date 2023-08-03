@@ -2,7 +2,8 @@ const { Schema, model } = require('mongoose')
 const bcrypt = require('bcrypt')
 const financeSchema = require('./Finance')
 const incomeSchema = require('./Income')
-const expenseSchema = require('./Expenses')
+// const expenseSchema = require('./Expenses')
+// const {Expenses} = require('./Expenses')
 
 const userSchema = new Schema(
     {
@@ -39,11 +40,11 @@ const userSchema = new Schema(
         //     type: Schema.Types.ObjectId,
         //     ref: 'Income'
         // },
-        // expensesGroup: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'Expense'
-        // }
-        expensesGroup: [expenseSchema]
+        expensesGroup: {
+            type: Schema.Types.ObjectId,
+            ref: 'Expense'
+        }
+        // expensesGroup: [Expenses]
     },
     {
         toJSON: {

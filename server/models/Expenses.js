@@ -25,6 +25,6 @@ const expenseSchema = new Schema({
     { timestamps: true } 
 )
 
-// const Expenses = model('Expenses', expenseSchema);
+const Expenses = model('Expenses', expenseSchema);
 
-module.exports = expenseSchema;
+module.exports = Expenses;
