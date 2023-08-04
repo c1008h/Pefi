@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Expenses } = require('../models');
+const { User, Expenses, Incomes, Finance } = require('../models');
 const { signToken } = require('../utils/auth');
 const {calculateNetworth} = require('../utils/financialCalculations');
 // const Expenses = require('../models/Expenses');
@@ -15,7 +15,13 @@ const resolvers = {
       me: async (parent, args, context) => {
         console.log(context.user)
         if(context.user) {
-            return User.findOne({ _id: context.user._id })
+            // return User.findOne({ _id: context.user._id })
+            const user = await User.findById(context.user._id)
+            .populate('incomesGroup')
+            .populate('expensesGroup')
+            .populate('goalsGroup')
+            .populate('financeGroup');
+          return user;
         }
         throw new AuthenticationError('You need to be logged in!')
       },
@@ -60,14 +66,28 @@ const resolvers = {
 
       createIncome: async (parent, { input }, context) => {
         if (context.user) {
-          const updatedUser = await User.findOneAndUpdate(
-            { _id: context.user._id },
-            { $addToSet: { incomesGroup: input } },
-            { new: true }
-        )
-        console.log('successfully input income')
+          try {
+            const newIncome = new Incomes({
+              amount: input.amount, 
+              category: input.category,
+              date: input.date,
+              frequency: input.frequency,
+              type: input.type,
+              note: input.note
+            })
+            const savedIncome = await newIncome.save();
 
-        return updatedUser;
+            const updatedUser = await User.findOneAndUpdate(
+              { _id: context.user._id },
+              { $push: { incomesGroup: savedIncome._id } },
+              { new: true }
+            )
+            console.log('successfully input income')
+            return updatedUser;
+          } catch (error) {
+            console.log('Error:', error);
+            throw new Error('Something went wrong.');
+          }
         }
         throw new AuthenticationError ('You need to be logged in.');
       },
@@ -86,22 +106,30 @@ const resolvers = {
       // },
       createExpense: async (parent, { input }, context) => {
         if (context.user) {
-          await Expenses.create({ input })
-          const user = await User.findOne({ _id: context.user._id });
-          const cash = parseFloat(user.financeGroup.find(group => group.type === 'cash').amount) || 0;
-          const digitalAssets = parseFloat(user.financeGroup.find(group => group.type === 'digital').amount) || 0;
-          const invested = parseFloat(user.financeGroup.find(group => group.type === 'invested').amount) || 0;
-          const saved = parseFloat(user.financeGroup.find(group => group.type === 'saved').amount) || 0;
+          try {
+            const newExpense = new Expenses({
+              amount: input.amount,
+              frequency: input.frequency,
+              category: input.category,
+              type: input.type,
+              date: input.date,
+            });
+            console.log(input)
 
-          // const netWorth = calculateNetworth(cash, digitalAssets, invested, saved);
+            const savedExpense = await newExpense.save();
 
             const updatedUser = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $addToSet: { expensesGroup: input } },
-                { new: true }
+              { _id: context.user._id },
+              { $push: { expensesGroup: savedExpense._id } },
+              { new: true }
             )
             console.log('successfully input expense')
             return updatedUser;
+
+          } catch (erorr) {
+            console.log('Error:', error);
+            throw new Error('Something went wrong.');
+          }
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
@@ -121,13 +149,30 @@ const resolvers = {
 
       createGoals: async (parent, { input }, context) => {
         if (context.user) {
+          try {
+            const newExpense = new Expenses({
+              amount: input.amount,
+              frequency: input.frequency,
+              category: input.category,
+              type: input.type,
+              date: input.date,
+            });
+            const savedExpense = await newExpense.save();
+
             const updatedUser = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $addToSet: { goalGroup: input } },
-                { new: true }
+              { _id: context.user._id },
+              { $addToSet: { goalGroup: savedExpense._id } },
+              { new: true }
             )
+
             console.log('successfully input goal')
             return updatedUser;
+
+          } catch (error) {
+            console.log('Error:', error);
+            throw new Error('Something went wrong.');
+          }
+           
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
@@ -146,22 +191,27 @@ const resolvers = {
       // },
       createFinance: async (parent, { input }, context) => {
         if (context.user) {
-          const { digital, cash, invested, saved } = input; // Destructure the input fields
-          const finance = {
-            digital: digital,
-            cash: cash,
-            invested: invested,
-            saved: saved
-          };
-          console.log('finance', finance)
+          try {
+            const updateFinance = new Finance({
+              digital: input.digital,
+              cash: input.cash,
+              invested: input.invested,
+              saved: input.saved
+            });
+            const saveFinance = await updateFinance.save();
+
+            // console.log('finance', finance)
             const updatedUser = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { financeGroup: finance }, // Set financeGroup to the finance object
-                { new: true }
+              { _id: context.user._id },
+              { financeGroup: saveFinance._id }, // Set financeGroup to the finance object
+              { new: true }
             )
             console.log(updatedUser)
             console.log('successfully input finance')
             return updatedUser;
+          } catch (error) {
+
+          }
         }
         throw new AuthenticationError ('You need to be log in first.');
       },

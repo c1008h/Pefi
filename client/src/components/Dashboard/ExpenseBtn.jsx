@@ -59,7 +59,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
           <Form.Group>
             <Form.Label>Expense Amount:</Form.Label>
             <Form.Control 
-              type="number"
+              type="text"
               name="amount"
               onChange={e => setAmount(e.target.value)}
               required

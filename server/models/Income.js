@@ -3,24 +3,24 @@ const { Schema, model } = require('mongoose');
 const incomeSchema = new Schema({
     amount: {
         type: Number,
-        required: true,
+        // required: true,
     },
     frequency: {
         type: String,
-        required: true
+        // required: true
         
     },
     category: {
         type: String,
-        required: true
+        // required: true
     },
     type: {
         type: String,
-        required: true
+        // required: true
     },
     date: {
         type: String,
-        required: true
+        // required: true
     },
     note: {
         type: String,
@@ -29,6 +29,6 @@ const incomeSchema = new Schema({
     { timestamps: true } 
 )
 
-// const Income = model('Income', incomeSchema);
+const Incomes = model('Incomes', incomeSchema);
 
-module.exports = incomeSchema;
+module.exports = Incomes;

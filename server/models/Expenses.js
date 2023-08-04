@@ -3,23 +3,23 @@ const { Schema, model } = require('mongoose');
 const expenseSchema = new Schema({
     amount: {
         type: String,
-        required: true,
+        // required: true,
     },
     frequency: {
         type: String,
-        required: true
+        // required: true
     },
     category: {
         type: String,
-        required: true
+        // required: true
     }, 
     type: {
         type: String, 
-        required: true
+        // required: true
     },
     date: {
         type: String,
-        required: true
+        // required: true
     }
 }, 
     { timestamps: true } 

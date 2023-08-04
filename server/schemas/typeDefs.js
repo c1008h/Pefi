@@ -4,7 +4,7 @@ const typeDefs = `
         firstName: String
         lastName: String
         email: String!
-        incomesGroup: [Income]
+        incomesGroup: [Incomes]
         expensesGroup: [Expenses]
         goalsGroup: [Goals]
         financeGroup: [Finance]
@@ -47,7 +47,7 @@ const typeDefs = `
         invested: String
         saved: String
     }
-    type Income {
+    type Incomes {
         amount: String
         frequency: String
         category: String
@@ -57,11 +57,11 @@ const typeDefs = `
     }
 
     type Expenses {
-        amount: String
-        frequency: String
-        category: String
-        type: String
-        date: String
+        amount: String!
+        frequency: String!
+        category: String!
+        type: String!
+        date: String!
     }
     input IncomeInput {
         amount: String
@@ -73,11 +73,11 @@ const typeDefs = `
     }
       
     input ExpenseInput {
-        amount: String
-        frequency: String
-        category: String
-        type: String
-        date: String
+        amount: String!
+        frequency: String!
+        category: String!
+        type: String!
+        date: String!
     }
     type Auth {
         token: ID
