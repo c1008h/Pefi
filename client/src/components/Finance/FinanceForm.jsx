@@ -3,18 +3,16 @@ import { Form, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'; // Import PropTypes
 import { useMutation } from '@apollo/client';
 import { CREATE_FINANCE } from '../../utils/mutations'
-import {QUERY_ME} from "../../utils/queries";
 // import { authService } from '../../utils/auth';
 export default function FinanceForm({userData}) {
-    // const [digital, setDigital] = useState(userData?.financeGroup[0]?.digital || '')
-    // const [cash, setCash] = useState(userData?.financeGroup[0]?.cash || '')
-    // const [invested, setInvested] = useState(userData?.financeGroup[0]?.invested || '')
-    // const [saved, setSaved] = useState(userData?.financeGroup[0]?.saved || '')
-    const [digital, setDigital] = useState()
-    const [cash, setCash] = useState()
-    const [invested, setInvested] = useState()
-    const [saved, setSaved] = useState()
-
+    const [digital, setDigital] = useState(userData?.financeGroup[0]?.digital || '')
+    const [cash, setCash] = useState(userData?.financeGroup[0]?.cash || '')
+    const [invested, setInvested] = useState(userData?.financeGroup[0]?.invested || '')
+    const [saved, setSaved] = useState(userData?.financeGroup[0]?.saved || '')
+    // const [digital, setDigital] = useState()
+    // const [cash, setCash] = useState()
+    // const [invested, setInvested] = useState()
+    // const [saved, setSaved] = useState()
     const [isEditMode, setIsEditMode] = useState(false);
 
     const [createFinance] = useMutation(CREATE_FINANCE)

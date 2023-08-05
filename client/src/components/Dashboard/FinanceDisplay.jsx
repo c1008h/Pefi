@@ -1,68 +1,66 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes
-
+import dayjs from 'dayjs'
 export default function FinanceDisplay({userData}) {
   const [networth, setNetworth] = useState()
-  // const [monthlyIncome, setMonthlyIncome] = useState()
-  // const [monthlyExpense, setMonthlyExpense] = useState()
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1; // Note: getMonth() returns 0-based index, so add 1
+  const [monthlyIncome, setMonthlyIncome] = useState()
+  const [monthlyExpense, setMonthlyExpense] = useState(0)
+  const currentMonth = dayjs().month() + 1;
+  const currentYear = dayjs().year();
 
+console.log(userData)
 
-  // console.log('income:', userData.incomesGroup)
-  // console.log('expense:', userData.expensesGroup)
-  // let incomeGroups = userData.incomesGroup
-  // let expenseGroups = userData.expensesGroup
-// console.log(expenseGroups)
-  // useEffect(() => {
-    // let digital = parseFloat(userData.financeGroup[0].digital)
-    // let cash = parseFloat(userData.financeGroup[0].cash)
-    // let saved = parseFloat(userData.financeGroup[0].saved)
-    // let invested = parseFloat(userData.financeGroup[0].invested)
-    // const incomeGroups = userData.incomesGroup || [];
-    // const expenseGroups = userData.expensesGroup || [];
+  useEffect(() => {
+    let digital = parseFloat(userData.financeGroup[0].digital)
+    let cash = parseFloat(userData.financeGroup[0].cash)
+    let saved = parseFloat(userData.financeGroup[0].saved)
+    let invested = parseFloat(userData.financeGroup[0].invested)
+    const incomeGroups = userData.incomesGroup || [];
+    const expenseGroups = userData.expensesGroup || [];
 
-    // const monthlyExpense = calculateMonthlyExpense(expenseGroups);
+    const monthlyIncome = calculateMonthlyIncome(incomeGroups)
+    const monthlyExpense = calculateMonthlyExpense(expenseGroups);
 
-    // setNetworth((digital + cash + saved + invested).toLocaleString())
-    // setMonthlyExpense(monthlyExpense);
-  // }, [userData])
+    setNetworth((digital + cash + saved + invested).toLocaleString())
+    setMonthlyIncome(monthlyIncome)
+    setMonthlyExpense(monthlyExpense);
+  }, [userData])
 
   // console.log(userData.financeGroup[0])
-  // function calculateMonthlyExpense(expenseGroups) {
-  //   let totalMonthlyExpense = 0;
+  function calculateMonthlyExpense(expensesGroup) {
+    let totalExpense = 0;
 
-  //   expenseGroups.forEach((expense) => {
-  //     if (!expenseGroups || !Array.isArray(expenseGroups)) {
-  //       return 0;
-  //     }
-  //     const [month, day, year] = expense.date.split('/');
-  //     const expenseYear = parseInt(year, 10);
-  //     const expenseMonth = parseInt(month, 10);
+    for(let i = 0; i < expensesGroup.length; i++) {
+      let dateStr = expensesGroup[i].date
+      const [month, day, year] = dateStr.split('/')
 
-  //       if (expenseYear === currentYear && expenseMonth === currentMonth) {
-  //         if (expense.frequency === 'monthly') {
-  //           const amount = parseFloat(expense.amount);
-  //           if (!isNaN(amount)) {
-  //             totalMonthlyExpense += amount;
-  //           }
-  //         }
-  //       }
-  //   });
+      if (Number(month) === currentMonth && Number(year) === currentYear) {
+        console.log('add to expense')
+        totalExpense += parseFloat(expensesGroup[i].amount);
+      }
+    }
+    return totalExpense
+  }
 
-  //   // setMonthlyExpense(totalMonthlyExpense)
-  //   return totalMonthlyExpense
-  // }
+  function calculateMonthlyIncome(incomesGroup) {
+    let totalIncome = 0;
 
-  // function calculateMonthlyIncome() {
+    for (let i =0; i < incomesGroup.length; i++) {
+      let dateStr = incomesGroup[i].date
+      const [month, day, year] = dateStr.split('/')
 
-  // }
+      if (Number(month) === currentMonth && Number(year) === currentYear) {
+        console.log('add to income')
+        totalIncome += parseFloat(incomesGroup[i].amount);
+      }
+    }
+    return totalIncome
+  }
   return (
     <div>
-        {/* <h5>Net Worth: ${networth}</h5> */}
-        <h5>Monthly Income:</h5>
-        {/* <h5>Monthly Expense: ${monthlyExpense}</h5> */}
+        <h5>Net Worth: ${networth}</h5>
+        <h5>Monthly Income: ${monthlyIncome}</h5>
+        <h5>Monthly Expense: ${monthlyExpense}</h5>
 
     </div>
   )

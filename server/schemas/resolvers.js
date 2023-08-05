@@ -1,9 +1,27 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Expenses, Incomes, Finance } = require('../models');
 const { signToken } = require('../utils/auth');
-const {calculateNetworth} = require('../utils/financialCalculations');
-// const Expenses = require('../models/Expenses');
+const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
 
+// async function recalculateFinance(user) {
+//   try {
+//     const networth = calculateNetworth(user)
+
+//     const monthlyIncome = calculateMonthlyIncome(user)
+
+//     const monthlyExpense = calculateMonthlyExpense(user)
+
+//     // user.financeGroup = {
+
+//     // }
+//     // await user.save()
+//     return user
+
+//   } catch (error) {
+//     console.error('Error in recalculateFinance:', error);
+//     throw new Error('Something went wrong while recalculating finance.');
+//   }
+// }
 const resolvers = {
     Query: {
       users: async () => {
@@ -13,8 +31,9 @@ const resolvers = {
         return User.findOne({ _id: _id });
       },
       me: async (parent, args, context) => {
-        console.log(context.user)
-        if(context.user) {
+        // console.log(context.user)
+        if (context.user) {
+
             // return User.findOne({ _id: context.user._id })
             const user = await User.findById(context.user._id)
             .populate('incomesGroup')
@@ -24,6 +43,24 @@ const resolvers = {
           return user;
         }
         throw new AuthenticationError('You need to be logged in!')
+      },
+      financialData: async (parent, { _id }, context) => {
+        if (context.user) {
+          const user = await User.findById(_id)
+          .populate('incomesGroup')
+          .populate('expensesGroup')
+          .populate('financeGroup');
+
+          const networth = calculateNetworth(user);
+
+          return {
+            financeGroup: user.financeGroup,
+            expenses: user.expensesGroup,
+            incomes: user.incomesGroup,
+            networth: networth.toString(), // Assuming the networth is a number, convert it to a string for GraphQL
+          };
+        }
+        throw new AuthenticationError('You need to be logged in!');
       },
     },
     Mutation: {
@@ -190,6 +227,7 @@ const resolvers = {
       //   throw new AuthenticationError ('You need to be logged in.');
       // },
       createFinance: async (parent, { input }, context) => {
+        // console.log(context.user)
         if (context.user) {
           try {
             const updateFinance = new Finance({
@@ -206,9 +244,11 @@ const resolvers = {
               { financeGroup: saveFinance._id }, // Set financeGroup to the finance object
               { new: true }
             )
-            console.log(updatedUser)
+            // console.log(updatedUser)
             console.log('successfully input finance')
             return updatedUser;
+            // console.log(recalculateFinance(updatedUser))
+            // await recalculateFinance(updatedUser)
           } catch (error) {
 
           }

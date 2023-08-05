@@ -57,11 +57,11 @@ const typeDefs = `
     }
 
     type Expenses {
-        amount: String!
-        frequency: String!
-        category: String!
-        type: String!
-        date: String!
+        amount: String
+        frequency: String
+        category: String
+        type: String
+        date: String
     }
     input IncomeInput {
         amount: String
@@ -73,21 +73,33 @@ const typeDefs = `
     }
       
     input ExpenseInput {
-        amount: String!
-        frequency: String!
-        category: String!
-        type: String!
-        date: String!
+        amount: String
+        frequency: String
+        category: String
+        type: String
+        date: String
     }
     type Auth {
         token: ID
         user: User
+    }
+    type FinanceGroup {
+        finances: [Finance]
+    }
+      
+    type FinancialData {
+        financeGroup: FinanceGroup
+        expenses: [Expenses]
+        incomes: [Incomes]
+        networth: String
     }
 
     type Query {
         users: [User]
         user(email: String!): User 
         me: User
+        financialData(_id: ID!): FinancialData
+
     }
 
     type Mutation {
