@@ -36,16 +36,18 @@ const typeDefs = `
         fiveYearYear: Float
     }
     type Finance {
-        digital: String
-        cash: String
-        invested: String
-        saved: String
+        digital: Float
+        cash: Float
+        invested: Float
+        saved: Float
     }
     input FinanceInput {
-        digital: String
-        cash: String
-        invested: String
-        saved: String
+        digital: Float
+        cash: Float
+        invested: Float
+        saved: Float
+        financeGroup: ID
+
     }
     type Incomes {
         amount: String

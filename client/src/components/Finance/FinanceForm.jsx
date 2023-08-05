@@ -33,10 +33,10 @@ export default function FinanceForm({userData}) {
         try {
             await createFinance({ 
                 variables: { input: {
-                digital: digital,
-                cash: cash,
-                invested: invested,
-                saved: saved
+                digital: parseFloat(digital),
+                cash: parseFloat(cash),
+                invested: parseFloat(invested),
+                saved: parseFloat(saved)
             } } })
 
             if(createFinance.error) { throw new Error('Something went wrong.')}

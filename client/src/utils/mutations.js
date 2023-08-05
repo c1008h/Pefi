@@ -128,3 +128,16 @@ export const CREATE_FINANCE = gql`
     }
   }
 `
+
+export const UPDATE_FINANCE = gql`
+  mutation updateFinance($input: FinanceInput!) {
+    updateFinance(input: $input ) {
+      financeGroup {
+        digital
+        cash
+        invested
+        saved
+      }
+    }
+  }
+`;

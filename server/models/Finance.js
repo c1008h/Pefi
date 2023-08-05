@@ -2,16 +2,16 @@ const { Schema, model } = require('mongoose');
 
 const financeSchema = new Schema({
     digital: {
-        type: String,
+        type: Number,
     },
     cash: {
-        type: String,
+        type: Number,
     },
     invested: {
-        type: String,
+        type: Number,
     },
     saved: {
-        type: String,
+        type: Number,
     }
 }, 
     { timestamps: true } 

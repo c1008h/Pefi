@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
+
 import PropTypes from 'prop-types'; // Import PropTypes
 import dayjs from 'dayjs'
+import { UPDATE_FINANCE } from '../../utils/mutations';
 export default function FinanceDisplay({userData}) {
   const [networth, setNetworth] = useState()
   const [monthlyIncome, setMonthlyIncome] = useState()
   const [monthlyExpense, setMonthlyExpense] = useState(0)
   const currentMonth = dayjs().month() + 1;
   const currentYear = dayjs().year();
+  const [updateFinance] = useMutation(UPDATE_FINANCE);
 
 console.log(userData)
 
@@ -52,6 +56,8 @@ console.log(userData)
       if (Number(month) === currentMonth && Number(year) === currentYear) {
         console.log('add to income')
         totalIncome += parseFloat(incomesGroup[i].amount);
+
+
       }
     }
     return totalIncome

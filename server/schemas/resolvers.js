@@ -2,26 +2,32 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Expenses, Incomes, Finance } = require('../models');
 const { signToken } = require('../utils/auth');
 const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
+const recalculateFinance = async (user) => {
+  const financeGroup = await Finance.findById(user.financeGroup);
 
-// async function recalculateFinance(user) {
-//   try {
-//     const networth = calculateNetworth(user)
+  // Calculate the total expenses for the user
+  const totalExpenses = await Expenses.aggregate([
+    { $match: { _id: { $in: user.expensesGroup } } },
+    { $group: { _id: null, totalAmount: { $sum: { $toDouble: "$amount" } } } },
+  ]);
 
-//     const monthlyIncome = calculateMonthlyIncome(user)
+  // Calculate the total incomes for the user
+  const totalIncomes = await Incomes.aggregate([
+    { $match: { _id: { $in: user.incomesGroup } } },
+    { $group: { _id: null, totalAmount: { $sum: { $toDouble: "$amount" } } } },
+  ]);
 
-//     const monthlyExpense = calculateMonthlyExpense(user)
+  // Calculate the networth
+  const networth = (totalIncomes[0]?.totalAmount || 0) - (totalExpenses[0]?.totalAmount || 0);
 
-//     // user.financeGroup = {
+  // Update the Finance document
+  financeGroup.digital = networth; // You can modify this as per your finance calculations
+  financeGroup.cash = 0; // Reset cash value if needed
+  financeGroup.invested = 0; // Reset invested value if needed
+  financeGroup.saved = 0; // Reset saved value if needed
 
-//     // }
-//     // await user.save()
-//     return user
-
-//   } catch (error) {
-//     console.error('Error in recalculateFinance:', error);
-//     throw new Error('Something went wrong while recalculating finance.');
-//   }
-// }
+  await financeGroup.save();
+};
 const resolvers = {
     Query: {
       users: async () => {
@@ -160,6 +166,8 @@ const resolvers = {
               { $push: { expensesGroup: savedExpense._id } },
               { new: true }
             )
+            // await recalculateFinance(updatedUser);
+
             console.log('successfully input expense')
             return updatedUser;
 
@@ -255,6 +263,42 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
+      updateFinance: async (parent, {input}, context) => {
+        if (context.user) {      
+          console.log('input', input)    
+          try {
+            const financeGroup = await Finance.findById(context.user.financeGroup);
+console.log('1', financeGroup)
+            // const financeGroup = await User.findById(context.user).populate('financeGroup')
+            console.log('apple:', financeGroup.financeGroup[0].cash)
+
+            if (input.cash !== 0) {
+              financeGroup[0].financeGroup.cash -= Number(input.cash);
+              // financeGroup[0].financeGroup.cash = isNaN(financeGroup.financeGroup.cash)
+              // ? 0 - Number(input.cash)
+              // : financeGroup.financeGroup.cash - Number(input.cash);
+            }  
+            if (input.digital !== 0) {
+              Number(financeGroup[0].financeGroup.digital) -= Number(input.digital);
+            } 
+            if (input.invested !== 0) {
+              Number(financeGroup[0].financeGroup.invested) -= Number(input.invested);
+            } 
+            if (input.saved !== 0) {
+              Number(financeGroup[0].financeGroup.saved) -= Number(input.saved);
+            } 
+            // console.log('updated', financeGroup.financeGroup)
+
+            await financeGroup.save();
+            console.log('updated', financeGroup[0].financeGroup)
+
+            return financeGroup[0].financeGroup; 
+          } catch (error) {
+            throw new Error('Failed to update Finance')
+          }
+        }
+        throw new AuthenticationError ('You need to be log in first.');
+      }
     }
 }
 module.exports = resolvers;

@@ -51,10 +51,11 @@ export const incomeOptions = [
     { label: 'Money Transfers', value: 'money-transfers' },
     { label: 'Repayment from Loans', value: 'repayment-loans' },
     { label: 'Wages', value: 'wages' },
-    { label: 'Cash', value: 'cash' },
 ]
 
 export const moneyType = [
     { label: 'Cash', value: 'cash' },
-    { label: 'Digital', value: 'digital' }
+    { label: 'Digital', value: 'digital' },
+    { label: 'Invested', value: 'invested' },
+    { label: 'Saved', value: 'saved' }
 ]
