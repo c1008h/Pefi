@@ -268,7 +268,7 @@ const resolvers = {
           console.log('input', input)    
           try {
             const financeGroup = await Finance.findById(context.user.financeGroup);
-console.log('1', financeGroup)
+            // console.log('1', financeGroup)
             // const financeGroup = await User.findById(context.user).populate('financeGroup')
             console.log('apple:', financeGroup.financeGroup[0].cash)
 
