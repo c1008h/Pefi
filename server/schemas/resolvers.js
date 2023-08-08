@@ -134,19 +134,19 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be logged in.');
       },
-      // removeIncome: async (parent, { id } , context) => {
-      //   if (context.user) {
+      removeIncome: async (parent, { _id } , context) => {
+        if (context.user) {
           
-      //     const updatedUser = await User.findByIdAndUpdate(
-      //       { _id: context.user._id },
-      //       { $pull: { income: { id : id }} },
-      //       { new: true }
-      //     )
-      //     console.log('successfully removed income')
-      //     return updatedUser;
-      //   }
-      //   throw new AuthenticationError ('You need to be logged in.');
-      // },
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $pull: { incomesGroup: { _id : _id }} },
+            { new: true }
+          )
+          console.log('successfully removed income')
+          return updatedUser;
+        }
+        throw new AuthenticationError ('You need to be logged in.');
+      },
       createExpense: async (parent, { input }, context) => {
         if (context.user) {
           try {

@@ -36,12 +36,14 @@ const typeDefs = `
         fiveYearYear: Float
     }
     type Finance {
+        _id: ID!
         digital: Float
         cash: Float
         invested: Float
         saved: Float
     }
     input FinanceInput {
+        _id: ID!
         digital: Float
         cash: Float
         invested: Float
@@ -50,6 +52,7 @@ const typeDefs = `
 
     }
     type Incomes {
+        _id: ID!
         amount: String
         frequency: String
         category: String
@@ -59,6 +62,7 @@ const typeDefs = `
     }
 
     type Expenses {
+        _id: ID!
         amount: String
         frequency: String
         category: String
@@ -66,6 +70,7 @@ const typeDefs = `
         date: String
     }
     input IncomeInput {
+        _id: ID!
         amount: String
         frequency: String
         category: String
@@ -75,6 +80,7 @@ const typeDefs = `
     }
       
     input ExpenseInput {
+        _id: ID!
         amount: String
         frequency: String
         category: String
@@ -116,10 +122,12 @@ const typeDefs = `
         updateFinance(input: FinanceInput!): User
 
         createIncome(input: IncomeInput!): User
-        createExpense(input: ExpenseInput!): User
-
         updateIncome(input: IncomeInput!): User
+        removeIncome(_id: ID!): User
+
+        createExpense(input: ExpenseInput!): User
         updateExpense(input: ExpenseInput!): User
+        removeExpense(_id: ID!): User
 
     }
 `;

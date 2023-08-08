@@ -8,6 +8,7 @@ export const QUERY_ME = gql`
       lastName
       email
       incomesGroup {
+        _id
         amount
         frequency
         category
@@ -16,6 +17,7 @@ export const QUERY_ME = gql`
         note
       }
       expensesGroup {
+        _id
         amount
         frequency
         category
@@ -35,6 +37,7 @@ export const QUERY_ME = gql`
         fiveYearYear
       }
       financeGroup {
+        _id
         digital
         cash
         invested
