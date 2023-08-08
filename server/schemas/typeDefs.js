@@ -36,14 +36,14 @@ const typeDefs = `
         fiveYearYear: Float
     }
     type Finance {
-        _id: ID!
+        _id: ID
         digital: Float
         cash: Float
         invested: Float
         saved: Float
     }
     input FinanceInput {
-        _id: ID!
+        _id: ID
         digital: Float
         cash: Float
         invested: Float
@@ -52,7 +52,7 @@ const typeDefs = `
 
     }
     type Incomes {
-        _id: ID!
+        _id: ID
         amount: String
         frequency: String
         category: String
@@ -62,7 +62,7 @@ const typeDefs = `
     }
 
     type Expenses {
-        _id: ID!
+        _id: ID
         amount: String
         frequency: String
         category: String
@@ -70,7 +70,7 @@ const typeDefs = `
         date: String
     }
     input IncomeInput {
-        _id: ID!
+        _id: ID
         amount: String
         frequency: String
         category: String
@@ -80,7 +80,7 @@ const typeDefs = `
     }
       
     input ExpenseInput {
-        _id: ID!
+        _id: ID
         amount: String
         frequency: String
         category: String
