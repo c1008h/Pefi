@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
+
+import { Button } from 'react-bootstrap'
+// import { useReactTable, getCoreRowModel, getPaginationRowModel, getSortedRowModel } from '@tanstack/react-table'
+import '../style/details.css'
 
 export default function AccountHistory() {
     const [userData, setUserData] = useState()
@@ -11,10 +15,19 @@ export default function AccountHistory() {
     const [expense, setExpense] = useState()
     const [income, setIncome] = useState()
     const [combinedData, setCombinedData] = useState([]);
-    const itemsPerPage = 25; // Change this to the desired number of items per page
+    const itemsPerPage = 25; 
     const [currentPage, setCurrentPage] = useState(1);
 
-    console.log(userData)
+    // const tableInstance = useReactTable({
+    //     columns, 
+    //     data, 
+    //     getCoreModel: getCoreRowModel(), 
+    //     getPaginationRowModel: getPaginationRowModel(), 
+    //     getSortedRowModel: getSortedRowModel(), 
+    // })
+
+
+    // console.log(userData)
 
     useEffect(() => {
         if (data) {
@@ -28,12 +41,12 @@ export default function AccountHistory() {
                 ...me.incomesGroup.map(item => ({ ...item, type: 'Income' }))
             ].sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date
     
-console.log('combined', combined)
+            console.log('combined', combined)
             setCombinedData(combined);
         }
     }, [data])
-    console.log('income', income)
-    console.log('expense', expense)
+    // console.log('income', income)
+    // console.log('expense', expense)
     const token = authService.loggedIn() ? authService.getToken() : null;
     if(!token) {
         return <h2>Please login first</h2>
@@ -41,13 +54,13 @@ console.log('combined', combined)
     if(loading) {
         return <h2>LOADING...</h2>
     }
-    // Pagination Logic
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = combinedData.slice(indexOfFirstItem, indexOfLastItem);
-console.log(currentItems)
+    // console.log(currentItems)
+
     return (
-        <div>
+        <div className='container'>
             <table>
                 <thead>
                     <tr>
@@ -61,16 +74,15 @@ console.log(currentItems)
                     {currentItems.map((item, index) => (
                         <tr key={index}>
                             <td>{item.date}</td>
-                            <td>${item.amount}</td>
+                            <td>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.amount)}</td>
                             <td>{item.type === 'Expense' ? 'Expense' : 'Income'}</td>
                             <td>{item.category}</td>
-                            <td>X</td>
+                            <td><Button>X</Button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
-            {/* Pagination Controls */}
             <div>
                 <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
                     Previous Page
@@ -84,5 +96,7 @@ console.log(currentItems)
             </div>
 
         </div>
+
+      
     )
 }
