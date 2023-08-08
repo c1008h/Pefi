@@ -8,6 +8,7 @@ import Login from './pages/Login.jsx'
 import Goals from './pages/Goals.jsx'
 import Finance from './pages/Finance.jsx';
 import Profile from './pages/Profile.jsx'
+import AccountHistory from './pages/AccountHistory.jsx';
 import 'react-calendar/dist/Calendar.css';
 import './style/calendar.css'
 import './style/index.css';
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element:<Dashboard/>
+      },
+      {
+        path: '/details',
+        element:<AccountHistory/>
       },
       {
         path: '/goals',
