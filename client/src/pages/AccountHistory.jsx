@@ -45,7 +45,7 @@ console.log('combined', combined)
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = combinedData.slice(indexOfFirstItem, indexOfLastItem);
-
+console.log(currentItems)
     return (
         <div>
             <table>
@@ -54,6 +54,7 @@ console.log('combined', combined)
                         <th>Date</th>
                         <th>Amount</th>
                         <th>Type</th>
+                        <th>Category</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +63,8 @@ console.log('combined', combined)
                             <td>{item.date}</td>
                             <td>${item.amount}</td>
                             <td>{item.type === 'Expense' ? 'Expense' : 'Income'}</td>
+                            <td>{item.category}</td>
+                            <td>X</td>
                         </tr>
                     ))}
                 </tbody>
