@@ -5,3 +5,16 @@
 th, td {
     padding: 10px;
 }
+
+.type-show td {
+    padding: 0.5em;
+    border-bottom: 1px solid gray;
+}
+
+.type-show.Expense {
+    background-color: #ffcccc; /* Set your desired background color for expenses */
+}
+
+.type-show.Income {
+    background-color: #ccffcc; /* Set your desired background color for incomes */
+}

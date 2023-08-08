@@ -72,12 +72,12 @@ export default function AccountHistory() {
                 </thead>
                 <tbody>
                     {currentItems.map((item, index) => (
-                        <tr key={index}>
+                        <tr key={index} className={item.type === 'Expense' ? 'type-show Expense' : 'type-show Income'}>
                             <td>{item.date}</td>
                             <td>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.amount)}</td>
                             <td>{item.type === 'Expense' ? 'Expense' : 'Income'}</td>
                             <td>{item.category}</td>
-                            <td><Button>X</Button></td>
+                            <td><Button variant='secondary'>X</Button></td>
                         </tr>
                     ))}
                 </tbody>
