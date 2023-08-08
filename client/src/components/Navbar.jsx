@@ -25,7 +25,7 @@ export default function Navbar () {
             {authService.loggedIn() ? (
             <>
                 <Link to='/dashboard' style={linkStyle}>Dashboard</Link>
-                <Link to='/details' style={linkStyle}>Acocunt Details</Link>
+                <Link to='/details' style={linkStyle}>Details</Link>
                 <Link to='/goals' style={linkStyle}>Goals</Link>
                 <Link to='finance' style={linkStyle}>Finance</Link>
                 <Link to='/profile' style={linkStyle}>Profile</Link>
