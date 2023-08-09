@@ -53,7 +53,7 @@ export const CREATE_INCOME = gql`
   }
 `;
 export const REMOVE_INCOME = gql`
-  mutation removeIncome($_id: ID) {
+  mutation removeIncome($_id: ID!) {
     removeIncome(_id: $_id) {
       _id
       firstName

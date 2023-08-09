@@ -178,19 +178,19 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
-      // deleteExpense: async (parent, { id } , context) => {
-      //   if (context.user) {
+      removeExpense: async (parent, { id } , context) => {
+        if (context.user) {
           
-      //     const updatedUser = await User.findByIdAndUpdate(
-      //       { _id: context.user._id },
-      //       { $pull: { expense: { id : id }} },
-      //       { new: true }
-      //     )
-      //     console.log('successfully removed expense')
-      //     return updatedUser;
-      //   }
-      //   throw new AuthenticationError ('You need to be logged in.');
-      // },
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $pull: { expensesGroup: { _id : _id }} },
+            { new: true }
+          )
+          console.log('successfully removed expense')
+          return updatedUser;
+        }
+        throw new AuthenticationError ('You need to be logged in.');
+      },
 
       createGoals: async (parent, { input }, context) => {
         if (context.user) {

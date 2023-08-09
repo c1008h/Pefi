@@ -39,9 +39,9 @@ console.log(userData)
         console.log(_id, type)
         try {
             if (type === 'Expense') {
-                await removeExpense({ variables: { _id } });
+                await removeExpense({ variables: { _id: _id } });
             } else if (type === 'Income') {
-                await removeIncome({ variables: { _id } });
+                await removeIncome({ variables: { _id: _id } });
             }
 
             // Update cache to reflect the changes
