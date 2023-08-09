@@ -18,7 +18,7 @@ export default function AccountHistory() {
     const [combinedData, setCombinedData] = useState([]);
     const itemsPerPage = 25; 
     const [currentPage, setCurrentPage] = useState(1);
-
+console.log(userData)
     useEffect(() => {
         if (data) {
             const { me } = data
@@ -31,11 +31,12 @@ export default function AccountHistory() {
                 ...me.incomesGroup.map(item => ({ ...item, type: 'Income' }))
             ].sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date
     
-            // console.log('combined', combined)
+            console.log('combined', combined)
             setCombinedData(combined);
         }
     }, [data])
     const handleDelete = async (_id, type) => {
+        console.log(_id, type)
         try {
             if (type === 'Expense') {
                 await removeExpense({ variables: { _id } });

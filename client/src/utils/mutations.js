@@ -87,7 +87,7 @@ export const CREATE_EXPENSE = gql`
 
 export const REMOVE_EXPENSE = gql`
   mutation removeExpense($_id: ID!) {
-    removeExpense(_id: $id) {
+    removeExpense(_id: $_id) {
       _id
       firstName
       lastName
