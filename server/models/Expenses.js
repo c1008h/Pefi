@@ -21,9 +21,6 @@ const expenseSchema = new Schema({
     date: {
         type: String,
         // required: true
-    },
-    transactionType: {
-        type: String
     }
 }, 
     { timestamps: true } 

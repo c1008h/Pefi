@@ -15,7 +15,6 @@ export const QUERY_ME = gql`
         type
         date
         note
-        transactionType
       }
       expensesGroup {
         _id
@@ -24,7 +23,6 @@ export const QUERY_ME = gql`
         category
         type
         date
-        transactionType
       }
       goalsGroup {
         oneYearGoal
