@@ -7,7 +7,7 @@ const typeDefs = `
         incomesGroup: [Incomes]
         expensesGroup: [Expenses]
         goalsGroup: [Goals]
-        financeGroup: [Finance]
+        financeGroup: Finance
     }
 
     type Goals {

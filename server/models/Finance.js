@@ -17,6 +17,6 @@ const financeSchema = new Schema({
     { timestamps: true } 
 )
 
-const Finance = model('Finance', financeSchema);
+// const Finance = model('Finance', financeSchema);
 
-module.exports = Finance;
+module.exports = financeSchema;

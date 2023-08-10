@@ -45,7 +45,7 @@ const resolvers = {
             .populate('incomesGroup')
             .populate('expensesGroup')
             .populate('goalsGroup')
-            .populate('financeGroup');
+            // .populate('financeGroup');
           return user;
         }
         throw new AuthenticationError('You need to be logged in!')
@@ -236,21 +236,30 @@ const resolvers = {
       //   throw new AuthenticationError ('You need to be logged in.');
       // },
       createFinance: async (parent, { input }, context) => {
-        // console.log(context.user)
+        console.log(context.user)
+        console.log('input:', input)
         if (context.user) {
           try {
-            const updateFinance = new Finance({
-              digital: input.digital,
-              cash: input.cash,
-              invested: input.invested,
-              saved: input.saved
-            });
-            const saveFinance = await updateFinance.save();
+            // const updateFinance = new Finance({
+            //   digital: input.digital,
+            //   cash: input.cash,
+            //   invested: input.invested,
+            //   saved: input.saved
+            // });
+            // const saveFinance = await updateFinance.save();
 
             // console.log('finance', finance)
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { financeGroup: saveFinance._id }, // Set financeGroup to the finance object
+              // { financeGroup: { input } }, // Set financeGroup to the finance object
+              {
+                $set: {
+                    'financeGroup.cash': input.cash,
+                    'financeGroup.digital': input.digital,
+                    'financeGroup.invested': input.invested,
+                    'financeGroup.saved': input.saved
+                }
+            },
               { new: true }
             )
             // console.log(updatedUser)
@@ -259,42 +268,58 @@ const resolvers = {
             // console.log(recalculateFinance(updatedUser))
             // await recalculateFinance(updatedUser)
           } catch (error) {
-
+            console.log('Error:', error)
+            throw new Error('Failed to create finance');
           }
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
       updateFinance: async (parent, {input}, context) => {
         if (context.user) {      
-          console.log('input', input)    
+          console.log('context:', context.user)
           try {
-            const financeGroup = await Finance.findById(context.user.financeGroup);
-            // console.log('1', financeGroup)
-            // const financeGroup = await User.findById(context.user).populate('financeGroup')
-            console.log('apple:', financeGroup.financeGroup[0].cash)
+            const updatedUser = await User.findOneAndUpdate(
+              { _id: context.user._id },
+              { 
+                $inc: {
+                'financeGroup.cash': -input.cash,
+                'financeGroup.digital': -input.digital,
+                'financeGroup.invested': -input.invested,
+                'financeGroup.saved': -input.saved
+                }
+              },
+              { new: true }
+            );
 
-            if (input.cash !== 0) {
-              financeGroup[0].financeGroup.cash -= Number(input.cash);
-              // financeGroup[0].financeGroup.cash = isNaN(financeGroup.financeGroup.cash)
-              // ? 0 - Number(input.cash)
-              // : financeGroup.financeGroup.cash - Number(input.cash);
-            }  
-            if (input.digital !== 0) {
-              Number(financeGroup[0].financeGroup.digital) -= Number(input.digital);
-            } 
-            if (input.invested !== 0) {
-              Number(financeGroup[0].financeGroup.invested) -= Number(input.invested);
-            } 
-            if (input.saved !== 0) {
-              Number(financeGroup[0].financeGroup.saved) -= Number(input.saved);
-            } 
-            // console.log('updated', financeGroup.financeGroup)
+            console.log('updatedUser:', updatedUser)
+            if (!updatedUser) {
+              console.log('User not found');
+              return null;
+            }
+            // if (input.cash !== 0) {
+            //   financeGroup[0].financeGroup.cash -= input.cash;
+            //   // financeGroup[0].financeGroup.cash = isNaN(financeGroup.financeGroup.cash)
+            //   // ? 0 - Number(input.cash)
+            //   // : financeGroup.financeGroup.cash - Number(input.cash);
+            // }  
+            // if (input.digital !== 0) {
+            //   financeGroup[0].financeGroup.digital -= input.digital;
+            // } 
+            // if (input.invested !== 0) {
+            //   financeGroup[0].financeGroup.invested -= input.invested;
+            // } 
+            // if (input.saved !== 0) {
+            //   financeGroup[0].financeGroup.saved -= input.saved;
+            // } 
+            // // console.log('updated', financeGroup.financeGroup)
 
-            await financeGroup.save();
-            console.log('updated', financeGroup[0].financeGroup)
+            // await financeGroup.save();
+            console.log('Updated user:', updatedUser);
+            return updatedUser.financeGroup;
 
-            return financeGroup[0].financeGroup; 
+            // return financeGroup[0].financeGroup; 
           } catch (error) {
+            console.error('Error updating finance:', error); 
             throw new Error('Failed to update Finance')
           }
         }

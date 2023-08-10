@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 
 import PropTypes from 'prop-types'; // Import PropTypes
@@ -13,30 +13,13 @@ export default function FinanceDisplay({userData}) {
   const [updateFinance] = useMutation(UPDATE_FINANCE);
 
 console.log(userData)
+const calculateMonthlyExpense = useCallback((expensesGroup) => {
+  let totalExpense = 0;
 
-  useEffect(() => {
-    let digital = parseFloat(userData.financeGroup[0].digital)
-    let cash = parseFloat(userData.financeGroup[0].cash)
-    let saved = parseFloat(userData.financeGroup[0].saved)
-    let invested = parseFloat(userData.financeGroup[0].invested)
-    const incomeGroups = userData.incomesGroup || [];
-    const expenseGroups = userData.expensesGroup || [];
-
-    const monthlyIncome = calculateMonthlyIncome(incomeGroups)
-    const monthlyExpense = calculateMonthlyExpense(expenseGroups);
-
-    setNetworth((digital + cash + saved + invested).toLocaleString())
-    setMonthlyIncome(monthlyIncome)
-    setMonthlyExpense(monthlyExpense);
-  }, [userData])
-
-  // console.log(userData.financeGroup[0])
-  function calculateMonthlyExpense(expensesGroup) {
-    let totalExpense = 0;
-
-    for(let i = 0; i < expensesGroup.length; i++) {
-      let dateStr = expensesGroup[i].date
-      console.log('expense date', dateStr)
+  for(let i = 0; i < expensesGroup.length; i++) {
+    let dateStr = expensesGroup[i].date
+    console.log('expense date', dateStr)
+    if (dateStr){
       const [month, day, year] = dateStr.split('/')
 
       if (Number(month) === currentMonth && Number(year) === currentYear) {
@@ -44,26 +27,56 @@ console.log(userData)
         totalExpense += expensesGroup[i].amount;
       }
     }
-    return totalExpense
   }
+  return totalExpense
+}, [currentMonth, currentYear])
 
-  function calculateMonthlyIncome(incomesGroup) {
-    let totalIncome = 0;
+const calculateMonthlyIncome = useCallback((incomesGroup) => {
+  let totalIncome = 0;
 
-    for (let i =0; i < incomesGroup.length; i++) {
-      let dateStr = incomesGroup[i].date
-      console.log('income date:', dateStr)
+  for (let i =0; i < incomesGroup.length; i++) {
+    let dateStr = incomesGroup[i].date
+    console.log('income date:', dateStr)
+    if(dateStr) {
       const [month, day, year] = dateStr.split('/')
 
       if (Number(month) === currentMonth && Number(year) === currentYear) {
         // console.log('add to income')
         totalIncome += incomesGroup[i].amount;
-
-
       }
     }
-    return totalIncome
   }
+  return totalIncome
+}, [currentMonth, currentYear])
+
+  useEffect(() => {
+    // let digital = parseFloat(userData.financeGroup[0].digital)
+    // let cash = parseFloat(userData.financeGroup[0].cash)
+    // let saved = parseFloat(userData.financeGroup[0].saved)
+    // let invested = parseFloat(userData.financeGroup[0].invested)
+    let digital = parseFloat(userData.financeGroup.digital)
+    let cash = parseFloat(userData.financeGroup.cash)
+    let saved = parseFloat(userData.financeGroup.saved)
+    let invested = parseFloat(userData.financeGroup.invested)
+    const incomeGroups = userData.incomesGroup || [];
+    const expenseGroups = userData.expensesGroup || [];
+
+    const monthlyIncome = calculateMonthlyIncome(incomeGroups)
+    const monthlyExpense = calculateMonthlyExpense(expenseGroups);
+
+
+    setNetworth((digital + cash + saved + invested).toLocaleString())
+    setMonthlyIncome(monthlyIncome)
+    setMonthlyExpense(monthlyExpense);
+
+
+  }, [calculateMonthlyExpense,calculateMonthlyIncome, userData.financeGroup.digital, userData.financeGroup.cash, userData.financeGroup.saved, userData.financeGroup.invested, userData.incomesGroup, userData.expensesGroup])
+
+  // }, [userData.financeGroup.digital, userData.financeGroup.cash, userData.financeGroup.saved, userData.financeGroup.invested, userData.incomesGroup, userData.expensesGroup, calculateMonthlyIncome, calculateMonthlyExpense, currentMonth, currentYear])
+
+  // console.log(userData.financeGroup[0])
+
+
   return (
     <div>
         <h5>Net Worth: ${networth}</h5>
