@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
-import { CREATE_INCOME } from '../../utils/mutations';
+import { CREATE_INCOME, UPDATE_FINANCE } from '../../utils/mutations';
 import Select from 'react-select'
 import { frequencyOptions, incomeOptions, moneyType } from '../../constants/genres'
 import PropTypes from 'prop-types'; // Import PropTypes
@@ -18,7 +18,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
 
     const [isRecurring, setIsRecurring] = useState(false);
     const [createIncome] = useMutation(CREATE_INCOME)
-
+    const [updateFinance] = useMutation(UPDATE_FINANCE)
     const handleAddIncome = () => {
       setShowPrompt(true);
     };
@@ -41,7 +41,17 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
         })
 
         if(createIncome.error) { throw new Error('Something went wrong.')}
-
+        await updateFinance({
+          variables: {
+            input: {
+              cash: type === 'cash' ? parseFloat(amount) : 0,
+              digital: type === 'digital' ? parseFloat(amount) : 0,
+              invested: type === 'invested' ? parseFloat(amount) : 0,
+              saved: type === 'saved' ? parseFloat(amount) : 0,
+            }
+          }
+        })
+        if (updateFinance.error) { throw new Error('Something went wrong with updating Finance')}
       } catch (error) {
         console.log("Error:", error)
       }

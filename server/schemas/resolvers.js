@@ -275,6 +275,7 @@ const resolvers = {
         throw new AuthenticationError ('You need to be log in first.');
       },
       updateFinance: async (parent, {input}, context) => {
+        console.log('input:', input)
         if (context.user) {      
           console.log('context:', context.user)
           try {
