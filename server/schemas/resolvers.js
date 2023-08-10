@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Expenses, Incomes, Finance } = require('../models');
+const { User, Expenses, Incomes } = require('../models');
 const { signToken } = require('../utils/auth');
 const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
 const recalculateFinance = async (user) => {

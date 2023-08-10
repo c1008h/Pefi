@@ -118,7 +118,6 @@ const typeDefs = `
         updateGoals(input: GoalInput!): User
 
         createFinance(input: FinanceInput!): User
-        updateFinance(input: FinanceInput!): User
 
         createIncome(input: IncomeInput!): User
         updateIncome(input: IncomeInput!): User

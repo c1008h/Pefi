@@ -40,18 +40,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
         })
 
         if(createIncome.error) { throw new Error('Something went wrong.')}
-        await updateFinance({
-          variables: {
-            input: {
-              cash: type === 'cash' ? parseFloat(amount) : 0,
-              digital: type === 'digital' ? parseFloat(amount) : 0,
-              invested: type === 'invested' ? parseFloat(amount) : 0,
-              saved: type === 'saved' ? parseFloat(amount) : 0,
-              transactionType: 'income'
-            }
-          }
-        })
-        if (updateFinance.error) { throw new Error('Something went wrong with updating Finance')}
+       
         window.location.reload();
       } catch (error) {
         console.log("Error:", error)

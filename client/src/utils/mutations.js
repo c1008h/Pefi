@@ -63,7 +63,8 @@ export const REMOVE_INCOME = gql`
         _id
         amount
         frequency
-        source
+        category
+        type
         date
         note
       }
@@ -98,6 +99,7 @@ export const REMOVE_EXPENSE = gql`
         amount
         frequency
         category
+        type
         date
       }
     }
@@ -136,17 +138,3 @@ export const CREATE_FINANCE = gql`
     }
   }
 `
-
-export const UPDATE_FINANCE = gql`
-  mutation updateFinance($input: FinanceInput!) {
-    updateFinance(input: $input ) {
-      financeGroup {
-        _id
-        digital
-        cash
-        invested
-        saved
-      }
-    }
-  }
-`;
