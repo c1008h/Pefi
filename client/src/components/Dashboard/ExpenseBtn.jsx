@@ -40,6 +40,8 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
       })
 
       if(createExpense.error) { throw new Error('Something went wrong with creating expense.')}
+      window.location.reload();
+
     } catch (error) {
       console.log("Error:", error)
     }

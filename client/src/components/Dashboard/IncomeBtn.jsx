@@ -36,8 +36,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
             category: category,
             type: type,
             date: date,
-            note: note.trim(),
-            transactionType:'income'
+            note: note.trim()
           }} 
         })
 
@@ -54,6 +53,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
           }
         })
         if (updateFinance.error) { throw new Error('Something went wrong with updating Finance')}
+        window.location.reload();
       } catch (error) {
         console.log("Error:", error)
       }

@@ -297,69 +297,7 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
-      updateFinance: async (parent, {input}, context) => {
-        console.log('input:', input)
-        if (context.user) {      
-          console.log('context:', context.user)
-          try {
-            // const { transactionType, ...financeInput } = input;
-            const updateFields = {};
-            if (input.transactionType === 'income') {
-              updateFields.$inc = {
-                'financeGroup.cash': +input.cash,
-                'financeGroup.digital': +input.digital,
-                'financeGroup.invested': +input.invested,
-                'financeGroup.saved': +input.saved,
-              };
-            } else if (input.transactionType === 'expense') {
-              updateFields.$inc = {
-                'financeGroup.cash': -input.cash,
-                'financeGroup.digital': -input.digital,
-                'financeGroup.invested': -input.invested,
-                'financeGroup.saved': -input.saved,
-              };
-            }
-
-            const updatedUser = await User.findOneAndUpdate(
-              { _id: context.user._id },
-              updateFields,
-              { new: true }
-            );
-
-            console.log('updatedUser:', updatedUser.financeGroup)
-            if (!updatedUser) {
-              console.log('User not found');
-              return null;
-            }
-            // if (input.cash !== 0) {
-            //   financeGroup[0].financeGroup.cash -= input.cash;
-            //   // financeGroup[0].financeGroup.cash = isNaN(financeGroup.financeGroup.cash)
-            //   // ? 0 - Number(input.cash)
-            //   // : financeGroup.financeGroup.cash - Number(input.cash);
-            // }  
-            // if (input.digital !== 0) {
-            //   financeGroup[0].financeGroup.digital -= input.digital;
-            // } 
-            // if (input.invested !== 0) {
-            //   financeGroup[0].financeGroup.invested -= input.invested;
-            // } 
-            // if (input.saved !== 0) {
-            //   financeGroup[0].financeGroup.saved -= input.saved;
-            // } 
-            // // console.log('updated', financeGroup.financeGroup)
-
-            // await financeGroup.save();
-            console.log('Updated user:', updatedUser);
-            return updatedUser.financeGroup;
-
-            // return financeGroup[0].financeGroup; 
-          } catch (error) {
-            console.error('Error updating finance:', error); 
-            throw new Error('Failed to update Finance')
-          }
-        }
-        throw new AuthenticationError ('You need to be log in first.');
-      }
+     
     }
 }
 module.exports = resolvers;
