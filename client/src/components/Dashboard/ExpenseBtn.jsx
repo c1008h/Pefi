@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
-import { CREATE_EXPENSE, UPDATE_FINANCE } from '../../utils/mutations';
+import { CREATE_EXPENSE } from '../../utils/mutations';
 import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
 import {genreList, frequencyOptions, moneyType} from '../../constants/genres'
@@ -14,7 +14,6 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   // const [showPrompt, setShowPrompt] = useState(false);
   const [reoccuring, setReoccuring] = useState(false)
   const [createExpense] = useMutation(CREATE_EXPENSE)
-  // const [updateFinance] = useMutation(UPDATE_FINANCE); 
 
   console.log(date)
   // const handleDateChange = (newValue) => {
