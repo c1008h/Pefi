@@ -23,10 +23,16 @@ export default function Navbar () {
         color: 'white',
         fontWeight: 'bold',
     };
+
+    const containerStyle = {
+        justifyContent:'center',
+        textAlign:'center',
+    }
+
     return (
         <nav style={style}>
             {authService.loggedIn() ? (
-            <>
+            <div style={containerStyle}>
                 <Link to='/dashboard' style={linkStyle}>Dashboard</Link>
                 <Link to='/details' style={linkStyle}>Details</Link>
                 <Link to='/goals' style={linkStyle}>Goals</Link>
@@ -34,13 +40,13 @@ export default function Navbar () {
                 <Link to='/profile' style={linkStyle}>Profile</Link>
                 <Link to='/welcome' style={linkStyle} onClick={ logout }>Logout</Link>  
 
-            </>
+            </div>
             ) : (
-            <>
+            <div style={containerStyle}>
                 <Link style={linkStyle}>Personal Finance</Link>
                 <Link to='/signup' style={linkStyle}>Signup</Link>
                 <Link to='/login' style={linkStyle}>Login</Link>
-            </>
+            </div>
             )}
         </nav>
     )
