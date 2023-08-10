@@ -145,16 +145,26 @@ const resolvers = {
         throw new AuthenticationError ('You need to be logged in.');
       },
       removeIncome: async (parent, { _id } , context) => {
-        console.log(_id)
+        console.log('income id:', _id)
         if (context.user) {
-          
-          const updatedUser = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $pull: { incomesGroup: _id } },
-            { new: true }
-          )
-          console.log('successfully removed income')
-          return updatedUser;
+          try {
+            const deletedIncome = await Incomes.findByIdAndDelete(_id);
+
+            if (!deletedIncome) {
+              console.log('Income not found');
+              return null;
+            }
+            const updatedUser = await User.findByIdAndUpdate(
+              { _id: context.user._id },
+              { $pull: { incomesGroup: _id } },
+              { new: true }
+            )
+            console.log('successfully removed income')
+            return updatedUser;
+          } catch (error) {
+            console.log("ERROR:", error);
+            throw new Error ("failed to delete income");
+          }
         }
         throw new AuthenticationError ('You need to be logged in.');
       },
@@ -203,16 +213,29 @@ const resolvers = {
         throw new AuthenticationError ('You need to be log in first.');
       },
       removeExpense: async (parent, { _id } , context) => {
-        // console.log(_id)
+        console.log('expense id:', _id)
         if (context.user) {
-          const updatedUser = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $pull: { expensesGroup: _id} },
-            { new: true }
-          )
-          console.log('successfully removed expense')
-          return updatedUser;
-        }
+          try {
+            const deletedExpense = await Expenses.findByIdAndDelete(_id);
+
+            if (!deletedExpense) {
+              console.log('Expense not found');
+              return null;
+            }
+
+            const updatedUser = await User.findByIdAndUpdate(
+              { _id: context.user._id },
+              { $pull: { expensesGroup: _id} },
+              { new: true }
+            )
+
+            console.log('successfully removed expense')
+            return updatedUser;
+          } catch (error) {
+            console.log("ERROR:", error);
+            throw new Error ("failed to delete expense");
+          }
+      }
         throw new AuthenticationError ('You need to be logged in.');
       },
 

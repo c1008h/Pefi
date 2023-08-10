@@ -18,7 +18,7 @@ export default function AccountHistory() {
     const [combinedData, setCombinedData] = useState([]);
     const itemsPerPage = 25; 
     const [currentPage, setCurrentPage] = useState(1);
-console.log(userData)
+    console.log(userData)
     useEffect(() => {
         if (data) {
             const { me } = data
