@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
-import { CREATE_INCOME, UPDATE_FINANCE } from '../../utils/mutations';
+import { CREATE_INCOME } from '../../utils/mutations';
 import Select from 'react-select'
 import { frequencyOptions, incomeOptions, moneyType } from '../../constants/genres'
 import PropTypes from 'prop-types'; // Import PropTypes
@@ -18,7 +18,6 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
 
     const [isRecurring, setIsRecurring] = useState(false);
     const [createIncome] = useMutation(CREATE_INCOME)
-    const [updateFinance] = useMutation(UPDATE_FINANCE)
     const handleAddIncome = () => {
       setShowPrompt(true);
     };
