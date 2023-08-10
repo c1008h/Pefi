@@ -1,59 +1,51 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useMutation } from '@apollo/client';
-
 import PropTypes from 'prop-types'; // Import PropTypes
 import dayjs from 'dayjs'
-import { UPDATE_FINANCE } from '../../utils/mutations';
 export default function FinanceDisplay({userData}) {
   const [networth, setNetworth] = useState()
   const [monthlyIncome, setMonthlyIncome] = useState()
   const [monthlyExpense, setMonthlyExpense] = useState(0)
   const currentMonth = dayjs().month() + 1;
   const currentYear = dayjs().year();
-  const [updateFinance] = useMutation(UPDATE_FINANCE);
 
-console.log(userData)
-const calculateMonthlyExpense = useCallback((expensesGroup) => {
-  let totalExpense = 0;
+  console.log(userData)
+  const calculateMonthlyExpense = useCallback((expensesGroup) => {
+    let totalExpense = 0;
 
-  for(let i = 0; i < expensesGroup.length; i++) {
-    let dateStr = expensesGroup[i].date
-    console.log('expense date', dateStr)
-    if (dateStr){
-      const [month, day, year] = dateStr.split('/')
+    for(let i = 0; i < expensesGroup.length; i++) {
+      let dateStr = expensesGroup[i].date
+      // console.log('expense date', dateStr)
+      if (dateStr){
+        const [month, day, year] = dateStr.split('/')
 
-      if (Number(month) === currentMonth && Number(year) === currentYear) {
-        // console.log('add to expense')
-        totalExpense += expensesGroup[i].amount;
+        if (Number(month) === currentMonth && Number(year) === currentYear) {
+          // console.log('add to expense')
+          totalExpense += expensesGroup[i].amount;
+        }
       }
     }
-  }
-  return totalExpense
-}, [currentMonth, currentYear])
+    return totalExpense
+  }, [currentMonth, currentYear])
 
-const calculateMonthlyIncome = useCallback((incomesGroup) => {
-  let totalIncome = 0;
+  const calculateMonthlyIncome = useCallback((incomesGroup) => {
+    let totalIncome = 0;
 
-  for (let i =0; i < incomesGroup.length; i++) {
-    let dateStr = incomesGroup[i].date
-    console.log('income date:', dateStr)
-    if(dateStr) {
-      const [month, day, year] = dateStr.split('/')
+    for (let i =0; i < incomesGroup.length; i++) {
+      let dateStr = incomesGroup[i].date
+      // console.log('income date:', dateStr)
+      if(dateStr) {
+        const [month, day, year] = dateStr.split('/')
 
-      if (Number(month) === currentMonth && Number(year) === currentYear) {
-        // console.log('add to income')
-        totalIncome += incomesGroup[i].amount;
+        if (Number(month) === currentMonth && Number(year) === currentYear) {
+          // console.log('add to income')
+          totalIncome += incomesGroup[i].amount;
+        }
       }
     }
-  }
-  return totalIncome
-}, [currentMonth, currentYear])
+    return totalIncome
+  }, [currentMonth, currentYear])
 
   useEffect(() => {
-    // let digital = parseFloat(userData.financeGroup[0].digital)
-    // let cash = parseFloat(userData.financeGroup[0].cash)
-    // let saved = parseFloat(userData.financeGroup[0].saved)
-    // let invested = parseFloat(userData.financeGroup[0].invested)
     let digital = parseFloat(userData.financeGroup.digital)
     let cash = parseFloat(userData.financeGroup.cash)
     let saved = parseFloat(userData.financeGroup.saved)
@@ -71,11 +63,6 @@ const calculateMonthlyIncome = useCallback((incomesGroup) => {
 
 
   }, [calculateMonthlyExpense,calculateMonthlyIncome, userData.financeGroup.digital, userData.financeGroup.cash, userData.financeGroup.saved, userData.financeGroup.invested, userData.incomesGroup, userData.expensesGroup])
-
-  // }, [userData.financeGroup.digital, userData.financeGroup.cash, userData.financeGroup.saved, userData.financeGroup.invested, userData.incomesGroup, userData.expensesGroup, calculateMonthlyIncome, calculateMonthlyExpense, currentMonth, currentYear])
-
-  // console.log(userData.financeGroup[0])
-
 
   return (
     <div>
