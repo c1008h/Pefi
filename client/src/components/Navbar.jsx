@@ -9,9 +9,12 @@ export default function Navbar () {
 
     const style = {
         diplay:'flex',
-        height: '60px',
+        height: '2.5rem',
         margin:'2px',
-        backgroundColor:'red',
+        backgroundColor:'gray',
+        backgroundSize: 'cover',
+        padding: '5% 0',
+        width: '100%',
         justifyContent: 'space-between', 
     }
     const linkStyle = {
