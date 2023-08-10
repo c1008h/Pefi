@@ -31,7 +31,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
       try {
         await createIncome({
           variables: { input: { 
-            amount: amount.trim(),
+            amount: parseFloat(amount.trim()),
             frequency: frequency,
             category: category,
             type: type,
@@ -64,7 +64,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
               <Form.Group>
                 <Form.Label>Amount:</Form.Label>
                 <Form.Control 
-                  type='text'
+                  type='number'
                   name='amount'
                   onChange={(e) => setAmount(e.target.value)}
                   required

@@ -53,7 +53,7 @@ const typeDefs = `
     }
     type Incomes {
         _id: ID
-        amount: String
+        amount: Float
         frequency: String
         category: String
         type: String
@@ -63,7 +63,7 @@ const typeDefs = `
 
     type Expenses {
         _id: ID
-        amount: String
+        amount: Float
         frequency: String
         category: String
         type: String
@@ -71,7 +71,7 @@ const typeDefs = `
     }
     input IncomeInput {
         _id: ID
-        amount: String
+        amount: Float
         frequency: String
         category: String
         type: String
@@ -81,7 +81,7 @@ const typeDefs = `
       
     input ExpenseInput {
         _id: ID
-        amount: String
+        amount: Float
         frequency: String
         category: String
         type: String

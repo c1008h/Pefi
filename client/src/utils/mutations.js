@@ -65,6 +65,7 @@ export const REMOVE_INCOME = gql`
         frequency
         source
         date
+        note
       }
     }
   }

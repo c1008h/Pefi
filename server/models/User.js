@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const Incomes = require('./Income');
+const Expenses = require('./Expenses')
 
 const userSchema = new Schema(
     {
@@ -60,6 +62,13 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
+
+userSchema.pre('remove', async function(next) {
+    const user = this;
+
+    await Expenses.deleteMany({ _id: { $in: user.expensesGroup}})
+    await Incomes.deleteMany({ _id: { $in: user.incomesGroup } })
+})
 
 const User = model('User', userSchema);
 

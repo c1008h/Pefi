@@ -135,11 +135,12 @@ const resolvers = {
         throw new AuthenticationError ('You need to be logged in.');
       },
       removeIncome: async (parent, { _id } , context) => {
+        console.log(_id)
         if (context.user) {
           
           const updatedUser = await User.findByIdAndUpdate(
             { _id: context.user._id },
-            { $pull: { incomesGroup: { _id : _id }} },
+            { $pull: { incomesGroup: _id } },
             { new: true }
           )
           console.log('successfully removed income')
@@ -178,12 +179,12 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
-      removeExpense: async (parent, { id } , context) => {
+      removeExpense: async (parent, { _id } , context) => {
+        // console.log(_id)
         if (context.user) {
-          
           const updatedUser = await User.findByIdAndUpdate(
             { _id: context.user._id },
-            { $pull: { expensesGroup: { _id : _id }} },
+            { $pull: { expensesGroup: _id} },
             { new: true }
           )
           console.log('successfully removed expense')

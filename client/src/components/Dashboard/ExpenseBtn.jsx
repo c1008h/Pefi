@@ -31,7 +31,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
     try {
       await createExpense({
         variables: { input: {
-          amount: amount.trim(),
+          amount: parseFloat(amount.trim()),
           frequency: frequency,
           category: category,
           type: type,
@@ -73,7 +73,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
           <Form.Group>
             <Form.Label>Expense Amount:</Form.Label>
             <Form.Control 
-              type="text"
+              type="number"
               name="amount"
               onChange={e => setAmount(e.target.value)}
               required

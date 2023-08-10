@@ -1,8 +1,9 @@
 const { Schema, model } = require('mongoose');
+// const User = require('./User');
 
 const expenseSchema = new Schema({
     amount: {
-        type: String,
+        type: Number,
         // required: true,
     },
     frequency: {
@@ -24,6 +25,18 @@ const expenseSchema = new Schema({
 }, 
     { timestamps: true } 
 )
+// expenseSchema.pre('remove', async function (next) {
+//     const expense = this;
+
+//     const user = await User.findOne({ expensesGroup: expense._id })
+    
+//     if (user) {
+//         user.expensesGroup.pull(expense._id)
+//         await user.save()
+//     }
+
+//     next()
+// })
 
 const Expenses = model('Expenses', expenseSchema);
 

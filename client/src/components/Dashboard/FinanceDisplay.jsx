@@ -36,11 +36,12 @@ console.log(userData)
 
     for(let i = 0; i < expensesGroup.length; i++) {
       let dateStr = expensesGroup[i].date
+      console.log('expense date', dateStr)
       const [month, day, year] = dateStr.split('/')
 
       if (Number(month) === currentMonth && Number(year) === currentYear) {
-        console.log('add to expense')
-        totalExpense += parseFloat(expensesGroup[i].amount);
+        // console.log('add to expense')
+        totalExpense += expensesGroup[i].amount;
       }
     }
     return totalExpense
@@ -51,11 +52,12 @@ console.log(userData)
 
     for (let i =0; i < incomesGroup.length; i++) {
       let dateStr = incomesGroup[i].date
+      console.log('income date:', dateStr)
       const [month, day, year] = dateStr.split('/')
 
       if (Number(month) === currentMonth && Number(year) === currentYear) {
-        console.log('add to income')
-        totalIncome += parseFloat(incomesGroup[i].amount);
+        // console.log('add to income')
+        totalIncome += incomesGroup[i].amount;
 
 
       }
