@@ -14,7 +14,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   // const [showPrompt, setShowPrompt] = useState(false);
   const [reoccuring, setReoccuring] = useState(false)
   const [createExpense] = useMutation(CREATE_EXPENSE)
-  const [updateFinance] = useMutation(UPDATE_FINANCE); 
+  // const [updateFinance] = useMutation(UPDATE_FINANCE); 
 
   console.log(date)
   // const handleDateChange = (newValue) => {
@@ -35,25 +35,11 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
           frequency: frequency,
           category: category,
           type: type,
-          date: date
+          date: date,
         }}
       })
 
       if(createExpense.error) { throw new Error('Something went wrong with creating expense.')}
-
-      await updateFinance({
-        variables: {
-          // _id: data.me._id, 
-          input: {
-            cash: type === 'cash' ? parseFloat(amount) : 0,
-            digital: type === 'digital' ? parseFloat(amount) : 0,
-            invested: type === 'invested' ? parseFloat(amount) : 0,
-            saved: type === 'saved' ? parseFloat(amount) : 0,
-          },
-        },
-      });
-      if (updateFinance.error) { throw new Error('Something went wrong with updating Finance')}
-      
     } catch (error) {
       console.log("Error:", error)
     }

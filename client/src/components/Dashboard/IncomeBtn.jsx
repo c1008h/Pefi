@@ -36,7 +36,8 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
             category: category,
             type: type,
             date: date,
-            note: note.trim()
+            note: note.trim(),
+            transactionType:'income'
           }} 
         })
 
@@ -48,6 +49,7 @@ export const IncomeBtn = ({ showIncomeForm, value }) => {
               digital: type === 'digital' ? parseFloat(amount) : 0,
               invested: type === 'invested' ? parseFloat(amount) : 0,
               saved: type === 'saved' ? parseFloat(amount) : 0,
+              transactionType: 'income'
             }
           }
         })

@@ -24,6 +24,9 @@ const incomeSchema = new Schema({
     },
     note: {
         type: String,
+    },
+    transactionType: {
+        type: String
     }
 },
     { timestamps: true } 

@@ -48,6 +48,7 @@ export const CREATE_INCOME = gql`
         type
         date
         note
+        transactionType
       }
     }
   }
@@ -66,6 +67,7 @@ export const REMOVE_INCOME = gql`
         source
         date
         note
+        transactionType
       }
     }
   }
@@ -81,6 +83,7 @@ export const CREATE_EXPENSE = gql`
         category
         type
         date
+        transactionType
       }
     }
   }
@@ -99,6 +102,7 @@ export const REMOVE_EXPENSE = gql`
         frequency
         category
         date
+        transactionType
       }
     }
   }

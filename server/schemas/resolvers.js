@@ -116,16 +116,26 @@ const resolvers = {
               date: input.date,
               frequency: input.frequency,
               type: input.type,
-              note: input.note
+              note: input.note,
             })
             const savedIncome = await newIncome.save();
 
+            const financeFieldToUpdate = `financeGroup.${input.type.toLowerCase()}`;
+            const updateFields = {
+              $push: { incomesGroup: savedIncome._id }
+            };
+            updateFields.$inc = {
+              [financeFieldToUpdate]: +input.amount,
+            }
+
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $push: { incomesGroup: savedIncome._id } },
+              // { $push: { incomesGroup: savedIncome._id } },
+              updateFields,
               { new: true }
             )
             console.log('successfully input income')
+            console.log('updated:', updatedUser.financeGroup)
             return updatedUser;
           } catch (error) {
             console.log('Error:', error);
@@ -159,17 +169,30 @@ const resolvers = {
               date: input.date,
             });
             console.log(input)
-
             const savedExpense = await newExpense.save();
 
+            const financeFieldToUpdate = `financeGroup.${input.type.toLowerCase()}`;
+            const updateFields = {
+              $push: { expensesGroup: savedExpense._id }
+            };
+            updateFields.$inc = {
+              [financeFieldToUpdate]: -input.amount,
+            }
+
+            // const updatedUser = await User.findOneAndUpdate(
+            //   { _id: context.user._id },
+            //   { $push: { expensesGroup: savedExpense._id } },
+            //   { new: true }
+            // )
+            // await recalculateFinance(updatedUser);
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $push: { expensesGroup: savedExpense._id } },
+              updateFields,
               { new: true }
-            )
-            // await recalculateFinance(updatedUser);
+            );
 
             console.log('successfully input expense')
+            console.log('updated:', updatedUser.financeGroup)
             return updatedUser;
 
           } catch (erorr) {
@@ -279,20 +302,31 @@ const resolvers = {
         if (context.user) {      
           console.log('context:', context.user)
           try {
-            const updatedUser = await User.findOneAndUpdate(
-              { _id: context.user._id },
-              { 
-                $inc: {
+            // const { transactionType, ...financeInput } = input;
+            const updateFields = {};
+            if (input.transactionType === 'income') {
+              updateFields.$inc = {
+                'financeGroup.cash': +input.cash,
+                'financeGroup.digital': +input.digital,
+                'financeGroup.invested': +input.invested,
+                'financeGroup.saved': +input.saved,
+              };
+            } else if (input.transactionType === 'expense') {
+              updateFields.$inc = {
                 'financeGroup.cash': -input.cash,
                 'financeGroup.digital': -input.digital,
                 'financeGroup.invested': -input.invested,
-                'financeGroup.saved': -input.saved
-                }
-              },
+                'financeGroup.saved': -input.saved,
+              };
+            }
+
+            const updatedUser = await User.findOneAndUpdate(
+              { _id: context.user._id },
+              updateFields,
               { new: true }
             );
 
-            console.log('updatedUser:', updatedUser)
+            console.log('updatedUser:', updatedUser.financeGroup)
             if (!updatedUser) {
               console.log('User not found');
               return null;

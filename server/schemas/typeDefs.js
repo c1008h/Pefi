@@ -49,7 +49,6 @@ const typeDefs = `
         invested: Float
         saved: Float
         financeGroup: ID
-
     }
     type Incomes {
         _id: ID
@@ -59,6 +58,7 @@ const typeDefs = `
         type: String
         date: String
         note: String
+        transactionType: String 
     }
 
     type Expenses {
@@ -68,6 +68,7 @@ const typeDefs = `
         category: String
         type: String
         date: String
+        transactionType: String 
     }
     input IncomeInput {
         _id: ID
@@ -77,6 +78,7 @@ const typeDefs = `
         type: String
         date: String
         note: String
+        transactionType: String 
     }
       
     input ExpenseInput {
@@ -86,6 +88,7 @@ const typeDefs = `
         category: String
         type: String
         date: String
+        transactionType: String 
     }
     type Auth {
         token: ID
