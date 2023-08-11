@@ -154,9 +154,16 @@ const resolvers = {
               console.log('Income not found');
               return null;
             }
+            const financeFieldToUpdate = `financeGroup.${deletedIncome.type.toLowerCase()}`;
+            const updateFields = {
+              $pull: { incomesGroup: _id },
+              $inc: {
+                [financeFieldToUpdate]: -deletedIncome.amount,
+              },
+            };
             const updatedUser = await User.findByIdAndUpdate(
               { _id: context.user._id },
-              { $pull: { incomesGroup: _id } },
+              updateFields,
               { new: true }
             )
             console.log('successfully removed income')
@@ -188,13 +195,6 @@ const resolvers = {
             updateFields.$inc = {
               [financeFieldToUpdate]: -input.amount,
             }
-
-            // const updatedUser = await User.findOneAndUpdate(
-            //   { _id: context.user._id },
-            //   { $push: { expensesGroup: savedExpense._id } },
-            //   { new: true }
-            // )
-            // await recalculateFinance(updatedUser);
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
               updateFields,
@@ -217,15 +217,21 @@ const resolvers = {
         if (context.user) {
           try {
             const deletedExpense = await Expenses.findByIdAndDelete(_id);
-
+            // console.log('deleteexpense:', deletedExpense)
             if (!deletedExpense) {
               console.log('Expense not found');
               return null;
             }
-
+            const financeFieldToUpdate = `financeGroup.${deletedExpense.type.toLowerCase()}`;
+            const updateFields = {
+              $pull: { expensesGroup: _id },
+              $inc: {
+                [financeFieldToUpdate]: +deletedExpense.amount,
+              },
+            };
             const updatedUser = await User.findByIdAndUpdate(
               { _id: context.user._id },
-              { $pull: { expensesGroup: _id} },
+              updateFields,
               { new: true }
             )
 

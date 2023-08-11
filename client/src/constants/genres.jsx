@@ -14,6 +14,7 @@ export const genreList = [
     { value: 'personal care', label: 'Personal Care' },
     { value: 'groceries', label: 'Groceries' },
     { value: 'home & maintenance', label: 'Home & Maintenance' },
+    { value: 'rent & mortgage', label: 'Rent & Mortgage' },
     { value: 'taxes', label: 'Taxes' },
     { value: 'investments', label: 'Investments' },
     { value: 'savings', label: 'Savings' },
