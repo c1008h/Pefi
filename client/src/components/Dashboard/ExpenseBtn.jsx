@@ -2,9 +2,15 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPENSE } from '../../utils/mutations';
+
+import { useDispatch } from 'react-redux';
+import { addExpense } from '../../store/reducers/expensesReducer';
+
 import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
 import {genreList, frequencyOptions, moneyType} from '../../constants/genres'
+
+
 export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   const [amount, setAmount] = useState()
   const [frequency, setFrequency] = useState()
@@ -14,6 +20,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   // const [showPrompt, setShowPrompt] = useState(false);
   const [reoccuring, setReoccuring] = useState(false)
   const [createExpense] = useMutation(CREATE_EXPENSE)
+  const dispatch = useDispatch();
 
   console.log(date)
   // const handleDateChange = (newValue) => {
@@ -26,7 +33,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   };
   const handleSaveExpense = async (amount, frequency, category, type, date) => {
     console.log('Inputting expense:', amount, frequency, category, type, date)
-
+    
     try {
       await createExpense({
         variables: { input: {
@@ -37,6 +44,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
           date: date,
         }}
       })
+      // await dispatch(addExpense({amount, frequency, category, type, date}));
 
       if(createExpense.error) { throw new Error('Something went wrong with creating expense.')}
       window.location.reload();

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes
 import dayjs from 'dayjs'
+
 export default function FinanceDisplay({userData}) {
   const [networth, setNetworth] = useState()
   const [monthlyIncome, setMonthlyIncome] = useState()

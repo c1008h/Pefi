@@ -3,11 +3,12 @@ import { ExpenseBtn } from '../components/Dashboard/ExpenseBtn.jsx'
 import { IncomeBtn } from '../components/Dashboard/IncomeBtn.jsx';
 // import { CalendarEl } from '../components/Dashboard/Calendar.jsx'
 import FinanceDisplay from '../components/Dashboard/FinanceDisplay.jsx'
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers';
+import { useSelector } from 'react-redux';
 
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
@@ -18,6 +19,8 @@ export const Dashboard = () => {
     const { data } = useQuery(QUERY_ME)
     const [value, setValue] = useState(dayjs());
 //    console.log(value.format('MM/DD/YYYY'))
+    const expenses = useSelector(state => state.expenses);
+    console.log('redux:', expenses)
     useEffect(() => {
         if (data) {
           setUserData(data.me)
@@ -43,10 +46,10 @@ export const Dashboard = () => {
       setShowExpenseForm(false);
     };
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      setShowForm(false);
-    };
+    // const handleSubmit = (event) => {
+    //   event.preventDefault();
+    //   setShowForm(false);
+    // };
 
     const token = authService.loggedIn() ? authService.getToken() : null;
     if(!token) {

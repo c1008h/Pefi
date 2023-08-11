@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import { REMOVE_EXPENSE, REMOVE_INCOME } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries'
@@ -45,8 +45,10 @@ export default function AccountHistory() {
             }
 
             // Update cache to reflect the changes
-            const updatedCombinedData = combinedData.filter(item => item._id !== _id);
-            setCombinedData(updatedCombinedData);
+            // const updatedCombinedData = combinedData.filter(item => item._id !== _id);
+            // setCombinedData(updatedCombinedData);
+            setCombinedData(combinedData => combinedData.filter(item => item._id !== _id || item.type !== type));
+
         } catch (error) {
             console.log('Error:', error);
         }
@@ -75,8 +77,8 @@ export default function AccountHistory() {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentItems.map((item, index) => (
-                        <tr key={index} className={item.type === 'Expense' ? 'type-show Expense' : 'type-show Income'}>
+                    {currentItems.map((item) => (
+                        <tr key={item.id} className={item.type === 'Expense' ? 'type-show Expense' : 'type-show Income'}>
                             <td>{item.date}</td>
                             <td>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.amount)}</td>
                             <td>{item.type === 'Expense' ? 'Expense' : 'Income'}</td>
