@@ -3,6 +3,7 @@ import { ExpenseBtn } from '../components/Dashboard/ExpenseBtn.jsx'
 import { IncomeBtn } from '../components/Dashboard/IncomeBtn.jsx';
 // import { CalendarEl } from '../components/Dashboard/Calendar.jsx'
 import FinanceDisplay from '../components/Dashboard/FinanceDisplay.jsx'
+import Monthly from '../components/Dashboard/Graphs/Monthly.jsx';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
@@ -75,6 +76,7 @@ export const Dashboard = () => {
                     <FinanceDisplay 
                         userData={userData}
                     />
+                    <Monthly />
                 </div>
                 <button
                     onClick={openExpenseForm}
