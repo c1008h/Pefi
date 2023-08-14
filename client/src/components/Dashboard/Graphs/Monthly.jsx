@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 import {
     Chart as ChartJS,
@@ -8,15 +8,16 @@ import {
     Title,
     Tooltip,
     Legend,
-  } from 'chart.js';
-  import {faker} from '@faker-js/faker';
-import { Bar } from "react-chartjs-2";
+} from 'chart.js';
+import {faker} from '@faker-js/faker';
+import { Bar, Line } from "react-chartjs-2";
 import PropTypes from 'prop-types'; 
 import { allMonths } from '../../../constants/months'
 
 export default function Monthly({ userData }) {
     const [monthlyIncome, setMonthlyIncome] = useState([])
     const [monthlyExpense, setMonthlyExpense] = useState([])
+    const [monthlyNet, setMonthlyNet] = useState([])
 
     // const currentMonth = dayjs().month() + 1;
     const currentYear = dayjs().year();
@@ -45,14 +46,14 @@ export default function Monthly({ userData }) {
                 monthlyExpenseArray[Number(month) - 1] += expenseEntry.amount;
             }
         });
-    
-        // Rest of the code for setting the state
+        // const subtractedArray = monthlyIncomeArray.map((income, index) => income - monthlyExpenseArray[index]);
+
         setMonthlyIncome(monthlyIncomeArray);
         setMonthlyExpense(monthlyExpenseArray);
+        // setMonthlyNet(subtractedArray)
     }, [ currentYear, userData.incomesGroup, userData.expensesGroup ])
     console.log('monthly expenses array:', monthlyExpense)
     console.log('monthly incomes array:', monthlyIncome)
-
 
     ChartJS.register(
         CategoryScale,
@@ -72,10 +73,10 @@ export default function Monthly({ userData }) {
                 display: false
             }
         },
-        // interaction: {
-        //     mode: 'index',
-        //     intersect: false
-        // },
+        interaction: {
+            mode: 'index',
+            intersect: false
+        },
         scales: {
             x: {
                 stacked: true
@@ -86,20 +87,22 @@ export default function Monthly({ userData }) {
         }
     }
     const data = {
-        allMonths,
+        labels: allMonths,
         datasets: [
             {
                 label:'Income', 
-                data: allMonths.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+                // data: allMonths.map(() => faker.datatype({ min: -1000, max: 1000 })),
+                data: monthlyIncome,
                 backgroundColor:'blue',
-                stack: monthlyIncome
+                stack: 'stackGroup1'
                 // stack: monthlyIncome
             },
             {
                 label:'Expense',
-                data: allMonths.map(() => faker.datatype.number({  min: -1000, max: 1000})),
+                // data: allMonths.map(() => faker.datatype({  min: -1000, max: 1000})),
+                data: monthlyExpense,
                 backgroundColor:'red',
-                stack: monthlyExpense
+                stack: 'stackGroup1'
             }
         ]
     }
@@ -107,7 +110,21 @@ export default function Monthly({ userData }) {
         <div>
             <h1>Monthly Graphs</h1>
             {/* <h2>{monthlyIncome}</h2> */}
-            <Bar options={options} data={data} />
+            {/* <Bar options={options} data={data} /> */}
+            {/* <Line 
+                data={monthlyNet}
+                options={{
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Monthly Networth Growth'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                }}
+            /> */}
         </div>
     )
 }

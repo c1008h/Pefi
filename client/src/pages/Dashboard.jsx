@@ -3,13 +3,16 @@ import { ExpenseBtn } from '../components/Dashboard/ExpenseBtn.jsx'
 import { IncomeBtn } from '../components/Dashboard/IncomeBtn.jsx';
 // import { CalendarEl } from '../components/Dashboard/Calendar.jsx'
 import FinanceDisplay from '../components/Dashboard/FinanceDisplay.jsx'
-import Monthly from '../components/Dashboard/Graphs/Monthly.jsx';
+import Yearly from '../components/Dashboard/Graphs/Yearly.jsx';
+import Monthly from '../components/Dashboard/Graphs/Monthly.jsx'
+import Weekly from '../components/Dashboard/Graphs/Weekly.jsx'
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers';
 import { useSelector } from 'react-redux';
+import { Button } from 'react-bootstrap';
 
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
@@ -19,7 +22,11 @@ export const Dashboard = () => {
     const [loading, setLoading] = useState(true)
     const { data } = useQuery(QUERY_ME)
     const [value, setValue] = useState(dayjs());
-//    console.log(value.format('MM/DD/YYYY'))
+
+    const [weekButton, setWeekButton] = useState(false)
+    const [monthButton, setMonthButton] = useState(false)
+    const [yearButton, setYearButton] = useState(false)
+
     const expenses = useSelector(state => state.expenses);
     console.log('redux:', expenses)
     useEffect(() => {
@@ -76,9 +83,42 @@ export const Dashboard = () => {
                     <FinanceDisplay 
                         userData={userData}
                     />
-                    <Monthly 
+                    <div>
+                        <Button
+                            onClick={() => {
+                                setMonthButton(false)
+                                setYearButton(false)
+                                setWeekButton(true)
+                            }}
+                        >
+                            Week
+                        </Button>
+                        <Button
+                            onClick= {() => {
+                                setMonthButton(true)
+                                setYearButton(false)
+                                setWeekButton(false)
+                            }}
+                        >
+                            Month
+                        </Button>
+                        <Button
+                            onClick= {() => {
+                                setMonthButton(false)
+                                setYearButton(true)
+                                setWeekButton(false)
+                            }}
+                        >
+                            Year
+                        </Button>
+
+                    </div>
+                    {monthButton && <Monthly userData={userData} />}
+      {yearButton && <Yearly userData={userData} />}
+      {weekButton && <Weekly userData={userData} />}                    
+      {/* <Yearly 
                         userData={userData}
-                    />
+                    /> */}
                 </div>
                 <button
                     onClick={openExpenseForm}
