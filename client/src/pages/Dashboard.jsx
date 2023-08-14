@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ExpenseBtn } from '../components/Dashboard/ExpenseBtn.jsx'
-import { IncomeBtn } from '../components/Dashboard/IncomeBtn.jsx';
+import { ExpenseModal } from '../components/Dashboard/ExpenseModal.jsx'
+import { IncomeModal } from '../components/Dashboard/IncomeModal.jsx';
 // import { CalendarEl } from '../components/Dashboard/Calendar.jsx'
 import FinanceDisplay from '../components/Dashboard/FinanceDisplay.jsx'
 import Yearly from '../components/Dashboard/Graphs/Yearly.jsx';
@@ -24,7 +24,7 @@ export const Dashboard = () => {
     const [value, setValue] = useState(dayjs());
 
     const [weekButton, setWeekButton] = useState(false)
-    const [monthButton, setMonthButton] = useState(false)
+    const [monthButton, setMonthButton] = useState(true)
     const [yearButton, setYearButton] = useState(false)
 
     const expenses = useSelector(state => state.expenses);
@@ -46,13 +46,17 @@ export const Dashboard = () => {
 
     const openExpenseForm = () => {
       setShowExpenseForm(true);
-      setShowIncomeForm(false);
     };
+    const closeExpenseForm = () => {
+        setShowExpenseForm(false)
+    }
   
     const openIncomeForm = () => {
       setShowIncomeForm(true);
-      setShowExpenseForm(false);
     };
+    const closeIncomeForm = () => {
+        setShowIncomeForm(false);
+    }
 
     // const handleSubmit = (event) => {
     //   event.preventDefault();
@@ -136,14 +140,16 @@ export const Dashboard = () => {
 
             <div style={{width:'60%'}}>
                 {showExpenseForm && 
-                <ExpenseBtn 
-                    showExpenseForm={showExpenseForm}
+                <ExpenseModal 
+                    openExpenseForm={openExpenseForm}
+                    closeExpenseForm={closeExpenseForm}
                     onDateChange={handleDateChange}
                     value={value}
                 />}            
                 {showIncomeForm && 
-                <IncomeBtn 
-                    showIncomeForm={showIncomeForm}
+                <IncomeModal 
+                    openIncomeForm={openIncomeForm}
+                    closeIncomeForm={closeIncomeForm}
                     onDateChange={handleDateChange}
                     value={value}
                 />}

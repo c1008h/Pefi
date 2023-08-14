@@ -11,7 +11,7 @@ import Select from 'react-select'
 import {genreList, frequencyOptions, moneyType} from '../../constants/genres'
 
 
-export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
+export function ExpenseModal({ onDateChange, showExpenseForm, value }) {
   const [amount, setAmount] = useState()
   const [frequency, setFrequency] = useState()
   const [category, setCategory] = useState()
@@ -124,7 +124,7 @@ export function ExpenseBtn({ onDateChange, showExpenseForm, value }) {
   );
 }
 
-ExpenseBtn.propTypes = {
+ExpenseModal.propTypes = {
   value: PropTypes.object.isRequired,
   showExpenseForm: PropTypes.bool.isRequired,
   onDateChange: PropTypes.func.isRequired
