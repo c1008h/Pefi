@@ -9,6 +9,7 @@ import {
     Tooltip,
     Legend,
   } from 'chart.js';
+  import {faker} from '@faker-js/faker';
 import { Bar } from "react-chartjs-2";
 import PropTypes from 'prop-types'; 
 import { allMonths } from '../../../constants/months'
@@ -64,11 +65,23 @@ export default function Monthly({ userData }) {
     const options = {
         responsive: true,
         plugins: {
-            legend: {
-                position: 'top',
-            },
             title: {
-                display: true, text:'chart.js bar chart'
+                display: true, text:'monthly'
+            },
+            legend: {
+                display: false
+            }
+        },
+        // interaction: {
+        //     mode: 'index',
+        //     intersect: false
+        // },
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
             }
         }
     }
@@ -77,13 +90,16 @@ export default function Monthly({ userData }) {
         datasets: [
             {
                 label:'Income', 
-                data: monthlyIncome,
-                backgroundColor:'green'
+                data: allMonths.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+                backgroundColor:'blue',
+                stack: monthlyIncome
+                // stack: monthlyIncome
             },
             {
                 label:'Expense',
-                data: monthlyExpense,
-                backgroundColor:'red'
+                data: allMonths.map(() => faker.datatype.number({  min: -1000, max: 1000})),
+                backgroundColor:'red',
+                stack: monthlyExpense
             }
         ]
     }
