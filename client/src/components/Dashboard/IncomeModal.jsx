@@ -124,7 +124,7 @@ export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Save</Button>
                 <Button onClick={closeIncomeForm}>Cancel</Button>
               </Modal.Footer>
              

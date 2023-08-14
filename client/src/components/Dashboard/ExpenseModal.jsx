@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Modal } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPENSE } from '../../utils/mutations';
 
 import { useDispatch } from 'react-redux';
 import { addExpense } from '../../store/reducers/expensesReducer';
-
 import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
 import {genreList, frequencyOptions, moneyType} from '../../constants/genres'
 
 
-export function ExpenseModal({ onDateChange, showExpenseForm, value }) {
+export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
   const [amount, setAmount] = useState()
   const [frequency, setFrequency] = useState()
   const [category, setCategory] = useState()
@@ -28,9 +27,6 @@ export function ExpenseModal({ onDateChange, showExpenseForm, value }) {
   //   onDateChange(newValue); // Call the callback function to update the date in Dashboard
   // };
 
-  const handlePromptClose = () => {
-    setShowPrompt(false);
-  };
   const handleSaveExpense = async (amount, frequency, category, type, date) => {
     console.log('Inputting expense:', amount, frequency, category, type, date)
     
@@ -54,78 +50,85 @@ export function ExpenseModal({ onDateChange, showExpenseForm, value }) {
     }
   }
   return (
-    <div style={{display:'flex', flexDirection:'column'}}>
-      {showExpenseForm && (
-        <div className="prompt" >
-          <h3>Add Expense Details</h3>
-          <Form 
-            style={{display:'flex', flexDirection:'column'}} 
-            onSubmit={(e) => {
-              e.preventDefault()
-              handleSaveExpense(amount, frequency, category, type, date)
-            }}
-          > 
-          <Form.Group>
-            <Form.Label>Expense Amount:</Form.Label>
-            <Form.Control 
-              type="number"
-              name="amount"
-              onChange={e => setAmount(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Category:</Form.Label>
-            <Select 
-              options={genreList} 
-              onChange={(selectedOption) => setCategory(selectedOption.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Type:</Form.Label>
-            <Select 
-              options={moneyType}
-              onChange={(selectedOption) => setType(selectedOption.value)}
-              required
-            />
-          </Form.Group>
+    <div>
+      <Modal show={openExpenseForm} onHide={closeExpenseForm}>
+          <div style={{display:'flex', flexDirection:'column'}}>
+              <Modal.Header closeButton>
+                <Modal.Title>Add Expense</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form 
+                  style={{display:'flex', flexDirection:'column'}} 
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    handleSaveExpense(amount, frequency, category, type, date)
+                  }}
+                > 
+                <Form.Group>
+                  <Form.Label>Expense Amount:</Form.Label>
+                  <Form.Control 
+                    type="number"
+                    name="amount"
+                    onChange={e => setAmount(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Category:</Form.Label>
+                  <Select 
+                    options={genreList} 
+                    onChange={(selectedOption) => setCategory(selectedOption.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Type:</Form.Label>
+                  <Select 
+                    options={moneyType}
+                    onChange={(selectedOption) => setType(selectedOption.value)}
+                    required
+                  />
+                </Form.Group>
 
-          <Form.Group>
-            <Form.Label>Frequency:</Form.Label>
-            {frequencyOptions.map((option) => (
-              <Form.Check 
-                type='radio'
-                key={option.value}
-                label={option.label}
-                name='frequency'
-                value={option.value}
-                onChange={(e) => setFrequency(e.target.value)}
-                required
-              />
-            ))}
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Date:</Form.Label>
-            <Form.Control 
-              type='text'
-              name='date'
-              value={date}
-              onChange={e => setDate(e.target.value)}
-              required
-            />
-          </Form.Group>
-            <Button type="submit">Add Expense</Button>
-            <Button onClick={handlePromptClose}>Cancel</Button>
-          </Form>
-        </div>
-      )}
+                <Form.Group>
+                  <Form.Label>Frequency:</Form.Label>
+                  {frequencyOptions.map((option) => (
+                    <Form.Check 
+                      type='radio'
+                      key={option.value}
+                      label={option.label}
+                      name='frequency'
+                      value={option.value}
+                      onChange={(e) => setFrequency(e.target.value)}
+                      required
+                    />
+                  ))}
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Date:</Form.Label>
+                  <Form.Control 
+                    type='text'
+                    name='date'
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button type="submit">Save</Button>
+                <Button onClick={closeExpenseForm}>Cancel</Button>
+              </Modal.Footer>
+            </div>
+        </Modal>
     </div>
+
   );
 }
 
 ExpenseModal.propTypes = {
   value: PropTypes.object.isRequired,
-  showExpenseForm: PropTypes.bool.isRequired,
-  onDateChange: PropTypes.func.isRequired
+  openExpenseForm: PropTypes.func.isRequired,
+  closeExpenseForm: PropTypes.func.isRequired
 }

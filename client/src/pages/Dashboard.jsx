@@ -16,7 +16,6 @@ import { Button } from 'react-bootstrap';
 
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
-    const [showForm, setShowForm] = useState(false);
     const [showExpenseForm, setShowExpenseForm] = useState(false);
     const [showIncomeForm, setShowIncomeForm] = useState(false);
     const [loading, setLoading] = useState(true)
@@ -41,8 +40,7 @@ export const Dashboard = () => {
     }
     function handleMonthChange(date) {
         setValue(date);
-      }
-    // console.log(userData)
+    }
 
     const openExpenseForm = () => {
       setShowExpenseForm(true);
@@ -94,48 +92,29 @@ export const Dashboard = () => {
                                 setYearButton(false)
                                 setWeekButton(true)
                             }}
-                        >
-                            Week
-                        </Button>
+                        >Week</Button>
                         <Button
                             onClick= {() => {
                                 setMonthButton(true)
                                 setYearButton(false)
                                 setWeekButton(false)
                             }}
-                        >
-                            Month
-                        </Button>
+                        >Month</Button>
                         <Button
                             onClick= {() => {
                                 setMonthButton(false)
                                 setYearButton(true)
                                 setWeekButton(false)
                             }}
-                        >
-                            Year
-                        </Button>
+                        >Year</Button>
 
                     </div>
                     {monthButton && <Monthly userData={userData} />}
-      {yearButton && <Yearly userData={userData} />}
-      {weekButton && <Weekly userData={userData} />}                    
-      {/* <Yearly 
-                        userData={userData}
-                    /> */}
+                    {yearButton && <Yearly userData={userData} />}
+                    {weekButton && <Weekly userData={userData} />}                    
                 </div>
-                <button
-                    onClick={openExpenseForm}
-                    // showExpenseForm={showExpenseForm} 
-                    >
-                        Add Expense
-                </button>
-                <button 
-                    onClick={openIncomeForm}
-                    // showIncomeForm={showIncomeForm}
-                    >
-                        Add Income
-                </button>  
+                <button onClick={openExpenseForm}>Add Expense</button>
+                <button onClick={openIncomeForm}>Add Income</button>  
             </div>
 
             <div style={{width:'60%'}}>
@@ -153,8 +132,7 @@ export const Dashboard = () => {
                     onDateChange={handleDateChange}
                     value={value}
                 />}
-            </div>     
-                      
+            </div>              
         </div>
     )
 }
