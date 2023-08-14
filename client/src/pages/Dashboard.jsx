@@ -86,32 +86,35 @@ export const Dashboard = () => {
                         userData={userData}
                     />
                     <div>
-                        <Button
-                            onClick={() => {
-                                setMonthButton(false)
-                                setYearButton(false)
-                                setWeekButton(true)
-                            }}
-                        >Week</Button>
-                        <Button
-                            onClick= {() => {
-                                setMonthButton(true)
-                                setYearButton(false)
-                                setWeekButton(false)
-                            }}
-                        >Month</Button>
-                        <Button
-                            onClick= {() => {
-                                setMonthButton(false)
-                                setYearButton(true)
-                                setWeekButton(false)
-                            }}
-                        >Year</Button>
-
+                        <div>
+                            <Button
+                                onClick={() => {
+                                    setMonthButton(false)
+                                    setYearButton(false)
+                                    setWeekButton(true)
+                                }}
+                            >Week</Button>
+                            <Button
+                                onClick= {() => {
+                                    setMonthButton(true)
+                                    setYearButton(false)
+                                    setWeekButton(false)
+                                }}
+                            >Month</Button>
+                            <Button
+                                onClick= {() => {
+                                    setMonthButton(false)
+                                    setYearButton(true)
+                                    setWeekButton(false)
+                                }}
+                            >Year</Button>
+                        </div>
+                        {monthButton && <Monthly userData={userData} />}
+                        {yearButton && <Yearly userData={userData} />}
+                        {weekButton && <Weekly userData={userData} />}   
                     </div>
-                    {monthButton && <Monthly userData={userData} />}
-                    {yearButton && <Yearly userData={userData} />}
-                    {weekButton && <Weekly userData={userData} />}                    
+
+                 
                 </div>
                 <button onClick={openExpenseForm}>Add Expense</button>
                 <button onClick={openIncomeForm}>Add Income</button>  
@@ -124,7 +127,7 @@ export const Dashboard = () => {
                     closeExpenseForm={closeExpenseForm}
                     onDateChange={handleDateChange}
                     value={value}
-                />}            
+                />}          
                 {showIncomeForm && 
                 <IncomeModal 
                     openIncomeForm={openIncomeForm}
