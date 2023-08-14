@@ -45,6 +45,10 @@ export const reducers = (state = initialState, action) => {
                 expenses: newExpenseState
             }
         case UPDATE_FINANCE:
+            return {
+                ...state,
+                
+            }
 
     }
 }

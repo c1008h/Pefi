@@ -76,7 +76,9 @@ export const Dashboard = () => {
                     <FinanceDisplay 
                         userData={userData}
                     />
-                    <Monthly />
+                    <Monthly 
+                        userData={userData}
+                    />
                 </div>
                 <button
                     onClick={openExpenseForm}

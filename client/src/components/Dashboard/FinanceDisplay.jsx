@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types'; 
 import dayjs from 'dayjs'
 
 export default function FinanceDisplay({userData}) {
