@@ -12,7 +12,7 @@ import {
 import {faker} from '@faker-js/faker';
 import { Bar, Line } from "react-chartjs-2";
 import PropTypes from 'prop-types'; 
-import { allMonths } from '../../../constants/months'
+import { allMonths } from '../../../constants/date_data'
 
 export default function Yearly({ userData }) {
     const [monthlyIncome, setMonthlyIncome] = useState([])

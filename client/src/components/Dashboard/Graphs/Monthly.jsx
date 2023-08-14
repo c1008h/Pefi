@@ -63,8 +63,8 @@ export default function Monthly({ userData }) {
     }
     // const filteredWeeklyIncome = weeklyIncome.slice(0, weekDateRanges.length);
     // const filteredWeeklyExpense = weeklyExpense.slice(0, weekDateRanges.length);
-    console.log('weekly expenses array:', weeklyExpense)
-    console.log('weekly incomes array:', weeklyIncome)
+    // console.log('weekly expenses array:', weeklyExpense)
+    // console.log('weekly incomes array:', weeklyIncome)
     
     ChartJS.register(
         CategoryScale,
@@ -73,7 +73,7 @@ export default function Monthly({ userData }) {
         Title,
         Tooltip,
         Legend
-      );
+    );
     const options = {
         responsive: true,
         plugins: {
