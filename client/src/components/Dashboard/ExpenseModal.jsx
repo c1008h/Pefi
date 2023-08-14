@@ -2,13 +2,11 @@ import { useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPENSE } from '../../utils/mutations';
-
 import { useDispatch } from 'react-redux';
 import { addExpense } from '../../store/reducers/expensesReducer';
 import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
 import {genreList, frequencyOptions, moneyType} from '../../constants/genres'
-
 
 export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
   const [amount, setAmount] = useState()

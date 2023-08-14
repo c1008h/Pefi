@@ -67,10 +67,10 @@ export default function FinanceDisplay({userData}) {
 
   return (
     <div>
-        <h5>Net Worth: ${networth}</h5>
-        <h5>Monthly Income: ${monthlyIncome}</h5>
-        <h5>Monthly Expense: ${monthlyExpense}</h5>
-
+      <h3 style={{fontWeight:'bold'}}>{dayjs().format('MMM')} {dayjs().format('YYYY')}</h3>
+      <h5>Net Worth: ${networth}</h5>
+      <h5>Monthly Income: ${monthlyIncome}</h5>
+      <h5>Monthly Expense: ${monthlyExpense}</h5>
     </div>
   )
 }
