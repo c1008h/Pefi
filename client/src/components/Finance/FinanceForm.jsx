@@ -5,10 +5,10 @@ import { useMutation } from '@apollo/client';
 import { CREATE_FINANCE } from '../../utils/mutations'
 // import { authService } from '../../utils/auth';
 export default function FinanceForm({userData}) {
-    const [digital, setDigital] = useState(userData.financeGroup.digital || 0)
-    const [cash, setCash] = useState(userData.financeGroup.cash || 0)
-    const [invested, setInvested] = useState(userData.financeGroup.invested || 0)
-    const [saved, setSaved] = useState(userData.financeGroup.saved || 0)
+    const [digital, setDigital] = useState(userData?.financeGroup?.digital || 0)
+    const [cash, setCash] = useState(userData?.financeGroup?.cash || 0)
+    const [invested, setInvested] = useState(userData?.financeGroup?.invested || 0)
+    const [saved, setSaved] = useState(userData?.financeGroup?.saved || 0)
     const [isEditMode, setIsEditMode] = useState(false);
     const [createFinance] = useMutation(CREATE_FINANCE)
 

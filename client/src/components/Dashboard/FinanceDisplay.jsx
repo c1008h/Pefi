@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs'
 
 export default function FinanceDisplay({userData}) {
-  const [networth, setNetworth] = useState()
-  const [monthlyIncome, setMonthlyIncome] = useState()
+  const [networth, setNetworth] = useState(0)
+  const [monthlyIncome, setMonthlyIncome] = useState(0)
   const [monthlyExpense, setMonthlyExpense] = useState(0)
   const currentMonth = dayjs().month() + 1;
   const currentYear = dayjs().year();
@@ -47,23 +47,25 @@ export default function FinanceDisplay({userData}) {
   }, [currentMonth, currentYear])
 
   useEffect(() => {
-    let digital = parseFloat(userData.financeGroup.digital)
-    let cash = parseFloat(userData.financeGroup.cash)
-    let saved = parseFloat(userData.financeGroup.saved)
-    let invested = parseFloat(userData.financeGroup.invested)
-    const incomeGroups = userData.incomesGroup || [];
-    const expenseGroups = userData.expensesGroup || [];
+    if (userData?.financeGroup) {
 
-    const monthlyIncome = calculateMonthlyIncome(incomeGroups)
-    const monthlyExpense = calculateMonthlyExpense(expenseGroups);
+      let digital = parseFloat(userData.financeGroup.digital || 0)
+      let cash = parseFloat(userData.financeGroup.cash || 0)
+      let saved = parseFloat(userData.financeGroup.saved || 0)
+      let invested = parseFloat(userData.financeGroup.invested || 0)
+      const incomeGroups = userData.incomesGroup || [];
+      const expenseGroups = userData.expensesGroup || [];
 
-
-    setNetworth((digital + cash + saved + invested).toLocaleString())
-    setMonthlyIncome(monthlyIncome)
-    setMonthlyExpense(monthlyExpense);
+      const monthlyIncome = calculateMonthlyIncome(incomeGroups)
+      const monthlyExpense = calculateMonthlyExpense(expenseGroups);
 
 
-  }, [calculateMonthlyExpense,calculateMonthlyIncome, userData.financeGroup.digital, userData.financeGroup.cash, userData.financeGroup.saved, userData.financeGroup.invested, userData.incomesGroup, userData.expensesGroup])
+      setNetworth((digital + cash + saved + invested).toLocaleString())
+      setMonthlyIncome(monthlyIncome)
+      setMonthlyExpense(monthlyExpense);
+    }
+
+  }, [calculateMonthlyExpense, calculateMonthlyIncome, userData?.financeGroup?.digital, userData?.financeGroup?.cash, userData?.financeGroup?.saved, userData?.financeGroup?.invested, userData?.incomesGroup, userData?.expensesGroup])
 
   return (
     <div>
