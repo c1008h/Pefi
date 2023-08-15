@@ -71,23 +71,6 @@ export const Dashboard = () => {
             <div className='row'>
                 <div style={{display:'flex'}}>
                     <div style={{flexDirection:'column'}} components={['DateCalendar', 'DateCalendar']} label={'"year", "month" and "day"'}>
-                        <DateCalendar
-                            value={value} 
-                            onChange={handleDateChange}
-                            onMonthChange={handleMonthChange}
-                            views={['year', 'month', 'day']}
-                        />
-                        <h2>{dayjs(value.$d).format('MM/DD/YYYY')}</h2>
-                        <div>
-                            <button onClick={openExpenseForm}>Add Expense</button>
-                            <button onClick={openIncomeForm}>Add Income</button>  
-                            <div>
-                                <PlaidIntegration />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='row'>
                         <FinanceDisplay 
                             userData={userData}
                         />
@@ -114,6 +97,25 @@ export const Dashboard = () => {
                                 }}
                             >Year</Button>
                         </div>
+                        <DateCalendar
+                            value={value} 
+                            onChange={handleDateChange}
+                            onMonthChange={handleMonthChange}
+                            views={['year', 'month', 'day']}
+                        />
+                        {/* <h2>{dayjs(value.$d).format('MM/DD/YYYY')}</h2> */}
+                        <div>
+                            <button onClick={openExpenseForm}>+ Expense</button>
+                            <button onClick={openIncomeForm}>- Income</button>  
+                            <div>
+                                <PlaidIntegration />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='row'>
+
+
                         <div>
                             {monthButton && <Monthly userData={userData} />}
                             {yearButton && <Yearly userData={userData} />}

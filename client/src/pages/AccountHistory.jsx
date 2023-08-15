@@ -4,7 +4,7 @@ import { REMOVE_EXPENSE, REMOVE_INCOME } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 
-import { Button } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 import '../style/details.css'
 
 export default function AccountHistory() {
@@ -66,7 +66,7 @@ export default function AccountHistory() {
     // console.log(currentItems)
 
     return (
-        <div className='container'>
+        <Container fluid='true' style={{justifyContent:'center', textAlign:'center'}} className='container'>
             <table>
                 <thead>
                     <tr>
@@ -107,7 +107,7 @@ export default function AccountHistory() {
                 </button>
             </div>
 
-        </div>
+        </Container>
 
       
     )

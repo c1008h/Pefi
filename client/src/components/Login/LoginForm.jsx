@@ -48,7 +48,7 @@ export default function LoginForm({ handleFormSubmit, handleChange, formState })
                 <div>
 
                   <Button 
-                    variant="success" 
+                    variant="secondary" 
                     type="submit" 
                     disabled={!(formState.email && formState.password)}
                   >Log in</Button>

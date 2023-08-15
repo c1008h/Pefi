@@ -21,18 +21,17 @@ export default function Weekly({ userData }) {
     const currentDate = dayjs();
     const currentWeekStart = currentDate.startOf('week'); 
     const currentWeekEnd = currentDate.endOf('week'); 
-
     const weekDates = [];
     const incomesByDay = Array(7).fill(0);
     const expensesByDay = Array(7).fill(0);
-  
+
     // for (let i = currentWeekStart.date(); i <= currentWeekEnd.date(); i++) {
     //   weekDates.push(currentWeekStart.date(i).toDate());
     // }
     for (let i = 0; i < 7; i++) {
       const day = currentWeekStart.add(i, 'day');
       // weekDates.push(day.format('ddd MMM D YYYY'));
-      weekDates.push(day.format('ddd'));
+      weekDates.push(day.format('ddd, D'));
 
     }
 
@@ -51,7 +50,10 @@ export default function Weekly({ userData }) {
         expensesByDay[dayIndex] += expense.amount;
       }
     });
-
+    console.log(weekDates)
+    // const dateString = weekDates
+    // const [day, date] = dateString.split('.');
+    // console.log('date,', date)
     setWeekDates(weekDates);
     setDailyIncome(incomesByDay);
     setDailyExpense(expensesByDay);

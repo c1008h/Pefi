@@ -37,7 +37,7 @@ export const SignupForm = ({ onSubmit }) => {
           </Col>
           <Col style={{margin:'0', padding:'0', backgroundColor:'#295d90'}}>
               <Form onSubmit={handleSubmit} style={{padding:'15%', justifyContent:'center'}}>
-                <h2 style={{textAlign:'center'}}>Signup</h2>
+                <h2 style={{textAlign:'center'}}>Signup for PeFi</h2>
                 <Form.Group>
                   <Form.Label htmlFor='email'>Email</Form.Label>
                   <Form.Control
@@ -82,7 +82,7 @@ export const SignupForm = ({ onSubmit }) => {
                   <Button style={{margin:'5%', marginBottom:'2.5rem', justifyContent:'center', textAlign:'center', float:'right'}}
                     disabled={!(email && password && confirmPassword)}
                     type='submit'
-                    variant='success'>
+                    variant='secondary'>
                     Continue
                 </Button>
               </Form>
