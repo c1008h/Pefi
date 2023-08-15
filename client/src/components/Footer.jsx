@@ -10,6 +10,7 @@ export default function Footer() {
         padding: '5%',
         bottom: '0',
         width: '100%',
+        margin:'0',
         // height: '2.5rem',
         // justifyContent:'center'
         textAlign:'center'

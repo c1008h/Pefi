@@ -1,15 +1,19 @@
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'; // Import PropTypes
-
 export default function LoginForm({ handleFormSubmit, handleChange, formState }) {
-    return (
+  const imageStyles = {
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%',
+  };  
+  return (
       <Container fluid='true'>
         <Row>
-          <Col>
+          <Col style={{padding:'0', margin: '0'}}>
+            <img src='/earth.jpg' alt='earth' style={imageStyles}/>
           </Col>
-          <Col>
-            <Card>
+          <Col style={imageStyles}>
               <Form onSubmit={handleFormSubmit} style={{padding:'15%', justifyContent:'center'}}>
                 <h1>Log in to Pefi</h1>
                 <Form.Group>
@@ -52,10 +56,9 @@ export default function LoginForm({ handleFormSubmit, handleChange, formState })
 
 
 
-                  <h5>Not a member? <Link>Create an account</Link></h5>
+                  <h5>Not on Pefi? <Link>Create an account</Link></h5>
                 </div>
               </Form>
-            </Card>
           </Col>
         </Row>
       </Container>

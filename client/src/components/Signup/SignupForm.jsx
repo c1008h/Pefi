@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import PropTypes from 'prop-types'; // Import PropTypes
+import galaxyImage from '/galaxy.jpg'
 
 export const SignupForm = ({ onSubmit }) => {
     const [email, setEmail] = useState('')
@@ -21,15 +22,20 @@ export const SignupForm = ({ onSubmit }) => {
         setConfirmPassword('')
       }
     };
+    const leftStyle = {
+      backgroundImage: `url(${galaxyImage})`, 
+      padding:'5%',
+      margin:'0',
+      backgroundSize:'cover'
+    }
     return (
-      <Container fluid='true' >
+      <Container fluid='true'>
         <Row>
-          <Col style={{padding:'5%'}}>
-            <h1>Create your login</h1>
-            <h5>We&apos;ll need your email address, and a unique password. You&apos;ll use this to login to access Personal Finance next time.</h5>
+          <Col style={leftStyle}>
+            <h1 style={{color:'white'}}>Create your login</h1>
+            <h5 style={{color:'white'}}>We&apos;ll need your email address, and a unique password. You&apos;ll use this to login to access Personal Finance next time.</h5>
           </Col>
-          <Col>
-            <Card>
+          <Col style={{margin:'0', padding:'0', backgroundColor:'#295d90'}}>
               <Form onSubmit={handleSubmit} style={{padding:'15%', justifyContent:'center'}}>
                 <h2 style={{textAlign:'center'}}>Signup</h2>
                 <Form.Group>
@@ -69,21 +75,17 @@ export const SignupForm = ({ onSubmit }) => {
                   />
                   <Form.Control.Feedback type='invalid'>Confirm your password!</Form.Control.Feedback>
                 </Form.Group>
-                <Container>
+                  <h5 style={{font:'black', paddingTop:'10px'}}>Already started?</h5>
+                  <Link to='/login'>Login to complete your application</Link>
 
-                    <h5 style={{font:'black'}}>Already started?</h5>
-                    <Link to='/login'>Login to complete your application</Link>
- 
-                    <h5 style={{font:'black'}}>By continuing, you agree to the USER ACCOUNT AGREEMENT and PRIVACY POLICY</h5>
-                    <Button style={{margin:'5%', justifyContent:'center', textAlign:'center'}}
-                      disabled={!(email && password && confirmPassword)}
-                      type='submit'
-                      variant='success'>
-                      Submit
-                  </Button>
-                </Container>
+                  <h5 style={{font:'black', marginTop:'30px'}}>By continuing, you agree to the USER ACCOUNT AGREEMENT and PRIVACY POLICY</h5>
+                  <Button style={{margin:'5%', justifyContent:'center', textAlign:'center', float:'right'}}
+                    disabled={!(email && password && confirmPassword)}
+                    type='submit'
+                    variant='success'>
+                    Continue
+                </Button>
               </Form>
-            </Card>
           </Col>
         </Row>
       </Container>

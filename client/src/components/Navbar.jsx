@@ -10,7 +10,7 @@ export default function Navbar () {
     const style = {
         diplay:'fixed',
         height: '2.5rem',
-        margin:'2px',
+        margin:'0',
         backgroundColor:'#003366',
         backgroundSize: 'cover',
         padding: '5% 0',
