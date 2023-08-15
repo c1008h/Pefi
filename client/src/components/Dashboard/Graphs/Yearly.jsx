@@ -9,8 +9,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import {faker} from '@faker-js/faker';
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import PropTypes from 'prop-types'; 
 import { allMonths } from '../../../constants/date_data'
 
@@ -67,7 +66,7 @@ export default function Yearly({ userData }) {
         responsive: true,
         plugins: {
             title: {
-                display: true, text:'monthly'
+                display: true, text: currentYear
             },
             legend: {
                 display: false
@@ -91,15 +90,12 @@ export default function Yearly({ userData }) {
         datasets: [
             {
                 label:'Income', 
-                // data: allMonths.map(() => faker.datatype({ min: -1000, max: 1000 })),
                 data: monthlyIncome,
                 backgroundColor:'blue',
                 stack: 'stackGroup1'
-                // stack: monthlyIncome
             },
             {
                 label:'Expense',
-                // data: allMonths.map(() => faker.datatype({  min: -1000, max: 1000})),
                 data: monthlyExpense,
                 backgroundColor:'red',
                 stack: 'stackGroup2'
@@ -108,23 +104,7 @@ export default function Yearly({ userData }) {
     }
     return (
         <div>
-            <h1>Yearly Graph</h1>
-            {/* <h2>{monthlyIncome}</h2> */}
             <Bar options={options} data={data} />
-            {/* <Line 
-                data={monthlyNet}
-                options={{
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Monthly Networth Growth'
-                        },
-                        legend: {
-                            display: false
-                        }
-                    }
-                }}
-            /> */}
         </div>
     )
 }

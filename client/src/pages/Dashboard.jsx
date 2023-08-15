@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers';
 import { useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
 
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
@@ -88,42 +89,44 @@ export const Dashboard = () => {
                     </div>
 
                     <div className='row'>
-                <FinanceDisplay 
-                    userData={userData}
-                />
-                <div>
-                    <div>
-                        <Button
-                            onClick={() => {
-                                setMonthButton(false)
-                                setYearButton(false)
-                                setWeekButton(true)
-                            }}
-                        >Week</Button>
-                        <Button
-                            onClick= {() => {
-                                setMonthButton(true)
-                                setYearButton(false)
-                                setWeekButton(false)
-                            }}
-                        >Month</Button>
-                        <Button
-                            onClick= {() => {
-                                setMonthButton(false)
-                                setYearButton(true)
-                                setWeekButton(false)
-                            }}
-                        >Year</Button>
+                        <FinanceDisplay 
+                            userData={userData}
+                        />
+                        <div>
+                            <Button
+                                onClick={() => {
+                                    setMonthButton(false)
+                                    setYearButton(false)
+                                    setWeekButton(true)
+                                }}
+                            >Week</Button>
+                            <Button
+                                onClick= {() => {
+                                    setMonthButton(true)
+                                    setYearButton(false)
+                                    setWeekButton(false)
+                                }}
+                            >Month</Button>
+                            <Button
+                                onClick= {() => {
+                                    setMonthButton(false)
+                                    setYearButton(true)
+                                    setWeekButton(false)
+                                }}
+                            >Year</Button>
+                        </div>
+                        <div>
+                            {monthButton && <Monthly userData={userData} />}
+                            {yearButton && <Yearly userData={userData} />}
+                            {weekButton && <Weekly userData={userData} />}   
+                        </div>
+                        <div>
+                            <NetworthLine 
+                                userData={userData}
+                            />
+                        </div>
                     </div>
-                    {monthButton && <Monthly userData={userData} />}
-                    {yearButton && <Yearly userData={userData} />}
-                    {weekButton && <Weekly userData={userData} />}   
                 </div>
-            </div>
-
-                 
-                </div>
-
             </div>
            
             <div style={{width:'60%'}}>
