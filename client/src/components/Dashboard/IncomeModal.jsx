@@ -121,13 +121,12 @@ export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
                       onChange={e => setNote(e.target.value)}
                     />
                   </Form.Group>
+                  <div>
+                    <Button type="submit">Save</Button>
+                    <Button onClick={closeIncomeForm}>Cancel</Button>
+                  </div>
                 </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button type="submit">Save</Button>
-                <Button onClick={closeIncomeForm}>Cancel</Button>
-              </Modal.Footer>
-             
+              </Modal.Body>           
             </div>
           </Modal>
       </div>

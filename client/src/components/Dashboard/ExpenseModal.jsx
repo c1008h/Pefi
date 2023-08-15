@@ -112,12 +112,12 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
                     required
                   />
                 </Form.Group>
+                <div>
+                  <Button type="submit">Save</Button>
+                  <Button onClick={closeExpenseForm}>Cancel</Button>
+                </div>
                 </Form>
               </Modal.Body>
-              <Modal.Footer>
-                <Button type="submit">Save</Button>
-                <Button onClick={closeExpenseForm}>Cancel</Button>
-              </Modal.Footer>
             </div>
         </Modal>
     </div>

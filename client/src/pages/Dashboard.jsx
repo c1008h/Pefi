@@ -70,8 +70,8 @@ export const Dashboard = () => {
     }
     return (
         <div className='container' style={{flexDirection:'row'}}>
-            <h2>Dashboard</h2>
-            <div >
+            {/* <h2>Dashboard</h2> */}
+            <div className='row'>
                 <div style={{display:'flex'}}>
                     <div style={{flexDirection:'column'}} components={['DateCalendar', 'DateCalendar']} label={'"year", "month" and "day"'}>
                         <DateCalendar
@@ -81,45 +81,51 @@ export const Dashboard = () => {
                             views={['year', 'month', 'day']}
                         />
                         <h2>{dayjs(value.$d).format('MM/DD/YYYY')}</h2>
-                    </div>
-                    <FinanceDisplay 
-                        userData={userData}
-                    />
-                    <div>
                         <div>
-                            <Button
-                                onClick={() => {
-                                    setMonthButton(false)
-                                    setYearButton(false)
-                                    setWeekButton(true)
-                                }}
-                            >Week</Button>
-                            <Button
-                                onClick= {() => {
-                                    setMonthButton(true)
-                                    setYearButton(false)
-                                    setWeekButton(false)
-                                }}
-                            >Month</Button>
-                            <Button
-                                onClick= {() => {
-                                    setMonthButton(false)
-                                    setYearButton(true)
-                                    setWeekButton(false)
-                                }}
-                            >Year</Button>
+                            <button onClick={openExpenseForm}>Add Expense</button>
+                            <button onClick={openIncomeForm}>Add Income</button>  
                         </div>
-                        {monthButton && <Monthly userData={userData} />}
-                        {yearButton && <Yearly userData={userData} />}
-                        {weekButton && <Weekly userData={userData} />}   
                     </div>
+
+                    <div className='row'>
+                <FinanceDisplay 
+                    userData={userData}
+                />
+                <div>
+                    <div>
+                        <Button
+                            onClick={() => {
+                                setMonthButton(false)
+                                setYearButton(false)
+                                setWeekButton(true)
+                            }}
+                        >Week</Button>
+                        <Button
+                            onClick= {() => {
+                                setMonthButton(true)
+                                setYearButton(false)
+                                setWeekButton(false)
+                            }}
+                        >Month</Button>
+                        <Button
+                            onClick= {() => {
+                                setMonthButton(false)
+                                setYearButton(true)
+                                setWeekButton(false)
+                            }}
+                        >Year</Button>
+                    </div>
+                    {monthButton && <Monthly userData={userData} />}
+                    {yearButton && <Yearly userData={userData} />}
+                    {weekButton && <Weekly userData={userData} />}   
+                </div>
+            </div>
 
                  
                 </div>
-                <button onClick={openExpenseForm}>Add Expense</button>
-                <button onClick={openIncomeForm}>Add Income</button>  
-            </div>
 
+            </div>
+           
             <div style={{width:'60%'}}>
                 {showExpenseForm && 
                 <ExpenseModal 
