@@ -71,10 +71,10 @@ export const SignupForm = ({ onSubmit }) => {
                 </Form.Group>
                 <Container>
 
-                    <p style={{font:'black'}}>Already started?</p>
+                    <h5 style={{font:'black'}}>Already started?</h5>
                     <Link to='/login'>Login to complete your application</Link>
  
-                    <p style={{font:'black'}}>By continuing, you agree to the USER ACCOUNT AGREEMENT and PRIVACY POLICY</p>
+                    <h5 style={{font:'black'}}>By continuing, you agree to the USER ACCOUNT AGREEMENT and PRIVACY POLICY</h5>
                     <Button style={{margin:'5%', justifyContent:'center', textAlign:'center'}}
                       disabled={!(email && password && confirmPassword)}
                       type='submit'

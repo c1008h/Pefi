@@ -44,7 +44,7 @@ export default function Navbar () {
             </div>
             ) : (
             <div style={containerStyle}>
-                <Link style={linkStyle}>Personal Finance</Link>
+                <Link style={linkStyle}>Pefi</Link>
                 <Link to='/signup' style={linkStyle}>Signup</Link>
                 <Link to='/login' style={linkStyle}>Login</Link>
             </div>

@@ -8,11 +8,10 @@ export default function LoginForm({ handleFormSubmit, handleChange, formState })
         <Row>
           <Col>
           </Col>
-
-
           <Col>
-            <Form onSubmit={handleFormSubmit} style={{padding:'15%', justifyContent:'center'}}>
-              <h1>Login</h1>
+            <Card>
+              <Form onSubmit={handleFormSubmit} style={{padding:'15%', justifyContent:'center'}}>
+                <h1>Log in to Pefi</h1>
                 <Form.Group>
                   <Form.Label>Email</Form.Label>
                   <Form.Control 
@@ -42,25 +41,24 @@ export default function LoginForm({ handleFormSubmit, handleChange, formState })
                   />
                 </Form.Group>
 
-                <Form.Text className="text-muted">
-                    We&apos;ll never share your email with anyone else.
-                </Form.Text>
                 <div>
+
                   <Button 
                     variant="success" 
                     type="submit" 
                     disabled={!(formState.email && formState.password)}
-                    >
-                  Submit
-                  </Button>
-                  <Link>Login</Link>
+                  >Log in</Button>
+
+
+
+
+                  <h5>Not a member? <Link>Create an account</Link></h5>
                 </div>
               </Form>
+            </Card>
           </Col>
         </Row>
-      
       </Container>
-
     )
 }
 
