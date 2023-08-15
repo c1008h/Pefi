@@ -14,7 +14,7 @@ import { DateCalendar } from '@mui/x-date-pickers';
 import { useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
-
+import PlaidIntegration from '../components/Plaid/PlaidLink.jsx'
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
     const [showExpenseForm, setShowExpenseForm] = useState(false);
@@ -28,13 +28,14 @@ export const Dashboard = () => {
     const [yearButton, setYearButton] = useState(false)
 
     const expenses = useSelector(state => state.expenses);
-    console.log('redux:', expenses)
+    // console.log('redux:', expenses)
     useEffect(() => {
         if (data) {
           setUserData(data.me)
           setLoading(false)
         }
     }, [data])
+
     function handleDateChange(newValue) {
         setValue(newValue)
         console.log(dayjs(value.$d).format('MM/DD/YYYY'))
@@ -42,7 +43,6 @@ export const Dashboard = () => {
     function handleMonthChange(date) {
         setValue(date);
     }
-
     const openExpenseForm = () => {
       setShowExpenseForm(true);
     };
@@ -56,11 +56,6 @@ export const Dashboard = () => {
     const closeIncomeForm = () => {
         setShowIncomeForm(false);
     }
-
-    // const handleSubmit = (event) => {
-    //   event.preventDefault();
-    //   setShowForm(false);
-    // };
 
     const token = authService.loggedIn() ? authService.getToken() : null;
     if(!token) {
@@ -85,6 +80,9 @@ export const Dashboard = () => {
                         <div>
                             <button onClick={openExpenseForm}>Add Expense</button>
                             <button onClick={openIncomeForm}>Add Income</button>  
+                            <div>
+                                <PlaidIntegration />
+                            </div>
                         </div>
                     </div>
 

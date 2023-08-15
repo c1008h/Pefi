@@ -8,12 +8,13 @@ export default function Navbar () {
     }
 
     const style = {
-        diplay:'flex',
+        diplay:'fixed',
         height: '2.5rem',
         margin:'2px',
         backgroundColor:'gray',
         backgroundSize: 'cover',
         padding: '5% 0',
+        top: '0',
         width: '100%',
         justifyContent: 'space-between', 
     }

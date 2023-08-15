@@ -27,7 +27,7 @@ body {
   margin: 0;
   padding: 0;
   place-items: center;
-  max-height: calc(100vh - 5rem); /* Subtract the combined height of navbar and footer */
+  /* max-height: calc(100vh - 5rem); Subtract the combined height of navbar and footer */
   overflow-y: auto;
 
   /* min-width: 320px;

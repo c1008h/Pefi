@@ -7,7 +7,7 @@ const { authMiddleware } = require('./utils/auth');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-
+const routes = require('./routes')
 const cors = require('cors');
 
 const app = express();
@@ -26,6 +26,8 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+
+  // app.use(routes);
 
   // Serve up static assets
   app.use('/images', express.static(path.join(__dirname, '../client/images')));

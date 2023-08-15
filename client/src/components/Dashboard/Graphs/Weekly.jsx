@@ -58,7 +58,7 @@ export default function Weekly({ userData }) {
 
   }, [userData])
 
-console.log(weekDates)
+// console.log(weekDates)
 
   ChartJS.register(
     CategoryScale,
