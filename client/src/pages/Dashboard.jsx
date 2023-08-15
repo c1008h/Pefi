@@ -12,9 +12,10 @@ import { authService } from '../utils/auth';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers';
 import { useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Tabs, Tab, Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
 import PlaidIntegration from '../components/Plaid/PlaidLink.jsx'
+
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
     const [showExpenseForm, setShowExpenseForm] = useState(false);

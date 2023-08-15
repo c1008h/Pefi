@@ -11,7 +11,7 @@ export default function Navbar () {
         diplay:'fixed',
         height: '2.5rem',
         margin:'2px',
-        backgroundColor:'gray',
+        backgroundColor:'#003366',
         backgroundSize: 'cover',
         padding: '5% 0',
         top: '0',
