@@ -29,7 +29,7 @@ export const SignupForm = ({ onSubmit }) => {
       backgroundSize:'cover'
     }
     return (
-      <Container fluid='true'>
+      <Container fluid='true' >
         <Row>
           <Col style={leftStyle}>
             <h1 style={{color:'white'}}>Create your login</h1>
@@ -75,11 +75,11 @@ export const SignupForm = ({ onSubmit }) => {
                   />
                   <Form.Control.Feedback type='invalid'>Confirm your password!</Form.Control.Feedback>
                 </Form.Group>
-                  <h5 style={{font:'black', paddingTop:'10px'}}>Already started?</h5>
+                  <h5 style={{font:'black', marginTop:'1.5rem'}}>Already started?</h5>
                   <Link to='/login'>Login to complete your application</Link>
 
-                  <h5 style={{font:'black', marginTop:'30px'}}>By continuing, you agree to the USER ACCOUNT AGREEMENT and PRIVACY POLICY</h5>
-                  <Button style={{margin:'5%', justifyContent:'center', textAlign:'center', float:'right'}}
+                  <h5 style={{font:'black', marginTop:'3.5'}}>By continuing, you agree to the USER ACCOUNT AGREEMENT and PRIVACY POLICY</h5>
+                  <Button style={{margin:'5%', marginBottom:'2.5rem', justifyContent:'center', textAlign:'center', float:'right'}}
                     disabled={!(email && password && confirmPassword)}
                     type='submit'
                     variant='success'>

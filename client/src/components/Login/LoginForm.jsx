@@ -54,7 +54,7 @@ export default function LoginForm({ handleFormSubmit, handleChange, formState })
                   >Log in</Button>
 
 
-
+                  <h5 style={{textAlign:'center', margin:'2.5rem'}}>-------------- OR --------------</h5>
 
                   <h5>Not on Pefi? <Link>Create an account</Link></h5>
                 </div>
