@@ -102,7 +102,7 @@ export default function Yearly({ userData }) {
                 // data: allMonths.map(() => faker.datatype({  min: -1000, max: 1000})),
                 data: monthlyExpense,
                 backgroundColor:'red',
-                stack: 'stackGroup1'
+                stack: 'stackGroup2'
             }
         ]
     }

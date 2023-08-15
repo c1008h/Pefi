@@ -110,7 +110,7 @@ export default function Monthly({ userData }) {
                 label:'Expense',
                 data: weeklyExpense,
                 backgroundColor:'red',
-                stack: 'stackGroup1'
+                stack: 'stackGroup2'
             }
         ]
     }

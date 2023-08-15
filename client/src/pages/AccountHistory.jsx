@@ -78,7 +78,7 @@ export default function AccountHistory() {
                 </thead>
                 <tbody>
                     {currentItems.map((item) => (
-                        <tr key={item.id} className={item.type === 'Expense' ? 'type-show Expense' : 'type-show Income'}>
+                        <tr key={item._id} className={item.type === 'Expense' ? 'type-show Expense' : 'type-show Income'}>
                             <td>{item.date}</td>
                             <td>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.amount)}</td>
                             <td>{item.type === 'Expense' ? 'Expense' : 'Income'}</td>

@@ -104,7 +104,7 @@ console.log(weekDates)
             label:'Expense',
             data: dailyExpense,
             backgroundColor:'red',
-            stack: 'stackGroup1'
+            stack: 'stackGroup2'
         }
     ]
   }

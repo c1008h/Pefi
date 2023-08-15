@@ -3,6 +3,7 @@ export const genreList = [
     { value: 'transportation', label: 'Transportation' },
     { value: 'utilities', label: 'Utilities' },
     { value: 'subscriptions & memberships', label: 'Subscriptions & Memberships' },
+    { value: 'pet', label:'Pet' },
     { value: 'entertainment', label: 'Entertainment' },
     { value: 'travel', label: 'Travel' },
     { value: 'health & fitness', label:'Health & Fitness' },
