@@ -25,16 +25,12 @@ export const QUERY_ME = gql`
         date
       }
       goalsGroup {
-        oneYearGoal
-        twoYearGoal
-        threeYearGoal
-        fourYearGoal
-        fiveYearGoal
-        oneYearYear
-        twoYearYear
-        threeYearYear
-        fourYearYear
-        fiveYearYear
+        id
+        year
+        invested
+        saved
+        cash
+        digital
       }
       financeGroup {
         _id

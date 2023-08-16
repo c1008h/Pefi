@@ -111,16 +111,12 @@ export const CREATE_GOALS = gql`
         createGoals(input: $input) {
             email
             goalsGroup {
-                oneYearGoal
-                twoYearGoal
-                threeYearGoal
-                fourYearGoal
-                fiveYearGoal
-                oneYearYear
-                twoYearYear
-                threeYearYear
-                fourYearYear
-                fiveYearYear
+              id
+              year
+              invested
+              saved
+              cash
+              digital
             }
         }
     }

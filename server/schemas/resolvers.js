@@ -1,7 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Expenses, Incomes } = require('../models');
+const { User, Expenses, Incomes, Goal } = require('../models');
 const { signToken } = require('../utils/auth');
 const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
+const { default: Goals } = require('../../client/src/pages/Goals');
 const recalculateFinance = async (user) => {
   const financeGroup = await Finance.findById(user.financeGroup);
 
@@ -248,18 +249,18 @@ const resolvers = {
       createGoals: async (parent, { input }, context) => {
         if (context.user) {
           try {
-            const newExpense = new Expenses({
-              amount: input.amount,
-              frequency: input.frequency,
-              category: input.category,
-              type: input.type,
-              date: input.date,
+            const newGoal = new Goal({
+              year: input.year,
+              saved: input.saved,
+              invested: input.invested,
+              cash: input.cash,
+              digital: input.digital,
             });
-            const savedExpense = await newExpense.save();
+            const savedGoal = await newGoal.save();
 
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $addToSet: { goalGroup: savedExpense._id } },
+              { $addToSet: { goalGroup: savedGoal._id } },
               { new: true }
             )
 

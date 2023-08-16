@@ -11,29 +11,21 @@ const typeDefs = `
     }
 
     type Goals {
-        oneYearGoal: Float
-        twoYearGoal: Float
-        threeYearGoal: Float
-        fourYearGoal: Float
-        fiveYearGoal: Float
-        oneYearYear: Float
-        twoYearYear: Float
-        threeYearYear: Float
-        fourYearYear: Float
-        fiveYearYear: Float
+        id: ID!
+        year: Float
+        invested: Float
+        saved: Float
+        cash: Float
+        digital: Float
     }
 
     input GoalInput {
-        oneYearGoal: Float
-        twoYearGoal: Float
-        threeYearGoal: Float
-        fourYearGoal: Float
-        fiveYearGoal: Float
-        oYearYear: Float
-        twoYearYear: Float
-        threeYearYear: Float
-        fourYearYear: Float
-        fiveYearYear: Float
+        id: ID!
+        year: Float
+        invested: Float
+        saved: Float
+        cash: Float
+        digital: Float
     }
     type Finance {
         _id: ID

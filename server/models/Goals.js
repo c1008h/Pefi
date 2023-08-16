@@ -2,27 +2,23 @@ const { Schema, model } = require('mongoose');
 
 const goalSchema = new Schema(
     {
-      id: {
-        type: String,
-        required: true
-      },
-      yearOneSavings: {
+      year: {
         type: Number,
         required: 'You need to leave a goal!'
       },
-      yearTwoSavings:{
+      invested:{
         type: Number,
         required: 'You need to leave a goal!'
       },
-      yearThreeSavings:{
+      saved:{
         type: Number,
         required: 'You need to leave a goal!'
       },
-      yearFourSavings:{
+      cash:{
         type: Number,
         required: 'You need to leave a goal!'
       },
-      yearFiveSavings:{
+      digital:{
         type: Number,
         required: 'You need to leave a goal!'
       },
