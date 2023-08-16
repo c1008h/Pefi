@@ -105,8 +105,8 @@ export const Dashboard = () => {
                         />
                         {/* <h2>{dayjs(value.$d).format('MM/DD/YYYY')}</h2> */}
                         <div>
-                            <button onClick={openExpenseForm}>+ Expense</button>
-                            <button onClick={openIncomeForm}>- Income</button>  
+                            <button onClick={openExpenseForm}>- Expense</button>
+                            <button onClick={openIncomeForm}>+ Income</button>  
                             <div>
                                 <PlaidIntegration />
                             </div>

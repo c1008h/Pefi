@@ -2,6 +2,8 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/c1008h/pefi/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/c1008h/pefi.svg)](https://github.com/c1008h/pefi/stargazers)
 
+![Demo](./media/PeFi.gif)
+
 ## Description
 The DeFi Goal Planner App allows users to plan their financial goals over a five-year period. Users can input their financial goals, track expenses and income, and visualize their financial habits through charts and graphs.
 ### Features
