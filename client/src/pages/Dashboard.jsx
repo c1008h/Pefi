@@ -69,7 +69,7 @@ export const Dashboard = () => {
         <div className='container' style={{flexDirection:'row'}}>
             {/* <h2>Dashboard</h2> */}
             <div className='row'>
-                <div style={{display:'flex'}}>
+                <div style={{display:'flex', marginTop:'4%'}}>
                     <div style={{flexDirection:'column'}} components={['DateCalendar', 'DateCalendar']} label={'"year", "month" and "day"'}>
                         <FinanceDisplay 
                             userData={userData}

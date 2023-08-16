@@ -57,7 +57,7 @@ export default function NetworthLine({ userData }) {
     }
 
     return (
-        <div>
+        <div style={{paddingBottom:'10%'}}>
             <Line data={data} />
         </div>
     )
