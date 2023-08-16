@@ -1,4 +1,6 @@
 # PeFi Goal Planner App
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/c1008h/pefi/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/c1008h/pefi.svg)](https://github.com/c1008h/pefi/stargazers)
 
 ## Description
 The DeFi Goal Planner App allows users to plan their financial goals over a five-year period. Users can input their financial goals, track expenses and income, and visualize their financial habits through charts and graphs.
@@ -29,6 +31,7 @@ The DeFi Goal Planner App allows users to plan their financial goals over a five
     - [Installation](#installation)
     - [Usage](#usage)
   - [Contribution](#contribution)
+  - [Upcoming Features](#upcoming-features)
   - [License](#license)
   - [Contact](#contact)
 
@@ -56,6 +59,18 @@ JWT_SECRET=your_jwt_secret
    
 ## Contribution
 Contributions are welcome! Please create a new branch and submit a pull request for review.
+
+## Upcoming Features
+
+While Pefi is already packed with useful features, we're committed to continuous improvement. Here are some exciting features we're planning to add in the near future:
+
+- **Expense Categories**: Organize your expenses with customizable categories for better tracking.
+- **Mobile App**: Stay on top of your finances on the go with our upcoming mobile app.
+- **Goal Achievements**: Celebrate your milestones by tracking your progress towards financial goals.
+- **Dark Mode**: Enjoy Pefi's sleek interface in both light and dark modes.
+
+We're constantly working to make Pefi even better. Keep an eye out for these enhancements in our future releases!
+
 
 ## License
 This project is licensed under the MIT License.
