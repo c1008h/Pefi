@@ -21,6 +21,7 @@ export default function Step2({handleSkip, handleNextStep}) {
                                 <Form.Control 
                                     type='text' 
                                     name='firstName' 
+                                    value={firstname}
                                     required
                                     onChange={(e) => setFirstname(e.target.value)}
                                 />
@@ -30,6 +31,7 @@ export default function Step2({handleSkip, handleNextStep}) {
                                 <Form.Control 
                                     type='text' 
                                     name='lastName'
+                                    value={lastname}
                                     onChange={(e) => setLastname(e.target.value)}
                                     required
                                 />
@@ -51,5 +53,4 @@ export default function Step2({handleSkip, handleNextStep}) {
 Step2.propTypes = {
     handleSkip: PropTypes.func.isRequired,
     handleNextStep: PropTypes.func.isRequired,
-    // formState: PropTypes.object.isRequired
-  };
+};
