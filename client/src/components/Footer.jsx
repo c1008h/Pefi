@@ -4,7 +4,7 @@ export default function Footer() {
     const style = {
         // position: 'fixed','
         display:'flex',
-        position:'relative',
+        position:'absolute',
         backgroundColor: '#003366',
         backgroundSize: 'cover',
         padding: '5%',

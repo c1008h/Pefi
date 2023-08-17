@@ -67,7 +67,7 @@ export default function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ApolloProvider client={client}>
-        <div>
+        <div className='app-container'>
           <Provider store={store}>
             <Navbar />
             <Outlet />

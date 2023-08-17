@@ -31,12 +31,22 @@ body {
   margin: 0;
   padding: 0;
   place-items: center;
-  background-color: #001F3F;
+  /* background-color: #001F3F; */
+  /* min-height: 100vh; */
   /* max-height: calc(100vh - 5rem);  */
-  overflow-y: auto;
+  /* overflow-y: auto; */
 
-  /* min-width: 320px;
-  min-height: 100vh; */
+
+}
+
+.app-container {
+  position: relative;
+  /* background-color: #001F3F; */
+  min-height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 60px; /* Adjust this value to match your footer's height */
+  box-sizing: border-box;
+
 }
 
 h1 {

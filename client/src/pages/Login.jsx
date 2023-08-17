@@ -47,7 +47,7 @@ const handleFormSubmit = async (e) => {
   });
 };
   return (
-    <>
+    <div>
       {authService.loggedIn() ? (
       <p>
         Success! You may now head{' '}
@@ -66,6 +66,6 @@ const handleFormSubmit = async (e) => {
           {error.message}
         </Alert>       
       )}
-    </>
+    </div>
   )
 }

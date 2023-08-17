@@ -1,4 +1,4 @@
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'; // Import PropTypes
 export default function LoginForm({ handleFormSubmit, handleChange, formState }) {
