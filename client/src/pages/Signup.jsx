@@ -59,19 +59,34 @@ export default function Signup() {
         />
       )}
       {step === 2 && (
-        <FirstGoal />
+        <FirstGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
       )}
       {step === 3 && (
-        <SecondGoal />
+        <SecondGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
       )}
       {step === 4 && (
-        <ThirdGoal />
+        <ThirdGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
       )}
       {step === 5 && (
-        <FourthGoal />
+        <FourthGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
       )}
       {step === 6 && (
-        <FifthGoal />
+        <FifthGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
       )}
     
     {/* )}  */}

@@ -6,6 +6,10 @@ import dayjs from 'dayjs';
 export function FirstGoal({handleSkip, handleNextStep}) {
   const [thisYear, setThisYear] = useState()
   const [nextYear, setNextYear] = useState()
+  const [digital, setDigital] = useState()
+  const [cash, setCash] = useState()
+  const [invested, setInvested] = useState()
+  const [saved, setSaved] = useState()
 
   useEffect(() => {
     const currentYear = dayjs().year();
@@ -47,22 +51,34 @@ export function FirstGoal({handleSkip, handleNextStep}) {
                 <Form>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setDigital(e.target.value)}
+                      value={digital}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Cash:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setCash(e.target.value)}
+                      value={cash}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Saved:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setSaved(e.target.value)}
+                      value={saved}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Invested:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setInvested(e.target.value)}
+                      value={invested}
+                    />
                   </Form.Group>
-                  <Button onClick={handleNextStep}>Next</Button>
-                  <Button onClick={handleSkip}>Skip for Now</Button>
+                  <Button onClick={() => handleNextStep()}>Next</Button>
+                  <Button onClick={() => handleSkip()}>Skip for Now</Button>
                 </Form>
               </Col>
             </Row>
