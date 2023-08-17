@@ -1,4 +1,4 @@
-import GoalsForm from '../components/Signup/GoalsForm'
+// import GoalsForm from '../components/Signup/Step2'
 
 export default function Goals() {
   return (
