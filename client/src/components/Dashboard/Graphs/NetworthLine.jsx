@@ -51,7 +51,7 @@ export default function NetworthLine({ userData }) {
                 label: 'Net Worth',
                 data: monthlyNetworth,
                 fill: false,
-                borderColor: 'blue'
+                borderColor: '#FF4500'
             }
         ]
     }

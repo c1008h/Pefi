@@ -103,13 +103,13 @@ export default function Monthly({ userData }) {
             {
                 label:'Income', 
                 data: weeklyIncome,
-                backgroundColor:'blue',
+                backgroundColor:'rgba(0, 51, 102, 0.6)',
                 stack: 'stackGroup1'
             },
             {
                 label:'Expense',
                 data: weeklyExpense,
-                backgroundColor:'red',
+                backgroundColor:'rgba(255, 165, 0, 0.6)',
                 stack: 'stackGroup2'
             }
         ]

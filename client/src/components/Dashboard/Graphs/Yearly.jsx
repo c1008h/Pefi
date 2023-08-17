@@ -91,13 +91,13 @@ export default function Yearly({ userData }) {
             {
                 label:'Income', 
                 data: monthlyIncome,
-                backgroundColor:'blue',
+                backgroundColor:'rgba(0, 51, 102, 0.6)',
                 stack: 'stackGroup1'
             },
             {
                 label:'Expense',
                 data: monthlyExpense,
-                backgroundColor:'red',
+                backgroundColor:'rgba(255, 165, 0, 0.6)',
                 stack: 'stackGroup2'
             }
         ]

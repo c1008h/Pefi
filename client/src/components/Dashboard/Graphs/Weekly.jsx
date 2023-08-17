@@ -99,13 +99,13 @@ export default function Weekly({ userData }) {
         {
             label:'Income', 
             data: dailyIncome,
-            backgroundColor:'blue',
+            backgroundColor:'rgba(0, 51, 102, 0.6)',
             stack: 'stackGroup1'
         },
         {
             label:'Expense',
             data: dailyExpense,
-            backgroundColor:'red',
+            backgroundColor:'rgba(255, 165, 0, 0.6)',
             stack: 'stackGroup2'
         }
     ]
