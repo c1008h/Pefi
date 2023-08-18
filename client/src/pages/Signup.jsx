@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import { authService } from '../utils/auth';
-
 import { Alert, Button } from 'react-bootstrap'
+
 import { SignupForm } from '../components/Signup/SignupForm';
 import Step2 from '../components/Signup/2-Name'
 import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
@@ -16,6 +16,11 @@ export default function Signup() {
   const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleNextStep = () => {
+    // if (!agreedToPrivacy || !agreedToUserAgreement) {
+    //   setShowPrivacyModal(true);
+    //   setShowUserAgreementModal(true);
+    //   return
+    // }
     setStep(step + 1);
     setSavingFinance(true)
   };
@@ -48,14 +53,14 @@ export default function Signup() {
   
   return (
     <>
-     {/* {authService.loggedIn() ? (
+     {authService.loggedIn() ? (
       <p>
         Success! You may now head{' '}
         <Link to='/dashboard'>Back to the homepage.</Link>
       </p>
-    ) : ( */}
-      {/* // <SignupForm onSubmit={handleFormSubmit}/> */}
-      <>
+    ) : ( 
+     <SignupForm onSubmit={handleFormSubmit}/>
+      /* <>
         {step === 1 && (
           <Step2 
             handleNextStep={handleNextStep}
@@ -102,10 +107,10 @@ export default function Signup() {
             style={{float:'right'}}
           >Next</Button>
         </div>
-      </>
+      </> */
       
     
-    {/* )}  */}
+    )}
 
     {error && (
       <div>
