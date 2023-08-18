@@ -29,28 +29,32 @@ export default function Step2({handleSkip, handleNextStep}) {
 
     return (
         <Container fluid='true' style={{padding:'5%'}}>
-            <Row style={{textAlign:'center'}}>
+            <Row style={{paddingBottom:'2%'}}>
                 <Col>
                     <h1>Welcome to Pefi!</h1>
                     <p>You&rsquo;re one step closer to achieving your financial goals.</p>
                     <p>Let&rsquo;s start by personalizing your account.</p>
                 </Col>
             </Row>
-            <Row>
+            <Row style={{paddingBottom:'2%'}}>
                 <Col>
+                    <h2>Upload Profile Picture</h2>
                     <img src="[Profile Picture Placeholder]" alt="Profile" />
                     <Button variant="secondary">Upload Profile Picture</Button>
                 </Col>
             </Row>
-            <Row>
+            <Row style={{paddingBottom:'2%'}}>
                 <Col>
+                    <h2>Personalize Your Account</h2>
                     <p>Your first and last name will help us address you personally and make your experience more tailored to you.</p>
                     <p>Rest assured, your personal information is safe with us. We value your privacy and won&rsquo;t share your data with anyone.</p>
                 </Col>
             </Row>
-            <Row>
+            <Row style={{paddingBottom:'2%'}}>
                 <Col>
                     <Card style={{padding: '5%'}}>
+                                <h3>Enter Your Information</h3>
+
                         <Form
                             onSubmit={(e) => {
                                 e.preventDefault()
@@ -87,8 +91,9 @@ export default function Step2({handleSkip, handleNextStep}) {
                     </Card>
                 </Col>
             </Row>
-            <Row>
+            <Row style={{paddingBottom:'2%'}}>
                 <Col>
+                    <h2>Financial Fun Fact</h2>
                     <p>Did you know that making small changes in your daily spending habits can lead to significant savings over time? We&rsquo;re here to help you make those positive changes!</p>
                 </Col>
             </Row>
