@@ -4,6 +4,10 @@ const typeDefs = `
         firstName: String
         lastName: String
         email: String!
+        location: String
+        gender: String
+        incomeLevel: String
+        birthday: Date
         incomesGroup: [Incomes]
         expensesGroup: [Expenses]
         goalsGroup: [Goals]
@@ -104,7 +108,7 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!): Auth
-        updateUser(email: String!, firstName: String!, lastName: String!): User
+        updateUser(email: String!, firstName: String!, lastName: String!, location: String, gender: String, incomeLevel: String, birthday: Date): User
 
         createGoals(input: GoalInput!): User
         updateGoals(input: GoalInput!): User

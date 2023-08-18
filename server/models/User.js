@@ -20,6 +20,22 @@ const userSchema = new Schema(
             unique: true,
             match: [/.+@.+\..+/, 'Must use a valid email address'],
         },
+        location: {
+            type: String,
+            trim: true
+        },
+        gender: {
+            type: String,
+            trim: true
+        },
+        incomeLevel: {
+            type: String,
+            trim: true
+        },
+        birthday: {
+            type: Date,
+            trim: true
+        },
         password: {
             type: String,
             required: true,

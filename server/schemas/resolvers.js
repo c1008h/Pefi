@@ -92,11 +92,11 @@ const resolvers = {
         return { token, user };
       },
 
-      updateUser: async (parent, { email, firstName, lastName }, context) => {
+      updateUser: async (parent, { email, firstName, lastName, location, gender, incomeLevel, birthday }, context) => {
         if (context.user) {
           const updatedUser = await User.findByIdAndUpdate(
             context.user._id,
-            { email, firstName, lastName },
+            { email, firstName, lastName, location, gender, incomeLevel, birthday },
             { new: true }
           );
           console.log('successfully updated user information')

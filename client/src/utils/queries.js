@@ -7,6 +7,10 @@ export const QUERY_ME = gql`
       firstName
       lastName
       email
+      location
+      gender
+      incomeLevel
+      birthday
       incomesGroup {
         _id
         amount
