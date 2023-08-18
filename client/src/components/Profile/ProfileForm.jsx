@@ -62,7 +62,8 @@ export default function ProfileForm({userData}) {
                 onSubmit={(e) => {
                     e.preventDefault()
                     handleSubmit(firstName, lastName, email)
-                    }}>
+                }}
+            >
                 <Form.Group>
                     <Form.Label>First Name:</Form.Label>
                     { isEditMode ? 

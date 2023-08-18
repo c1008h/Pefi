@@ -22,7 +22,7 @@ export function FirstGoal({handleSkip, handleNextStep}) {
 
   return (
     <Container fluid='true'>
-      <Container>
+      <Container style={{paddingTop:'5%'}}>
         <Row>
           <Col>
             <h2>Set Your Financial Goals</h2>
@@ -41,7 +41,7 @@ export function FirstGoal({handleSkip, handleNextStep}) {
           <Col>
             <Row>
               <Col>
-                <h2>Your Financial Goals for the Upcoming Year:</h2>
+                <h2>Vision for the Upcoming Year:</h2>
                 <p>In the form below, please share your financial goals for the next year. Remember to keep them specific and realistic. Don't worry about setting too many goals; even one or two well-defined goals can make a big impact.</p>
               </Col>
             </Row>
@@ -77,8 +77,8 @@ export function FirstGoal({handleSkip, handleNextStep}) {
                       value={invested}
                     />
                   </Form.Group>
-                  <Button onClick={() => handleNextStep()}>Next</Button>
-                  <Button onClick={() => handleSkip()}>Skip for Now</Button>
+                  {/* <Button onClick={() => handleNextStep()}>Next</Button>
+                  <Button onClick={() => handleSkip()}>Skip for Now</Button> */}
                 </Form>
               </Col>
             </Row>
