@@ -33,6 +33,11 @@ class AuthService {
     localStorage.setItem('permission', permission);
     window.location.assign('/');
   }
+  
+  signup(idToken,permission) {
+    localStorage.setItem('id_token', idToken);
+    localStorage.setItem('permission', permission);
+  }
 
   logout() {
     localStorage.removeItem('id_token');

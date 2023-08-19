@@ -1,0 +1,22 @@
+footer {
+    display: flex;
+    position: absolute;
+    background-color: #003366;
+    background-size: cover;
+    padding: 5%;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    /* height:2.5rem;
+    justify-content: center; */
+}
+footer p {
+    color: #F5F5F5;
+}
+
+#footer-text {
+    text-align: center;
+    color: white;
+    justify-content: center;
+    padding-top: 3%;
+}

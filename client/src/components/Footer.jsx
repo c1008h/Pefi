@@ -1,33 +1,28 @@
 import { Container, Col, Row } from 'react-bootstrap'
+import '../style/footer.css'
 
 export default function Footer() {
-    const style = {
-        // position: 'fixed','
-        display:'flex',
-        position:'absolute',
-        backgroundColor: '#003366',
-        backgroundSize: 'cover',
-        padding: '5%',
-        bottom: '0',
-        width: '100%',
-        margin:'0',
-        // height: '2.5rem',
-        // justifyContent:'center'
-        textAlign:'center'
-    }
-    const footerText = {
-        textAlign: 'center',
-        color:'white',
-        justifyContent:'center',
-        paddingTop:'3%'
-    }
+    // const style = {
+    //     // position: 'fixed','
+    //     display:'flex',
+    //     position:'absolute',
+    //     backgroundColor: '#003366',
+    //     backgroundSize: 'cover',
+    //     padding: '5%',
+    //     bottom: '0',
+    //     width: '100%',
+    //     margin:'0',
+    //     // height: '2.5rem',
+    //     // justifyContent:'center'
+    //     textAlign:'center'
+    // }
     
     return (
-        <footer style={style}>
+        <footer>
             <Container>
                 <Container>
                     <Row>
-                        <Col style={{float:'left'}}>
+                        <Col>
                             <p>Contact</p>
                         </Col>
                         <Col>
@@ -48,7 +43,7 @@ export default function Footer() {
                     </Row>
                 </Container>
 
-                <Container fluid='true' style={footerText}><p>© Chris Hong 2023. All rights reserved.</p></Container>
+                <Container fluid='true' id='footer-text'><p>© Chris Hong 2023. All rights reserved.</p></Container>
             </Container>
         </footer>
     )

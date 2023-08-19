@@ -7,9 +7,12 @@ import { UPDATE_USER } from '../../utils/mutations';
 export default function Step2({handleSkip, handleNextStep}) {
     const [firstName, setFirstname] = useState()
     const [lastName, setLastname] = useState()
+    const [birthday, setBirthday] = useState()
+    const [gender, setGender] = useState()
+    const [location, setLocation] = useState()
 
     const [ updateUser ] = useMutation(UPDATE_USER)
-    const handleSubmit = async (firstName, lastName) => {
+    const handleSubmit = async (firstName, lastName, birthday, gender, location) => {
         if (!firstName || !lastName) {
             console.error('Error: Required fields are empty');
             return;
@@ -20,6 +23,9 @@ export default function Step2({handleSkip, handleNextStep}) {
                 variables: {
                     firstName: firstName,
                     lastName: lastName,
+                    birthday: birthday,
+                    gender: gender,
+                    location: location
                 }
             })
         } catch (error) {
@@ -58,7 +64,7 @@ export default function Step2({handleSkip, handleNextStep}) {
                         <Form
                             onSubmit={(e) => {
                                 e.preventDefault()
-                                handleSubmit(firstName, lastName)
+                                handleSubmit(firstName, lastName, birthday, gender, location)
                             }}
                         >
                             <Form.Group>
@@ -80,7 +86,33 @@ export default function Step2({handleSkip, handleNextStep}) {
                                     onChange={(e) => setLastname(e.target.value)}
                                     required
                                 />
-
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Birthday:</Form.Label>
+                                <Form.Control 
+                                    type='date' 
+                                    name='birthday'
+                                    value={birthday}
+                                    onChange={(e) => setBirthday(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Gender:</Form.Label>
+                                <Form.Control 
+                                    type='text' 
+                                    name='gender'
+                                    value={gender}
+                                    onChange={(e) => setGender(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Location:</Form.Label>
+                                <Form.Control 
+                                    type='text' 
+                                    name='location'
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                />
                             </Form.Group>
                             {/* <Button onClick={handleNextStep}>Next</Button>
                             <Button onClick={handleSkip}>Skip for Now</Button> */}

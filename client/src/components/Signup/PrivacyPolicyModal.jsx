@@ -14,7 +14,7 @@ export default function PrivacyPolicyModal({ show, onHide }) {
     console.log('button works')
     return (
         <Modal show={show} onHide={onHide}>
-            <Container>
+            <Container style={{padding:'5%'}}>
                 <Row>
                     <Col>
                         <h1>Privacy Policy:</h1>

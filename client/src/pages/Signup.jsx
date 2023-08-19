@@ -33,7 +33,7 @@ export default function Signup() {
     if(!email || !password){
       alert('Failed to submit! Please fill all requested fields.');
       document.location.replace('/');
-      // return;
+      return;
     }
 
     try {
@@ -44,7 +44,8 @@ export default function Signup() {
         }
       })
   
-      authService.login(data.addUser.token)
+      authService.signup(data.addUser.token)
+      setSignupSuccess(true); 
     } catch (e) {
       console.log('unable to add user')
       console.log(e)
@@ -54,62 +55,62 @@ export default function Signup() {
   return (
     <>
      {authService.loggedIn() ? (
-      <p>
+      <>
+      {/* <p>
         Success! You may now head{' '}
         <Link to='/dashboard'>Back to the homepage.</Link>
-      </p>
+      </p> */}
+
+      {step === 1 && (
+        <Step2 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
+      )}
+      {step === 2 && (
+        <FirstGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
+      )}
+      {step === 3 && (
+        <SecondGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
+      )}
+      {step === 4 && (
+        <ThirdGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
+      )}
+      {step === 5 && (
+        <FourthGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
+      )}
+      {step === 6 && (
+        <FifthGoal 
+          handleNextStep={handleNextStep}
+          handleSkip={handleSkip}
+        />
+      )}
+
+      <div style={{padding:'5%'}}>
+        <Button
+          onClick={() => handleSkip()}
+          style={{float:'left'}}
+        >Skip</Button>
+        <Button
+          onClick={() => handleNextStep()}
+          style={{float:'right'}}
+        >Next</Button>
+      </div>
+    </>
     ) : ( 
      <SignupForm onSubmit={handleFormSubmit}/>
-      /* <>
-        {step === 1 && (
-          <Step2 
-            handleNextStep={handleNextStep}
-            handleSkip={handleSkip}
-          />
-        )}
-        {step === 2 && (
-          <FirstGoal 
-            handleNextStep={handleNextStep}
-            handleSkip={handleSkip}
-          />
-        )}
-        {step === 3 && (
-          <SecondGoal 
-            handleNextStep={handleNextStep}
-            handleSkip={handleSkip}
-          />
-        )}
-        {step === 4 && (
-          <ThirdGoal 
-            handleNextStep={handleNextStep}
-            handleSkip={handleSkip}
-          />
-        )}
-        {step === 5 && (
-          <FourthGoal 
-            handleNextStep={handleNextStep}
-            handleSkip={handleSkip}
-          />
-        )}
-        {step === 6 && (
-          <FifthGoal 
-            handleNextStep={handleNextStep}
-            handleSkip={handleSkip}
-          />
-        )}
-        <div style={{padding:'5%'}}>
-          <Button
-            onClick={() => handleSkip()}
-            style={{float:'left'}}
-          >Skip</Button>
-          <Button
-            onClick={() => handleNextStep()}
-            style={{float:'right'}}
-          >Next</Button>
-        </div>
-      </> */
-      
-    
     )}
 
     {error && (

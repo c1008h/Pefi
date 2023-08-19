@@ -14,16 +14,6 @@ export const SignupForm = ({ onSubmit }) => {
 
     const [showPrivacyModal, setShowPrivacyModal] = useState(false); // Privacy Policy modal
     const [showUserAgreementModal, setShowUserAgreementModal] = useState(false); // User Agreement modal
-    const [agreedToPrivacy, setAgreedToPrivacy] = useState(false);
-    const [agreedToUserAgreement, setAgreedToUserAgreement] = useState(false);
-
-    const handleAgreePrivacy = () => {
-      setAgreedToPrivacy(!agreedToPrivacy);
-    };
-  
-    const handleAgreeUserAgreement = () => {
-      setAgreedToUserAgreement(!agreedToUserAgreement);
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -108,7 +98,7 @@ export const SignupForm = ({ onSubmit }) => {
                   By signing up, you agree to the Pefi&apos;s <a onClick={() => setShowUserAgreementModal(true)} style={{textDecoration:'underline'}}>Terms of Use</a> and <a onClick={() => setShowPrivacyModal(true)} style={{textDecoration:'underline'}}>Privacy Policy</a>
                 </h5>
                 <Button style={{margin:'5%', marginBottom:'2.5rem', justifyContent:'center', textAlign:'center', float:'right'}}
-                  disabled={!(email && password && confirmPassword && agreedToUserAgreement && agreedToPrivacy)}
+                  disabled={!(email && password && confirmPassword )}
                   type='submit'
                   variant='secondary'
                 >

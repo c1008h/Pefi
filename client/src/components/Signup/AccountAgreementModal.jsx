@@ -14,7 +14,7 @@ export default function AccountAgreementModal({ show, onHide}) {
 
     return (
         <Modal show={show} onHide={onHide}>
-            <Container>
+            <Container style={{padding:'5%'}}>
                 <Row>
                     <Col>
                         <h1>User Account Agreement (Terms of Use):</h1>
