@@ -96,10 +96,10 @@ export const SignupForm = ({ onSubmit }) => {
                   type="checkbox"
                   label="I agree to the USER ACCOUNT AGREEMENT"
                   checked={agreedToUserAgreement}
-                  onChange={handleAgreeUserAgreement}
+                  onChange={() => setShowUserAgreementModal(true)}
                   required
                 />
-                  <Button onClick={() => setShowUserAgreementModal(true)}>View Agreement</Button>
+                  <Button onClick={() => handleViewUserAgreement()}>View Agreement</Button>
                 </Form.Group>
 
                 <Form.Group controlId="privacyCheckbox">
@@ -110,19 +110,19 @@ export const SignupForm = ({ onSubmit }) => {
                     onChange={handleAgreePrivacy}
                     required
                   />
-                    <Button onClick={() => setShowPrivacyModal(true)}>View Privacy Policy</Button>
+                  <Button onClick={() => setShowPrivacyModal(true)}>View Privacy Policy</Button>
                 </Form.Group>
-                {showUserAgreementModal && 
+                {/* {showUserAgreementModal &&  */}
                   <AccountAgreementModal 
                     show={showUserAgreementModal} 
                     onHide={() => setShowUserAgreementModal(false)} 
                   />
-                }
-                {showPrivacyModal && 
+                {/* // } */}
+                {/* {showPrivacyModal &&  */}
                   <PrivacyPolicyModal 
                     show={showPrivacyModal} 
                     onHide={() => setShowPrivacyModal(false)} />
-                }
+                {/* } */}
                   <h5 style={{font:'black', marginTop:'1.5rem'}}>Already started?</h5>
                   <Link to='/login'>Login to complete your application</Link>
 
