@@ -44,6 +44,7 @@ export const SignupForm = ({ onSubmit }) => {
       margin:'0',
       backgroundSize:'cover'
     }
+
     return (
       <Container fluid='true' >
         <Row>
@@ -91,47 +92,27 @@ export const SignupForm = ({ onSubmit }) => {
                   />
                   <Form.Control.Feedback type='invalid'>Confirm your password!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group controlId="userAgreementCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="I agree to the USER ACCOUNT AGREEMENT"
-                  checked={agreedToUserAgreement}
-                  onChange={() => setShowUserAgreementModal(true)}
-                  required
+                
+                <AccountAgreementModal 
+                  show={showUserAgreementModal} 
+                  onHide={() => setShowUserAgreementModal(false)} 
                 />
-                  <Button onClick={() => handleViewUserAgreement()}>View Agreement</Button>
-                </Form.Group>
+                <PrivacyPolicyModal 
+                  show={showPrivacyModal} 
+                  onHide={() => setShowPrivacyModal(false)} 
+                />
+                <h5 style={{font:'black', marginTop:'1.5rem'}}>Already started?</h5>
+                <Link to='/login'>Login to complete your application</Link>
 
-                <Form.Group controlId="privacyCheckbox">
-                  <Form.Check
-                    type="checkbox"
-                    label="I agree to the PRIVACY POLICY"
-                    checked={agreedToPrivacy}
-                    onChange={handleAgreePrivacy}
-                    required
-                  />
-                  <Button onClick={() => setShowPrivacyModal(true)}>View Privacy Policy</Button>
-                </Form.Group>
-                {/* {showUserAgreementModal &&  */}
-                  <AccountAgreementModal 
-                    show={showUserAgreementModal} 
-                    onHide={() => setShowUserAgreementModal(false)} 
-                  />
-                {/* // } */}
-                {/* {showPrivacyModal &&  */}
-                  <PrivacyPolicyModal 
-                    show={showPrivacyModal} 
-                    onHide={() => setShowPrivacyModal(false)} />
-                {/* } */}
-                  <h5 style={{font:'black', marginTop:'1.5rem'}}>Already started?</h5>
-                  <Link to='/login'>Login to complete your application</Link>
-
-                  <h5 style={{font:'black', marginTop:'3.5'}}>By continuing, you agree to the USER ACCOUNT AGREEMENT and PRIVACY POLICY</h5>
-                  <Button style={{margin:'5%', marginBottom:'2.5rem', justifyContent:'center', textAlign:'center', float:'right'}}
-                    disabled={!(email && password && confirmPassword && agreedToUserAgreement && agreedToPrivacy)}
-                    type='submit'
-                    variant='secondary'>
-                    Continue
+                <h5 style={{font:'black', marginTop:'3.5'}}>
+                  By signing up, you agree to the Pefi&apos;s <a onClick={() => setShowUserAgreementModal(true)} style={{textDecoration:'underline'}}>Terms of Use</a> and <a onClick={() => setShowPrivacyModal(true)} style={{textDecoration:'underline'}}>Privacy Policy</a>
+                </h5>
+                <Button style={{margin:'5%', marginBottom:'2.5rem', justifyContent:'center', textAlign:'center', float:'right'}}
+                  disabled={!(email && password && confirmPassword && agreedToUserAgreement && agreedToPrivacy)}
+                  type='submit'
+                  variant='secondary'
+                >
+                  Continue
                 </Button>
               </Form>
           </Col>
