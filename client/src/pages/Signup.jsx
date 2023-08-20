@@ -11,18 +11,10 @@ import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../comp
 
 export default function Signup() {
   const [step, setStep] = useState(1);
-  const [savingFinance, setSavingFinance] = useState(false)
-
   const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleNextStep = () => {
-    // if (!agreedToPrivacy || !agreedToUserAgreement) {
-    //   setShowPrivacyModal(true);
-    //   setShowUserAgreementModal(true);
-    //   return
-    // }
     setStep(step + 1);
-    setSavingFinance(true)
   };
   
   const handleSkip = () => {
@@ -45,7 +37,6 @@ export default function Signup() {
       })
   
       authService.signup(data.addUser.token)
-      setSignupSuccess(true); 
     } catch (e) {
       console.log('unable to add user')
       console.log(e)

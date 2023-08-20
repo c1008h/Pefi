@@ -106,7 +106,7 @@ export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
                   <Form.Group>
                     <Form.Label>Date:</Form.Label>
                     <Form.Control 
-                      type='text'
+                      type='date'
                       name='date'
                       value={date}
                       onChange={e => setDate(e.target.value)}

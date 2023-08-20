@@ -1,33 +1,57 @@
 import { useState } from 'react';
 import  { Container, Row, Col, Form, Card, Button } from 'react-bootstrap'
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types'; 
+import Select from 'react-select'
+import { genderList } from '../../constants/genders'
+
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../../utils/mutations';
 
 export default function Step2({handleSkip, handleNextStep}) {
-    const [firstName, setFirstname] = useState()
-    const [lastName, setLastname] = useState()
-    const [birthday, setBirthday] = useState()
-    const [gender, setGender] = useState()
-    const [location, setLocation] = useState()
+    const [firstName, setFirstname] = useState('')
+    const [lastName, setLastname] = useState('')
+    const [birthday, setBirthday] = useState('')
+    const [gender, setGender] = useState('')
+    const [location, setLocation] = useState('')
+    const [firstNameError, setFirstNameError] = useState("");
+    const [lastNameError, setLastNameError] = useState("");
+    const [other, setOther] = useState(false)
+
+    const handleGenderSelect = (selectedOption) => {
+        const selectedGender = selectedOption.value;
+    
+        if (selectedGender === 'other (specify)') {
+          setGender(''); 
+          setOther(true)
+        } else {
+          setGender(selectedGender); 
+          setOther(false)
+        }
+    };
 
     const [ updateUser ] = useMutation(UPDATE_USER)
+
     const handleSubmit = async (firstName, lastName, birthday, gender, location) => {
+        console.log('handle update user')
         if (!firstName || !lastName) {
             console.error('Error: Required fields are empty');
+            setFirstNameError("Please enter your first name.");
+            setLastNameError("Please enter your last name.");
             return;
         }
 
         try {
             await updateUser({
                 variables: {
-                    firstName: firstName,
-                    lastName: lastName,
+                    firstName: firstName.trim(),
+                    lastName: lastName.trim(),
                     birthday: birthday,
-                    gender: gender,
-                    location: location
+                    gender: gender.trim(),
+                    location: location.trim()
                 }
             })
+            handleNextStep()
+            console.log('successful')
         } catch (error) {
             console.error('Error:', error)
         }
@@ -98,13 +122,28 @@ export default function Step2({handleSkip, handleNextStep}) {
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Gender:</Form.Label>
-                                <Form.Control 
+                                {/* <Form.Control 
                                     type='text' 
                                     name='gender'
                                     value={gender}
                                     onChange={(e) => setGender(e.target.value)}
+                                /> */}
+                                <Select 
+                                    options={genderList}
+                                    onChange={handleGenderSelect}
                                 />
                             </Form.Group>
+                            {other && (
+                                <Form.Group>
+                                <Form.Label>Custom Gender:</Form.Label>
+                                <Form.Control
+                                    type='text'
+                                    name='gender'
+                                    value={gender}
+                                    onChange={(e) => setGender(e.target.value)}
+                                />
+                                </Form.Group>
+                            )}
                             <Form.Group>
                                 <Form.Label>Location:</Form.Label>
                                 <Form.Control 
@@ -117,8 +156,8 @@ export default function Step2({handleSkip, handleNextStep}) {
                             {/* <Button onClick={handleNextStep}>Next</Button>
                             <Button onClick={handleSkip}>Skip for Now</Button> */}
                         </Form>
-                        {/* {firstNameError && <p>Please enter your first name.</p>}
-                        {lastNameError && <p>Please enter your last name.</p>} */}
+                        {firstNameError && <p>{firstNameError}</p>}
+                        {lastNameError && <p>{lastNameError}</p>}
 
                     </Card>
                 </Col>

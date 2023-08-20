@@ -1,0 +1,20 @@
+export const genderList = [
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
+    { value: 'transgender', label: 'Transgender' },
+    { value: 'genderqueer', label: 'Genderqueer' },
+    { value: 'genderfluid', label: 'Genderfluid' },
+    { value: 'non-binary', label: 'Non-binary' },
+    { value: 'agender', label: 'Agender' },
+    { value: 'bigender', label: 'Bigender' },
+    { value: 'two-spirit', label: 'Two-spirit' },
+    { value: 'androgynous', label: 'Androgynous' },
+    { value: 'cisgender', label: 'Cisgender' },
+    { value: 'demiboy', label: 'Demiboy' },
+    { value: 'demigirl', label: 'Demigirl' },
+    { value: 'neutrois', label: 'Neutrois' },
+    { value: 'pangender', label: 'Pangender' },
+    { value: 'third-gender', label: 'Third Gender' },
+    { value: 'questioning', label: 'Questioning' },
+    { value: 'other (specify)', label: 'Other (specify)' }
+]

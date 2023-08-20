@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addExpense } from '../../store/reducers/expensesReducer';
 import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
-import {genreList, frequencyOptions, moneyType} from '../../constants/genres'
+import { genreList, frequencyOptions, moneyType } from '../../constants/genres'
 
 export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
   const [amount, setAmount] = useState()
@@ -105,7 +105,7 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
                 <Form.Group>
                   <Form.Label>Date:</Form.Label>
                   <Form.Control 
-                    type='text'
+                    type='date'
                     name='date'
                     value={date}
                     onChange={e => setDate(e.target.value)}

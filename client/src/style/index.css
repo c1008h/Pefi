@@ -39,13 +39,13 @@ body {
   /* background-color: #001F3F; */
   /* min-height: 100vh; */
   /* max-height: calc(100vh - 5rem);  */
-  /* overflow-y: auto; */
+  overflow-y: auto;
 }
 
 .app-container {
   position: relative;
   /* background-color: #001F3F; */
-  min-height: 100vh -200px;
+  min-height: 100vh;
   overflow-y: auto;
   padding-bottom: 60px; 
   box-sizing: border-box;
