@@ -7,7 +7,7 @@ import { genderList } from '../../constants/genders'
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../../utils/mutations';
 
-export default function Step2({handleSkip, handleNextStep}) {
+export default function Step2({handleSkip, handleNextStep, step}) {
     const [firstName, setFirstname] = useState('')
     const [lastName, setLastname] = useState('')
     const [birthday, setBirthday] = useState('')
@@ -16,7 +16,7 @@ export default function Step2({handleSkip, handleNextStep}) {
     const [firstNameError, setFirstNameError] = useState("");
     const [lastNameError, setLastNameError] = useState("");
     const [other, setOther] = useState(false)
-
+// console.log(step)
     const handleGenderSelect = (selectedOption) => {
         const selectedGender = selectedOption.value;
     
@@ -175,4 +175,5 @@ export default function Step2({handleSkip, handleNextStep}) {
 Step2.propTypes = {
     handleSkip: PropTypes.func.isRequired,
     handleNextStep: PropTypes.func.isRequired,
+    step: PropTypes.number.isRequired
 };

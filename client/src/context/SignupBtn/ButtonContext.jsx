@@ -1,11 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-
 const ButtonContext = createContext();
-
-export function useButtonContext() {
-  return useContext(ButtonContext);
-}
 
 export function ButtonProvider({ children }) {
   const [step, setStep] = useState(1)
@@ -26,6 +21,10 @@ export function ButtonProvider({ children }) {
       {children}
     </ButtonContext.Provider>
   );
+}
+
+export function useButtonContext() {
+  return useContext(ButtonContext);
 }
 
 ButtonProvider.propTypes = {

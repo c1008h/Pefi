@@ -10,14 +10,14 @@ import Step2 from '../components/Signup/2-Name'
 import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
 
 import { ButtonProvider, useButtonContext } from '../context/SignupBtn/ButtonContext';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export default function Signup() {
   // const [step, setStep] = useState(1);
   const [addUser, { error }] = useMutation(ADD_USER);
   
-  const { step, continueFlag, handleNextStep, handleSkip } = useButtonContext();
-
+  const { step, handleNextStep, handleSkip } = useButtonContext();
+console.log(step)
   // const handleNextStep = () => {
   //   setStep(step + 1);
   // };
@@ -60,6 +60,7 @@ export default function Signup() {
         {step === 1 && (
           <Step2 
             handleNextStep={handleNextStep}
+            step={step}
             handleSkip={handleSkip}
           />
         )}
@@ -121,6 +122,9 @@ export default function Signup() {
   );
 }
 
-Signup.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+// Signup.propTypes = {
+//   step: PropTypes.number.isRequired,
+//   handleSkip: PropTypes.bool.isRequired,
+//   continueFlag: PropTypes.bool.isRequired,
+//   handleNextStep: PropTypes.func.isRequired
+// };
