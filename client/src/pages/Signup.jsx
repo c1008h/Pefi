@@ -9,26 +9,22 @@ import { SignupForm } from '../components/Signup/SignupForm';
 import Step2 from '../components/Signup/2-Name'
 import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
 
-const ButtonContext = createContext();
+import { ButtonProvider, useButtonContext } from '../context/SignupBtn/ButtonContext';
+import PropTypes from 'prop-types';
 
-export function useButton() {
-  return useContext(ButtonContext);
-}
-
-export default function Signup({ children }) {
-  const [step, setStep] = useState(1);
+export default function Signup() {
+  // const [step, setStep] = useState(1);
   const [addUser, { error }] = useMutation(ADD_USER);
-  const [buttonState, setButtonState] = useState(false);
-  const toggleButtonState = () => {
-    setButtonState(!buttonState);
-  };
-  const handleNextStep = () => {
-    setStep(step + 1);
-  };
   
-  const handleSkip = () => {
-    setStep(step + 1)
-  };
+  const { step, continueFlag, handleNextStep, handleSkip } = useButtonContext();
+
+  // const handleNextStep = () => {
+  //   setStep(step + 1);
+  // };
+  
+  // const handleSkip = () => {
+  //   setStep(step + 1)
+  // };
 
   const handleFormSubmit = async (email, password) => {
     if(!email || !password){
@@ -60,7 +56,7 @@ export default function Signup({ children }) {
         Success! You may now head{' '}
         <Link to='/dashboard'>Back to the homepage.</Link>
       </p> */}
-      <ButtonContext.Provider value={{ buttonState, toggleButtonState }}>
+      <ButtonProvider>
         {step === 1 && (
           <Step2 
             handleNextStep={handleNextStep}
@@ -108,7 +104,7 @@ export default function Signup({ children }) {
             style={{float:'right'}}
           >Next</Button>
         </div>
-      </ButtonContext.Provider>
+      </ButtonProvider>
     </>
     ) : ( 
      <SignupForm onSubmit={handleFormSubmit}/>
@@ -124,3 +120,7 @@ export default function Signup({ children }) {
     </>
   );
 }
+
+Signup.propTypes = {
+  children: PropTypes.node.isRequired,
+};
