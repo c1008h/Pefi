@@ -9,22 +9,22 @@ import { SignupForm } from '../components/Signup/SignupForm';
 import Step2 from '../components/Signup/2-Name'
 import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
 
-import { ButtonProvider, useButtonContext } from '../context/SignupBtn/ButtonContext';
+// import { ButtonProvider, useButtonContext } from '../context/SignupBtn/ButtonContext';
 // import PropTypes from 'prop-types';
 
 export default function Signup() {
-  // const [step, setStep] = useState(1);
+  const [step, setStep] = useState(1);
   const [addUser, { error }] = useMutation(ADD_USER);
   
-  const { step, handleNextStep, handleSkip } = useButtonContext();
-console.log(step)
-  // const handleNextStep = () => {
-  //   setStep(step + 1);
-  // };
+  // const {  handleNextStep, handleSkip, step } = useButtonContext();
+  // console.log(step)
+  const handleNextStep = () => {
+    setStep(step + 1);
+  };
   
-  // const handleSkip = () => {
-  //   setStep(step + 1)
-  // };
+  const handleSkip = () => {
+    setStep(step + 1)
+  };
 
   const handleFormSubmit = async (email, password) => {
     if(!email || !password){
@@ -56,7 +56,7 @@ console.log(step)
         Success! You may now head{' '}
         <Link to='/dashboard'>Back to the homepage.</Link>
       </p> */}
-      <ButtonProvider>
+      {/* <ButtonProvider> */}
         {step === 1 && (
           <Step2 
             handleNextStep={handleNextStep}
@@ -105,7 +105,7 @@ console.log(step)
             style={{float:'right'}}
           >Next</Button>
         </div> */}
-      </ButtonProvider>
+      {/* </ButtonProvider> */}
     </>
     ) : ( 
      <SignupForm onSubmit={handleFormSubmit}/>

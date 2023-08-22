@@ -158,10 +158,10 @@ export default function Step2({handleSkip, handleNextStep, step}) {
                             </Form.Group>
                             {/* <Button onClick={handleNextStep}>Next</Button>
                             <Button onClick={handleSkip}>Skip for Now</Button> */}
-                            <div>
-                                <SkipBtn />
-                                <ContinueBtn />
-                            </div>
+                            {/* <div>
+                                <SkipBtn onClick={() => handleSkip()}/>
+                                <ContinueBtn onClick={() => handleSubmit(firstName, lastName, birthday, gender, location)}/>
+                            </div> */}
                         </Form>
                         {firstNameError && <p>{firstNameError}</p>}
                         {lastNameError && <p>{lastNameError}</p>}
@@ -174,6 +174,16 @@ export default function Step2({handleSkip, handleNextStep, step}) {
                     <h2>Financial Fun Fact</h2>
                     <p>Did you know that making small changes in your daily spending habits can lead to significant savings over time? We&rsquo;re here to help you make those positive changes!</p>
                 </Col>
+            </Row>
+            <Row>
+                <div>
+                    <Button 
+                        style={{float:'left'}}
+                        onClick={() => handleSkip()}>Skip</Button>
+                    <Button 
+                        style={{float:'right'}}
+                        onClick={() => handleSubmit(firstName, lastName, birthday, gender, location)}>Continue</Button>
+                </div>
             </Row>
         </Container>
     )
