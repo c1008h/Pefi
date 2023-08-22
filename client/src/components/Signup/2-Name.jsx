@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Select from 'react-select'
 import { genderList } from '../../constants/genders'
 
+import SkipBtn from './SkipBtn';
+import ContinueBtn from './ContinueBtn';
+
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../../utils/mutations';
 
@@ -155,6 +158,10 @@ export default function Step2({handleSkip, handleNextStep, step}) {
                             </Form.Group>
                             {/* <Button onClick={handleNextStep}>Next</Button>
                             <Button onClick={handleSkip}>Skip for Now</Button> */}
+                            <div>
+                                <SkipBtn />
+                                <ContinueBtn />
+                            </div>
                         </Form>
                         {firstNameError && <p>{firstNameError}</p>}
                         {lastNameError && <p>{lastNameError}</p>}

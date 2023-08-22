@@ -95,7 +95,7 @@ console.log(step)
           />
         )}
 
-        <div style={{padding:'5%'}}>
+        {/* <div style={{padding:'5%'}}>
           <Button
             onClick={() => handleSkip()}
             style={{float:'left'}}
@@ -104,7 +104,7 @@ console.log(step)
             onClick={() => handleNextStep()}
             style={{float:'right'}}
           >Next</Button>
-        </div>
+        </div> */}
       </ButtonProvider>
     </>
     ) : ( 
