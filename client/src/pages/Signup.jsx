@@ -1,23 +1,21 @@
-import { useState, createContext, useContext } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import { authService } from '../utils/auth';
-import { Alert, Button } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 
 import { SignupForm } from '../components/Signup/SignupForm';
 import Step2 from '../components/Signup/2-Name'
 import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
+import '../style/signup.css'
 
-// import { ButtonProvider, useButtonContext } from '../context/SignupBtn/ButtonContext';
 // import PropTypes from 'prop-types';
 
 export default function Signup() {
   const [step, setStep] = useState(1);
   const [addUser, { error }] = useMutation(ADD_USER);
   
-  // const {  handleNextStep, handleSkip, step } = useButtonContext();
-  // console.log(step)
   const handleNextStep = () => {
     setStep(step + 1);
   };

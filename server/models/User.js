@@ -45,10 +45,6 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Goal'
         },
-        // financeGroup: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'Finance'
-        // }],
         financeGroup: financeSchema,
         incomesGroup: [{
             type: Schema.Types.ObjectId,
@@ -58,7 +54,6 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Expenses'
         }]
-        // expensesGroup: [Expenses]
     },
     { timestamps: true } ,
     {

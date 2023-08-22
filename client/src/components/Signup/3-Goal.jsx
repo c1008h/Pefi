@@ -3,22 +3,58 @@ import  { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'; // Import PropTypes
 import dayjs from 'dayjs';
 
+import { useMutation } from '@apollo/client';
+import { CREATE_GOALS } from '../../utils/mutations'
+
 export function FirstGoal({handleSkip, handleNextStep}) {
   const [thisYear, setThisYear] = useState()
   const [nextYear, setNextYear] = useState()
-  const [digital, setDigital] = useState()
-  const [cash, setCash] = useState()
-  const [invested, setInvested] = useState()
-  const [saved, setSaved] = useState()
+  const [digital, setDigital] = useState(0)
+  const [cash, setCash] = useState(0)
+  const [invested, setInvested] = useState(0)
+  const [saved, setSaved] = useState(0)
+  const [ createGoals ] = useMutation(CREATE_GOALS)
 
   useEffect(() => {
     const currentYear = dayjs().year();
     const nextYear = currentYear + 1;
 
-    setThisYear(`${currentYear} - ${nextYear}`);
+    setThisYear(currentYear)
+    // setThisYear(`${currentYear} - ${nextYear}`);
     setNextYear(nextYear)
   }, [])
   // console.log(thisYear)
+  console.log(thisYear)
+  const handleSubmit = async (digital, cash, invested, saved, thisYear) => {
+    console.log('handle add goal')
+    if(!thisYear || !digital || !cash || !invested || !saved) {
+      console.log('need to fill out form')
+    }
+    try {
+      const year = parseInt(thisYear);
+
+      if (isNaN(year)) {
+        console.error('Invalid year:', thisYear);
+        return; // Don't proceed if "thisYear" cannot be parsed as an integer
+      }
+
+      await createGoals({
+        variables: {
+          input: {
+            year: parseInt(thisYear),
+            digital: parseFloat(digital),
+            cash: parseFloat(cash),
+            invested: parseFloat(invested),
+            saved: parseFloat(saved)
+          }
+        }
+      })
+      handleNextStep()
+      console.log('successfully added goal')
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  }
 
   return (
     <Container fluid='true'>
@@ -48,7 +84,10 @@ export function FirstGoal({handleSkip, handleNextStep}) {
             <Row>
               <Col>
                 <h3>What are your financial goals for {nextYear}?</h3>
-                <Form>
+                <Form onSubmit={(e) => {
+                  e.preventDefault()
+                  handleSubmit( thisYear, saved, invested, cash, digital)
+                }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
                     <Form.Control 
@@ -84,12 +123,62 @@ export function FirstGoal({handleSkip, handleNextStep}) {
             </Row>
           </Col>
         </Row>
+        <Row>
+          <div className='btn-container'>
+            <Button 
+                style={{float:'left'}}
+                onClick={() => handleSkip()}>Skip</Button>
+            <Button 
+                style={{float:'right'}}
+                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+              }>Continue</Button>
+            </div>
+        </Row>
       </Container>
     </Container>
   )
 }
 
 export function SecondGoal({handleSkip, handleNextStep}) {
+  const [thisYear, setThisYear] = useState()
+  const [nextYear, setNextYear] = useState()
+  const [digital, setDigital] = useState()
+  const [cash, setCash] = useState()
+  const [invested, setInvested] = useState()
+  const [saved, setSaved] = useState()
+  const [ createGoals ] = useMutation(CREATE_GOALS)
+
+  useEffect(() => {
+    const currentYear = dayjs().year() + 1;
+    const nextYear = currentYear + 1;
+
+    setThisYear(currentYear)
+    // setThisYear(`${currentYear} - ${nextYear}`);
+    setNextYear(nextYear)
+  }, [])
+  // console.log(thisYear)
+  
+  const handleSubmit = async (digital, cash, invested, saved, thisYear) => {
+    console.log('handle add goal')
+    if(!thisYear || !digital || !cash || !invested || !saved) {
+      console.log('need to fill out form')
+    }
+    try {
+      await createGoals({
+        variables: {
+          year: thisYear,
+          digital: digital,
+          cash: cash,
+          invested: invested,
+          saved: saved
+        }
+      })
+      handleNextStep()
+      console.log('successfully added goal')
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  }
   return (
     <Container fluid='true'>
       <Container>
@@ -102,31 +191,55 @@ export function SecondGoal({handleSkip, handleNextStep}) {
             </Row>
             <Row>
               <Col>
-                <Form>
+              <Form onSubmit={(e) => {
+                  e.preventDefault()
+                  handleSubmit( thisYear, saved, invested, cash, digital)
+                }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
                     <Form.Control 
-                      
+                      onChange={(e) => setDigital(e.target.value)}
+                      value={digital}
                     />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Cash:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setCash(e.target.value)}
+                      value={cash}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Saved:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setSaved(e.target.value)}
+                      value={saved}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Invested:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setInvested(e.target.value)}
+                      value={invested}
+                    />
                   </Form.Group>
-                  <Button onClick={handleNextStep}>Next</Button>
-                  <Button onClick={handleSkip}>Skip for Now</Button>
+                  {/* <Button onClick={() => handleNextStep()}>Next</Button>
+                  <Button onClick={() => handleSkip()}>Skip for Now</Button> */}
                 </Form>
               </Col>
             </Row>
           </Col>
+        </Row>
+        <Row>
+          <div className='btn-container'> 
+            <Button 
+                style={{float:'left'}}
+                onClick={() => handleSkip()}>Skip</Button>
+            <Button 
+                style={{float:'right'}}
+                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+              }>Continue</Button>
+            </div>
         </Row>
       </Container>
     </Container>
@@ -134,6 +247,45 @@ export function SecondGoal({handleSkip, handleNextStep}) {
 }
 
 export function ThirdGoal({handleSkip, handleNextStep}) {
+  const [thisYear, setThisYear] = useState()
+  const [nextYear, setNextYear] = useState()
+  const [digital, setDigital] = useState()
+  const [cash, setCash] = useState()
+  const [invested, setInvested] = useState()
+  const [saved, setSaved] = useState()
+  const [ createGoals ] = useMutation(CREATE_GOALS)
+
+  useEffect(() => {
+    const currentYear = dayjs().year() + 2;
+    const nextYear = currentYear + 1;
+
+    // setThisYear(`${currentYear} - ${nextYear}`);
+    setThisYear(currentYear)
+    setNextYear(nextYear)
+  }, [])
+  // console.log(thisYear)
+  
+  const handleSubmit = async (digital, cash, invested, saved, thisYear) => {
+    console.log('handle add goal')
+    if(!thisYear || !digital || !cash || !invested || !saved) {
+      console.log('need to fill out form')
+    }
+    try {
+      await createGoals({
+        variables: {
+          year: thisYear,
+          digital: digital,
+          cash: cash,
+          invested: invested,
+          saved: saved
+        }
+      })
+      handleNextStep()
+      console.log('successfully added goal')
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  }
   return (
     <Container fluid='true'>
       <Container>
@@ -146,29 +298,55 @@ export function ThirdGoal({handleSkip, handleNextStep}) {
             </Row>
             <Row>
               <Col>
-                <Form>
+              <Form onSubmit={(e) => {
+                  e.preventDefault()
+                  handleSubmit( thisYear, saved, invested, cash, digital)
+                }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setDigital(e.target.value)}
+                      value={digital}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Cash:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setCash(e.target.value)}
+                      value={cash}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Saved:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setSaved(e.target.value)}
+                      value={saved}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Invested:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setInvested(e.target.value)}
+                      value={invested}
+                    />
                   </Form.Group>
-                  <Button onClick={handleNextStep}>Next</Button>
-                  <Button onClick={handleSkip}>Skip for Now</Button>
+                  {/* <Button onClick={() => handleNextStep()}>Next</Button>
+                  <Button onClick={() => handleSkip()}>Skip for Now</Button> */}
                 </Form>
               </Col>
             </Row>
           </Col>
+        </Row>
+        <Row>
+          <div className='btn-container'>
+            <Button 
+                style={{float:'left'}}
+                onClick={() => handleSkip()}>Skip</Button>
+            <Button 
+                style={{float:'right'}}
+                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+              }>Continue</Button>
+            </div>
         </Row>
       </Container>
     </Container>
@@ -176,6 +354,45 @@ export function ThirdGoal({handleSkip, handleNextStep}) {
 }
 
 export function FourthGoal({handleSkip, handleNextStep}) {
+  const [thisYear, setThisYear] = useState()
+  const [nextYear, setNextYear] = useState()
+  const [digital, setDigital] = useState()
+  const [cash, setCash] = useState()
+  const [invested, setInvested] = useState()
+  const [saved, setSaved] = useState()
+  const [ createGoals ] = useMutation(CREATE_GOALS)
+
+  useEffect(() => {
+    const currentYear = dayjs().year() + 3;
+    const nextYear = currentYear + 1;
+
+    // setThisYear(`${currentYear} - ${nextYear}`);
+    setThisYear(currentYear)
+    setNextYear(nextYear)
+  }, [])
+  // console.log(thisYear)
+  
+  const handleSubmit = async (digital, cash, invested, saved, thisYear) => {
+    console.log('handle add goal')
+    if(!thisYear || !digital || !cash || !invested || !saved) {
+      console.log('need to fill out form')
+    }
+    try {
+      await createGoals({
+        variables: {
+          year: thisYear,
+          digital: digital,
+          cash: cash,
+          invested: invested,
+          saved: saved
+        }
+      })
+      handleNextStep()
+      console.log('successfully added goal')
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  }
   return (
     <Container fluid='true'>
       <Container>
@@ -188,29 +405,55 @@ export function FourthGoal({handleSkip, handleNextStep}) {
             </Row>
             <Row>
               <Col>
-                <Form>
+              <Form onSubmit={(e) => {
+                  e.preventDefault()
+                  handleSubmit( thisYear, saved, invested, cash, digital)
+                }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setDigital(e.target.value)}
+                      value={digital}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Cash:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setCash(e.target.value)}
+                      value={cash}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Saved:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setSaved(e.target.value)}
+                      value={saved}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Invested:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setInvested(e.target.value)}
+                      value={invested}
+                    />
                   </Form.Group>
-                  <Button onClick={handleNextStep}>Next</Button>
-                  <Button onClick={handleSkip}>Skip for Now</Button>
+                  {/* <Button onClick={() => handleNextStep()}>Next</Button>
+                  <Button onClick={() => handleSkip()}>Skip for Now</Button> */}
                 </Form>
               </Col>
             </Row>
           </Col>
+        </Row>
+        <Row>
+          <div className='btn-container'>
+            <Button 
+                style={{float:'left'}}
+                onClick={() => handleSkip()}>Skip</Button>
+            <Button 
+                style={{float:'right'}}
+                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+              }>Continue</Button>
+            </div>
         </Row>
       </Container>
     </Container>
@@ -218,6 +461,45 @@ export function FourthGoal({handleSkip, handleNextStep}) {
 }
 
 export function FifthGoal({handleSkip, handleNextStep}) {
+  const [thisYear, setThisYear] = useState()
+  const [nextYear, setNextYear] = useState()
+  const [digital, setDigital] = useState()
+  const [cash, setCash] = useState()
+  const [invested, setInvested] = useState()
+  const [saved, setSaved] = useState()
+  const [ createGoals ] = useMutation(CREATE_GOALS)
+
+  useEffect(() => {
+    const currentYear = dayjs().year() + 4;
+    const nextYear = currentYear + 1;
+
+    // setThisYear(`${currentYear} - ${nextYear}`);
+    setThisYear(currentYear)
+    setNextYear(nextYear)
+  }, [])
+  // console.log(thisYear)
+  
+  const handleSubmit = async (digital, cash, invested, saved, thisYear) => {
+    console.log('handle add goal')
+    if(!thisYear || !digital || !cash || !invested || !saved) {
+      console.log('need to fill out form')
+    }
+    try {
+      await createGoals({
+        variables: {
+          year: thisYear,
+          digital: digital,
+          cash: cash,
+          invested: invested,
+          saved: saved
+        }
+      })
+      handleNextStep()
+      console.log('successfully added goal')
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  }
   return (
     <Container fluid='true'>
       <Container>
@@ -230,29 +512,55 @@ export function FifthGoal({handleSkip, handleNextStep}) {
             </Row>
             <Row>
               <Col>
-                <Form>
+              <Form onSubmit={(e) => {
+                  e.preventDefault()
+                  handleSubmit( thisYear, saved, invested, cash, digital)
+                }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setDigital(e.target.value)}
+                      value={digital}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Cash:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setCash(e.target.value)}
+                      value={cash}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Saved:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setSaved(e.target.value)}
+                      value={saved}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Total Invested:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                      onChange={(e) => setInvested(e.target.value)}
+                      value={invested}
+                    />
                   </Form.Group>
-                  <Button onClick={handleNextStep}>Next</Button>
-                  <Button onClick={handleSkip}>Skip for Now</Button>
+                  {/* <Button onClick={() => handleNextStep()}>Next</Button>
+                  <Button onClick={() => handleSkip()}>Skip for Now</Button> */}
                 </Form>
               </Col>
             </Row>
           </Col>
+        </Row>
+        <Row>
+          <div className='btn-container'>
+            <Button 
+                style={{float:'left'}}
+                onClick={() => handleSkip()}>Skip</Button>
+            <Button 
+                style={{float:'right'}}
+                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+              }>Continue</Button>
+            </div>
         </Row>
       </Container>
     </Container>

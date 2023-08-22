@@ -115,7 +115,6 @@ export const CREATE_GOALS = gql`
         createGoals(input: $input) {
             email
             goalsGroup {
-              id
               year
               invested
               saved

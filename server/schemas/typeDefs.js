@@ -15,7 +15,7 @@ const typeDefs = `
     }
 
     type Goals {
-        id: ID!
+        id: ID
         year: Float
         invested: Float
         saved: Float
@@ -24,7 +24,7 @@ const typeDefs = `
     }
 
     input GoalInput {
-        id: ID!
+        id: ID
         year: Float
         invested: Float
         saved: Float
