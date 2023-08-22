@@ -55,7 +55,8 @@ const resolvers = {
           const user = await User.findById(_id)
           .populate('incomesGroup')
           .populate('expensesGroup')
-          .populate('financeGroup');
+          .populate('financeGroup')
+          .populate('goalsGroup');
 
           const networth = calculateNetworth(user);
 
@@ -259,7 +260,7 @@ const resolvers = {
 
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $addToSet: { goalGroup: savedGoal._id } },
+              { $addToSet: { goalsGroup: savedGoal._id } },
               { new: true }
             )
 
