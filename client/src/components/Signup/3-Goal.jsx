@@ -164,6 +164,12 @@ export function SecondGoal({handleSkip, handleNextStep}) {
       console.log('need to fill out form')
     }
     try {
+      const year = parseInt(thisYear);
+
+      if (isNaN(year)) {
+        console.error('Invalid year:', thisYear);
+        return; 
+      }
       await createGoals({
         variables: {
           year: thisYear,
@@ -271,6 +277,12 @@ export function ThirdGoal({handleSkip, handleNextStep}) {
       console.log('need to fill out form')
     }
     try {
+      const year = parseInt(thisYear);
+
+      if (isNaN(year)) {
+        console.error('Invalid year:', thisYear);
+        return; 
+      }
       await createGoals({
         variables: {
           year: thisYear,
@@ -378,6 +390,12 @@ export function FourthGoal({handleSkip, handleNextStep}) {
       console.log('need to fill out form')
     }
     try {
+      const year = parseInt(thisYear);
+
+      if (isNaN(year)) {
+        console.error('Invalid year:', thisYear);
+        return; 
+      }
       await createGoals({
         variables: {
           year: thisYear,
@@ -485,6 +503,12 @@ export function FifthGoal({handleSkip, handleNextStep}) {
       console.log('need to fill out form')
     }
     try {
+      const year = parseInt(thisYear);
+
+      if (isNaN(year)) {
+        console.error('Invalid year:', thisYear);
+        return; 
+      }
       await createGoals({
         variables: {
           year: thisYear,
