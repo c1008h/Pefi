@@ -125,12 +125,6 @@ export default function Step2({handleSkip, handleNextStep, step}) {
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Gender:</Form.Label>
-                                {/* <Form.Control 
-                                    type='text' 
-                                    name='gender'
-                                    value={gender}
-                                    onChange={(e) => setGender(e.target.value)}
-                                /> */}
                                 <Select 
                                     options={genderList}
                                     onChange={handleGenderSelect}

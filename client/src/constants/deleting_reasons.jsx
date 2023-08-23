@@ -1,0 +1,22 @@
+export const deleteAccount = [
+    { value: 'privacy-concerns', label: 'Privacy Concerns' },
+    { value: 'better-alternative', label: 'Found a Better Alternative' },
+    { value: 'no-longer-need', label: 'No Longer Need the Service' },
+    { value: 'user-experience', label: 'Dissatisfied with the User Experience' },
+    { value: 'too-many-notifications', label: 'Received Too Many Notifications' },
+    { value: 'security-concerns', label: 'Account Compromised or Security Concerns' },
+    { value: 'too-many-emails', label: 'Too Many Emails or Spam' },
+    { value: 'difficulty-using', label: 'Difficulty Using the Platform' },
+    { value: 'account-management', label: 'Account or Data Management Issues' },
+    { value: 'data-privacy', label: 'Concerns About Data Privacy' },
+    { value: 'switched-username', label: 'Switched to a Different Email or Username' },
+    { value: 'lack-of-features', label: 'Lack of Features or Functionality' },
+    { value: 'personal-reasons', label: 'Personal Reasons' },
+    { value: 'account-hacked', label: 'Account Was Hacked or Abused' },
+    { value: 'life-circumstances', label: 'Changes in Life Circumstances' },
+    { value: 'discontinued-interest', label: 'Discontinued Interest in the Service' },
+    { value: 'service-discontinued', label: 'Company or Service No Longer Exists' },
+    { value: 'account-duplication', label: 'Account Duplication' },
+    { value: 'legal-compliance', label: 'Legal or Compliance Reasons' },
+    { value: 'other (specify)', label: 'Other (specify)' }
+]
