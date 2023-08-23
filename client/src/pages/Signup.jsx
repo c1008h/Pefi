@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import { authService } from '../utils/auth';
-import { Alert } from 'react-bootstrap'
+import { Alert, ProgressBar } from 'react-bootstrap'
 
 import { SignupForm } from '../components/Signup/SignupForm';
 import Step2 from '../components/Signup/2-Name'
@@ -13,15 +13,33 @@ import '../style/signup.css'
 export default function Signup() {
   const [step, setStep] = useState(1);
   const [addUser, { error }] = useMutation(ADD_USER);
-  
+  const [now, setNow] = useState(step/6)
+  const [navigationFailed, setNavigationFailed] = useState(false); 
+  const navigate = useNavigate();
+
   const handleNextStep = () => {
+    if (now > 99) {
+      navigate('/dashboard')
+      .catch(() => {
+        setNavigationFailed(true)
+      })
+    }
     setStep(step + 1);
+    setNow(step * 20)
   };
   
   const handleSkip = () => {
-    setStep(step + 1)
+    if (now > 99) {
+      navigate('/dashboard')
+      .catch(() => {
+        setNavigationFailed(true)
+      })
+    }
+    setStep(step + 1);
+    setNow(step * 20)
   };
-
+console.log('now:', now)
+console.log('step:', step)
   const handleFormSubmit = async (email, password) => {
     if(!email || !password){
       alert('Failed to submit! Please fill all requested fields.');
@@ -89,7 +107,13 @@ export default function Signup() {
             handleSkip={handleSkip}
           />
         )}
-
+        {step === 6 && navigationFailed && (
+          <p>
+            Success! You may now head{' '}
+            <Link to="/dashboard">Back to the homepage.</Link>
+          </p>
+        )}
+        <ProgressBar now={now} label={`${now}%`} visuallyHidden />
       </>
     ) : ( 
      <SignupForm onSubmit={handleFormSubmit}/>
