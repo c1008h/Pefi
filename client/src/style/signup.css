@@ -2,3 +2,15 @@
 .btn-container {
     padding: 5%;
 }
+
+.form-card {
+    padding: 5%;
+}
+
+.skip-btn {
+    float: left;
+}
+
+.continue-btn {
+    float: right;
+}

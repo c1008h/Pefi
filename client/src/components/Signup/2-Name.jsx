@@ -154,14 +154,9 @@ export default function Step2({handleSkip, handleNextStep, step}) {
                                     name='location'
                                     value={location}
                                     onChange={(e) => setLocation(e.target.value)}
+                                    placeholder="City, State, Country (e.g., Seattle, WA, USA)"
                                 />
                             </Form.Group>
-                            {/* <Button onClick={handleNextStep}>Next</Button>
-                            <Button onClick={handleSkip}>Skip for Now</Button> */}
-                            {/* <div>
-                                <SkipBtn onClick={() => handleSkip()}/>
-                                <ContinueBtn onClick={() => handleSubmit(firstName, lastName, birthday, gender, location)}/>
-                            </div> */}
                         </Form>
                         {firstNameError && <p>{firstNameError}</p>}
                         {lastNameError && <p>{lastNameError}</p>}
@@ -176,12 +171,12 @@ export default function Step2({handleSkip, handleNextStep, step}) {
                 </Col>
             </Row>
             <Row>
-                <div>
+                <div className='btn-container'>
                     <Button 
-                        style={{float:'left'}}
+                        className='skip-btn'
                         onClick={() => handleSkip()}>Skip</Button>
                     <Button 
-                        style={{float:'right'}}
+                        className='continue-btn'
                         onClick={() => handleSubmit(firstName, lastName, birthday, gender, location)}>Continue</Button>
                 </div>
             </Row>
