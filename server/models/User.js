@@ -42,7 +42,8 @@ const userSchema = new Schema(
             minlength: 8
         },
         goalsGroup: {
-            type: Schema.Types.ObjectId,
+            // type: Schema.Types.ObjectId,
+            type: Number,
             ref: 'Goal'
         },
         financeGroup: financeSchema,
