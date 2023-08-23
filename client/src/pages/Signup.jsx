@@ -10,8 +10,6 @@ import Step2 from '../components/Signup/2-Name'
 import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
 import '../style/signup.css'
 
-// import PropTypes from 'prop-types';
-
 export default function Signup() {
   const [step, setStep] = useState(1);
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -54,7 +52,6 @@ export default function Signup() {
         Success! You may now head{' '}
         <Link to='/dashboard'>Back to the homepage.</Link>
       </p> */}
-      {/* <ButtonProvider> */}
         {step === 1 && (
           <Step2 
             handleNextStep={handleNextStep}
@@ -93,18 +90,7 @@ export default function Signup() {
           />
         )}
 
-        {/* <div style={{padding:'5%'}}>
-          <Button
-            onClick={() => handleSkip()}
-            style={{float:'left'}}
-          >Skip</Button>
-          <Button
-            onClick={() => handleNextStep()}
-            style={{float:'right'}}
-          >Next</Button>
-        </div> */}
-      {/* </ButtonProvider> */}
-    </>
+      </>
     ) : ( 
      <SignupForm onSubmit={handleFormSubmit}/>
     )}
@@ -119,10 +105,3 @@ export default function Signup() {
     </>
   );
 }
-
-// Signup.propTypes = {
-//   step: PropTypes.number.isRequired,
-//   handleSkip: PropTypes.bool.isRequired,
-//   continueFlag: PropTypes.bool.isRequired,
-//   handleNextStep: PropTypes.func.isRequired
-// };
