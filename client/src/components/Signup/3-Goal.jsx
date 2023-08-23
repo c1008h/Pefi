@@ -86,7 +86,7 @@ export function FirstGoal({handleSkip, handleNextStep}) {
                 <h3>What are your financial goals for {nextYear}?</h3>
                 <Form onSubmit={(e) => {
                   e.preventDefault()
-                  handleSubmit( thisYear, saved, invested, cash, digital)
+                  handleSubmit( digital, cash, invested, saved, thisYear)
                 }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
@@ -130,7 +130,7 @@ export function FirstGoal({handleSkip, handleNextStep}) {
                 onClick={() => handleSkip()}>Skip</Button>
             <Button 
                 style={{float:'right'}}
-                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+                onClick={() => handleSubmit( digital, cash, invested, saved, thisYear)
               }>Continue</Button>
             </div>
         </Row>
@@ -142,10 +142,10 @@ export function FirstGoal({handleSkip, handleNextStep}) {
 export function SecondGoal({handleSkip, handleNextStep}) {
   const [thisYear, setThisYear] = useState()
   const [nextYear, setNextYear] = useState()
-  const [digital, setDigital] = useState()
-  const [cash, setCash] = useState()
-  const [invested, setInvested] = useState()
-  const [saved, setSaved] = useState()
+  const [digital, setDigital] = useState(0)
+  const [cash, setCash] = useState(0)
+  const [invested, setInvested] = useState(0)
+  const [saved, setSaved] = useState(0)
   const [ createGoals ] = useMutation(CREATE_GOALS)
 
   useEffect(() => {
@@ -172,11 +172,13 @@ export function SecondGoal({handleSkip, handleNextStep}) {
       }
       await createGoals({
         variables: {
-          year: thisYear,
-          digital: digital,
-          cash: cash,
-          invested: invested,
-          saved: saved
+          input: {
+            year: parseInt(thisYear),
+            digital: parseFloat(digital),
+            cash: parseFloat(cash),
+            invested: parseFloat(invested),
+            saved: parseFloat(saved)
+          }
         }
       })
       handleNextStep()
@@ -199,7 +201,7 @@ export function SecondGoal({handleSkip, handleNextStep}) {
               <Col>
               <Form onSubmit={(e) => {
                   e.preventDefault()
-                  handleSubmit( thisYear, saved, invested, cash, digital)
+                  handleSubmit( digital, cash, invested, saved, thisYear)
                 }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
@@ -243,7 +245,7 @@ export function SecondGoal({handleSkip, handleNextStep}) {
                 onClick={() => handleSkip()}>Skip</Button>
             <Button 
                 style={{float:'right'}}
-                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+                onClick={() => handleSubmit( digital, cash, invested, saved, thisYear)
               }>Continue</Button>
             </div>
         </Row>
@@ -285,11 +287,13 @@ export function ThirdGoal({handleSkip, handleNextStep}) {
       }
       await createGoals({
         variables: {
-          year: thisYear,
-          digital: digital,
-          cash: cash,
-          invested: invested,
-          saved: saved
+          input: {
+            year: parseInt(thisYear),
+            digital: parseFloat(digital),
+            cash: parseFloat(cash),
+            invested: parseFloat(invested),
+            saved: parseFloat(saved)
+          }
         }
       })
       handleNextStep()
@@ -312,7 +316,7 @@ export function ThirdGoal({handleSkip, handleNextStep}) {
               <Col>
               <Form onSubmit={(e) => {
                   e.preventDefault()
-                  handleSubmit( thisYear, saved, invested, cash, digital)
+                  handleSubmit( digital, cash, invested, saved, thisYear)
                 }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
@@ -356,7 +360,7 @@ export function ThirdGoal({handleSkip, handleNextStep}) {
                 onClick={() => handleSkip()}>Skip</Button>
             <Button 
                 style={{float:'right'}}
-                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+                onClick={() => handleSubmit( digital, cash, invested, saved, thisYear)
               }>Continue</Button>
             </div>
         </Row>
@@ -398,11 +402,13 @@ export function FourthGoal({handleSkip, handleNextStep}) {
       }
       await createGoals({
         variables: {
-          year: thisYear,
-          digital: digital,
-          cash: cash,
-          invested: invested,
-          saved: saved
+          input: {
+            year: parseInt(thisYear),
+            digital: parseFloat(digital),
+            cash: parseFloat(cash),
+            invested: parseFloat(invested),
+            saved: parseFloat(saved)
+          }
         }
       })
       handleNextStep()
@@ -425,7 +431,7 @@ export function FourthGoal({handleSkip, handleNextStep}) {
               <Col>
               <Form onSubmit={(e) => {
                   e.preventDefault()
-                  handleSubmit( thisYear, saved, invested, cash, digital)
+                  handleSubmit( digital, cash, invested, saved, thisYear)
                 }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
@@ -469,7 +475,7 @@ export function FourthGoal({handleSkip, handleNextStep}) {
                 onClick={() => handleSkip()}>Skip</Button>
             <Button 
                 style={{float:'right'}}
-                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+                onClick={() => handleSubmit( digital, cash, invested, saved, thisYear )
               }>Continue</Button>
             </div>
         </Row>
@@ -511,11 +517,13 @@ export function FifthGoal({handleSkip, handleNextStep}) {
       }
       await createGoals({
         variables: {
-          year: thisYear,
-          digital: digital,
-          cash: cash,
-          invested: invested,
-          saved: saved
+          input: {
+            year: parseInt(thisYear),
+            digital: parseFloat(digital),
+            cash: parseFloat(cash),
+            invested: parseFloat(invested),
+            saved: parseFloat(saved)
+          }
         }
       })
       handleNextStep()
@@ -538,7 +546,7 @@ export function FifthGoal({handleSkip, handleNextStep}) {
               <Col>
               <Form onSubmit={(e) => {
                   e.preventDefault()
-                  handleSubmit( thisYear, saved, invested, cash, digital)
+                  handleSubmit( digital, cash, invested, saved, thisYear )
                 }}>
                   <Form.Group>
                     <Form.Label>Total Digital::</Form.Label>
@@ -582,7 +590,7 @@ export function FifthGoal({handleSkip, handleNextStep}) {
                 onClick={() => handleSkip()}>Skip</Button>
             <Button 
                 style={{float:'right'}}
-                onClick={() => handleSubmit( thisYear, saved, invested, cash, digital)
+                onClick={() => handleSubmit(digital, cash, invested, saved, thisYear)
               }>Continue</Button>
             </div>
         </Row>

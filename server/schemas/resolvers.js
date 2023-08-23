@@ -248,6 +248,9 @@ const resolvers = {
 
       createGoals: async (parent, { input }, context) => {
         if (context.user) {
+          
+          console.log(input)
+
           try {
             const newGoal = new Goal({
               year: input.year,
@@ -260,7 +263,7 @@ const resolvers = {
 
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $addToSet: { goalsGroup: savedGoal._id } },
+              { $addToSet: { goalsGroup: savedGoal.year } },
               { new: true }
             )
 
