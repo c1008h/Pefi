@@ -590,7 +590,8 @@ export function FifthGoal({handleSkip, handleNextStep}) {
     setThisYear(currentYear)
     setNextYear(nextYear)
   }, [])
-  
+  // const navigate = useNavigate();
+
   const handleSubmit = async (digital, cash, invested, saved, thisYear) => {
     console.log('handle add goal')
     if(!thisYear || !digital || !cash || !invested || !saved) {
@@ -615,8 +616,8 @@ export function FifthGoal({handleSkip, handleNextStep}) {
           }
         }
       })
-      handleNextStep()
       console.log('successfully added goal')
+      // navigate('/dashboard');
     } catch (err) {
       console.error('Error:', err);
     }
