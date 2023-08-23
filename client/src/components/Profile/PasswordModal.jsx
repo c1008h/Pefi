@@ -7,14 +7,11 @@ export default function PasswordModal({ show, handleClose }) {
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
     const handlePasswordChange = () => {
-        // Perform password validation and change logic here
-        // ...
-        // After handling the password change, you can reset the password-related states
         setCurrentPassword('');
         setNewPassword('');
         setConfirmNewPassword('');
     
-        handleClose(); // Close the password change modal after saving
+        handleClose(); 
     };
 
     return (
