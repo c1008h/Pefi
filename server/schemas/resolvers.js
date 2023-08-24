@@ -92,7 +92,6 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       },
-
       updateUser: async (parent, { email, firstName, lastName, location, gender, incomeLevel, birthday }, context) => {
         if (context.user) {
           const updatedUser = await User.findByIdAndUpdate(
@@ -107,7 +106,54 @@ const resolvers = {
   
         throw new AuthenticationError('You need to be logged in.');
       },
+      checkPassword: async (parent, { user_id, password }) => {
+        try {
+          const user = await User.findById(user_id)
 
+          if (!user) {
+            throw new AuthenticationError('User not found')
+          }
+
+          const validPassword = await user.isCorrectPassword(password)
+
+          if (!validPassword) {
+            throw new AuthenticationError('Incorrect password');
+          }
+
+          const token = signToken(user)
+
+          return { token }
+        } catch (error) {
+          console.log('Error: ', error)
+          throw new AuthenticationError('Authentication failed')
+        }
+      },
+      deleteUser: async (paernt, { user_id, email, reason }, context) => {
+        if (context.user) {
+          try {
+            await User.findByIdAndDelete(user_id);
+            // await Finances.deleteMany({ user_id }); // Delete finance data
+            await Expenses.deleteMany({ user_id }); // Delete expense data
+            await Incomes.deleteMany({ user_id }); 
+
+            const deleteRecord = new Delete({
+              user_id,
+              email,
+              reason,
+              timestamp: new Date()
+            })
+
+            await deleteRecord.save()
+
+            return true
+            console.log('successfully deleted user')
+          } catch (err) {
+            console.log('Error:', err)
+            throw new Error ('failed to delete user')
+          }
+        }
+        throw new AuthenticationError ('You need to be logged in.');
+      },
       createIncome: async (parent, { input }, context) => {
         if (context.user) {
           try {
