@@ -24,11 +24,11 @@ export default function DeleteAccountModal({ show, handleClose }) {
           setOther(false)
         }
     };
-    const checkPassword = async (currentPassword) => {
+    const checkingPass = async (currentPassword) => {
         try {
             await checkPassword({
                 variales: {
-                    password: password.trim()
+                    password: currentPassword
                 }
             })
             console.log('Correct password')
@@ -37,7 +37,7 @@ export default function DeleteAccountModal({ show, handleClose }) {
         }
     }
 
-    const handleDelete = async (user_id, emaiil, reason,) => {
+    const handleDelete = async (user_id, email, reason,) => {
         setCurrentPassword('');    
         handleClose(); 
         try {
@@ -93,7 +93,7 @@ export default function DeleteAccountModal({ show, handleClose }) {
         <Button variant="secondary" onClick={handleClose}>
             Close
         </Button>
-        <Button variant="primary" onClick={handleDelete}>
+        <Button variant="primary" onClick={checkingPass}>
             Delete Account
         </Button>
         </Modal.Footer>
