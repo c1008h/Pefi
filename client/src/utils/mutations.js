@@ -41,6 +41,28 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const CHECK_PASSWORD = gql`
+  mutation checkPassword($user_id: ID!, $password:String!) {
+    checkPassword(user_id: $user_id, password: $password) {
+      token
+      user {
+        user_id
+      }
+    }
+  }
+`
+
+export const DELETE_USER = gql`
+  mutation deleteUser($user_id: ID!, $email: String!, $reason: String!) {
+    deleteUser(user_id: $user_id, email: $email, reason: $reason) {
+      user_id
+      email
+      reason
+    }
+  }
+`
+
 export const CREATE_INCOME = gql`
   mutation createIncome($input: IncomeInput!) {
     createIncome(input: $input) {

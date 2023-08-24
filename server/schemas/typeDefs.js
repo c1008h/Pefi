@@ -97,6 +97,12 @@ const typeDefs = `
         networth: String
     }
 
+    type DeleteUser {
+        user_id: ID!
+        email: String!
+        reason: String!
+    }
+
     type Query {
         users: [User]
         user(email: String!): User 
@@ -109,6 +115,9 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!): Auth
         updateUser(email: String, firstName: String!, lastName: String!, location: String, gender: String, incomeLevel: String, birthday: String): User
+        deleteUser(user_id: ID!, email: String!, reason: String!): User
+        checkPassword(userId: ID!, password: String!): Auth
+
 
         createGoals(input: GoalInput!): User
         updateGoals(input: GoalInput!): User

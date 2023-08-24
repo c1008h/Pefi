@@ -1,13 +1,17 @@
 import {useState} from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import Select from 'react-select'
-import {deleteAccount} from '../../constants/deleting_reasons'
+import { useMutation } from '@apollo/client'
+import { deleteAccount } from '../../constants/deleting_reasons'
+import { CHECK_PASSWORD, DELETE_USER } from '../../utils/mutations'
 
 export default function DeleteAccountModal({ show, handleClose }) {
     const [currentPassword, setCurrentPassword] = useState('');
     const [confirm, setConfirm] = useState('')
     const [reason, setReason] = useState('')
     const [other, setOther] = useState(false)
+    const [deleteUser] = useMutation(DELETE_USER)
+    const [checkPassword] = useMutation(CHECK_PASSWORD)
 
     const handleReasonSelect = (selectedOption) => {
         const selectedReason = selectedOption.value;
@@ -20,9 +24,34 @@ export default function DeleteAccountModal({ show, handleClose }) {
           setOther(false)
         }
     };
-    const handleDelete = () => {
+    const checkPassword = async (currentPassword) => {
+        try {
+            await checkPassword({
+                variales: {
+                    password: password.trim()
+                }
+            })
+            console.log('Correct password')
+        } catch (err) {
+            console.log('Error:', err)
+        }
+    }
+
+    const handleDelete = async (user_id, emaiil, reason,) => {
         setCurrentPassword('');    
         handleClose(); 
+        try {
+            await deleteUser({
+                variables: {
+                    user_id: user_id,
+                    email: email,
+                    reason: reason
+                }
+            })
+        } catch (err) {
+            console.log('Error:', err)
+        }
+    
     };
 
     return (
