@@ -24,11 +24,15 @@ export default function DeleteAccountModal({ show, handleClose }) {
           setOther(false)
         }
     };
-    const checkPassword = async (currentPassword) => {
+    const checkingPass = async (currentPassword) => {
+        console.log(typeof currentPassword, currentPassword)
+        if (!currentPassword) {
+            alert('Failed to submit delete request! Please fill all requested fields!')
+        }
         try {
             await checkPassword({
                 variales: {
-                    password: password.trim()
+                    password: currentPassword
                 }
             })
             console.log('Correct password')
@@ -37,7 +41,11 @@ export default function DeleteAccountModal({ show, handleClose }) {
         }
     }
 
-    const handleDelete = async (user_id, emaiil, reason,) => {
+    const handleDelete = async (user_id, email, reason,) => {
+        if (!reason) {
+            alert('Failed to submit delete request! Please fill all requested fields!')
+        }
+
         setCurrentPassword('');    
         handleClose(); 
         try {
@@ -60,7 +68,10 @@ export default function DeleteAccountModal({ show, handleClose }) {
                 <Modal.Title><h2>Delete Account</h2></Modal.Title>
             </Modal.Header>
         <Modal.Body>
-            <Form>
+            <Form onSubmit={(e) => {
+                e.preventDefault(e)
+                checkingPass(currentPassword)
+            }}>
                 <Form.Group>
                     <Form.Label>Why are you deleting your account?</Form.Label>
                     <Select 
@@ -82,7 +93,13 @@ export default function DeleteAccountModal({ show, handleClose }) {
                 )}
                 <Form.Group>
                     <Form.Label>To continue, please re-enter your password:</Form.Label>
-                    <Form.Control />
+                    <Form.Control 
+                        type='password'
+                        name='currentPassword'
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        required
+                    />
                 </Form.Group>
             </Form>
             <h5>
@@ -93,7 +110,7 @@ export default function DeleteAccountModal({ show, handleClose }) {
         <Button variant="secondary" onClick={handleClose}>
             Close
         </Button>
-        <Button variant="primary" onClick={handleDelete}>
+        <Button variant="primary" onClick={() => checkingPass(currentPassword)}>
             Delete Account
         </Button>
         </Modal.Footer>
