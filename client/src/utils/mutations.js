@@ -43,9 +43,13 @@ export const UPDATE_USER = gql`
 `;
 
 export const CHECK_PASSWORD = gql`
-  mutation checkPassword($password:String!) {
-    checkPassword(password: $password) {
-      password
+  mutation checkPassword($_id: ID!, $password:String!) {
+    checkPassword(_id: $_id, password: $password) {
+      token
+      user {
+        _id
+        email
+      }
     }
   }
 `

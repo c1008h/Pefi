@@ -106,10 +106,9 @@ const resolvers = {
   
         throw new AuthenticationError('You need to be logged in.');
       },
-      checkPassword: async (parent, { user_id, password }) => {
-        console.log('user id: ', user_id)
+      checkPassword: async (parent, { password, _id }) => {
         try {
-          const user = await User.findById(user_id)
+          const user = await User.findById(_id)
 
           if (!user) {
             throw new AuthenticationError('User not found')
@@ -122,8 +121,8 @@ const resolvers = {
           }
 
           const token = signToken(user)
-
-          return { token }
+          console.log('correct password!')
+          return { token, user }
         } catch (error) {
           console.log('Error: ', error)
           throw new AuthenticationError('Authentication failed')

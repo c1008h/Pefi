@@ -1,17 +1,19 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import Select from 'react-select'
 import { useMutation } from '@apollo/client'
 import { deleteAccount } from '../../constants/deleting_reasons'
 import { CHECK_PASSWORD, DELETE_USER } from '../../utils/mutations'
+import PropTypes from 'prop-types'; // Import PropTypes
 
-export default function DeleteAccountModal({ show, handleClose }) {
+export default function DeleteAccountModal({ show, handleClose, userData }) {
     const [currentPassword, setCurrentPassword] = useState('');
     const [confirm, setConfirm] = useState('')
     const [reason, setReason] = useState('')
     const [other, setOther] = useState(false)
     const [deleteUser] = useMutation(DELETE_USER)
     const [checkPassword] = useMutation(CHECK_PASSWORD)
+    const [userId, setUserId] = useState(userData?._id || '')
 
     const handleReasonSelect = (selectedOption) => {
         const selectedReason = selectedOption.value;
@@ -24,14 +26,16 @@ export default function DeleteAccountModal({ show, handleClose }) {
           setOther(false)
         }
     };
-    const checkingPass = async (currentPassword) => {
+    const checkingPass = async (currentPassword, userId) => {
         console.log(typeof currentPassword, currentPassword)
+
         if (!currentPassword) {
             alert('Failed to submit delete request! Please fill all requested fields!')
         }
         try {
             await checkPassword({
-                variales: {
+                variables: {
+                    _id: userId,
                     password: currentPassword
                 }
             })
@@ -70,7 +74,7 @@ export default function DeleteAccountModal({ show, handleClose }) {
         <Modal.Body>
             <Form onSubmit={(e) => {
                 e.preventDefault(e)
-                checkingPass(currentPassword)
+                checkingPass(currentPassword, userId)
             }}>
                 <Form.Group>
                     <Form.Label>Why are you deleting your account?</Form.Label>
@@ -110,10 +114,16 @@ export default function DeleteAccountModal({ show, handleClose }) {
         <Button variant="secondary" onClick={handleClose}>
             Close
         </Button>
-        <Button variant="primary" onClick={() => checkingPass(currentPassword)}>
+        <Button variant="primary" onClick={() => checkingPass(currentPassword, userId)}>
             Delete Account
         </Button>
         </Modal.Footer>
     </Modal>
     )
+}
+
+DeleteAccountModal.propTypes = {
+    userData: PropTypes.object.isRequired,
+    show: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired
 }

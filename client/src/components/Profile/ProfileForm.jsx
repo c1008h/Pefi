@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PasswordModal from './PasswordModal';
 import DeleteAccountModal from './DeleteAccountModal';
 import PropTypes from 'prop-types'; // Import PropTypes
@@ -123,6 +123,7 @@ export default function ProfileForm({userData}) {
                             <PasswordModal 
                                 show={showPasswordModal}
                                 handleClose={handleClosePasswordModal}
+                                userData={userData}
                             />
                         ) : null}
                         <h4 className='text-btn' onClick={handleOpenDeleteModal}>Delete Account</h4>
@@ -130,6 +131,7 @@ export default function ProfileForm({userData}) {
                             <DeleteAccountModal
                                 show={showDeleteModal}
                                 handleClose={handleCloseDeleteModal}
+                                userData={userData}
                             />
                         ) : null}
                     </div>
