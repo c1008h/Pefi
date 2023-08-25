@@ -15,9 +15,9 @@ export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
     const [type, setType] = useState()
     const [date, setDate] = useState(value.format('MM/DD/YYYY'))
     const [note, setNote] = useState('');
-
     const [isRecurring, setIsRecurring] = useState(false);
     const [createIncome] = useMutation(CREATE_INCOME)
+
     const handleAddIncome = () => {
       setShowPrompt(true);
     };

@@ -107,6 +107,7 @@ const resolvers = {
         throw new AuthenticationError('You need to be logged in.');
       },
       checkPassword: async (parent, { user_id, password }) => {
+        console.log('user id: ', user_id)
         try {
           const user = await User.findById(user_id)
 
