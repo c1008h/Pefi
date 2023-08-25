@@ -116,7 +116,7 @@ const typeDefs = `
         addUser(email: String!, password: String!): Auth
         updateUser(email: String, firstName: String!, lastName: String!, location: String, gender: String, incomeLevel: String, birthday: String): User
         deleteUser(user_id: ID!, email: String!, reason: String!): User
-        checkPassword(password: String!): Auth
+        checkPassword(_id: ID!, password: String!): Auth
 
 
         createGoals(input: GoalInput!): User
