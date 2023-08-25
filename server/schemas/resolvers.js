@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Expenses, Incomes, Goal } = require('../models');
+const { User, Expenses, Incomes, Goal, Delete } = require('../models');
 const { signToken } = require('../utils/auth');
 const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
 const recalculateFinance = async (user) => {
@@ -144,9 +144,10 @@ const resolvers = {
             })
 
             await deleteRecord.save()
-
-            return true
+            
             console.log('successfully deleted user')
+
+            return deleteRecord
           } catch (err) {
             console.log('Error:', err)
             throw new Error ('failed to delete user')

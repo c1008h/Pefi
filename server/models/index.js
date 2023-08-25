@@ -3,5 +3,6 @@ const Goal = require('./Goals')
 const Incomes = require('./Income')
 const Expenses = require('./Expenses')
 const Finance = require('./Finance')
+const Delete = require('./Delete')
 
-module.exports = { User, Finance, Goal, Incomes, Expenses }
+module.exports = { User, Finance, Goal, Incomes, Expenses, Delete }
