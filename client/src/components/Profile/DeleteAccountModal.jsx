@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client'
 import { deleteAccount } from '../../constants/deleting_reasons'
 import { CHECK_PASSWORD, DELETE_USER } from '../../utils/mutations'
 import PropTypes from 'prop-types'; // Import PropTypes
-
+import { authService } from '../../utils/auth'
 export default function DeleteAccountModal({ show, handleClose, userData }) {
     const [currentPassword, setCurrentPassword] = useState('');
     const [isAgreed, setIsAgreed] = useState(false); 
@@ -67,6 +67,7 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
             setEmail('')
             handleClose(); 
             console.log('successfully delete user')
+            authService.logout()
         } catch (err) {
             console.log('Error:', err)
         }

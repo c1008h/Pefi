@@ -38,8 +38,8 @@ export default function Signup() {
     setStep(step + 1);
     setNow(step * 20)
   };
-console.log('now:', now)
-console.log('step:', step)
+// console.log('now:', now)
+// console.log('step:', step)
   const handleFormSubmit = async (email, password) => {
     if(!email || !password){
       alert('Failed to submit! Please fill all requested fields.');
