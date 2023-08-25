@@ -55,11 +55,13 @@ export const CHECK_PASSWORD = gql`
 `
 
 export const DELETE_USER = gql`
-  mutation deleteUser($user_id: ID!, $email: String!, $reason: String!) {
-    deleteUser(user_id: $user_id, email: $email, reason: $reason) {
-      user_id
-      email
+  mutation deleteUser($_id: ID!, $email: String!, $reason: String!) {
+    deleteUser(_id: $_id, email: $email, reason: $reason) {
       reason
+      user {
+        _id
+        email
+      }
     }
   }
 `

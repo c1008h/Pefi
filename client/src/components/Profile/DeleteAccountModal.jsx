@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import Select from 'react-select'
 import { useMutation } from '@apollo/client'
@@ -8,12 +8,14 @@ import PropTypes from 'prop-types'; // Import PropTypes
 
 export default function DeleteAccountModal({ show, handleClose, userData }) {
     const [currentPassword, setCurrentPassword] = useState('');
-    const [confirm, setConfirm] = useState('')
+    const [isAgreed, setIsAgreed] = useState(false); 
     const [reason, setReason] = useState('')
     const [other, setOther] = useState(false)
+    const [isPasswordCorrect, setIsPasswordCorrect] = useState(false); 
+    const [userId, setUserId] = useState(userData?._id || '')
+    const [email, setEmail] = useState(userData?.email || '')
     const [deleteUser] = useMutation(DELETE_USER)
     const [checkPassword] = useMutation(CHECK_PASSWORD)
-    const [userId, setUserId] = useState(userData?._id || '')
 
     const handleReasonSelect = (selectedOption) => {
         const selectedReason = selectedOption.value;
@@ -27,8 +29,6 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
         }
     };
     const checkingPass = async (currentPassword, userId) => {
-        console.log(typeof currentPassword, currentPassword)
-
         if (!currentPassword) {
             alert('Failed to submit delete request! Please fill all requested fields!')
         }
@@ -40,12 +40,14 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
                 }
             })
             console.log('Correct password')
+            setIsPasswordCorrect(true)
         } catch (err) {
             console.log('Error:', err)
+            setIsPasswordCorrect(false)
         }
     }
 
-    const handleDelete = async (user_id, email, reason,) => {
+    const handleDelete = async (userId, email, reason,) => {
         if (!reason) {
             alert('Failed to submit delete request! Please fill all requested fields!')
         }
@@ -55,7 +57,7 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
         try {
             await deleteUser({
                 variables: {
-                    user_id: user_id,
+                    user_id: userId,
                     email: email,
                     reason: reason
                 }
@@ -103,18 +105,44 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         required
+                        disabled={isPasswordCorrect}
                     />
+                    <Button
+                        onClick={() => checkingPass(currentPassword, userId)}
+                    >{!isPasswordCorrect? 'Verify Password':'Verified!'}</Button>
                 </Form.Group>
+                {isPasswordCorrect ? (
+                    <Form.Group>
+                        <Form.Check
+                            type="checkbox"
+                            label="I understand that my profile and account information will be deleted from the site."
+                            checked={isAgreed}
+                            onChange={() => setIsAgreed(!isAgreed)}
+                        />
+                    </Form.Group>
+                ): 
+                    null 
+                }
             </Form>
-            <h5>
-                Are you sure? Your profile and retrieved account information will be deleted from our site
-            </h5>
         </Modal.Body>
         <Modal.Footer style={{justifyContent:'space-between'}}>
         <Button variant="secondary" onClick={handleClose}>
             Close
         </Button>
-        <Button variant="primary" onClick={() => checkingPass(currentPassword, userId)}>
+        <Button variant="primary" 
+            onClick={() => {
+                if (isPasswordCorrect && isAgreed) {
+                    handleDelete(userId, email, reason)
+                } else {
+                    if (!isAgreed) {
+                        alert('Please acknowledge that you understand the consequences of account deletion.')
+                    } else {
+                        alert('Password is incorrect')
+                    }
+                }
+            }}
+            disabled={!isPasswordCorrect || !isAgreed}
+        >
             Delete Account
         </Button>
         </Modal.Footer>
