@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const deleteSchema = new Schema({
     user_id : {
-        type: ID,
+        type: String,
         required: true
     },
     email: {

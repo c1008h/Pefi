@@ -43,6 +43,7 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
             setIsPasswordCorrect(true)
         } catch (err) {
             console.log('Error:', err)
+            setCurrentPassword('');    
             setIsPasswordCorrect(false)
         }
     }
@@ -51,9 +52,8 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
         if (!reason) {
             alert('Failed to submit delete request! Please fill all requested fields!')
         }
-
-        setCurrentPassword('');    
-        handleClose(); 
+        setCurrentPassword('');   
+        console.log(userId) 
         try {
             await deleteUser({
                 variables: {
@@ -62,10 +62,14 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
                     reason: reason
                 }
             })
+            setCurrentPassword('');   
+            setUserId('')
+            setEmail('')
+            handleClose(); 
+            console.log('successfully delete user')
         } catch (err) {
             console.log('Error:', err)
         }
-    
     };
 
     return (
