@@ -18,26 +18,25 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const handleNextStep = () => {
-    if (step > 5) {
+    if (now > 99) {
       navigate('/dashboard')
       .catch(() => {
         setNavigationFailed(true)
       })
     }
     setStep(step + 1);
-    setNow(step * 17)
+    setNow(step * 20)
   };
   
   const handleSkip = () => {
-    console.log(step)
-    if (step > 5) {
+    if (now > 99) {
       navigate('/dashboard')
       .catch(() => {
         setNavigationFailed(true)
       })
     }
     setStep(step + 1);
-    setNow(step * 17)
+    setNow(step * 20)
   };
 // console.log('now:', now)
 // console.log('step:', step)
