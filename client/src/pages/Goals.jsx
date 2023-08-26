@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client'
 import { QUERY_ME } from '../utils/queries'
 
 import Display from '../components/Goals/Display'
+import GoalCarousel from '../components/Goals/GoalCarousel'
 
 export default function Goals() {
   const [userData, setUserData] = useState()
@@ -18,6 +19,7 @@ export default function Goals() {
 
   return (
     <div>
+      <GoalCarousel userData={userData}/>
       <Display />
     </div>
   )
