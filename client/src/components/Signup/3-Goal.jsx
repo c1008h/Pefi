@@ -706,12 +706,18 @@ export function FifthGoal({handleSkip, handleNextStep}) {
           <div className='btn-container'>
             <Button 
               className='skip-btn'
-              onClick={() => handleSkip()}>Skip</Button>
+              onClick={(e) => {
+                e.preventDefault()
+                handleSkip()}}
+              >Skip</Button>
             <Button 
               className='continue-btn'
-              onClick={() => handleSubmit(digital, cash, invested, saved, thisYear)}
+              onClick={(e) => {
+                e.preventDefault()
+                handleSubmit(digital, cash, invested, saved, thisYear)
+              }}
             >Continue</Button>
-            </div>
+          </div>
         </Row>
       </Container>
     </Container>
