@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_INCOME } from '../../utils/mutations';
 import Select from 'react-select'
 import { frequencyOptions, incomeOptions, moneyType } from '../../constants/genres'
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types'; 
 
 export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
     const [showPrompt, setShowPrompt] = useState(false);
