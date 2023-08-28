@@ -41,11 +41,10 @@ const userSchema = new Schema(
             required: true,
             minlength: 8
         },
-        goalsGroup: {
-            // type: Schema.Types.ObjectId,
-            type: Number,
+        goalsGroup: [{
+            type: Schema.Types.ObjectId,
             ref: 'Goal'
-        },
+        }],
         financeGroup: financeSchema,
         incomesGroup: [{
             type: Schema.Types.ObjectId,

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -13,33 +13,42 @@ import '../style/signup.css'
 export default function Signup() {
   const [step, setStep] = useState(1);
   const [addUser, { error }] = useMutation(ADD_USER);
-  const [now, setNow] = useState(step/6)
+  const [now, setNow] = useState(1)
   const [navigationFailed, setNavigationFailed] = useState(false); 
   const navigate = useNavigate();
 
   const handleNextStep = () => {
-    if (now > 99) {
-      navigate('/dashboard')
-      .catch(() => {
+    // console.log('Entering handleNextStep. Step:', step);
+
+    if (step === 6) {
+      // console.log('Condition met. Navigating to /dashboard. Step:', step);
+      try {
+        navigate('/dashboard')
+      } catch (error) {
+        console.log('Error:', error)
         setNavigationFailed(true)
-      })
+      }
     }
     setStep(step + 1);
-    setNow(step * 20)
+    setNow((step * 15) + 10)
   };
   
   const handleSkip = () => {
-    if (now > 99) {
-      navigate('/dashboard')
-      .catch(() => {
+    if (step > 5) {
+      try {
+        navigate('/dashboard')
+      } catch (error) {
+        console.log('Error:', error)
         setNavigationFailed(true)
-      })
+      }
     }
     setStep(step + 1);
-    setNow(step * 20)
+    setNow((step * 15) + 10)
   };
-// console.log('now:', now)
-// console.log('step:', step)
+
+  // console.log('now:', now)
+  // console.log('step:', step)
+
   const handleFormSubmit = async (email, password) => {
     if(!email || !password){
       alert('Failed to submit! Please fill all requested fields.');

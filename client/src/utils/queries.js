@@ -29,7 +29,7 @@ export const QUERY_ME = gql`
         date
       }
       goalsGroup {
-        id
+        _id
         year
         invested
         saved

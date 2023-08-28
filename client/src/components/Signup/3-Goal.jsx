@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import  { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'
 import PropTypes from 'prop-types'; 
 import dayjs from 'dayjs';
-
 import { useMutation } from '@apollo/client';
 import { CREATE_GOALS } from '../../utils/mutations'
 
@@ -617,7 +616,7 @@ export function FifthGoal({handleSkip, handleNextStep}) {
         }
       })
       console.log('successfully added goal')
-      // navigate('/dashboard');
+      handleNextStep()
     } catch (err) {
       console.error('Error:', err);
     }
@@ -706,8 +705,8 @@ export function FifthGoal({handleSkip, handleNextStep}) {
           <div className='btn-container'>
             <Button 
               className='skip-btn'
-              onClick={(e) => {
-                e.preventDefault()
+              onClick={() => {
+                // e.preventDefault()
                 handleSkip()}}
               >Skip</Button>
             <Button 
