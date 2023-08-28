@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import PropTypes from 'prop-types'; 
 
-export default function Display({userData}) {
+export default function AllDisplay({userData}) {
 
     return (
         <div>
@@ -10,6 +10,6 @@ export default function Display({userData}) {
     )
 }
 
-Display.propTypes = {
+AllDisplay.propTypes = {
     userData: PropTypes.object.isRequired,
 }

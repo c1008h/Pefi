@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Expenses, Incomes, Goal, Delete } = require('../models');
 const { signToken } = require('../utils/auth');
 const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
+const { default: Goals } = require('../../client/src/pages/Goals');
 const recalculateFinance = async (user) => {
   const financeGroup = await Finance.findById(user.financeGroup);
 
@@ -39,14 +40,19 @@ const resolvers = {
       me: async (parent, args, context) => {
         // console.log(context.user)
         if (context.user) {
-
+          try {
             // return User.findOne({ _id: context.user._id })
             const user = await User.findById(context.user._id)
             .populate('incomesGroup')
             .populate('expensesGroup')
             .populate('goalsGroup')
             // .populate('financeGroup');
-          return user;
+
+            return user;
+          } catch (error) {
+            console.error('Error populating fields:', error)
+            throw error;
+          }
         }
         throw new AuthenticationError('You need to be logged in!')
       },
@@ -132,9 +138,10 @@ const resolvers = {
         if (context.user) {
           try {
             await User.findByIdAndDelete(user_id);
-            // await Finances.deleteMany({ user_id }); // Delete finance data
-            await Expenses.deleteMany({ user_id }); // Delete expense data
+            // await Finances.deleteMany({ user_id }); 
+            await Expenses.deleteMany({ user_id }); 
             await Incomes.deleteMany({ user_id }); 
+            await Goal.deleteMany({ user_id })
 
             const deleteRecord = new Delete({
               user_id,
