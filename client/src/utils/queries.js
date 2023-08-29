@@ -43,6 +43,17 @@ export const QUERY_ME = gql`
         invested
         saved
       }
+      networth {
+        _id
+        year
+        networth
+        totalIncome
+        totalExpense
+        digital
+        cash
+        invested
+        saved
+      }
     }
   }
 `;

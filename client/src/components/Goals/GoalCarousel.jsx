@@ -8,10 +8,12 @@ export default function GoalCarousel({ userData, layout }) {
     const [currentYear, setCurrentYear] = useState(null);
     const [yearsToShow, setYearsToShow] = useState([]);
     const [selectedYear, setSelectedYear] = useState(null);
+    const [active, setActiveTab] = useState(layout || null)
 
     useEffect(() => {
         const currentYear = dayjs().year();
         setCurrentYear(currentYear)
+        setActiveTab(layout)
 
         if (layout === 'current') {
             setYearsToShow([currentYear])
@@ -45,7 +47,13 @@ export default function GoalCarousel({ userData, layout }) {
         <Container style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <button onClick={() => handleYearChange(currentYear - 1)}> Previous </button>
             <Container>
-                <CurrentDisplay years={yearsToShow} userData={userData} />
+                {active === 'current' ? <CurrentDisplay years={yearsToShow} userData={userData} />
+                : active ==='previous' ? <PreviousDisplay years={yearsToShow} userData={userData} /> 
+                : active === 'future' ? <FutureDisplay years={yearsToShow} userData={userData} />
+                : active === 'ten' ? <AllDisplay years={yearsToShow} userData={userData} />
+                : 'Select a tab!'
+                }
+                {/* <CurrentDisplay years={yearsToShow} userData={userData} /> */}
             </Container>
             <button onClick={() => handleYearChange(currentYear + 1)}> Next </button>
         </Container>

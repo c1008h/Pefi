@@ -160,3 +160,21 @@ export const CREATE_FINANCE = gql`
     }
   }
 `
+
+export const CREATE_NETWORTH = gql`
+  mutation createNetworth($_id: ID, $year: Number, $digital: Number, $cash: Number, $invested: Number, $saved: Number, $networth: Number, $totalIncome: Number, $totalExpense: Number) {
+    createNetworth(_id: $_id, year: $year, digital: $digital, cash: $cash, invested: $invested, saved: $saved, networth: $networth, totalIncome: $totalIncome, totalExpense: $totalExpense) {
+      networthGroup {
+        _id
+        year
+        digital
+        cash
+        invested
+        saved
+        networth
+        totalIncome
+        totalExpense
+      }
+    }
+  }
+`

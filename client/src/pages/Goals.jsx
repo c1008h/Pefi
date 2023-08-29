@@ -13,7 +13,7 @@ import '../style/goals.css'
 export default function Goals() {
   const [userData, setUserData] = useState()
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState('current'); // Default tab
+  const [activeTab, setActiveTab] = useState('current'); 
 
   const { data } = useQuery(QUERY_ME)
 
@@ -39,7 +39,7 @@ export default function Goals() {
   return (
     <Container fluid={true}>
       <Row style={{justifyContent:'center'}}>
-        <Col md={5}>
+        <Col md={7}>
           <Tabs 
             defaultActiveKey={activeTab}
             onSelect={handleTabSelect}
@@ -47,14 +47,14 @@ export default function Goals() {
             className='mb-3'
             justify
           >
-            <Tab eventKey='previous' title='Previous'>Last Five</Tab>
-            <Tab eventKey='current' title='Current'>Current</Tab>
-            <Tab eventKey='future' title='Future'>Next Five</Tab>
-            <Tab eventKey='ten' title='Ten'>Mid Preview</Tab>
+            <Tab eventKey='previous' title='Previous'></Tab>
+            <Tab eventKey='current' title='Current'></Tab>
+            <Tab eventKey='future' title='Future'></Tab>
+            <Tab eventKey='ten' title='Ten'></Tab>
           </Tabs>
         </Col>
       </Row>
-      <Row>
+      <Row style={{marginBottom:'5%'}}>
         {/* <GoalCarousel userData={userData}/> */}
         <Col>
           {activeTab === 'current' && (
@@ -71,7 +71,6 @@ export default function Goals() {
           )}
         </Col>
       </Row>
-      {/* <Display userData={userData}/> */}
     </Container>
   )
 }

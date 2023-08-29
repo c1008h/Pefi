@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Expenses, Incomes, Goal, Delete } = require('../models');
+const { User, Expenses, Incomes, Goal, Delete, Networth } = require('../models');
 const { signToken } = require('../utils/auth');
 const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
 const recalculateFinance = async (user) => {
@@ -45,6 +45,7 @@ const resolvers = {
             .populate('incomesGroup')
             .populate('expensesGroup')
             .populate('goalsGroup')
+            .populate('networthGroup')
             // .populate('financeGroup');
 
             return user;
@@ -69,7 +70,7 @@ const resolvers = {
             financeGroup: user.financeGroup,
             expenses: user.expensesGroup,
             incomes: user.incomesGroup,
-            networth: networth.toString(), // Assuming the networth is a number, convert it to a string for GraphQL
+            networth: networth.toString()
           };
         }
         throw new AuthenticationError('You need to be logged in!');
@@ -141,6 +142,7 @@ const resolvers = {
             await Expenses.deleteMany({ user_id }); 
             await Incomes.deleteMany({ user_id }); 
             await Goal.deleteMany({ user_id })
+            await Networth.deleteMany({ user_id })
 
             const deleteRecord = new Delete({
               user_id,
@@ -383,7 +385,35 @@ const resolvers = {
         }
         throw new AuthenticationError ('You need to be log in first.');
       },
-     
+      createNetworth: async (parent, { year, digital, cash, invested, saved, networth, totalIncome, totalExpense}, context) => {
+        if (context.user) {
+          try {
+            const updatedUser = await User.findOneAndUpdate(
+              { _id: context.user._id },
+              {
+                $set: {
+                  'networthGroup.year': year,
+                  'networthGroup.digital': digital,
+                  'networthGroup.cash': cash,
+                  'networthGroup.invested': invested,
+                  'networthGroup.saved': saved,
+                  'networthGroup.networth': networth,
+                  'networthGroup.totalIncome': totalIncome,
+                  'networthGroup.totalExpense': totalExpense,
+                }
+              },
+              { new: true }
+            )
+            console.log('successfully input networth!')
+
+            return updatedUser
+          } catch (error) {
+            console.log('Error:', error)
+            throw new Error('Failed to create networth')
+          }
+        }
+        throw new AuthenticationError ('You need to be log in first.');
+      }
     }
 }
 module.exports = resolvers;

@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const Incomes = require('./Income');
 const Expenses = require('./Expenses');
 const financeSchema = require('./Finance');
+const Networth = require('./Networth')
+const Goal = require('./Goals')
 
 const userSchema = new Schema(
     {
@@ -46,6 +48,10 @@ const userSchema = new Schema(
             ref: 'Goal'
         }],
         financeGroup: financeSchema,
+        networthGroup: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Networth'
+        }],
         incomesGroup: [{
             type: Schema.Types.ObjectId,
             ref: 'Incomes'
@@ -81,6 +87,8 @@ userSchema.pre('remove', async function(next) {
 
     await Expenses.deleteMany({ _id: { $in: user.expensesGroup}})
     await Incomes.deleteMany({ _id: { $in: user.incomesGroup } })
+    await Goal.deleteMany({ _id: { $in: user.goalsGroup }})
+    await Networth.deleteMany({ _id: { $in: user.networthGroup }})
 })
 
 const User = model('User', userSchema);

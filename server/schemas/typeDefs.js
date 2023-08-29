@@ -12,6 +12,7 @@ const typeDefs = `
         expensesGroup: [Expenses]
         goalsGroup: [Goals]
         financeGroup: Finance
+        networthGroup: Networth
     }
 
     type Goals {
@@ -31,6 +32,17 @@ const typeDefs = `
         cash: Float
         digital: Float
     }
+    type Networth {
+        _id: ID
+        digital: Float
+        cash: Float
+        invested: Float
+        saved: Float
+        networth: Float
+        totalIncome: Float
+        totalExpense: Float
+    }
+
     type Finance {
         _id: ID
         digital: Float
@@ -131,6 +143,9 @@ const typeDefs = `
         createExpense(input: ExpenseInput!): User
         updateExpense(input: ExpenseInput!): User
         removeExpense(_id: ID!): User
+
+
+        createNetworth(digital: Float, cash: Float, invested: Float, saved: Float, networth: Float, totalIncome: Float, totalExpense: Float ): User
 
     }
 `;

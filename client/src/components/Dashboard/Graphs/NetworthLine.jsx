@@ -42,7 +42,7 @@ export default function NetworthLine({ userData }) {
         LinearScale,   
         Title,
         PointElement,
-      );
+    );
     
     const data = {
         labels: allMonths,
