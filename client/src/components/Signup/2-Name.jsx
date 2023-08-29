@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Select from 'react-select'
 import { genderList } from '../../constants/genders'
 
-import SkipBtn from './SkipBtn';
-import ContinueBtn from './ContinueBtn';
+// import SkipBtn from './SkipBtn';
+// import ContinueBtn from './ContinueBtn';
 
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../../utils/mutations';

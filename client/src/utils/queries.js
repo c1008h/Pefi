@@ -43,7 +43,7 @@ export const QUERY_ME = gql`
         invested
         saved
       }
-      networth {
+      networthGroup {
         _id
         year
         networth

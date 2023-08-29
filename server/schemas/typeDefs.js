@@ -34,6 +34,7 @@ const typeDefs = `
     }
     type Networth {
         _id: ID
+        year: Float
         digital: Float
         cash: Float
         invested: Float
@@ -145,7 +146,7 @@ const typeDefs = `
         removeExpense(_id: ID!): User
 
 
-        createNetworth(digital: Float, cash: Float, invested: Float, saved: Float, networth: Float, totalIncome: Float, totalExpense: Float ): User
+        createNetworth(year: Float, digital: Float, cash: Float, invested: Float, saved: Float, networth: Float, totalIncome: Float, totalExpense: Float ): User
 
     }
 `;

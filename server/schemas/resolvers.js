@@ -387,6 +387,7 @@ const resolvers = {
       },
       createNetworth: async (parent, { year, digital, cash, invested, saved, networth, totalIncome, totalExpense}, context) => {
         if (context.user) {
+          console.log('')
           try {
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },

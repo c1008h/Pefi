@@ -8,6 +8,8 @@ import { Alert, ProgressBar } from 'react-bootstrap'
 import { SignupForm } from '../components/Signup/SignupForm';
 import Step2 from '../components/Signup/2-Name'
 import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
+import Financial from '../components/Signup/4-Financial';
+
 import '../style/signup.css'
 
 export default function Signup() {
@@ -20,7 +22,7 @@ export default function Signup() {
   const handleNextStep = () => {
     // console.log('Entering handleNextStep. Step:', step);
 
-    if (step === 6) {
+    if (step === 7) {
       // console.log('Condition met. Navigating to /dashboard. Step:', step);
       try {
         navigate('/dashboard')
@@ -34,7 +36,7 @@ export default function Signup() {
   };
   
   const handleSkip = () => {
-    if (step > 5) {
+    if (step > 6) {
       try {
         navigate('/dashboard')
       } catch (error) {
@@ -116,12 +118,19 @@ export default function Signup() {
             handleSkip={handleSkip}
           />
         )}
-        {step === 6 && navigationFailed && (
+        {step === 7 && (
+          <Financial 
+            handleNextStep={handleNextStep}
+            handleSkip={handleSkip}
+          />
+        )}
+        {step === 7 && navigationFailed && (
           <p>
             Success! You may now head{' '}
             <Link to="/dashboard">Back to the homepage.</Link>
           </p>
         )}
+
         <ProgressBar now={now} label={`${now}%`} visuallyHidden />
       </>
     ) : ( 

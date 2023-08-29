@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'; // Import PropTypes
+import {Container, Form, Col, Row, Card} from 'react-bootstrap'
+import PropTypes from 'prop-types'; 
 
 export default function Financial({handleSkip, handleNextStep}) {
   return (
-    <div>
+    <Container>
       Financial info
-    </div>
+    </Container>
   )
 }
 Financial.propTypes = {
