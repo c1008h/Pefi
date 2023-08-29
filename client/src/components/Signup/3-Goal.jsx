@@ -37,7 +37,7 @@ export function FirstGoal({handleSkip, handleNextStep}) {
       }
 
       await createGoals({
-        variables: {
+        variables: { 
           input: {
             year: parseInt(thisYear),
             digital: parseFloat(digital),
