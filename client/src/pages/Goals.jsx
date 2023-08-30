@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
-
 import { QUERY_ME } from '../utils/queries'
-
-import Display from '../components/Goals/Displays/AllDisplay'
 import GoalCarousel from '../components/Goals/GoalCarousel'
-import { AllDisplay, CurrentDisplay, FutureDisplay, PreviousDisplay } from '../components/Goals/Displays'
 import { authService } from '../utils/auth'
 import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap'
 import '../style/goals.css'

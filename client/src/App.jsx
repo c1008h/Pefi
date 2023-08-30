@@ -29,34 +29,6 @@ export default function App() {
       },
     };
   });
-  // const cache = new InMemoryCache({
-  //   typePolicies: {
-  //     User: {
-  //       fields: {
-  //         incomesGroup: {
-  //           merge(existing = [], incoming) {
-  //             const merged = [...existing, ...incoming].reduceRight((result, income) => {
-  //               if (!result.some(i => i.id === incomeOptions.id)) {
-  //                 result.push(income)
-  //               }
-  //             }, [])
-  //             return merged
-  //           }
-  //         },
-  //         expensesGroup: {
-  //           merge(existing = [], incoming) {
-  //             const merged = [...existing, ...incoming].reduce((result, expense) => {
-  //               if (!result.some(i => i.id === expenseOptions.id)) {
-  //                 result.push(expense)
-  //               }
-  //             }, [])
-  //             return merged
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // })
   
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
