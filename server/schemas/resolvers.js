@@ -389,18 +389,21 @@ const resolvers = {
         if (context.user) {
           console.log('')
           try {
+            const newNetworthEntry = {
+              year: year, 
+              digital: digital,
+              cash: cash,
+              invested: invested,
+              saved: saved,
+              networth: networth,
+              totalIncome: totalIncome,
+              totalExpense: totalExpense
+            }
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
               {
-                $set: {
-                  'networthGroup.year': year,
-                  'networthGroup.digital': digital,
-                  'networthGroup.cash': cash,
-                  'networthGroup.invested': invested,
-                  'networthGroup.saved': saved,
-                  'networthGroup.networth': networth,
-                  'networthGroup.totalIncome': totalIncome,
-                  'networthGroup.totalExpense': totalExpense,
+                $push: {
+                  'networthGroup': newNetworthEntry
                 }
               },
               { new: true }

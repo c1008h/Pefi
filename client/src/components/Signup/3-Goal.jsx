@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { useMutation } from '@apollo/client';
 import { CREATE_GOALS } from '../../utils/mutations'
+import '../../style/signup.css'
 
 export function FirstGoal({handleSkip, handleNextStep}) {
   const [thisYear, setThisYear] = useState()
@@ -55,9 +56,9 @@ export function FirstGoal({handleSkip, handleNextStep}) {
   }
 
   return (
-    <Container fluid='true'>
-      <Container style={{paddingTop:'5%'}}>
-        <Row>
+    <Container fluid='true' className='upper-container'>
+      <Container>
+        <Row className='goal-container'>
           <Col>
             <h2>Set Your Financial Goals</h2>
             <h4>Introduction:</h4>
@@ -184,9 +185,9 @@ export function SecondGoal({handleSkip, handleNextStep}) {
     }
   }
   return (
-    <Container fluid='true'>
+    <Container fluid='true' className='upper-container'>
       <Container>
-        <Row>
+        <Row className='goal-container'>
           <Col>
             <h2>Your Financial Goals for {nextYear}:</h2>
             <p>
@@ -334,9 +335,9 @@ export function ThirdGoal({handleSkip, handleNextStep}) {
     }
   }
   return (
-    <Container fluid='true'>
+    <Container fluid='true' className='upper-container'>
       <Container>
-        <Row>
+        <Row className='goal-container'>
           <Col>
             <h2>Your Financial Goals for {nextYear}:</h2>
             <p>
@@ -477,9 +478,9 @@ export function FourthGoal({handleSkip, handleNextStep}) {
     }
   }
   return (
-    <Container fluid='true'>
+    <Container fluid='true' className='upper-container'>
       <Container>
-        <Row>
+        <Row className='goal-container'>
           <Col>
             <h2>Your Financial Goals for {nextYear}:</h2>
             <p>
@@ -622,9 +623,9 @@ export function FifthGoal({handleSkip, handleNextStep}) {
     }
   }
   return (
-    <Container fluid='true'>
+    <Container fluid='true' className='upper-container'>
       <Container>
-        <Row>
+        <Row className='goal-container'>
           <Col>
             <h2>Your Financial Goals for {nextYear}:</h2>
             <p>

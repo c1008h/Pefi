@@ -28,7 +28,7 @@ export const ADD_USER = gql`
   }
 `;
 export const UPDATE_USER = gql`
-  mutation updateUser($email: String, $firstName: String!, $lastName: String!, $location: String, $gender: String, $incomeLevel: String, $birthday: String) {
+  mutation updateUser($email: String, $firstName: String, $lastName: String, $location: String, $gender: String, $incomeLevel: String, $birthday: String) {
     updateUser(email: $email, firstName: $firstName, lastName: $lastName, location: $location, gender: $gender, incomeLevel: $incomeLevel, birthday: $birthday) {
       _id
       firstName
@@ -162,7 +162,7 @@ export const CREATE_FINANCE = gql`
 `
 
 export const CREATE_NETWORTH = gql`
-  mutation createNetworth($_id: ID, $year: Number, $digital: Number, $cash: Number, $invested: Number, $saved: Number, $networth: Number, $totalIncome: Number, $totalExpense: Number) {
+  mutation createNetworth($_id: ID, $year: Float, $digital: Float, $cash: Float, $invested: Float, $saved: Float, $networth: Float, $totalIncome: Float, $totalExpense: Float) {
     createNetworth(_id: $_id, year: $year, digital: $digital, cash: $cash, invested: $invested, saved: $saved, networth: $networth, totalIncome: $totalIncome, totalExpense: $totalExpense) {
       networthGroup {
         _id

@@ -14,3 +14,15 @@
 .continue-btn {
     float: right;
 }
+.upper-container {
+    padding:5%;
+}
+.goal-container {
+    text-align: left;
+}
+
+/* Financial */
+
+.finance-container {
+    text-align: left;
+}
