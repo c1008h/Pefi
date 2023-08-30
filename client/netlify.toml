@@ -1,4 +1,5 @@
 [build]
-  publish = "build"
+
+  publish = "dist"
   command = "npm run build --verbose"
   node_version = "14"
