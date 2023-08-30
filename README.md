@@ -6,6 +6,8 @@
 
 ## Description
 The DeFi Goal Planner App allows users to plan their financial goals over a five-year period. Users can input their financial goals, track expenses and income, and visualize their financial habits through charts and graphs.
+
+<a href='https://pefi.netlify.app'>Deployed Link</a>
 ### Features
 
 - **Goal Planning**: Input and track financial goals for cash, digital assets, investments, and savings.
