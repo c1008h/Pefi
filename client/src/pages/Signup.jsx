@@ -32,7 +32,7 @@ export default function Signup() {
       }
     }
     setStep(step + 1);
-    setNow((step * 15) + 10)
+    setNow((step * 13) + 10)
   };
   
   const handleSkip = () => {
@@ -45,11 +45,11 @@ export default function Signup() {
       }
     }
     setStep(step + 1);
-    setNow((step * 15) + 10)
+    setNow((step * 13) + 10)
   };
 
-  // console.log('now:', now)
-  // console.log('step:', step)
+  console.log('now:', now)
+  console.log('step:', step)
 
   const handleFormSubmit = async (email, password) => {
     if(!email || !password){
