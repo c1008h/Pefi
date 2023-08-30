@@ -387,9 +387,9 @@ const resolvers = {
       },
       createNetworth: async (parent, { year, digital, cash, invested, saved, networth, totalIncome, totalExpense}, context) => {
         if (context.user) {
-          console.log('')
+          console.log('testing create networth')
           try {
-            const newNetworthEntry = {
+            const newNetworth = new Networth({
               year: year, 
               digital: digital,
               cash: cash,
@@ -398,12 +398,15 @@ const resolvers = {
               networth: networth,
               totalIncome: totalIncome,
               totalExpense: totalExpense
-            }
+            })
+            
+            const saveNetworth = await newNetworth.save()
+
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
               {
                 $push: {
-                  'networthGroup': newNetworthEntry
+                  networthGroup: saveNetworth._id
                 }
               },
               { new: true }
