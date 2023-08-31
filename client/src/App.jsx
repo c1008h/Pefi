@@ -17,9 +17,9 @@ import Footer from './components/Footer';
 
 export default function App() {
   const httpLink = createHttpLink({
-    uri: process.env.REACT_APP_API_URL,
+    uri: 'https://pefi-cb4de0d6766a.herokuapp.com/graphql',
   });
-  
+
   const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('id_token');
     return {
