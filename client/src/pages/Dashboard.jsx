@@ -28,7 +28,10 @@ export const Dashboard = () => {
     const [monthButton, setMonthButton] = useState(true)
     const [yearButton, setYearButton] = useState(false)
 
-    const expenses = useSelector(state => state.expenses);
+    const user = useSelector((state) => state.auth.user);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+    console.log(isAuthenticated)
     // console.log('redux:', expenses)
     useEffect(() => {
         if (data) {

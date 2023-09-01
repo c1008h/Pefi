@@ -14,7 +14,10 @@ export default function CurrentDisplay({ years, userData }) {
   console.log('user years:', years)
   console.log('currentDisplay:', goalsGroup)
   console.log('finance:', finance)
-  console.log((finance.digital/goalsGroup[0].digital)*100)
+  // console.log((finance.digital/goalsGroup[0].digital)*100)
+
+  console.log((finance.digital / (goalsGroup && goalsGroup.length > 0 ? goalsGroup[0].digital : 0)) * 100)
+
 
   const getDataForYear = (year) => {
     if (goalsGroup && goalsGroup.length > 0) {

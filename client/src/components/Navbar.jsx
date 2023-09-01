@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 import { authService } from '../utils/auth';
 import '../style/navbar.css'
 
 export default function Navbar () {
+    const user = useSelector((state) => state.auth.user);
+    const token = useSelector((state) => state.auth.token);
+
     const logout = (event) => {
         event.preventDefault();
         authService.logout();

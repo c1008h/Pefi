@@ -1,5 +1,6 @@
 import decode from 'jwt-decode';
-
+import store from '../store/store'
+import { setUser, clearUser } from '../store/slices/authSlice';
 class AuthService {
   getProfile() {
     //console.log(decode(this.getToken()));
@@ -31,18 +32,21 @@ class AuthService {
   login(idToken,permission) {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('permission', permission);
+    // Add this for redux store
+    store.dispatch(setUser(decode(idToken)))
     window.location.assign('/');
   }
   
   signup(idToken,permission) {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('permission', permission);
+    store.dispatch(setUser(decode(idToken))); // Dispatch the user data to Redux
   }
 
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('permission');
-
+    store.dispatch(clearUser()); // Clear user data in Redux
     // window.location.reload('/');
     window.location.assign('/');
 

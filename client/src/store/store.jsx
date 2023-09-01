@@ -1,14 +1,15 @@
-// store.js
 import { configureStore } from '@reduxjs/toolkit';
-import expensesReducer from './reducers/expensesReducer';
-import incomeReducer from './reducers/incomeReducer';
-import financeGroupReducer from './reducers/financeGroupReducer';
+import authReducer from './slices/authSlice';
+import financeReducer from './slices/financeSlice';
+import userReducer from './slices/userSlicer'
+import goalReducer from './slices/goalSlice'
 
 const store = configureStore({
   reducer: {
-    expenses: expensesReducer,
-    income: incomeReducer,
-    financeGroup: financeGroupReducer,
+    auth: authReducer,
+    finance: financeReducer,
+    user: userReducer,
+    goal: goalReducer
   },
 });
 

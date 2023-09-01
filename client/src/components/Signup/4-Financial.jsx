@@ -3,6 +3,8 @@ import { useMutation } from '@apollo/client';
 import {Container, Button, Form, Col, Row, Card} from 'react-bootstrap'
 import PropTypes from 'prop-types'; 
 import dayjs from 'dayjs';
+import { useDispatch } from 'react-redux';
+import { updateNetworth, updateCash, updateDigital, updateInvested, updateSaved } from '../../store/slices/financeSlice';
 import { CREATE_NETWORTH, UPDATE_USER, CREATE_FINANCE } from '../../utils/mutations';
 
 export default function Financial({handleSkip, handleNextStep}) {
@@ -15,6 +17,7 @@ export default function Financial({handleSkip, handleNextStep}) {
   const [ createFinance ] = useMutation(CREATE_FINANCE)
   const [ updateUser ] = useMutation(UPDATE_USER)
   const [thisYear, setThisYear] = useState()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const currentYear = dayjs().year();
@@ -44,8 +47,15 @@ export default function Financial({handleSkip, handleNextStep}) {
           cash: parseFloat(currentCash),
           invested: parseFloat(currentInvested),
           saved: parseFloat(currentSaved)
-      }
+        }
       })
+
+      dispatch(updateCash(currentCash))
+      dispatch(updateDigital(currentDigital))
+      dispatch(updateInvested(currentInvested))
+      dispatch(updateSaved(currentSaved))
+      dispatch(updateNetworth());
+
       await handleNextStep()
       console.log('successful')
     } catch (error) {
@@ -99,7 +109,7 @@ export default function Financial({handleSkip, handleNextStep}) {
               <Card className='form-card'>
                 <Form onSubmit={(e) => {
                   e.preventDefault()
-                  handleSubmit( thisYear, incomeLevel, currentDigital, currentCash, currentInvested, currentSaved )
+                  handleSubmit( thisYear, currentDigital, currentCash, currentInvested, currentSaved, incomeLevel)
                 }}>
                   <Form.Group>
                     <Form.Label>
@@ -175,7 +185,7 @@ export default function Financial({handleSkip, handleNextStep}) {
           <Button 
             className='continue-btn'
             disabled={incomeLevel === null || currentDigital === null || currentCash === null || currentInvested === null || currentSaved === null}            
-            onClick={() => handleSubmit( thisYear, incomeLevel, currentDigital, currentCash, currentInvested, currentSaved )}
+            onClick={() => handleSubmit( thisYear, currentDigital, currentCash, currentInvested, currentSaved, incomeLevel )}
           >Continue</Button>
         </div>
       </Row>

@@ -14,6 +14,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer';
+import { authService } from './utils/auth';
+import { setUser, clearUser } from './store/slices/authSlice';
+import { useEffect } from 'react';
 
 export default function App() {
   const httpLink = createHttpLink({
@@ -29,6 +32,20 @@ export default function App() {
       },
     };
   });
+
+  const initializeAuth =() => {
+    const token = authService.getToken()
+    if (token && authService.isTokenExpired(token)) {
+      store.dispatch(clearUser());
+    } else if (token) {
+      const userData = authService.getProfile()
+      store.dispatch(setUser(userData))
+    }
+  }
+
+  useEffect(() => {
+    initializeAuth()
+  }, [])
   
   const client = new ApolloClient({
     link: authLink.concat(httpLink),

@@ -5,10 +5,13 @@ import { authService } from "../utils/auth";
 import LoginForm from '../components/Login/LoginForm'
 import { Alert } from 'react-bootstrap'
 import { LOGIN_USER } from '../utils/mutations';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../store/slices/authSlice'
 
 export default function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,6 +21,8 @@ export default function Login() {
         [name]: value,
     });
 };
+const user = useSelector((state) => state.auth.user);
+const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
 // submit form
 const handleFormSubmit = async (e) => {
@@ -34,8 +39,15 @@ const handleFormSubmit = async (e) => {
       variables: { ...formState },
     });
 
-    authService.login(data.login.token)
+    dispatch(setUser(data.login.user))
 
+console.log('data', data.login.user)
+console.log('user', user)
+console.log('first', isAuthenticated)
+
+debugger;
+
+    authService.login(data.login.token)
   } catch (e) {
     console.log(e);
   }
