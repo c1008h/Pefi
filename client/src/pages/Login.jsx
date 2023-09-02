@@ -41,11 +41,9 @@ const handleFormSubmit = async (e) => {
 
     dispatch(setUser(data.login.user))
 
-console.log('data', data.login.user)
-console.log('user', user)
-console.log('first', isAuthenticated)
-
-debugger;
+// console.log('data', data.login.user)
+// console.log('user', user)
+// console.log('first', isAuthenticated)
 
     authService.login(data.login.token)
   } catch (e) {

@@ -1,6 +1,4 @@
 import decode from 'jwt-decode';
-import store from '../store/store'
-import { setUser, clearUser } from '../store/slices/authSlice';
 class AuthService {
   getProfile() {
     //console.log(decode(this.getToken()));
@@ -18,7 +16,7 @@ class AuthService {
     const decoded = decode(token);
     // If the expiration time is less than the current time (in seconds), the token is expired and we return `true`
     if (decoded.exp < Date.now() / 1000) {
-      // localStorage.removeItem('id_token');
+      localStorage.removeItem('id_token');
       return true;
     }
     // If token hasn't passed its expiration time, return `false`
@@ -32,24 +30,19 @@ class AuthService {
   login(idToken,permission) {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('permission', permission);
-    // Add this for redux store
-    store.dispatch(setUser(decode(idToken)))
     window.location.assign('/');
   }
   
   signup(idToken,permission) {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('permission', permission);
-    store.dispatch(setUser(decode(idToken))); // Dispatch the user data to Redux
   }
 
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('permission');
-    store.dispatch(clearUser()); // Clear user data in Redux
     // window.location.reload('/');
     window.location.assign('/');
-
   }
 }
 

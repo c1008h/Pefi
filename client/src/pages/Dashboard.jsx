@@ -11,7 +11,8 @@ import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, updateSaved, updateNetworth } from '../store/slices/financeSlice.jsx';
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
 import PlaidIntegration from '../components/Plaid/PlaidLink.jsx'
@@ -28,15 +29,16 @@ export const Dashboard = () => {
     const [monthButton, setMonthButton] = useState(true)
     const [yearButton, setYearButton] = useState(false)
 
-    const user = useSelector((state) => state.auth.user);
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const dispatch = useDispatch(); 
 
-    console.log(isAuthenticated)
-    // console.log('redux:', expenses)
+    const expenses = useSelector((state) => state.finance.expenses);
+    const incomes = useSelector((state) => state.finance.incomes)
+
     useEffect(() => {
         if (data) {
           setUserData(data.me)
           setLoading(false)
+          dispatch(setExpenses(data.me.expenseGroup))
         }
     }, [data])
 
@@ -139,6 +141,7 @@ export const Dashboard = () => {
                     openExpenseForm={openExpenseForm}
                     closeExpenseForm={closeExpenseForm}
                     onDateChange={handleDateChange}
+                    onSaveExpense={() => dispatch(setExpenses())}
                     value={value}
                 />}          
                 {showIncomeForm && 

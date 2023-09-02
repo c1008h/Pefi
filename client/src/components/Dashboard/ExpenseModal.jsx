@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
 import { genreList, frequencyOptions, moneyType } from '../../constants/genres'
 
-export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
+export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, onSaveExpense, value }) {
   const [amount, setAmount] = useState()
   const [frequency, setFrequency] = useState()
   const [category, setCategory] = useState()
@@ -16,7 +16,6 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
   // const [showPrompt, setShowPrompt] = useState(false);
   const [reoccuring, setReoccuring] = useState(false)
   const [createExpense] = useMutation(CREATE_EXPENSE)
-  const dispatch = useDispatch();
 
   console.log(date)
   // const handleDateChange = (newValue) => {
@@ -38,9 +37,9 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
         }}
       })
       // await dispatch(addExpense({amount, frequency, category, type, date}));
-
+      onSaveExpense({amount, frequency, category, type, date})
       if(createExpense.error) { throw new Error('Something went wrong with creating expense.')}
-      window.location.reload();
+      // window.location.reload();
 
     } catch (error) {
       console.log("Error:", error)
@@ -127,5 +126,7 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, value }) {
 ExpenseModal.propTypes = {
   value: PropTypes.object.isRequired,
   openExpenseForm: PropTypes.func.isRequired,
-  closeExpenseForm: PropTypes.func.isRequired
+  closeExpenseForm: PropTypes.func.isRequired,
+  onDateChange: PropTypes.func.isRequired,
+  onSaveExpense: PropTypes.func.isRequired
 }

@@ -47,7 +47,10 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
             setIsPasswordCorrect(false)
         }
     }
-
+    const logout = (event) => {
+        event.preventDefault();
+        authService.logout();
+    }
     const handleDelete = async (userId, email, reason,) => {
         if (!reason) {
             alert('Failed to submit delete request! Please fill all requested fields!')
@@ -66,6 +69,7 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
             setUserId('')
             setEmail('')
             handleClose(); 
+            logout()
             console.log('successfully delete user')
             authService.logout()
         } catch (err) {
