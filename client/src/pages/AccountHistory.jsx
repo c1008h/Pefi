@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { REMOVE_EXPENSE, REMOVE_INCOME } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
+import { useDispatch } from 'react-redux';
 import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, updateSaved, updateNetworth } from '../store/slices/financeSlice.jsx';
 
 import { Button, Container } from 'react-bootstrap'
@@ -21,7 +22,7 @@ export default function AccountHistory() {
     const itemsPerPage = 25; 
     const [currentPage, setCurrentPage] = useState(1);
     console.log(userData)
-    
+
     const dispatch = useDispatch();
 
     const expenseState = useSelector((state) => state.finance.expenses);
