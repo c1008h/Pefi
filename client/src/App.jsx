@@ -20,7 +20,7 @@ import { useEffect } from 'react';
 
 export default function App() {
   const httpLink = createHttpLink({
-    uri: 'https://pefi-cb4de0d6766a.herokuapp.com/graphql',
+    uri: 'http://localhost:3006/graphql' || 'https://pefi-cb4de0d6766a.herokuapp.com/graphql',
   });
 
   const authLink = setContext((_, { headers }) => {

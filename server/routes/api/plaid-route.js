@@ -37,37 +37,6 @@ const configuration = new Configuration({
       },
     },
 });
-
-const client = new PlaidApi(configuration);
-const getAssetReportWithRetries = (
-    plaidClient,
-    asset_report_token,
-    ms = 1000,
-    retriesLeft = 20,
-  ) =>
-    new Promise((resolve, reject) => {
-      const request = {
-        asset_report_token,
-      };
-  
-      plaidClient
-        .assetReportGet(request)
-        .then(resolve)
-        .catch(() => {
-          setTimeout(() => {
-            if (retriesLeft === 1) {
-              reject('Ran out of retries while polling for asset report');
-              return;
-            }
-            getAssetReportWithRetries(
-              plaidClient,
-              asset_report_token,
-              ms,
-              retriesLeft - 1,
-            ).then(resolve);
-          }, ms);
-        });
-});
   
 const formatError = (error) => {
     return {
