@@ -8,10 +8,10 @@ import { authService } from '../utils/auth';
 
 import { Alert, ProgressBar } from 'react-bootstrap'
 
-import { SignupForm } from '../components/Signup/SignupForm';
+import { SignupForm } from '../components/Signup/First/SignupForm';
 import Step2 from '../components/Signup/2-Name'
 import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
-import Financial from '../components/Signup/4-Financial';
+import Financial from '../components/Signup/Fourth/4-Financial';
 
 import '../style/signup.css'
 

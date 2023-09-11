@@ -15,7 +15,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, updateSaved, updateNetworth } from '../store/slices/financeSlice.jsx';
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
-import PlaidIntegration from '../components/Plaid/PlaidLink.jsx'
 
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
@@ -112,9 +111,6 @@ export const Dashboard = () => {
                         <div>
                             <button onClick={openExpenseForm}>- Expense</button>
                             <button onClick={openIncomeForm}>+ Income</button>  
-                            <div>
-                                <PlaidIntegration />
-                            </div>
                         </div>
                     </div>
 

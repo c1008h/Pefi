@@ -4,8 +4,10 @@ import {Container, Button, Form, Col, Row, Card} from 'react-bootstrap'
 import PropTypes from 'prop-types'; 
 import dayjs from 'dayjs';
 import { useDispatch } from 'react-redux';
-import { updateNetworth, updateCash, updateDigital, updateInvested, updateSaved } from '../../store/slices/financeSlice';
-import { CREATE_NETWORTH, UPDATE_USER, CREATE_FINANCE } from '../../utils/mutations';
+import { updateNetworth, updateCash, updateDigital, updateInvested, updateSaved } from '../../../store/slices/financeSlice';
+import { CREATE_NETWORTH, UPDATE_USER, CREATE_FINANCE } from '../../../utils/mutations';
+import ManualInput from './ManualInput';
+import PlaidInput from './PlaidInput'
 
 export default function Financial({handleSkip, handleNextStep}) {
   const [currentDigital, setCurrentDigital] = useState(null)
@@ -13,10 +15,18 @@ export default function Financial({handleSkip, handleNextStep}) {
   const [currentSaved, setCurrentSaved] = useState(null)
   const [currentInvested, setCurrentInvested] = useState(null)
   const [incomeLevel, setIncomeLevel] = useState(null)
+
+  // const [option, setOption] = useState(null)
+  // const [formData, setFormaData] = useState({
+  //   income: '', digital:'', cash:'', invested:'', saved:''
+  // })
+  // const [showError, setShowError] = useState(false);
+
   const [ createNetworth ] = useMutation(CREATE_NETWORTH)
   const [ createFinance ] = useMutation(CREATE_FINANCE)
   const [ updateUser ] = useMutation(UPDATE_USER)
   const [thisYear, setThisYear] = useState()
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +36,6 @@ export default function Financial({handleSkip, handleNextStep}) {
 
   const handleSubmit = async (thisYear, currentDigital, currentCash, currentInvested, currentSaved, incomeLevel) => {
     try {
-
       await updateUser({
         variables: {
           incomeLevel: incomeLevel
@@ -62,6 +71,28 @@ export default function Financial({handleSkip, handleNextStep}) {
       console.log('Error:', error)
     }
   }
+
+  // const handleOptionChange = (selectedOption) => {
+  //   setOption(selectedOption)
+  //   setShowError(false)
+  // }
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target
+  //   setFormaData({ ...formData, [name]: value})
+  // }
+
+  // const handleFormSubmit = (e) => {
+  //   e.preventDefault()
+
+  //   if (option === 'manual') {
+  //     console.log('Submitted manually:', formData)
+  //   } else if (option === 'plaid') {
+  //     console.log('Connecting with Plaid...')
+  //   } else {
+  //     setShowError(true)
+  //   }
+  // }
 
   return (
     <Container>
@@ -106,64 +137,104 @@ export default function Financial({handleSkip, handleNextStep}) {
           </Row>
           <Row>
             <Col>
-              <Card className='form-card'>
-                <Form onSubmit={(e) => {
-                  e.preventDefault()
-                  handleSubmit( thisYear, currentDigital, currentCash, currentInvested, currentSaved, incomeLevel)
-                }}>
-                  <Form.Group>
-                    <Form.Label>
-                      Annual Income:
-                    </Form.Label>
-                    <Form.Control 
-                      onChange={(e) => setIncomeLevel(e.target.value)}
-                      type='number' name='incomeLevel' required
-                    />
-                  </Form.Group>
+              <h3>Choose How to Provide Your Financial Information</h3>
+                {/* <Form.Check
+                  type="radio"
+                  label="Manually Input"
+                  name="option"
+                  id="manual-option"
+                  value="manual"
+                  checked={option === 'manual'}
+                  onChange={() => handleOptionChange('manual')}
+                />
+                <Form.Check
+                  type="radio"
+                  label="Connect with Plaid"
+                  name="option"
+                  id="plaid-option"
+                  value="plaid"
+                  checked={option === 'plaid'}
+                  onChange={() => handleOptionChange('plaid')}
+                /> */}
+   <Card className='form-card'>
+            <Form onSubmit={(e) => {
+                e.preventDefault()
+                handleSubmit( thisYear, currentDigital, currentCash, currentInvested, currentSaved, incomeLevel)
+            }}>
+                <Form.Group>
+                <Form.Label>
+                    Annual Income:
+                </Form.Label>
+                <Form.Control 
+                    onChange={(e) => setIncomeLevel(e.target.value)}
+                    type='number' name='incomeLevel' required
+                />
+                </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>
-                      Digital:
-                    </Form.Label>
-                    <Form.Control 
-                      onChange={(e) => setCurrentDigital(e.target.value)}
-                      type='number' name='currentDigital' required
-                    />
-                  </Form.Group>
+                <Form.Group>
+                <Form.Label>
+                    Digital:
+                </Form.Label>
+                <Form.Control 
+                    onChange={(e) => setCurrentDigital(e.target.value)}
+                    type='number' name='currentDigital' required
+                />
+                </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>
-                      Cash:
-                    </Form.Label>
-                    <Form.Control 
-                      onChange={(e) => setCurrentCash(e.target.value)}
-                      type='number' name='currentCash' required
-                    />
-                  </Form.Group>
+                <Form.Group>
+                <Form.Label>
+                    Cash:
+                </Form.Label>
+                <Form.Control 
+                    onChange={(e) => setCurrentCash(e.target.value)}
+                    type='number' name='currentCash' required
+                />
+                </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>
-                      Invested:
-                    </Form.Label>
-                    <Form.Control 
-                      onChange={(e) => setCurrentInvested(e.target.value)}
-                      type='number' name='currentInvested' required
-                    />
-                  </Form.Group>
+                <Form.Group>
+                <Form.Label>
+                    Invested:
+                </Form.Label>
+                <Form.Control 
+                    onChange={(e) => setCurrentInvested(e.target.value)}
+                    type='number' name='currentInvested' required
+                />
+                </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>
-                        Saved:
-                    </Form.Label>
-                    <Form.Control 
-                      onChange={(e) => setCurrentSaved(e.target.value)}
-                      type='number' name='currentSaved' required
-                    />
-                  </Form.Group>
-                </Form>
-              </Card>
+                <Form.Group>
+                <Form.Label>
+                    Saved:
+                </Form.Label>
+                <Form.Control 
+                    onChange={(e) => setCurrentSaved(e.target.value)}
+                    type='number' name='currentSaved' required
+                />
+                </Form.Group>
+            </Form>
+        </Card>              
+
+
+              {/* <ManualInput 
+                thisYear={thisYear}
+              /> */}
+
             </Col>
           </Row>
+
+          {/* <Row>
+            <Col>
+              {option === 'manual' && (
+                <ManualInput 
+                  thisYear={thisYear}
+                />
+              )}
+              {option === 'plaid' && (
+                <PlaidInput 
+                  handleSubmit={handleFormSubmit}
+                />
+              )}
+            </Col>
+          </Row> */}
           
         </Col>
       </Row>

@@ -2,32 +2,33 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Expenses, Incomes, Goal, Delete, Networth } = require('../models');
 const { signToken } = require('../utils/auth');
 const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
-const recalculateFinance = async (user) => {
-  const financeGroup = await Finance.findById(user.financeGroup);
 
-  // Calculate the total expenses for the user
-  const totalExpenses = await Expenses.aggregate([
-    { $match: { _id: { $in: user.expensesGroup } } },
-    { $group: { _id: null, totalAmount: { $sum: { $toDouble: "$amount" } } } },
-  ]);
+// const recalculateFinance = async (user) => {
+//   const financeGroup = await Finance.findById(user.financeGroup);
 
-  // Calculate the total incomes for the user
-  const totalIncomes = await Incomes.aggregate([
-    { $match: { _id: { $in: user.incomesGroup } } },
-    { $group: { _id: null, totalAmount: { $sum: { $toDouble: "$amount" } } } },
-  ]);
+//   // Calculate the total expenses for the user
+//   const totalExpenses = await Expenses.aggregate([
+//     { $match: { _id: { $in: user.expensesGroup } } },
+//     { $group: { _id: null, totalAmount: { $sum: { $toDouble: "$amount" } } } },
+//   ]);
 
-  // Calculate the networth
-  const networth = (totalIncomes[0]?.totalAmount || 0) - (totalExpenses[0]?.totalAmount || 0);
+//   // Calculate the total incomes for the user
+//   const totalIncomes = await Incomes.aggregate([
+//     { $match: { _id: { $in: user.incomesGroup } } },
+//     { $group: { _id: null, totalAmount: { $sum: { $toDouble: "$amount" } } } },
+//   ]);
 
-  // Update the Finance document
-  financeGroup.digital = networth; // You can modify this as per your finance calculations
-  financeGroup.cash = 0; // Reset cash value if needed
-  financeGroup.invested = 0; // Reset invested value if needed
-  financeGroup.saved = 0; // Reset saved value if needed
+//   // Calculate the networth
+//   const networth = (totalIncomes[0]?.totalAmount || 0) - (totalExpenses[0]?.totalAmount || 0);
 
-  await financeGroup.save();
-};
+//   // Update the Finance document
+//   financeGroup.digital = networth; // You can modify this as per your finance calculations
+//   financeGroup.cash = 0; // Reset cash value if needed
+//   financeGroup.invested = 0; // Reset invested value if needed
+//   financeGroup.saved = 0; // Reset saved value if needed
+
+//   await financeGroup.save();
+// };
 const resolvers = {
     Query: {
       users: async () => {
