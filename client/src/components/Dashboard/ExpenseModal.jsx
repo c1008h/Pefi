@@ -39,7 +39,7 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, 
       // await dispatch(addExpense({amount, frequency, category, type, date}));
       onSaveExpense({amount, frequency, category, type, date})
       if(createExpense.error) { throw new Error('Something went wrong with creating expense.')}
-      // window.location.reload();
+      window.location.reload();
 
     } catch (error) {
       console.log("Error:", error)
