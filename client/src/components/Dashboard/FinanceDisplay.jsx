@@ -9,7 +9,8 @@ export default function FinanceDisplay({userData}) {
   const currentMonth = dayjs().month() + 1;
   const currentYear = dayjs().year();
 
-  console.log(userData)
+  console.log(userData.expensesGroup)
+
   const calculateMonthlyExpense = useCallback((expensesGroup) => {
     let totalExpense = 0;
 
@@ -17,7 +18,8 @@ export default function FinanceDisplay({userData}) {
       let dateStr = expensesGroup[i].date
       // console.log('expense date', dateStr)
       if (dateStr){
-        const [month, day, year] = dateStr.split('/')
+        const [month, day, year] = dateStr.split('-')
+        console.log('Parsed date:', month, day, year); // Add this line for debugging
 
         if (Number(month) === currentMonth && Number(year) === currentYear) {
           // console.log('add to expense')
@@ -35,7 +37,7 @@ export default function FinanceDisplay({userData}) {
       let dateStr = incomesGroup[i].date
       // console.log('income date:', dateStr)
       if(dateStr) {
-        const [month, day, year] = dateStr.split('/')
+        const [month, day, year] = dateStr.split('-')
 
         if (Number(month) === currentMonth && Number(year) === currentYear) {
           // console.log('add to income')
@@ -67,6 +69,7 @@ export default function FinanceDisplay({userData}) {
 
   }, [calculateMonthlyExpense, calculateMonthlyIncome, userData?.financeGroup?.digital, userData?.financeGroup?.cash, userData?.financeGroup?.saved, userData?.financeGroup?.invested, userData?.incomesGroup, userData?.expensesGroup])
 
+  console.log(monthlyExpense)
   return (
     <div>
       <h3 style={{fontWeight:'bold'}}>{dayjs().format('MMM')} {dayjs().format('YYYY')}</h3>
