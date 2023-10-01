@@ -30,14 +30,16 @@ export const Welcome = () => {
                             </Col>
                             <Col>
                                 <Card>
-                                    <Card.Header>Track Expenses and Incomes</Card.Header>
-                                    <Card.Body>Effortlessly input your expenses and income, gaining insights into your spending habits.</Card.Body>
+                                    <Card.Header>Set Financial Goals</Card.Header>
+                                    <Card.Body>Define your financial objectives and track your
+                                        progress toward achieving them.</Card.Body>
                                 </Card>
                             </Col>
                             <Col>
                                 <Card>
-                                    <Card.Header>Track Expenses and Incomes</Card.Header>
-                                    <Card.Body>Effortlessly input your expenses and income, gaining insights into your spending habits.</Card.Body>
+                                    <Card.Header>Visualize Your Income</Card.Header>
+                                    <Card.Body>Get a clear picture of your income sources and
+                                        better manage your finances.</Card.Body>
                                 </Card>
                             </Col>
                         </Row>
@@ -52,13 +54,17 @@ export const Welcome = () => {
                                 </Card>
                             </Col>
                             <Col>
-                            <Card>
-                                <Card.Body>Effortlessly input your expenses and income, gaining insights into your spending habits.</Card.Body>
+                                <Card>
+                                    <Card.Body>                                        
+                                        Set and manage your financial goals with ease.
+                                    </Card.Body>
                                 </Card>
                             </Col>
                             <Col>
-                            <Card>
-                                <Card.Body>Effortlessly input your expenses and income, gaining insights into your spending habits.</Card.Body>
+                                <Card>
+                                    <Card.Body>              
+                                        Visualize your income sources through graphs and charts.
+                                    </Card.Body>
                                 </Card>
                             </Col>
                         </Row>
@@ -69,17 +75,25 @@ export const Welcome = () => {
                         <Row>
                             <Col>
                                 <Card>
-                                    <Card.Body>Effortlessly input your expenses and income, gaining insights into your spending habits.</Card.Body>
+                                    <Card.Body>
+                                    &quot;This app has been a game-changer for my
+                                        finances. I can finally see where my money is
+                                        going and set realistic goals.&quot;
+                                    </Card.Body>
                                 </Card>
                             </Col>
                             <Col>
-                            <Card>
-                                <Card.Body>Effortlessly input your expenses and income, gaining insights into your spending habits.</Card.Body>
+                                <Card>
+                                    <Card.Body>
+                                        &quot;I love how easy it is to track my expenses and income. The visualizations are fantastic.&quot;
+                                    </Card.Body>
                                 </Card>
                             </Col>
                             <Col>
-                            <Card>
-                                <Card.Body>Effortlessly input your expenses and income, gaining insights into your spending habits.</Card.Body>
+                                <Card>
+                                    <Card.Body>
+                                        &quot;Financial planning has never been this straightforward. Highly recommend!&quot;                                  
+                                    </Card.Body>
                                 </Card>
                             </Col>
                         </Row>
