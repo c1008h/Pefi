@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, updateSaved, updateNetworth } from '../store/slices/financeSlice.jsx';
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
+import PleaseLogin from '../components/PleaseLogin.jsx';
 
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
@@ -64,7 +65,7 @@ export const Dashboard = () => {
 
     const token = authService.loggedIn() ? authService.getToken() : null;
     if(!token) {
-        return <h2>Please login first</h2>
+        return <PleaseLogin />
     }
     if(loading) {
         return <h2>LOADING...</h2>
