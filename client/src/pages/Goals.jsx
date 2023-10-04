@@ -5,7 +5,7 @@ import GoalCarousel from '../components/Goals/GoalCarousel'
 import { authService } from '../utils/auth'
 import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap'
 import '../style/goals.css'
-
+import PleaseLogin from '../components/PleaseLogin'
 export default function Goals() {
   const [userData, setUserData] = useState()
   const [loading, setLoading] = useState(true)
@@ -23,7 +23,7 @@ export default function Goals() {
 
   const token = authService.loggedIn() ? authService.getToken() : null;
   if(!token) {
-      return <h2>Please login first</h2>
+      return <PleaseLogin/>
   }
   if(loading) {
       return <h2>LOADING...</h2>

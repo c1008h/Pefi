@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
-
+import PleaseLogin from '../components/PleaseLogin';
 export default function Finance() {
   const [userData, setUserData] = useState({})
   const [loading, setLoading] = useState(true)
@@ -17,7 +17,7 @@ export default function Finance() {
   
   const token = authService.loggedIn() ? authService.getToken() : null;
   if(!token) {
-      return <h2>Please login first</h2>
+      return <PleaseLogin/>
   }
   if(loading) {
       return <h2>LOADING...</h2>

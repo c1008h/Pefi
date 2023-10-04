@@ -6,6 +6,7 @@ import { authService } from '../utils/auth';
 // import { useDispatch } from 'react-redux';
 // import { setUser } from '../utils/reducers/userReducer'; // Import the setUser action
 import ProfileForm from '../components/Profile/ProfileForm';
+import PleaseLogin from '../components/PleaseLogin';
 
 export default function Profile() {
   // const user = useSelector((state) => state.user.user)
@@ -31,7 +32,7 @@ export default function Profile() {
 
   const token = authService.loggedIn() ? authService.getToken() : null;
   if(!token) {
-      return <h2>Please login first</h2>
+      return <PleaseLogin />
   }
   if(loading) {
       return <h2>LOADING...</h2>
