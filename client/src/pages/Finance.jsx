@@ -4,6 +4,8 @@ import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 import PleaseLogin from '../components/PleaseLogin';
+import Loading from './Loading';
+
 export default function Finance() {
   const [userData, setUserData] = useState({})
   const [loading, setLoading] = useState(true)
@@ -20,7 +22,7 @@ export default function Finance() {
       return <PleaseLogin/>
   }
   if(loading) {
-      return <h2>LOADING...</h2>
+      return <Loading />
   }
   return (
     <div>

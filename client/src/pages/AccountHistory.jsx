@@ -9,6 +9,8 @@ import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, upd
 
 import { Button, Container } from 'react-bootstrap'
 import '../style/details.css'
+import PleaseLogin from '../components/PleaseLogin';
+import Loading from './Loading';
 
 export default function AccountHistory() {
     const { data } = useQuery(QUERY_ME)
@@ -64,10 +66,10 @@ export default function AccountHistory() {
     };
     const token = authService.loggedIn() ? authService.getToken() : null;
     if(!token) {
-        return <h2>Please login first</h2>
+        return <PleaseLogin />
     }
     if(loading) {
-        return <h2>LOADING...</h2>
+        return <Loading />
     }
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;

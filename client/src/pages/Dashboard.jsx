@@ -16,6 +16,7 @@ import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, upd
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
 import PleaseLogin from '../components/PleaseLogin.jsx';
+import Loading from './Loading.jsx';
 
 export const Dashboard = () => {
     const [userData, setUserData] = useState({})
@@ -68,7 +69,7 @@ export const Dashboard = () => {
         return <PleaseLogin />
     }
     if(loading) {
-        return <h2>LOADING...</h2>
+        return <Loading />
     }
     return (
         <div className='container' style={{flexDirection:'row'}}>

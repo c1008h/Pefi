@@ -7,6 +7,7 @@ import { authService } from '../utils/auth';
 // import { setUser } from '../utils/reducers/userReducer'; // Import the setUser action
 import ProfileForm from '../components/Profile/ProfileForm';
 import PleaseLogin from '../components/PleaseLogin';
+import Loading from './Loading';
 
 export default function Profile() {
   // const user = useSelector((state) => state.user.user)
@@ -35,7 +36,7 @@ export default function Profile() {
       return <PleaseLogin />
   }
   if(loading) {
-      return <h2>LOADING...</h2>
+      return <Loading />
   }
 
   return (
