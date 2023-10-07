@@ -10,6 +10,7 @@ import Loading from './Loading'
 
 export default function Goals() {
   const [userData, setUserData] = useState()
+  const [goals, setGoals] = useState(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('current'); 
 
@@ -18,10 +19,16 @@ export default function Goals() {
   useEffect(() => {
     if(data) {
       setUserData(data.me)
+
+      if(data.me.goalsGroup.length > 0){
+        setGoals(data.me.goalsGroup)
+      }
       setLoading(false)
     }
   }, [data])
   // console.log(userData || '')
+  // console.log('goals page', userData.goalsGroup)
+  console.log('goals', goals)
 
   const token = authService.loggedIn() ? authService.getToken() : null;
   if(!token) {
@@ -54,20 +61,30 @@ export default function Goals() {
       </Row>
       <Row style={{marginBottom:'5%'}}>
         {/* <GoalCarousel userData={userData}/> */}
-        <Col>
-          {activeTab === 'current' && (
-            <GoalCarousel userData={userData} layout='current' />
-          )}
-          {activeTab === 'previous' && (
-            <GoalCarousel userData={userData} layout='previous' />
-          )}
-          {activeTab === 'future' && (
-            <GoalCarousel userData={userData} layout='future' />
-          )}
-          {activeTab === 'ten' && (
-            <GoalCarousel userData={userData} layout='ten' />
-          )}
-        </Col>
+        {goals !== null ? (
+          <Col>
+            {activeTab === 'current' && (
+              <GoalCarousel userData={userData} layout='current' />
+            )}
+            {activeTab === 'previous' && (
+              <GoalCarousel userData={userData} layout='previous' />
+            )}
+            {activeTab === 'future' && (
+              <GoalCarousel userData={userData} layout='future' />
+            )}
+            {activeTab === 'ten' && (
+              <GoalCarousel userData={userData} layout='ten' />
+            )}
+          </Col>
+        ) : (
+          <div>
+          <p>You haven&rsquo;t set any financial goals yet.</p>
+          {/* <button onClick={() =>}>
+            Set Financial Goals
+          </button> */}
+        </div>
+        )}
+      
       </Row>
     </Container>
   )
