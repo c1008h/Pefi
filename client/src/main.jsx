@@ -1,13 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Welcome } from './pages/Welcome.jsx'
-import { Dashboard } from './pages/Dashboard.jsx'
-import Signup from './pages/Signup.jsx';
-import Login from './pages/Login.jsx'
-import Goals from './pages/Goals.jsx'
-import Finance from './pages/Finance.jsx';
-import Profile from './pages/Profile.jsx'
-import AccountHistory from './pages/AccountHistory.jsx';
+import { Welcome, Dashboard, Signup, Login, Goals, Finance, Profile, AccountHistory, AddGoals} from './pages/index'
 import 'react-calendar/dist/Calendar.css';
 import './style/calendar.css'
 import './style/index.css';
@@ -35,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/goals',
         element:<Goals/>
+      },
+      {
+        path: '/addgoals',
+        element:<AddGoals/>
       },
       {
         path: '/finance',

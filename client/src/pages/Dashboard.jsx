@@ -18,7 +18,7 @@ import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
 import PleaseLogin from '../components/PleaseLogin.jsx';
 import Loading from './Loading.jsx';
 
-export const Dashboard = () => {
+export default function Dashboard() {
     const [userData, setUserData] = useState({})
     const [showExpenseForm, setShowExpenseForm] = useState(false);
     const [showIncomeForm, setShowIncomeForm] = useState(false);

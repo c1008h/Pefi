@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import {Container, Card, Row, Col} from 'react-bootstrap'
+import { Container, Card, Row, Col } from 'react-bootstrap'
 import  {authService } from '../utils/auth'
-import { Dashboard } from './Dashboard';
+import { Dashboard } from './index';
 import '../style/index.css'
 
-export const Welcome = () => {
+export default function Welcome() {
     return (
         <div style={{margin:'5px', padding: '5px'}}>
             {authService.loggedIn() ? (

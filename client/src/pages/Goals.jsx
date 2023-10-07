@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { QUERY_ME } from '../utils/queries'
 import GoalCarousel from '../components/Goals/GoalCarousel'
@@ -26,9 +27,6 @@ export default function Goals() {
       setLoading(false)
     }
   }, [data])
-  // console.log(userData || '')
-  // console.log('goals page', userData.goalsGroup)
-  console.log('goals', goals)
 
   const token = authService.loggedIn() ? authService.getToken() : null;
   if(!token) {
@@ -78,13 +76,10 @@ export default function Goals() {
           </Col>
         ) : (
           <div>
-          <p>You haven&rsquo;t set any financial goals yet.</p>
-          {/* <button onClick={() =>}>
-            Set Financial Goals
-          </button> */}
-        </div>
+            <p>You haven&rsquo;t set any financial goals yet.</p>
+            <Link to='/signup'>Click here to add goals</Link>
+          </div>
         )}
-      
       </Row>
     </Container>
   )
