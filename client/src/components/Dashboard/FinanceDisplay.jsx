@@ -14,10 +14,11 @@ export default function FinanceDisplay({userData}) {
   const calculateMonthlyExpense = useCallback((expensesGroup) => {
     let totalExpense = 0;
 
-    for(let i = 0; i < expensesGroup.length; i++) {
+    for (let i = 0; i < expensesGroup.length; i++) {
       let dateStr = expensesGroup[i].date
       // console.log('expense date', dateStr)
-      if (dateStr){
+
+      if (dateStr) {
         const [month, day, year] = dateStr.split(' ')
         console.log('Parsed date:', month, day, year); // Add this line for debugging
 

@@ -44,7 +44,7 @@ export default function CurrentDisplay({ years, userData }) {
             <Container key={year} style={{ }}>
               <h2>{year} - {year + 1}</h2>
               <div className='progress-box'>
-                <h3>Digital</h3>
+                <h3>Digital Goal: {goalsGroup[0].digital}</h3>
                 <ProgressBar 
                   variant={digitalPercentage < 33 ? 'danger' 
                     : digitalPercentage > 33 && digitalPercentage < 66 ? 'warning' 
