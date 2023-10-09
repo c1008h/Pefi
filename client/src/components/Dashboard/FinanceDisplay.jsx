@@ -19,6 +19,7 @@ export default function FinanceDisplay({userData}) {
       // console.log('expense date', dateStr)
 
       if (dateStr) {
+        console.log(dateStr)
         const [month, day, year] = dateStr.split(' ')
         console.log('Parsed date:', month, day, year); // Add this line for debugging
 
