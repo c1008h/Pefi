@@ -43,7 +43,7 @@ export default function FinanceDisplay({userData}) {
       let dateStr = incomesGroup[i].date
       // console.log('income date:', dateStr)
       if(dateStr) {
-        const [month, day, year] = dateStr.split('-')
+        const [year, month, day] = dateStr.split('-')
 
         if (Number(month) === currentMonth && Number(year) === currentYear) {
           // console.log('add to income')
