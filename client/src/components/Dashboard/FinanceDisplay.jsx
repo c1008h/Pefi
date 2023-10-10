@@ -20,11 +20,14 @@ export default function FinanceDisplay({userData}) {
 
       if (dateStr) {
         console.log(dateStr)
-        const [month, day, year] = dateStr.split(' ')
-        console.log('Parsed date:', month, day, year); // Add this line for debugging
+        const [year, month, day] = dateStr.split('-')
+        // console.log('Parsed date:', month, day, year); 
+        // console.log('current month:', currentMonth)
+        // console.log('month', month)
+
 
         if (Number(month) === currentMonth && Number(year) === currentYear) {
-          // console.log('add to expense')
+          console.log('add to expense')
           console.log("Expense amount:", expensesGroup[i].amount);
           totalExpense += expensesGroup[i].amount;
         }
