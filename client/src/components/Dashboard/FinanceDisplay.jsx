@@ -9,7 +9,7 @@ export default function FinanceDisplay({userData}) {
   const currentMonth = dayjs().month() + 1;
   const currentYear = dayjs().year();
 
-  console.log(userData.expensesGroup)
+  // console.log(userData.expensesGroup)
 
   const calculateMonthlyExpense = useCallback((expensesGroup) => {
     let totalExpense = 0;
@@ -19,16 +19,14 @@ export default function FinanceDisplay({userData}) {
       // console.log('expense date', dateStr)
 
       if (dateStr) {
-        console.log(dateStr)
         const [year, month, day] = dateStr.split('-')
         // console.log('Parsed date:', month, day, year); 
         // console.log('current month:', currentMonth)
         // console.log('month', month)
 
-
         if (Number(month) === currentMonth && Number(year) === currentYear) {
-          console.log('add to expense')
-          console.log("Expense amount:", expensesGroup[i].amount);
+          // console.log('add to expense')
+          // console.log("Expense amount:", expensesGroup[i].amount);
           totalExpense += expensesGroup[i].amount;
         }
       }
@@ -74,7 +72,7 @@ export default function FinanceDisplay({userData}) {
 
   }, [calculateMonthlyExpense, calculateMonthlyIncome, userData?.financeGroup?.digital, userData?.financeGroup?.cash, userData?.financeGroup?.saved, userData?.financeGroup?.invested, userData?.incomesGroup, userData?.expensesGroup])
 
-  console.log(monthlyExpense)
+  // console.log(monthlyExpense)
   
   return (
     <div>

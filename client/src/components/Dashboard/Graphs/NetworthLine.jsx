@@ -16,7 +16,8 @@ export default function NetworthLine({ userData }) {
     const [currentYearNet, setCurrentYearNet] = useState([])
     const [monthlyNetworth, setMonthlyNetworth] = useState([]);
 
-
+    // console.log(userData)
+    
     useEffect(() => {
         const incomeGroups = userData.incomesGroup || [];
         const expenseGroups = userData.expensesGroup || [];
@@ -24,11 +25,12 @@ export default function NetworthLine({ userData }) {
         const networthByMonth = Array.from({ length: 12}, () => 0)
 
         incomeGroups.forEach(incomeEntry => {
-            const [month, day, year] = incomeEntry.date.split('/');
+            console.log('incomeentry:', incomeEntry.date)
+            const [month, day, year] = incomeEntry.date.split('-');
             networthByMonth[Number(month) - 1] += incomeEntry.amount;
         })
         expenseGroups.forEach(expenseEntry => {
-            const [month, day, year] = expenseEntry.date.split('/');
+            const [month, day, year] = expenseEntry.date.split('-');
             networthByMonth[Number(month) - 1] -= expenseEntry.amount;
         });
 
