@@ -30,6 +30,7 @@ export default function NetworthLine({ userData }) {
             networthByMonth[Number(month) - 1] += incomeEntry.amount;
         })
         expenseGroups.forEach(expenseEntry => {
+            console.log('expense entry:', expenseEntry)
             const [month, day, year] = expenseEntry.date.split('-');
             networthByMonth[Number(month) - 1] -= expenseEntry.amount;
         });
