@@ -14,30 +14,33 @@ import { allMonths } from '../../../constants/date_data'
 
 export default function NetworthLine({ userData }) {
     const [currentYearNet, setCurrentYearNet] = useState([])
-    const [monthlyNetworth, setMonthlyNetworth] = useState([]);
+    const [monthlyNetworth, setMonthlyNetworth] = useState(Array(12).fill(0));
 
     // console.log(userData)
     
     useEffect(() => {
-        const incomeGroups = userData.incomesGroup || [];
-        const expenseGroups = userData.expensesGroup || [];
+        if (userData) {    
+            const incomeGroups = userData.incomesGroup || [];
+            const expenseGroups = userData.expensesGroup || [];
 
-        const networthByMonth = Array.from({ length: 12}, () => 0)
+            const networthByMonth = Array(12).fill(0);
+            // const networthByMonth = Array.from({ length: 12}, () => 0)
 
-        incomeGroups.forEach(incomeEntry => {
-            console.log('incomeentry:', incomeEntry.amount)
-            const [month, day, year] = incomeEntry.date.split('-');
-            networthByMonth[Number(month) - 1] += incomeEntry.amount;
-        })
-        expenseGroups.forEach(expenseEntry => {
-            console.log('expense entry:', expenseEntry.amount)
-            const [month, day, year] = expenseEntry.date.split('-');
-            networthByMonth[Number(month) - 1] -= expenseEntry.amount;
-        });
+            incomeGroups.forEach(incomeEntry => {
+                console.log('incomeentry:', incomeEntry.amount)
+                const [month, day, year] = incomeEntry.date.split('-');
+                networthByMonth[Number(month) - 1] += incomeEntry.amount;
+            })
+            expenseGroups.forEach(expenseEntry => {
+                console.log('expense entry:', expenseEntry.amount)
+                const [month, day, year] = expenseEntry.date.split('-');
+                networthByMonth[Number(month) - 1] -= expenseEntry.amount;
+            });
 
-        console.log(monthlyNetworth)
+            console.log(monthlyNetworth)
 
-        setMonthlyNetworth(networthByMonth)
+            setMonthlyNetworth(networthByMonth)
+        }
     }, [userData.incomesGroup, userData.expensesGroup]);
 
     ChartJS.register(

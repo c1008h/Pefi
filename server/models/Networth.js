@@ -4,6 +4,9 @@ const networthSchema = new Schema({
     year: {
         type: Number,
     },
+    month: {
+        type: Number,
+    }, 
     digital: {
         type: Number,
     },

@@ -35,6 +35,7 @@ const typeDefs = `
     type Networth {
         _id: ID
         year: Float
+        month: Float
         digital: Float
         cash: Float
         invested: Float
@@ -121,7 +122,6 @@ const typeDefs = `
         user(email: String!): User 
         me: User
         financialData(_id: ID!): FinancialData
-
     }
 
     type Mutation {
@@ -145,9 +145,7 @@ const typeDefs = `
         updateExpense(input: ExpenseInput!): User
         removeExpense(_id: ID!): User
 
-
         createNetworth(_id: ID, year: Float, digital: Float, cash: Float, invested: Float, saved: Float, networth: Float, totalIncome: Float, totalExpense: Float ): User
-
     }
 `;
 

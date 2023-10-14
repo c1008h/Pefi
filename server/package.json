@@ -28,6 +28,7 @@
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
     "mongoose": "^7.3.4",
+    "node-cron": "^3.0.2",
     "node-schedule": "^2.1.1",
     "nodemon": "^2.0.22",
     "plaid": "^15.2.0",
@@ -35,6 +36,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.49.0"
+    "chai": "^4.3.10",
+    "eslint": "^8.49.0",
+    "mocha": "^10.2.0",
+    "sinon": "^16.1.0"
   }
 }
