@@ -12,6 +12,7 @@ import {
 import { Bar, Line } from "react-chartjs-2";
 import PropTypes from 'prop-types'; 
 import { daysWeek } from '../../../constants/date_data'
+
 export default function Weekly({ userData }) {
   const [dailyIncome, setDailyIncome] = useState([])
   const [dailyExpense, setDailyExpense] = useState([])
@@ -38,18 +39,33 @@ export default function Weekly({ userData }) {
     userData.incomesGroup.forEach((income) => {
       const incomeDate = dayjs(income.date, 'MM/DD/YYYY');
       const dayIndex = incomeDate.diff(currentWeekStart, 'day');
+
       if (dayIndex >= 0 && dayIndex < 7) {
+        console.log('income is true')
         incomesByDay[dayIndex] += income.amount;
       }
     });
 
     userData.expensesGroup.forEach((expense) => {
+
+
+      console.log('expense:', expense.date)
+  
       const expenseDate = dayjs(expense.date, 'MM/DD/YYYY');
+      const [year, month, day] = expense.date.split('-')
       const dayIndex = expenseDate.diff(currentWeekStart, 'day');
+
+      console.log('day index', dayIndex)
+      console.log('expense date', month, day, year)
+
       if (dayIndex >= 0 && dayIndex < 7) {
+        console.log('expense is true')
+
         expensesByDay[dayIndex] += expense.amount;
       }
     });
+
+    
     console.log(weekDates)
     // const dateString = weekDates
     // const [day, date] = dateString.split('.');

@@ -3,6 +3,34 @@ const { User, Expenses, Incomes, Goal, Delete, Networth } = require('../models')
 const { signToken } = require('../utils/auth');
 const { calculateNetworth, calculateMonthlyIncome, calculateMonthlyExpense } = require('../utils/calculations');
 
+const createOrUpdateNetworth = async (userId, year, month, cashChange, digitalChange, savedChange, investedChange) => {
+  try {
+    // Find the Networth document for the given year and month
+    const networth = await Networth.findOne({ year, month });
+
+    if (networth) {
+      // If the Networth document exists for the given year and month, update the fields
+      networth.cash += cashChange;
+      networth.digital += digitalChange;
+      networth.saved += savedChange;
+      networth.invested += investedChange;
+    } else {
+      // If the Networth document does not exist, create a new one
+      const newNetworth = new Networth({
+        year,
+        month,
+        cash: cashChange,
+        digital: digitalChange,
+        saved: savedChange,
+        invested: investedChange,
+      });
+      await newNetworth.save();
+    }
+  } catch (error) {
+    // Handle errors...
+  }
+};
+
 const resolvers = {
     Query: {
       users: async () => {
@@ -141,6 +169,37 @@ const resolvers = {
       createIncome: async (parent, { input }, context) => {
         if (context.user) {
           try {
+            const [year, month] = input.date.split('-');
+            let categoryFieldToUpdate;
+            console.log('input type', input.type)
+            switch (input.type) {
+              case 'cash':
+                categoryFieldToUpdate = 'cash';
+                break;
+              case 'digital':
+                categoryFieldToUpdate = 'digital';
+                break;
+              case 'invested':
+                categoryFieldToUpdate = 'invested';
+                break;
+              case 'saved':
+                categoryFieldToUpdate = 'saved';
+                break;
+              default:
+                categoryFieldToUpdate = null;
+            }
+            if (categoryFieldToUpdate) {
+              await createOrUpdateNetworth(
+                context.user._id,
+                year,
+                month,
+                input.amount,
+                0,
+                0,
+                0,
+              )
+            }
+
             const newIncome = new Incomes({
               amount: input.amount, 
               category: input.category,
@@ -149,6 +208,7 @@ const resolvers = {
               type: input.type,
               note: input.note,
             })
+          
             const savedIncome = await newIncome.save();
 
             const financeFieldToUpdate = `financeGroup.${input.type.toLowerCase()}`;
@@ -209,6 +269,38 @@ const resolvers = {
       createExpense: async (parent, { input }, context) => {
         if (context.user) {
           try {
+            const [year, month] = input.date.split('-');
+            let categoryFieldToUpdate;
+            console.log('input type', input.type)
+            switch (input.type) {
+              case 'cash':
+                categoryFieldToUpdate = 'cash';
+                break;
+              case 'digital':
+                categoryFieldToUpdate = 'digital';
+                break;
+              case 'invested':
+                categoryFieldToUpdate = 'invested';
+                break;
+              case 'saved':
+                categoryFieldToUpdate = 'saved';
+                break;
+              default:
+                categoryFieldToUpdate = null;
+            }
+            if (categoryFieldToUpdate) {
+              await createOrUpdateNetworth(
+                context.user._id,
+                year,
+                month,
+                input.amount,
+                0,
+                0,
+                0,
+              )
+              console.log('input expense')
+            }
+
             const newExpense = new Expenses({
               amount: input.amount,
               frequency: input.frequency,
@@ -248,12 +340,30 @@ const resolvers = {
         if (context.user) {
           try {
             const deletedExpense = await Expenses.findByIdAndDelete(_id);
-            // console.log('deleteexpense:', deletedExpense)
             if (!deletedExpense) {
               console.log('Expense not found');
               return null;
             }
+
+            const [year, month] = deletedExpense.date.split('-');
             const financeFieldToUpdate = `financeGroup.${deletedExpense.type.toLowerCase()}`;
+
+            let networth = await Networth.findOne({ year, month });
+
+            if (!networth) {
+              networth = new Networth({
+                year,
+                month,
+                digital: 0, 
+                cash: 0,
+                saved: 0,
+                invested: 0,
+              })
+            }
+            networth.financeFieldToUpdate -= deletedExpense.amount;
+            networth.financeFieldToUpdate -= deletedExpense.amount;
+            await networth.save();
+
             const updateFields = {
               $pull: { expensesGroup: _id },
               $inc: {

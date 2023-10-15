@@ -17,6 +17,10 @@ const createMonthlyNetworth = async () => {
       });
     }
 
+    if (!yearlyNetworth.monthlyData || !Array.isArray(yearlyNetworth.monthlyData)) {
+        yearlyNetworth.monthlyData = [];
+    }
+    
     let monthlyNetworth = yearlyNetworth.monthlyData.find((entry) => entry.month === month);
 
     if (!monthlyNetworth) {
@@ -49,3 +53,6 @@ const createMonthlyNetworth = async () => {
 };
 
 cron.schedule('0 0 1 * *', createMonthlyNetworth);
+
+
+module.exports = { createMonthlyNetworth };

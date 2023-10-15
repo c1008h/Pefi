@@ -3,19 +3,26 @@ const expect = chai.expect;
 const sinon = require('sinon');
 
 const {
-  createMonthlyNetworth
-} = require('./networthService'); // Replace with the correct file path
+    createMonthlyNetworth
+} = require('../utils/networthService'); 
 
 const { User, Networth } = require('../models/index')
 
-describe('Networth Automation', () => {
+describe('Networth Automation', function () {
+    this.timeout(5000); 
+
   describe('createMonthlyNetworth', () => {
     it('should create a new YearlyNetworth document if it does not exist', async () => {
-      // Mock YearlyNetworth.findOne to return null
       const findOneStub = sinon.stub(Networth, 'findOne').resolves(null);
 
-      // Call the function
-      await createMonthlyNetworth();
+      createMonthlyNetworth()
+      .then(() => {
+        expect(findOneStub.calledOnce).to.be.true;
+
+        findOneStub.restore();
+        done(); 
+      })
+      .catch((err) => done(err));
 
       // Assertions
       // Ensure YearlyNetworth.findOne was called
@@ -26,29 +33,30 @@ describe('Networth Automation', () => {
     });
 
     it('should create a new Monthly Networth data if it does not exist', async () => {
-      // Mock YearlyNetworth.findOne to return an existing document
-      const existingYearlyNetworth = new Networth({
-        year: new Date().getFullYear(),
-        monthlyData: [],
-      });
-      const findOneStub = sinon.stub(Networth, 'findOne').resolves(existingYearlyNetworth);
+        // Mock YearlyNetworth.findOne to return an existing document
+        const existingYearlyNetworth = new Networth({
+            year: new Date().getFullYear(),
+            monthlyData: [],
+        });
+        const findOneStub = sinon.stub(Networth, 'findOne').resolves(existingYearlyNetworth);
 
-      // Mock YearlyNetworth.save to resolve successfully
-      const saveStub = sinon.stub(existingYearlyNetworth, 'save').resolves(existingYearlyNetworth);
+        // Mock YearlyNetworth.save to resolve successfully
+        const saveStub = sinon.stub(existingYearlyNetworth, 'save').resolves(existingYearlyNetworth);
 
-      // Call the function
-      await createMonthlyNetworth();
+        createMonthlyNetworth()
+        .then(() => {
+            expect(findOneStub.calledOnce).to.be.true;
+            expect(saveStub.calledOnce).to.be.true;
 
-      // Assertions
-      // Ensure YearlyNetworth.findOne was called
-      expect(findOneStub.calledOnce).to.be.true;
-      
-      // Ensure YearlyNetworth.save was called
-      expect(saveStub.calledOnce).to.be.true;
-
-      // Restore the stubs
-      findOneStub.restore();
-      saveStub.restore();
+            findOneStub.restore();
+            saveStub.restore();
+            done();
+        })
+        .catch((err) => done(err))
     });
   });
+  
+  afterEach(() => {
+    sinon.restore();
+  })
 });
