@@ -53,7 +53,9 @@ export default function Weekly({ userData }) {
   
       const expenseDate = dayjs(expense.date, 'MM/DD/YYYY');
       const [year, month, day] = expense.date.split('-')
-      const dayIndex = expenseDate.diff(currentWeekStart, 'day');
+      // const dayIndex = expenseDate.diff(currentWeekStart, 'day');
+      
+      const dayIndex = expenseDate.diff(currentWeekStart);
 
       console.log('day index', dayIndex)
       console.log('expense date', month, day, year)
@@ -66,7 +68,6 @@ export default function Weekly({ userData }) {
     });
 
     
-    console.log(weekDates)
     // const dateString = weekDates
     // const [day, date] = dateString.split('.');
     // console.log('date,', date)
