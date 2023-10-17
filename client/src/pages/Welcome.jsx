@@ -101,7 +101,7 @@ export default function Welcome() {
                     <Container className='content-containers' fluid='true' style={{justifyContent:'center', textAlign:'center'}}>
                         <h3>Start Your Financial Journey Today!</h3>
                         <Link to='/signup'>
-                            <button>Get Started</button>
+                            <button style={{marginTop:'1%'}}>Get Started</button>
                         </Link>
                     </Container>
                 </div>
