@@ -6,7 +6,7 @@ import '../style/index.css'
 
 export default function Welcome() {
     return (
-        <div style={{margin:'5px', padding: '5px'}}>
+        <div>
             {authService.loggedIn() ? (
                 <Dashboard/>
                 ) : (
