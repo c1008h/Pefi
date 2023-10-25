@@ -30,7 +30,7 @@ class AuthService {
   login(idToken,permission) {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('permission', permission);
-    window.location.assign('/');
+    // window.location.assign('/');
   }
   
   signup(idToken,permission) {

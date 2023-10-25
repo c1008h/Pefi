@@ -8,14 +8,14 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { Provider } from 'react-redux';
-import store from './store/store';
+import store from './store';
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer';
 import { authService } from './utils/auth';
-import { setUser, clearUser } from './store/slices/authSlice';
+import { loginUser,logoutUser } from './features/auth/authSlice';
 import { useEffect } from 'react';
 
 export default function App() {
@@ -36,10 +36,10 @@ export default function App() {
   const initializeAuth =() => {
     const token = authService.getToken()
     if (token && authService.isTokenExpired(token)) {
-      store.dispatch(clearUser());
+      store.dispatch(logoutUser());
     } else if (token) {
       const userData = authService.getProfile()
-      store.dispatch(setUser(userData))
+      store.dispatch(loginUser(userData))
     }
   }
 

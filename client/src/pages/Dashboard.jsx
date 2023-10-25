@@ -12,7 +12,7 @@ import { authService } from '../utils/auth';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers';
 import { useSelector, useDispatch } from 'react-redux';
-import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, updateSaved, updateNetworth } from '../store/slices/financeSlice.jsx';
+// import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, updateSaved, updateNetworth } from '../store/slices/financeSlice.jsx';
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
 import PleaseLogin from '../components/PleaseLogin.jsx';
@@ -30,16 +30,16 @@ export default function Dashboard() {
     const [monthButton, setMonthButton] = useState(true)
     const [yearButton, setYearButton] = useState(false)
 
-    const dispatch = useDispatch(); 
+    // const dispatch = useDispatch(); 
 
-    const expenses = useSelector((state) => state.finance.expenses);
-    const incomes = useSelector((state) => state.finance.incomes)
+    // const expenses = useSelector((state) => state.finance.expenses);
+    // const incomes = useSelector((state) => state.finance.incomes)
 
     useEffect(() => {
         if (data) {
           setUserData(data.me)
           setLoading(false)
-          dispatch(setExpenses(data.me.expenseGroup))
+        //   dispatch(setExpenses(data.me.expenseGroup))
         }
     }, [data])
 

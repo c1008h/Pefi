@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../store/slices/authSlice'
+// import { setUser } from '../store/slices/authSlice'
 import { ADD_USER } from '../utils/mutations';
 import { authService } from '../utils/auth';
 
@@ -70,7 +70,7 @@ export default function Signup() {
         }
       })
 
-      dispatch(setUser(data.addUser.user))
+      // dispatch(setUser(data.addUser.user))
 
       authService.signup(data.addUser.token)
     } catch (e) {

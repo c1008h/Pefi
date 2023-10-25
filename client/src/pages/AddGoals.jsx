@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../store/slices/authSlice'
+// import { useDispatch } from 'react-redux';
+// import { setUser } from '../store/slices/authSlice'
 import { ADD_USER } from '../utils/mutations';
 import { authService } from '../utils/auth';
 import { Alert, ProgressBar } from 'react-bootstrap'
@@ -16,7 +16,7 @@ export default function Signup() {
   const [now, setNow] = useState(1)
   const [navigationFailed, setNavigationFailed] = useState(false); 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleNextStep = () => {
     if (step === 5) {

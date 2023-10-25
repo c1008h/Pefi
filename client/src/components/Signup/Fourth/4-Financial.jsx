@@ -3,8 +3,8 @@ import { useMutation } from '@apollo/client';
 import {Container, Button, Form, Col, Row, Card} from 'react-bootstrap'
 import PropTypes from 'prop-types'; 
 import dayjs from 'dayjs';
-import { useDispatch } from 'react-redux';
-import { updateNetworth, updateCash, updateDigital, updateInvested, updateSaved } from '../../../store/slices/financeSlice';
+// import { useDispatch } from 'react-redux';
+// import { updateNetworth, updateCash, updateDigital, updateInvested, updateSaved } from '../../../store/slices/financeSlice';
 import { CREATE_NETWORTH, UPDATE_USER, CREATE_FINANCE } from '../../../utils/mutations';
 import ManualInput from './ManualInput';
 import PlaidInput from './PlaidInput'
@@ -27,7 +27,7 @@ export default function Financial({handleSkip, handleNextStep}) {
   const [ updateUser ] = useMutation(UPDATE_USER)
   const [thisYear, setThisYear] = useState()
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     const currentYear = dayjs().year();
@@ -59,11 +59,11 @@ export default function Financial({handleSkip, handleNextStep}) {
         }
       })
 
-      dispatch(updateCash(currentCash))
-      dispatch(updateDigital(currentDigital))
-      dispatch(updateInvested(currentInvested))
-      dispatch(updateSaved(currentSaved))
-      dispatch(updateNetworth());
+      // dispatch(updateCash(currentCash))
+      // dispatch(updateDigital(currentDigital))
+      // dispatch(updateInvested(currentInvested))
+      // dispatch(updateSaved(currentSaved))
+      // dispatch(updateNetworth());
 
       await handleNextStep()
       console.log('successful')

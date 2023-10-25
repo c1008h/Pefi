@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client';
 import { Container, Button, Form, Col, Row, Card } from 'react-bootstrap'
-import { updateNetworth, updateCash, updateDigital, updateInvested, updateSaved } from '../../../store/slices/financeSlice';
+// import { updateNetworth, updateCash, updateDigital, updateInvested, updateSaved } from '../../../store/slices/financeSlice';
 import { CREATE_NETWORTH, UPDATE_USER, CREATE_FINANCE } from '../../../utils/mutations';
 import PropTypes from 'prop-types'; 
 
@@ -42,11 +42,11 @@ export default function ManualInput({ thisYear }) {
             }
           })
     
-          dispatch(updateCash(currentCash))
-          dispatch(updateDigital(currentDigital))
-          dispatch(updateInvested(currentInvested))
-          dispatch(updateSaved(currentSaved))
-          dispatch(updateNetworth());
+        //   dispatch(updateCash(currentCash))
+        //   dispatch(updateDigital(currentDigital))
+        //   dispatch(updateInvested(currentInvested))
+        //   dispatch(updateSaved(currentSaved))
+        //   dispatch(updateNetworth());
     
           await handleNextStep()
           console.log('successful')
