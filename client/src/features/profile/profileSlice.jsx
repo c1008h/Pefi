@@ -10,10 +10,9 @@ export const profileSlice = createSlice({
         createProfile: (state, action) => {
             state.userProfile = action.payload
         },
-        deleteProfile: (state, action) => {
-            state.userProfile = action.payload
+        deleteProfile: (state) => {
+            state.userProfile = null;
         }
-
     }
 })
 
