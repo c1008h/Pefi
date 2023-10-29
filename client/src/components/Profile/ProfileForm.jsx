@@ -10,7 +10,7 @@ import '../../style/profile.css'
 export default function ProfileForm({userData}) {
     const [firstName, setFirstName] = useState(userData.firstName || '')
     const [lastName, setLastName] = useState(userData.lastName || '')
-    const [email, setEmail] = useState(userData.email)
+    const [email, setEmail] = useState(userData.email || '')
     const [password, setPassword] = useState()
     const [isEditMode, setIsEditMode] = useState(false);
     const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -22,9 +22,9 @@ export default function ProfileForm({userData}) {
         setIsEditMode(true);
     };
     const handleCancelClick = () => {
-        setFirstName(userData.firstName || '');
-        setLastName(userData.lastName || '');
-        setEmail(userData.email || '');
+        setFirstName(userData?.firstName || '');
+        setLastName(userData?.lastName || '');
+        setEmail(userData?.email || '');
         setPassword(''); // Reset the password field
         setIsEditMode(false);
     };

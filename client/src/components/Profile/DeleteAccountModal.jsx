@@ -6,6 +6,8 @@ import { deleteAccount } from '../../constants/deleting_reasons'
 import { CHECK_PASSWORD, DELETE_USER } from '../../utils/mutations'
 import PropTypes from 'prop-types'; // Import PropTypes
 import { authService } from '../../utils/auth'
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from '../../features/auth/authSlice'
 export default function DeleteAccountModal({ show, handleClose, userData }) {
     const [currentPassword, setCurrentPassword] = useState('');
     const [isAgreed, setIsAgreed] = useState(false); 
@@ -16,6 +18,8 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
     const [email, setEmail] = useState(userData?.email || '')
     const [deleteUser] = useMutation(DELETE_USER)
     const [checkPassword] = useMutation(CHECK_PASSWORD)
+
+    const dispatch = useDispatch();
 
     const handleReasonSelect = (selectedOption) => {
         const selectedReason = selectedOption.value;
@@ -72,6 +76,8 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
             logout()
             console.log('successfully delete user')
             authService.logout()
+            dispatch(logoutUser())
+
         } catch (err) {
             console.log('Error:', err)
         }

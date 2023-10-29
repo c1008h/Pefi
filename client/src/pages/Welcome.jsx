@@ -3,11 +3,17 @@ import { Container, Card, Row, Col } from 'react-bootstrap'
 import  {authService } from '../utils/auth'
 import { Dashboard } from './index';
 import '../style/index.css'
+import { useDispatch, useSelector } from 'react-redux';
+import {isAuthenticated, user } from '../features/auth/authSlice'
 
 export default function Welcome() {
+    const user = useSelector((state) => state.auth.user);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
     return (
         <div>
-            {authService.loggedIn() ? (
+            {/* {authService.loggedIn() ? ( */}
+            {isAuthenticated ? (
                 <Dashboard/>
                 ) : (
                 <div>

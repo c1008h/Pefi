@@ -27,6 +27,7 @@ export default function Login() {
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+  console.log("Is authenticated:", isAuthenticated)
   // submit form
   const handleFormSubmit = async (e) => {
     e.preventDefault();
