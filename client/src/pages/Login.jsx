@@ -67,9 +67,9 @@ export default function Login() {
       </p>
       ) : (
         <LoginForm 
-        handleFormSubmit={handleFormSubmit}
-        handleChange={handleChange}
-        formState={formState}
+          handleFormSubmit={handleFormSubmit}
+          handleChange={handleChange}
+          formState={formState}
         />
       )}
 

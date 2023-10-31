@@ -1,25 +1,27 @@
 import {useState} from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
+import ModalTemplate from '../ModalTemplate';
 
 export default function PasswordModal({ show, handleClose }) {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
-    const handlePasswordChange = () => {
+    const handleChange = () => {
         setCurrentPassword('');
         setNewPassword('');
         setConfirmNewPassword('');
-    
         handleClose(); 
     };
 
     return (
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Change Password</Modal.Title>
-            </Modal.Header>
-        <Modal.Body>
+        <ModalTemplate 
+            title={"Change Password"}
+            change={"Update"}
+            show={show}
+            handleClose={handleClose}
+            handleChange={handleChange}
+        >
             <Form>
                 <Form.Group>
                     <Form.Label>Current Password:</Form.Label>
@@ -35,15 +37,6 @@ export default function PasswordModal({ show, handleClose }) {
                     <Form.Control></Form.Control>
                 </Form.Group> */}
             </Form>
-        </Modal.Body>
-        <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-            Close
-        </Button>
-        {/* <Button variant="primary" onClick={handlePasswordChange}>
-            Save Changes
-        </Button> */}
-        </Modal.Footer>
-    </Modal>
+        </ModalTemplate>
     )
 }

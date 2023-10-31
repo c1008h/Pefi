@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import ModalTemplate from '../ModalTemplate'
+import { Button, Form } from 'react-bootstrap'
 import Select from 'react-select'
 import { useMutation } from '@apollo/client'
 import { deleteAccount } from '../../constants/deleting_reasons'
@@ -55,10 +56,22 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
         event.preventDefault();
         authService.logout();
     }
+    
     const handleDelete = async (userId, email, reason,) => {
+        let errorMessage = null;
+
         if (!reason) {
-            alert('Failed to submit delete request! Please fill all requested fields!')
+            errorMessage = "Failed to submit delete request! Please fill all requested fields!";
+        } else if (!isPasswordCorrect) {
+            errorMessage = "Password is incorrect!";
+        } else if (!isAgreed) {
+            errorMessage = "Please acknowledge that you understand the consequences of account deletion.";
         }
+        if (errorMessage) {
+            alert(errorMessage);
+            return
+        }
+
         setCurrentPassword('');   
         console.log(userId) 
         try {
@@ -84,11 +97,14 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
     };
 
     return (
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title><h2>Delete Account</h2></Modal.Title>
-            </Modal.Header>
-        <Modal.Body>
+        <ModalTemplate 
+            title={"Delete Account"}
+            change={"Delete"}
+            show={show}
+            handleClose={handleClose}
+            handleChange={handleDelete}
+            primaryButtonDisabled={!isPasswordCorrect || !isAgreed}
+        >
             <Form onSubmit={(e) => {
                 e.preventDefault(e)
                 checkingPass(currentPassword, userId)
@@ -139,29 +155,27 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
                     null 
                 }
             </Form>
-        </Modal.Body>
-        <Modal.Footer style={{justifyContent:'space-between'}}>
-        <Button variant="secondary" onClick={handleClose}>
-            Close
-        </Button>
-        <Button variant="primary" 
-            onClick={() => {
-                if (isPasswordCorrect && isAgreed) {
-                    handleDelete(userId, email, reason)
-                } else {
-                    if (!isAgreed) {
-                        alert('Please acknowledge that you understand the consequences of account deletion.')
-                    } else {
-                        alert('Password is incorrect')
-                    }
-                }
-            }}
-            disabled={!isPasswordCorrect || !isAgreed}
-        >
-            Delete Account
-        </Button>
-        </Modal.Footer>
-    </Modal>
+        </ModalTemplate>
+
+            
+
+        // <Button variant="primary" 
+        //     onClick={() => {
+        //         if (isPasswordCorrect && isAgreed) {
+        //             handleDelete(userId, email, reason)
+        //         } else {
+        //             if (!isAgreed) {
+        //                 alert('Please acknowledge that you understand the consequences of account deletion.')
+        //             } else {
+        //                 alert('Password is incorrect')
+        //             }
+        //         }
+        //     }}
+        //     disabled={!isPasswordCorrect || !isAgreed}
+        // >
+        //     Delete Account
+        // </Button>
+
     )
 }
 

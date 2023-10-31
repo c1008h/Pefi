@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Form, Button, Modal } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPENSE } from '../../utils/mutations';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
 import { genreList, frequencyOptions, moneyType } from '../../constants/genres'
+import ModalTemplate from '../ModalTemplate';
 
 export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, onSaveExpense, value }) {
   const [amount, setAmount] = useState()
@@ -29,13 +30,14 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, 
     try {
       await createExpense({
         variables: { input: {
-          amount: parseFloat(amount.trim()),
+          amount: parseFloat(amount),
           frequency: frequency,
           category: category,
           type: type,
           date: date,
         }}
       })
+
       // await dispatch(addExpense({amount, frequency, category, type, date}));
       onSaveExpense({amount, frequency, category, type, date})
       if(createExpense.error) { throw new Error('Something went wrong with creating expense.')}
@@ -45,79 +47,75 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, 
       console.log("Error:", error)
     }
   }
+
   return (
     <div>
-      <Modal show={openExpenseForm} onHide={closeExpenseForm}>
-          <div style={{display:'flex', flexDirection:'column'}}>
-              <Modal.Header closeButton>
-                <Modal.Title>Add Expense</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form 
-                  style={{display:'flex', flexDirection:'column'}} 
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    handleSaveExpense(amount, frequency, category, type, date)
-                  }}
-                > 
-                <Form.Group>
-                  <Form.Label>Expense Amount:</Form.Label>
-                  <Form.Control 
-                    type="number"
-                    name="amount"
-                    onChange={e => setAmount(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Category:</Form.Label>
-                  <Select 
-                    options={genreList} 
-                    onChange={(selectedOption) => setCategory(selectedOption.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Type:</Form.Label>
-                  <Select 
-                    options={moneyType}
-                    onChange={(selectedOption) => setType(selectedOption.value)}
-                    required
-                  />
-                </Form.Group>
+      <ModalTemplate 
+        title={"Add Expense"}
+        change={"Save"}
+        show={openExpenseForm} 
+        handleClose={closeExpenseForm} 
+        handleChange={() => handleSaveExpense(amount, frequency, category, type, date)}
+      >
+        <Form 
+          style={{display:'flex', flexDirection:'column'}} 
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSaveExpense(amount, frequency, category, type, date)
+          }}
+        > 
+          <Form.Group>
+            <Form.Label>Expense Amount:</Form.Label>
+            <Form.Control 
+              type="number"
+              name="amount"
+              onChange={e => setAmount(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Category:</Form.Label>
+            <Select 
+              options={genreList} 
+              onChange={(selectedOption) => setCategory(selectedOption.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Type:</Form.Label>
+            <Select 
+              options={moneyType}
+              onChange={(selectedOption) => setType(selectedOption.value)}
+              required
+            />
+          </Form.Group>
 
-                <Form.Group>
-                  <Form.Label>Frequency:</Form.Label>
-                  {frequencyOptions.map((option) => (
-                    <Form.Check 
-                      type='radio'
-                      key={option.value}
-                      label={option.label}
-                      name='frequency'
-                      value={option.value}
-                      onChange={(e) => setFrequency(e.target.value)}
-                      required
-                    />
-                  ))}
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Date:</Form.Label>
-                  <Form.Control 
-                    type='date'
-                    name='date'
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <div>
-                  <Button type="submit">Save</Button>
-                  <Button onClick={closeExpenseForm}>Cancel</Button>
-                </div>
-                </Form>
-              </Modal.Body>
-            </div>
-        </Modal>
+          <Form.Group>
+            <Form.Label>Frequency:</Form.Label>
+            {frequencyOptions.map((option) => (
+              <Form.Check 
+                type='radio'
+                key={option.value}
+                label={option.label}
+                name='frequency'
+                value={option.value}
+                onChange={(e) => setFrequency(e.target.value)}
+                required
+              />
+            ))}
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Date:</Form.Label>
+            <Form.Control 
+              type='date'
+              name='date'
+              value={date}
+              onChange={e => setDate(e.target.value)}
+              required
+            />
+          </Form.Group>
+        </Form>
+      </ModalTemplate>
     </div>
 
   );
