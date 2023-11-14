@@ -3,6 +3,8 @@ import { Form, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'; // Import PropTypes
 import { useMutation } from '@apollo/client';
 import { CREATE_FINANCE } from '../../utils/mutations'
+import { ButtonTemplate } from '../Landing/index'
+
 // import { authService } from '../../utils/auth';
 export default function FinanceForm({userData}) {
     const [digital, setDigital] = useState(userData?.financeGroup?.digital || 0)
@@ -136,11 +138,11 @@ export default function FinanceForm({userData}) {
 
                 {isEditMode ? (
                 <>
-                    <Button type="submit">Save</Button>
-                    <Button onClick={handleCancelClick}>Cancel</Button>
+                    <ButtonTemplate title="Save" type="submit" btnStyle='round'/>
+                    <ButtonTemplate title="Cancel" onClick={handleCancelClick} btnStyle='round'/>
                 </>
                 ) : (
-                    <Button onClick={handleUpdateClick}>Update</Button>
+                    <ButtonTemplate title="Update" onClick={handleUpdateClick} btnStyle='round' />
                 )}
 
             </Form>

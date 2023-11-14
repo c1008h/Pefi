@@ -6,7 +6,7 @@ import { Container, Card, Form, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../../utils/mutations';
 import '../../style/profile.css'
-
+import { ButtonTemplate } from '../Landing';
 export default function ProfileForm({userData}) {
     const [firstName, setFirstName] = useState(userData.firstName || '')
     const [lastName, setLastName] = useState(userData.lastName || '')
@@ -137,11 +137,11 @@ export default function ProfileForm({userData}) {
                     </div>
                     {isEditMode ? (
                     <>
-                        <Button type="submit">Save</Button>
-                        <Button variant="secondary" onClick={handleCancelClick}>Cancel</Button>
+                        <ButtonTemplate title='Save' type='submit' btnStyle='round'/>
+                        <ButtonTemplate title='Cancel' onClick={handleCancelClick} btnStyle='round' />
                     </>
                     ) : (
-                        <Button onClick={handleUpdateClick}>Edit Profile</Button>
+                        <ButtonTemplate title='Edit Profile' onClick={handleUpdateClick} btnStyle='round' />
                     )}
                 </Form>
             </Card>

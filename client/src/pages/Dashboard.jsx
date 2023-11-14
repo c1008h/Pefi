@@ -82,27 +82,31 @@ console.log(data?.me)
                             userData={userData}
                         />
                         <div>
-                            <Button
+                            <ButtonTemplate 
+                                title="Week"
                                 onClick={() => {
                                     setMonthButton(false)
                                     setYearButton(false)
                                     setWeekButton(true)
                                 }}
-                            >Week</Button>
-                            <Button
+                            />
+
+                            <ButtonTemplate
+                                title='Month'
                                 onClick= {() => {
                                     setMonthButton(true)
                                     setYearButton(false)
                                     setWeekButton(false)
                                 }}
-                            >Month</Button>
-                            <Button
+                            />
+                            <ButtonTemplate
+                                title='Year'
                                 onClick= {() => {
                                     setMonthButton(false)
                                     setYearButton(true)
                                     setWeekButton(false)
                                 }}
-                            >Year</Button>
+                            />
                         </div>
                         <DateCalendar
                             value={value} 
@@ -112,8 +116,8 @@ console.log(data?.me)
                         />
                         {/* <h2>{dayjs(value.$d).format('MM/DD/YYYY')}</h2> */}
                         <div>
-                            <ButtonTemplate title='- Expense' onClick={openExpenseForm} />
-                            <ButtonTemplate title='+ Income' onClick={openIncomeForm} />
+                            <ButtonTemplate title='- Expense' onClick={openExpenseForm} btnStyle='navyBtns'/>
+                            <ButtonTemplate title='+ Income' onClick={openIncomeForm} btnStyle='navyBtns'/>
                         </div>
                     </div>
 

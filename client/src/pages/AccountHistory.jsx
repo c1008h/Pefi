@@ -11,6 +11,7 @@ import { Button, Container } from 'react-bootstrap'
 import '../style/details.css'
 
 import { Loading, PleaseLogin } from '../components/index';
+import { ButtonTemplate } from '../components/Landing/index'
 
 export default function AccountHistory() {
     const { data } = useQuery(QUERY_ME)
@@ -107,15 +108,15 @@ export default function AccountHistory() {
             </table>
 
             <div>
-                <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
-                    Previous Page
-                </button>
-                <button
+                <ButtonTemplate 
+                    title="Previous Page" 
+                    onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}
+                />
+                <ButtonTemplate 
+                    title="Next Page" 
                     onClick={() => setCurrentPage(currentPage + 1)}
                     disabled={indexOfLastItem >= combinedData.length}
-                >
-                    Next Page
-                </button>
+                />
             </div>
 
         </Container>

@@ -22,7 +22,7 @@ export default function Welcome() {
                     <ContainerTemplate style="topContainerStyle">
                         <h1>Empower Your Financial Journey</h1>
                         <p>Track Expenses, Set Goals, Visualize Income</p>
-                        <ButtonTemplate location='signup' title='Get Started' />
+                        <ButtonTemplate location='signup' title='Get Started' btnStyle='navyBtns' />
                     </ContainerTemplate>
 
                     <ContainerTemplate title="Benefits: ">
@@ -43,7 +43,7 @@ export default function Welcome() {
 
                     <ContainerTemplate style='bottomContainer'>
                         <h3>Start Your Financial Journey Today!</h3>
-                        <ButtonTemplate location='signup' title='Get Started' />
+                        <ButtonTemplate location='signup' title='Get Started' btnStyle='navyBtns' />
                     </ContainerTemplate>
                 </div>
             )}
