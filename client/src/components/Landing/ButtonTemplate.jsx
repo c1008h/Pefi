@@ -1,10 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function ButtonTemplate({ title, location }) {
+export default function ButtonTemplate({ title, location, onClick }) {
+  const buttonStyle = {
+    marginTop: '2%'
+  }
+
   return (
-    <Link to={`/${location}`}>
-      <button style={{marginTop:'2%'}}>{title}</button>
-    </Link>
+    <>
+      {location ? (
+        <Link to={`/${location}`}>
+          <button style={buttonStyle}>{title}</button>
+        </Link>
+      ) : (
+        <button onClick={onClick} style={buttonStyle}>{title}</button>
+      )}
+    </>
   )
 }

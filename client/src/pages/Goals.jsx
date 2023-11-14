@@ -6,8 +6,7 @@ import GoalCarousel from '../components/Goals/GoalCarousel'
 import { authService } from '../utils/auth'
 import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap'
 import '../style/goals.css'
-import PleaseLogin from '../components/PleaseLogin'
-import Loading from './Loading'
+import { Loading, PleaseLogin } from '../components/index';
 
 export default function Goals() {
   const [userData, setUserData] = useState()

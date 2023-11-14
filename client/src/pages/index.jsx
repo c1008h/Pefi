@@ -3,7 +3,6 @@ export { default as AddGoals } from './AddGoals';
 export { default as Dashboard } from './Dashboard';
 export { default as Finance } from './Finance';
 export { default as Goals } from './Goals';
-export { default as Loading } from './Loading';
 export { default as Login } from './Login';
 export { default as Signup } from './Signup';
 export { default as Profile } from './Profile';

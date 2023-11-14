@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
-import PleaseLogin from '../components/PleaseLogin';
-import Loading from './Loading';
+import { Loading, PleaseLogin } from '../components/index';
 
 export default function Finance() {
   const [userData, setUserData] = useState({})

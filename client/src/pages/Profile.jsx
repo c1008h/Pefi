@@ -6,8 +6,7 @@ import { authService } from '../utils/auth';
 // import { useDispatch } from 'react-redux';
 // import { setUser } from '../utils/reducers/userReducer'; // Import the setUser action
 import ProfileForm from '../components/Profile/ProfileForm';
-import PleaseLogin from '../components/PleaseLogin';
-import Loading from './Loading';
+import { Loading, PleaseLogin } from '../components/index';
 
 export default function Profile() {
   // const user = useSelector((state) => state.user.user)

@@ -16,8 +16,8 @@ import { useSelector, useDispatch } from 'react-redux';
 // import {}
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
-import PleaseLogin from '../components/PleaseLogin.jsx';
-import Loading from './Loading.jsx';
+import { Loading, PleaseLogin } from '../components/index';
+import ButtonTemplate from '../components/Landing/ButtonTemplate.jsx';
 
 export default function Dashboard() {
     const [userData, setUserData] = useState({})
@@ -112,8 +112,8 @@ console.log(data?.me)
                         />
                         {/* <h2>{dayjs(value.$d).format('MM/DD/YYYY')}</h2> */}
                         <div>
-                            <button onClick={openExpenseForm}>- Expense</button>
-                            <button onClick={openIncomeForm}>+ Income</button>  
+                            <ButtonTemplate title='- Expense' onClick={openExpenseForm} />
+                            <ButtonTemplate title='+ Income' onClick={openIncomeForm} />
                         </div>
                     </div>
 
