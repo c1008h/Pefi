@@ -5,7 +5,7 @@ import { Dashboard } from './index';
 import '../style/index.css'
 import { useDispatch, useSelector } from 'react-redux';
 import {isAuthenticated, user } from '../features/auth/authSlice'
-import { ContainerTemplate, CardTemplate } from '../components/Landing/index'
+import { ContainerTemplate, CardTemplate, ButtonTemplate } from '../components/Landing/index'
 import { benefitData, featureData, testimonialData } from '../constants/landingData';
 
 export default function Welcome() {
@@ -22,9 +22,7 @@ export default function Welcome() {
                     <ContainerTemplate style="topContainerStyle">
                         <h1>Empower Your Financial Journey</h1>
                         <p>Track Expenses, Set Goals, Visualize Income</p>
-                        <Link to='/signup'>
-                            <button>Get Started</button>
-                        </Link>
+                        <ButtonTemplate location='signup' title='Get Started' />
                     </ContainerTemplate>
 
                     <ContainerTemplate title="Benefits: ">
@@ -45,9 +43,7 @@ export default function Welcome() {
 
                     <ContainerTemplate style='bottomContainer'>
                         <h3>Start Your Financial Journey Today!</h3>
-                        <Link to='/signup'>
-                            <button style={{marginTop:'2%'}}>Get Started</button>
-                        </Link>
+                        <ButtonTemplate location='signup' title='Get Started' />
                     </ContainerTemplate>
                 </div>
             )}
