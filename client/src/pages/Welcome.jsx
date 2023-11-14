@@ -29,31 +29,33 @@ export default function Welcome() {
 
                     <ContainerTemplate title="Benefits: ">
                         {benefitData.map((item, index) => (
-                            <CardTemplate key={index} 
-                                header={item.header}
-                                body={item.description}
-                            />
+                            <CardTemplate key={index} row={true} header={item.header} body={item.description} />
                         ))}
                     </ContainerTemplate>
-
                     <ContainerTemplate title="Features" >
                         {featureData.map((item, index) => (
-                            <CardTemplate key={index} body={item.description} />
+                            <CardTemplate key={index} body={item.description} row={true} />
+                        ))}
+                    </ContainerTemplate>
+                    <ContainerTemplate title="Testimonials">
+                        {testimonialData.map((item, index) => (
+                            <CardTemplate key={index} body={` "${item.description}" `} row={true}/>
                         ))}
                     </ContainerTemplate>
 
-                    <ContainerTemplate title="Testimonials">
-                        {testimonialData.map((item, index) => (
-                            <CardTemplate key={index} body={` "${item.description}" `}/>
-                        ))}
+                    <ContainerTemplate title="Start Your Financial Journey Today!" style='bottomContainer'>
+                    <Link to='/signup'>
+                            <button style={{marginTop:'2%'}}>Get Started</button>
+                        </Link>
                     </ContainerTemplate>
   
-                    <Container className='content-containers' fluid='true' style={{justifyContent:'center', textAlign:'center'}}>
+
+                    {/* <Container className='content-containers' fluid='true' style={{justifyContent:'center', textAlign:'center'}}>
                         <h3>Start Your Financial Journey Today!</h3>
                         <Link to='/signup'>
                             <button style={{marginTop:'2%'}}>Get Started</button>
                         </Link>
-                    </Container>
+                    </Container> */}
                 </div>
             )}
         </div>
