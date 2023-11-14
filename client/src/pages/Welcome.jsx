@@ -19,13 +19,13 @@ export default function Welcome() {
                 <Dashboard/>
                 ) : (
                 <div>
-                    <Container fluid='true' style={{justifyContent:'center', textAlign:'center', padding: '5%', margin: '5%'}}>
+                    <ContainerTemplate style="topContainerStyle">
                         <h1>Empower Your Financial Journey</h1>
                         <p>Track Expenses, Set Goals, Visualize Income</p>
                         <Link to='/signup'>
                             <button>Get Started</button>
                         </Link>
-                    </Container>
+                    </ContainerTemplate>
 
                     <ContainerTemplate title="Benefits: ">
                         {benefitData.map((item, index) => (
@@ -43,19 +43,12 @@ export default function Welcome() {
                         ))}
                     </ContainerTemplate>
 
-                    <ContainerTemplate title="Start Your Financial Journey Today!" style='bottomContainer'>
-                    <Link to='/signup'>
-                            <button style={{marginTop:'2%'}}>Get Started</button>
-                        </Link>
-                    </ContainerTemplate>
-  
-
-                    {/* <Container className='content-containers' fluid='true' style={{justifyContent:'center', textAlign:'center'}}>
+                    <ContainerTemplate style='bottomContainer'>
                         <h3>Start Your Financial Journey Today!</h3>
                         <Link to='/signup'>
                             <button style={{marginTop:'2%'}}>Get Started</button>
                         </Link>
-                    </Container> */}
+                    </ContainerTemplate>
                 </div>
             )}
         </div>

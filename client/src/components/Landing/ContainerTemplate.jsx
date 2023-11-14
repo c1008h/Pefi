@@ -13,7 +13,7 @@ export default function ContainerTemplate({ title, children, style, row }) {
     justifyContent:'center', textAlign:'center', padding: '5%', margin: '5%'
   }
 
-  const containerClass = style === 'bottomContainer' ? bottomContainerStyle : topContainerStyle;
+  const containerClass = style === 'bottomContainer' ? bottomContainerStyle : (style === 'topContainer' ? topContainerStyle : null);
   
   return (
     <Container fluid='true' className='content-containers' style={containerClass}>
