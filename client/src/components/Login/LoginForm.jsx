@@ -1,7 +1,7 @@
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'; // Import PropTypes
-export default function LoginForm({ handleFormSubmit, handleChange, formState }) {
+export default function LoginForm({ handleFormSubmit, handleChange, formState, hasRequirement }) {
   const imageStyles = {
     objectFit: 'cover',
     width: '100%',
@@ -41,7 +41,6 @@ export default function LoginForm({ handleFormSubmit, handleChange, formState })
                     onChange={handleChange}
                     required
                     isInvalid={!formState.password} 
-
                   />
                 </Form.Group>
 

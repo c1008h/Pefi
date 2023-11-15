@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
-import { FormLayout, FormTemplate } from '../components/index'
-import { ButtonTemplate } from '../components/Landing';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 // import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 // import { setUser } from '../utils/reducers/userReducer'; // Import the setUser action
 // import ProfileForm from '../components/Profile/ProfileForm';
-import { Loading, PleaseLogin } from '../components/index';
+import { Loading, PleaseLogin, FormTemplate, FormLayout } from '../components/index';
 import { UPDATE_USER } from '../utils/mutations';
 import PasswordModal from '../components/Profile/PasswordModal';
 import DeleteAccountModal from '../components/Profile/DeleteAccountModal';

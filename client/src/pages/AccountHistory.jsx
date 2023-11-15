@@ -78,7 +78,7 @@ export default function AccountHistory() {
     // console.log(currentItems)
 
     return (
-        <Container fluid='true' style={{justifyContent:'center', textAlign:'center'}} className='container'>
+        <Container fluid='true' style={{ display:'flex', flexDirection: 'column', justifyContent:'center', textAlign:'center', minHeight: '100vh'}} className='container'>
             <table>
                 <thead>
                     <tr>
@@ -96,27 +96,16 @@ export default function AccountHistory() {
                             <td>{item.type === 'Expense' ? 'Expense' : 'Income'}</td>
                             <td>{item.category}</td>
                             <td>
-                                <Button 
-                                    variant='secondary'
-                                    onClick={() => handleDelete(item._id, item.type)}
-                                >X
-                                </Button>
+                                <ButtonTemplate title='X' onClick={() => handleDelete(item._id, item.type)} btnStyle='round'/>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
-            <div>
-                <ButtonTemplate 
-                    title="Previous Page" 
-                    onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}
-                />
-                <ButtonTemplate 
-                    title="Next Page" 
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                    disabled={indexOfLastItem >= combinedData.length}
-                />
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: 'auto', marginBottom: '10px' }}>
+                <ButtonTemplate title="<" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
+                <ButtonTemplate title=">" onClick={() => setCurrentPage(currentPage + 1)} disabled={indexOfLastItem >= combinedData.length} />
             </div>
 
         </Container>

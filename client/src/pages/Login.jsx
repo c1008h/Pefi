@@ -7,28 +7,58 @@ import { Alert } from 'react-bootstrap'
 import { LOGIN_USER } from '../utils/mutations';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../features/auth/authSlice'
+import { Container } from 'react-bootstrap'
+import { FormLayout, FormTemplate } from "../components";
+import AuthFormTemplate from "../components/Signup/AuthFormTemplate";
+import { ButtonTemplate } from "../components/Landing";
+
+const styles = {
+  container: {
+    display: 'flex',
+    height: '100vh', 
+    background: `url('/earth.jpg') no-repeat center center fixed`,
+    backgroundSize: 'cover',
+    justifyContent:'center',
+    alignItems: 'center', 
+  },
+  formContainer: {
+    height:'50%',
+    width:'70%'
+  },
+  title: {
+    color:'white',
+    fontWeight:'bold'
+  },
+  card: {
+    padding:'3% 5% 3% 5%',
+    margin: '3% 15%'
+  }
+}
+
+const formStyle = {
+  form: {
+    padding:'15%', justifyContent:'center'
+  },
+}
 
 export default function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
   const { email, password } = formState;
 
   const [login, { error }] = useMutation(LOGIN_USER);
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormState({
-        ...formState,
-        [name]: value,
-    });
-  };
-
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
   console.log("Is authenticated:", isAuthenticated)
-  // submit form
+
+  const handleChange = (updatedFormState) =>{ 
+    setFormState(updatedFormState)
+    setIsButtonDisabled(!(updatedFormState.email && updatedFormState.password))
+  };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(formState);
@@ -39,9 +69,7 @@ export default function Login() {
     }
 
     try {
-      const { data } = await login({
-        variables: { email, password },
-      });
+      const { data } = await login({ variables: { email, password } });
 
       dispatch(loginUser(data.login.user))
       // console.log('data', data.login.user)
@@ -52,11 +80,19 @@ export default function Login() {
       console.log(e);
     }
 
-    setFormState({
-      email: '',
-      password: '',
-    });
+    setFormState({ email: '', password: '' });
   };
+
+  const fields = [
+    {
+      label: 'Email', name: 'email', type: 'email', value: formState.email, placeholder:"Enter email",
+      onChange: handleChange, isInvalid:!formState.email, validationFeedback: "Email is required!"
+    },
+    {
+      label: 'Password', name: 'password', type: 'password', value: formState.password, placeholder:"Enter password",
+      onChange: handleChange, isInvalid:!formState.email, validationFeedback: "Password is required!"
+    },
+  ]
 
   return (
     <div>
@@ -66,11 +102,38 @@ export default function Login() {
         <Link to="/">back to the homepage.</Link>
       </p>
       ) : (
-        <LoginForm 
-          handleFormSubmit={handleFormSubmit}
-          handleChange={handleChange}
-          formState={formState}
-        />
+        <Container fluid='true' style={styles.container}>
+          {/* <Row style={containerStyle}> */}
+            {/* <Col style={{padding:'0', margin: '0'}}>
+              <img src='/earth.jpg' alt='earth' style={imageStyles}/>
+            </Col> */}
+            {/* <Col> */}
+          <FormLayout 
+            title='Log in to Pefi' 
+            styles={styles}
+          >
+            <AuthFormTemplate 
+              fields={fields}
+              onSubmit={handleFormSubmit}
+              onChange={handleChange}
+              disabled={isButtonDisabled}  
+              >
+              <ButtonTemplate 
+                title="Log in" 
+                type="submit" 
+                btnStyle="round" 
+                onClick={handleFormSubmit}
+                disabled={isButtonDisabled}
+              />
+            </AuthFormTemplate>
+            <div>
+              <h5 style={{textAlign:'center', margin:'2.5rem', fontWeight:'bold'}}>
+                 OR
+              </h5>
+              <h5>Not on Pefi? <Link to='/signup'>Create an account</Link></h5>
+            </div>
+          </FormLayout>
+        </Container>
       )}
 
       {error && (

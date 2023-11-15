@@ -5,10 +5,7 @@ import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 import { CREATE_FINANCE } from '../utils/mutations'
 import { useMutation } from '@apollo/client';
-
-import { Loading, PleaseLogin } from '../components/index';
-import { FormLayout, FormTemplate } from '../components/index'
-import { ButtonTemplate } from '../components/Landing/index'
+import { Loading, PleaseLogin, FormTemplate, FormLayout } from '../components/index';
 
 export default function Finance() {
   const [userData, setUserData] = useState({});
@@ -77,12 +74,10 @@ export default function Finance() {
 
 
   const token = authService.loggedIn() ? authService.getToken() : null;
-  if(!token) {
-      return <PleaseLogin/>
-  }
-  if(loading) {
-      return <Loading />
-  }
+  if(!token) return <PleaseLogin/>
+
+  if (loading) return <Loading />
+  
 
   return (
     <FormLayout title="Finance">

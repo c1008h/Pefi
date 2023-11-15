@@ -3,7 +3,13 @@ import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { ButtonTemplate } from './Landing';
 
-export default function FormTemplate({ fields, onSubmit }) {
+export default function FormTemplate({ 
+  fields, 
+  onSubmit, 
+  isAuthenticationForm, 
+  disabled, 
+  hasRequirement 
+}) {
   const [formData, setFormData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -45,6 +51,8 @@ export default function FormTemplate({ fields, onSubmit }) {
                 name={field.name}
                 value={formData[field.name]}
                 onChange={handleChange}
+                placeholder={field.placeholder}
+                // {...(hasRequirement ? { required: true } : {})}
               />
             ) : (
               <Form.Control value={field.value} disabled />
@@ -53,13 +61,31 @@ export default function FormTemplate({ fields, onSubmit }) {
         )
       })}
 
-      {isEditMode ? (
+      {isAuthenticationForm ? (
+        <ButtonTemplate title="Log in" type="submit" btnStyle="round" disabled={disabled} />
+      ) : (
+        isEditMode ? (
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <ButtonTemplate title="Save" type="submit" btnStyle="round" />
+            <ButtonTemplate title="Cancel" onClick={handleCancelClick} btnStyle="round" />
+          </div>
+        ) : (
+          <ButtonTemplate title="Update" onClick={handleUpdateClick} btnStyle="round" />
+        )
+      )}
+
+      {/* {isEditMode ? (
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <ButtonTemplate title="Save" type="submit" btnStyle='round'/>
           <ButtonTemplate title="Cancel" onClick={handleCancelClick} btnStyle='round'/>
         </div>
       ) : (
         <ButtonTemplate title="Update" onClick={handleUpdateClick} btnStyle='round' />
+      )} */}
+      {isAuthenticationForm && fields.validationFeedback && (
+        <Form.Control.Feedback type='invalid'>
+          {fields.validationFeedback}
+        </Form.Control.Feedback>
       )}
     </Form>
   )

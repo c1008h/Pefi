@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Welcome, Dashboard, Signup, Login, Goals, Finance, Profile, AccountHistory, AddGoals} from './pages/index'
+import { Footer, Navbar } from './components/'
 import 'react-calendar/dist/Calendar.css';
 import './style/calendar.css'
 import './style/index.css';
@@ -15,31 +16,31 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Welcome />
+        element: <><Navbar/><Welcome /><Footer/></>
       }, 
       {
         path: '/dashboard',
-        element:<Dashboard/>
+        element:<><Navbar/><Dashboard/><Footer/></>
       },
       {
         path: '/details',
-        element:<AccountHistory/>
+        element:<><Navbar/><AccountHistory/><Footer/></>
       },
       {
         path: '/goals',
-        element:<Goals/>
+        element:<><Navbar/><Goals/><Footer/></>
       },
       {
         path: '/addgoals',
-        element:<AddGoals/>
+        element:<><Navbar/><AddGoals/><Footer/></>
       },
       {
         path: '/finance',
-        element:<Finance/>
+        element:<><Navbar/><Finance/><Footer/></>
       },
       {
         path: '/profile',
-        element:<Profile/>
+        element:<><Navbar/><Profile/><Footer/></>
       },
       {
         path: '/signup',

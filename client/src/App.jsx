@@ -52,15 +52,13 @@ export default function App() {
     cache: new InMemoryCache(),
     // cache: cache
   });
-  
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ApolloProvider client={client}>
         <div className='app-container'>
           <Provider store={store}>
-            <Navbar />
-            <Outlet />
-            <Footer />
+            <Outlet/>
           </Provider>
         </div>
       </ApolloProvider>
