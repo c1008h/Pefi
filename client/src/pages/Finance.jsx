@@ -80,7 +80,7 @@ export default function Finance() {
   
 
   return (
-    <FormLayout title="Finance">
+    <FormLayout title="Finance" styles={financeForm}>
       <FormTemplate 
         fields={fields}
         onSubmit={(formData) => {
@@ -89,4 +89,20 @@ export default function Finance() {
       />
     </FormLayout>
   )
+}
+
+const financeForm = {
+  
+  formContainer: {
+    paddingTop:'3%',
+    marginBottom:'5%'
+  },
+  title: {
+
+  },
+  card: {
+    padding:'3% 5% 3% 5%',
+    margin: '3% 15%',
+  }
+  
 }

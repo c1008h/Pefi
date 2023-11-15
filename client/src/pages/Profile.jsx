@@ -131,7 +131,7 @@ export default function Profile() {
   }
 
   return (
-    <FormLayout title="Profile">
+    <FormLayout title="Profile" styles={profileForm} >
       <FormTemplate 
         fields={fields}
         onSubmit={(formData) => {
@@ -159,4 +159,20 @@ export default function Profile() {
       </div>
     </FormLayout>
   )
+}
+
+const profileForm = {
+  
+  formContainer: {
+    paddingTop:'3%',
+    marginBottom:'5%'
+  },
+  title: {
+
+  },
+  card: {
+    padding:'3% 5% 3% 5%',
+    margin: '3% 15%',
+  }
+  
 }

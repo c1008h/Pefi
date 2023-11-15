@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { authService } from '../utils/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import '../style/navbar.css'
@@ -23,19 +23,19 @@ export default function Navbar () {
             { authService.loggedIn() ? (
             // {/* {!isAuthenticated ? ( */}
             <div className='container'>
-                <Link to='/dashboard' className='nav-item'>Dashboard</Link>
-                <Link to='/details' className='nav-item'>Details</Link>
-                <Link to='/goals' className='nav-item'>Goals</Link>
-                <Link to='finance' className='nav-item'>Finance</Link>
-                <Link to='/profile' className='nav-item'>Profile</Link>
+                <NavLink to='/dashboard' className='nav-item'>Dashboard</NavLink>
+                <NavLink to='/details' className='nav-item'>Details</NavLink>
+                <NavLink to='/goals' className='nav-item'>Goals</NavLink>
+                <NavLink to='/finance' className='nav-item'>Finance</NavLink>
+                <NavLink to='/profile' className='nav-item'>Profile</NavLink>
                 <Link to='/welcome' className='nav-item' onClick={ logout }>Logout</Link>  
 
             </div>
             ) : (
             <div className='container'>
-                <Link className='nav-item'>Pefi</Link>
-                <Link to='/signup' className='nav-item'>Signup</Link>
-                <Link to='/login' className='nav-item'>Login</Link>
+                <NavLink className='nav-item'>Pefi</NavLink>
+                <NavLink to='/signup' className='nav-item'>Signup</NavLink>
+                <NavLink to='/login' className='nav-item'>Login</NavLink>
             </div>
             )}
         </nav>

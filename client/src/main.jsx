@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Welcome, Dashboard, Signup, Login, Goals, Finance, Profile, AccountHistory, AddGoals} from './pages/index'
+import { Welcome, Error, Dashboard, Signup, Login, Goals, Finance, Profile, AccountHistory, AddGoals} from './pages/index'
 import { Footer, Navbar } from './components/'
 import 'react-calendar/dist/Calendar.css';
 import './style/calendar.css'
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   {
     path:'/',
     element: <App />,
-    // error: <NoMatch />,
+    error: <Error />,
     children: [
       {
         index: true,
