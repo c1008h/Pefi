@@ -12,35 +12,6 @@ import { FormLayout, FormTemplate } from "../components";
 import AuthFormTemplate from "../components/Signup/AuthFormTemplate";
 import { ButtonTemplate } from "../components/Landing";
 
-const styles = {
-  container: {
-    display: 'flex',
-    height: '100vh', 
-    background: `url('/earth.jpg') no-repeat center center fixed`,
-    backgroundSize: 'cover',
-    justifyContent:'center',
-    alignItems: 'center', 
-  },
-  formContainer: {
-    height:'50%',
-    width:'70%'
-  },
-  title: {
-    color:'white',
-    fontWeight:'bold'
-  },
-  card: {
-    padding:'3% 5% 3% 5%',
-    margin: '3% 15%'
-  }
-}
-
-const formStyle = {
-  form: {
-    padding:'15%', justifyContent:'center'
-  },
-}
-
 export default function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -90,7 +61,7 @@ export default function Login() {
     },
     {
       label: 'Password', name: 'password', type: 'password', value: formState.password, placeholder:"Enter password",
-      onChange: handleChange, isInvalid:!formState.email, validationFeedback: "Password is required!"
+      onChange: handleChange, isInvalid:!formState.password, validationFeedback: "Password is required!"
     },
   ]
 
@@ -117,7 +88,7 @@ export default function Login() {
               onSubmit={handleFormSubmit}
               onChange={handleChange}
               disabled={isButtonDisabled}  
-              >
+            >
               <ButtonTemplate 
                 title="Log in" 
                 type="submit" 
@@ -143,4 +114,33 @@ export default function Login() {
       )}
     </div>
   )
+}
+
+const styles = {
+  container: {
+    display: 'flex',
+    height: '100vh', 
+    background: `url('/earth.jpg') no-repeat center center fixed`,
+    backgroundSize: 'cover',
+    justifyContent:'center',
+    alignItems: 'center', 
+  },
+  formContainer: {
+    height:'50%',
+    width:'70%'
+  },
+  title: {
+    color:'white',
+    fontWeight:'bold'
+  },
+  card: {
+    padding:'3% 5% 3% 5%',
+    margin: '3% 15%'
+  }
+}
+
+const formStyle = {
+  form: {
+    padding:'15%', justifyContent:'center'
+  },
 }
