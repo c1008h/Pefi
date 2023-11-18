@@ -18,18 +18,8 @@ export default function ButtonTemplate({
   disabled, 
   type 
 }) {
-  // const [isDisabled, setIsDisabled] = useState(disabled);
-
-  // useEffect(() => {
-  //   setIsDisabled(disabled);
-
-  // }, [disabled])
-  console.log('Is button disabled?', disabled);
-
-
   const buttonStyle = btnStyle === 'navy' ? navyBtns : (btnStyle === 'round' ? roundBtns : null);
 
-  console.log(disabled)
   return (
     <>
       {location ? (

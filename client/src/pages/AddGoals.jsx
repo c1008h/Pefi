@@ -7,7 +7,6 @@ import { ADD_USER } from '../utils/mutations';
 import { authService } from '../utils/auth';
 import { Alert, ProgressBar } from 'react-bootstrap'
 // import { LoginForm } from '../components/Signup/First/SignupForm';
-import { FirstGoal, SecondGoal, ThirdGoal, FourthGoal, FifthGoal } from '../components/Signup/3-Goal'
 import '../style/signup.css'
 
 export default function Signup() {

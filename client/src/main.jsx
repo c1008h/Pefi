@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Welcome, Error, Dashboard, Signup, Login, Goals, Finance, Profile, AccountHistory, AddGoals} from './pages/index'
+import { Welcome, Error, Dashboard, Signup, OnBoarding, Login, Goals, Finance, Profile, AccountHistory } from './pages/index'
 import { Footer, Navbar } from './components/'
 import 'react-calendar/dist/Calendar.css';
 import './style/calendar.css'
@@ -30,10 +30,10 @@ const router = createBrowserRouter([
         path: '/goals',
         element:<><Navbar/><Goals/><Footer/></>
       },
-      {
-        path: '/addgoals',
-        element:<><Navbar/><AddGoals/><Footer/></>
-      },
+      // {
+      //   path: '/addgoals',
+      //   element:<><Navbar/><AddGoals/><Footer/></>
+      // },
       {
         path: '/finance',
         element:<><Navbar/><Finance/><Footer/></>
@@ -45,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element:<Signup/>
+      },
+      {
+        path: '/signup/*',
+        element:<OnBoarding/>
       },
       {
         path: '/login',
