@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { Container, Col, Button, ProgressBar } from 'react-bootstrap';
-import { RowTemplate, FormLayout, AuthFormTemplate } from '../components';
-import { ButtonTemplate } from '../components/Landing';
+import { RowTemplate, FormLayout, AuthFormTemplate, ButtonTemplate } from '../components';
 import { useMutation } from '@apollo/client';
 import { CREATE_GOALS, UPDATE_USER, CREATE_NETWORTH, ADD_USER, CREATE_FINANCE } from '../utils/mutations';
 import dayjs from 'dayjs';

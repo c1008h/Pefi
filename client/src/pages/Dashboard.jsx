@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
 import { Loading, PleaseLogin } from '../components/index';
-import ButtonTemplate from '../components/Landing/ButtonTemplate.jsx';
+import ButtonTemplate from '../components/ButtonTemplate.jsx';
 
 export default function Dashboard() {
     const [userData, setUserData] = useState({})
@@ -122,17 +122,13 @@ console.log(data?.me)
                     </div>
 
                     <div className='row'>
-
-
                         <div>
                             {monthButton && <Monthly userData={userData} />}
                             {yearButton && <Yearly userData={userData} />}
                             {weekButton && <Weekly userData={userData} />}   
                         </div>
                         <div>
-                            <NetworthLine 
-                                userData={userData}
-                            />
+                            <NetworthLine userData={userData} />
                         </div>
                     </div>
                 </div>

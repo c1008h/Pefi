@@ -8,8 +8,7 @@ import { authService } from '../utils/auth';
 import { Alert, Container, Row, Col } from 'react-bootstrap'
 import { privacyPolicy, accountAgreement } from '../constants/agreementData'
 import '../style/signup.css'
-import { ButtonTemplate } from '../components/Landing';
-import { FormLayout, AuthFormTemplate, AgreementModal } from "../components";
+import { FormLayout, ButtonTemplate, AuthFormTemplate, AgreementModal } from "../components";
 import OnBoarding from './OnBoarding';
 
 export default function Signup() {

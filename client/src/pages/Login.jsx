@@ -7,9 +7,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../features/auth/authSlice'
 import { Container } from 'react-bootstrap'
-import { FormLayout, FormTemplate } from "../components";
-import AuthFormTemplate from "../components/Signup/AuthFormTemplate";
-import { ButtonTemplate } from "../components/Landing";
+import { FormLayout, FormTemplate, AuthFormTemplate, ButtonTemplate } from "../components";
 
 export default function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });

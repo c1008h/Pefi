@@ -6,5 +6,10 @@ export { default as ModalTemplate } from './ModalTemplate'
 export { default as FormTemplate } from './FormTemplate'
 export { default as FormLayout } from './FormLayout'
 export { default as RowTemplate } from './RowTemplate'
-export { default as AuthFormTemplate } from '../components/Signup/AuthFormTemplate'
+export { default as AuthFormTemplate } from './AuthFormTemplate'
 export { default as AgreementModal } from './AgreementModal'
+
+
+export { default as ButtonTemplate } from './ButtonTemplate'
+export { default as CardTemplate } from './CardTemplate'
+export { default as ContainerTemplate } from './ContainerTemplate'

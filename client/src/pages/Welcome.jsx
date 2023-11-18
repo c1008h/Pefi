@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
 import  {authService } from '../utils/auth'
 import { Dashboard } from './index';
 import '../style/index.css'
 import { useDispatch, useSelector } from 'react-redux';
 import {isAuthenticated, user } from '../features/auth/authSlice'
-import { ContainerTemplate, CardTemplate, ButtonTemplate } from '../components/Landing/index'
+import { ContainerTemplate, CardTemplate, ButtonTemplate } from '../components'
 import { benefitData, featureData, testimonialData } from '../constants/landingData';
 
 export default function Welcome() {

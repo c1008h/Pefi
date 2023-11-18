@@ -1,4 +1,4 @@
-export const Expenses = () => {
+const Expenses = () => {
     return (
         <form style={{
                 display:'flex', 

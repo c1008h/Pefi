@@ -10,8 +10,7 @@ import { authService } from '../utils/auth';
 import { Button, Container } from 'react-bootstrap'
 import '../style/details.css'
 
-import { Loading, PleaseLogin } from '../components/index';
-import { ButtonTemplate } from '../components/Landing/index'
+import { Loading, PleaseLogin, ButtonTemplate } from '../components/index';
 
 export default function AccountHistory() {
     const { data } = useQuery(QUERY_ME)

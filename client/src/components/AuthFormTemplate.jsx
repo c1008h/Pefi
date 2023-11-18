@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Select from 'react-select'
-import { genderList } from '../../constants/genders';
+import { genderList } from '../constants/genders';
 export default function AuthFormTemplate({ 
   fields, onSubmit, isAuthenticationForm, 
   disabled, hasRequirement, children, onChange }) {

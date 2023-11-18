@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { ButtonTemplate } from './Landing';
+import { ButtonTemplate } from '../components';
 
 export default function FormTemplate({ 
   fields, 
