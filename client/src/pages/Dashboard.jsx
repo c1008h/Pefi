@@ -66,12 +66,9 @@ console.log(data?.me)
     }
 
     const token = authService.loggedIn() ? authService.getToken() : null;
-    if(!token) {
-        return <PleaseLogin />
-    }
-    if(loading) {
-        return <Loading />
-    }
+    if(!token) return <PleaseLogin />
+    if(loading) return <Loading />
+    
     return (
         <div className='container' style={{flexDirection:'row'}}>
             {/* <h2>Dashboard</h2> */}

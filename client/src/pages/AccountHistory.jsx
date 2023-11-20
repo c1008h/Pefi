@@ -6,8 +6,7 @@ import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 // import { useDispatch } from 'react-redux';
 // import { setExpenses, setIncomes, updateCash, updateDigital, updateInvested, updateSaved, updateNetworth } from '../store/slices/financeSlice.jsx';
-
-import { Button, Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import '../style/details.css'
 
 import { Loading, PleaseLogin, ButtonTemplate } from '../components/index';
@@ -46,6 +45,7 @@ export default function AccountHistory() {
             setCombinedData(combined);
         }
     }, [data])
+
     const handleDelete = async (_id, type) => {
         console.log(_id, type)
         try {
@@ -64,13 +64,11 @@ export default function AccountHistory() {
             console.log('Error:', error);
         }
     };
+
     const token = authService.loggedIn() ? authService.getToken() : null;
-    if(!token) {
-        return <PleaseLogin />
-    }
-    if(loading) {
-        return <Loading />
-    }
+    if(!token) return <PleaseLogin />
+    if(loading) return <Loading />
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = combinedData.slice(indexOfFirstItem, indexOfLastItem);

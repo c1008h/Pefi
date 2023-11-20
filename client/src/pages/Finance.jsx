@@ -78,7 +78,6 @@ export default function Finance() {
 
   if (loading) return <Loading />
   
-
   return (
     <FormLayout title="Finance" styles={financeForm}>
       <FormTemplate 
