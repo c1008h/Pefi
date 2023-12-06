@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 // const User = require('./User');
 
 const expenseSchema = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref:'User'
+    },
     amount: {
         type: Number,
         // required: true,
@@ -21,6 +25,9 @@ const expenseSchema = new Schema({
     date: {
         type: String,
         // required: true
+    },
+    note: {
+        type: String
     }
 }, 
     { timestamps: true } 

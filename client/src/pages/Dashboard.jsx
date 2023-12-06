@@ -7,7 +7,14 @@ import Yearly from '../components/Dashboard/Graphs/Yearly.jsx';
 import Monthly from '../components/Dashboard/Graphs/Monthly.jsx'
 import Weekly from '../components/Dashboard/Graphs/Weekly.jsx'
 import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../utils/queries'
+import { 
+    QUERY_EXPENSE_BY_YEAR, 
+    QUERY_EXPENSE_BY_MONTH, 
+    QUERY_EXPENSE_BY_DAY,
+    QUERY_INCOME_BY_YEAR,
+    QUERY_INCOME_BY_MONTH,
+    QUERY_INCOME_BY_DAY 
+} from '../utils/queries'
 import { authService } from '../utils/auth';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers';
@@ -17,14 +24,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import NetworthLine from '../components/Dashboard/Graphs/NetworthLine.jsx';
 import { Loading, PleaseLogin } from '../components/index';
-import ButtonTemplate from '../components/ButtonTemplate.jsx';
+import ButtonTemplate from '../components/buttons/ButtonTemplate.jsx';
 
 export default function Dashboard() {
     const [userData, setUserData] = useState({})
     const [showExpenseForm, setShowExpenseForm] = useState(false);
     const [showIncomeForm, setShowIncomeForm] = useState(false);
     const [loading, setLoading] = useState(true)
-    const { data } = useQuery(QUERY_ME)
+    const { expenseYear } = useQuery(QUERY_EXPENSE_BY_YEAR)
     const [value, setValue] = useState(dayjs());
 
     const [weekButton, setWeekButton] = useState(false)
@@ -35,14 +42,14 @@ export default function Dashboard() {
 
     // const expenses = useSelector((state) => state.finance.expenses);
     // const incomes = useSelector((state) => state.finance.incomes)
-console.log(data?.me)
+console.log(expenseYear)
     useEffect(() => {
-        if (data) {
-          setUserData(data.me)
+        if (expenseYear) {
+          setUserData(expenseYear)
           setLoading(false)
         //   dispatch(setExpenses(data.me.expenseGroup))
         }
-    }, [data])
+    }, [expenseYear])
 
     function handleDateChange(newValue) {
         setValue(newValue)

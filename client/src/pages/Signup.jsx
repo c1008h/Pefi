@@ -40,9 +40,11 @@ export default function Signup() {
 
     try {
       const { data } = await addUser({ variables: { email: formState.email.trim(), password: formState.password.trim() } })
+      const { token, user } = data.addUser;
+
       // dispatch(setUser(data.addUser.user))
 
-      authService.signup(data.addUser.token)
+      authService.signup(token, user.id)
     } catch (e) {
       console.log('unable to add user')
       console.log(e)

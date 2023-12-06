@@ -22,26 +22,26 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element:<><Navbar/><Dashboard/><Footer/></>
       },
-      {
-        path: '/details',
-        element:<><Navbar/><AccountHistory/><Footer/></>
-      },
-      {
-        path: '/goals',
-        element:<><Navbar/><Goals/><Footer/></>
-      },
+      // {
+      //   path: '/details',
+      //   element:<><Navbar/><AccountHistory/><Footer/></>
+      // },
+      // {
+      //   path: '/goals',
+      //   element:<><Navbar/><Goals/><Footer/></>
+      // },
       // {
       //   path: '/addgoals',
       //   element:<><Navbar/><AddGoals/><Footer/></>
       // },
-      {
-        path: '/finance',
-        element:<><Navbar/><Finance/><Footer/></>
-      },
-      {
-        path: '/profile',
-        element:<><Navbar/><Profile/><Footer/></>
-      },
+      // {
+      //   path: '/finance',
+      //   element:<><Navbar/><Finance/><Footer/></>
+      // },
+      // {
+      //   path: '/profile',
+      //   element:<><Navbar/><Profile/><Footer/></>
+      // },
       {
         path: '/signup',
         element:<Signup/>

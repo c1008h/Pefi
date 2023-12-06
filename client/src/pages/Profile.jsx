@@ -6,7 +6,7 @@ import { authService } from '../utils/auth';
 // import { useDispatch } from 'react-redux';
 // import { setUser } from '../utils/reducers/userReducer'; // Import the setUser action
 // import ProfileForm from '../components/Profile/ProfileForm';
-import { Loading, PleaseLogin, FormTemplate, FormLayout } from '../components/index';
+import { Loading, PleaseLogin, FormTemplate, FormLayout, ModalTemplate } from '../components/index';
 import { UPDATE_USER } from '../utils/mutations';
 import PasswordModal from '../components/Profile/PasswordModal';
 import DeleteAccountModal from '../components/Profile/DeleteAccountModal';
@@ -155,6 +155,19 @@ export default function Profile() {
             handleClose={handleCloseDeleteModal}
             userData={userData}
           />
+          // <ModalTemplate
+          //   title={"Delete Account"}
+          //   change={"Delete"}
+          //   show={show}
+          //   handleClose={handleClose}
+          //   handleChange={handleDelete}
+          //   primaryButtonDisabled={!isPasswordCorrect || !isAgreed}
+          // >
+          //   <FormTemplate 
+          //     // fields={}
+              
+          //   />
+          // </ModalTemplate>
         ) : null}
       </div>
     </FormLayout>

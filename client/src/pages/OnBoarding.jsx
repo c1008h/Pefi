@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Container, Col, Button, ProgressBar } from 'react-bootstrap';
 import { RowTemplate, FormLayout, AuthFormTemplate, ButtonTemplate } from '../components';
 import { useMutation } from '@apollo/client';
-import { CREATE_GOALS, UPDATE_USER, CREATE_NETWORTH, ADD_USER, CREATE_FINANCE } from '../utils/mutations';
+import { CREATE_GOALS, UPDATE_USER, CREATE_NETWORTH, ADD_A_USER, ADD_FINANCE } from '../utils/mutations';
 import dayjs from 'dayjs';
 import { onboardingScreenData, currentFinancialInfo, userInformation, goalInformation, financialScreenData } from '../constants/onboardingData'
+import { authService } from '../utils/auth';
 
 export default function OnBoarding({ children }) {
     const [userDataState, setUserDataState] = useState({ firstName: '', lastName: '', birthday: '', gender: '', location:''})
@@ -13,6 +14,7 @@ export default function OnBoarding({ children }) {
     const [userFinancial, setUserFinancial] = useState({ incomeLevel: 0, currentDigital:0, currentCash: 0, currentSaved:0, currentInvested: 0 })
     const [thisYear, setThisYear] = useState(dayjs().year());
     const [nextYear, setNextYear] = useState()
+    const [userId, setUserId] = useState(authService.getUserId)
     
     const [firstNameError, setFirstNameError] = useState("");
     const [lastNameError, setLastNameError] = useState("");
@@ -24,8 +26,7 @@ export default function OnBoarding({ children }) {
     const [ createGoals ] = useMutation(CREATE_GOALS)
     const [ updateUser ] = useMutation(UPDATE_USER)
     const [ createNetworth ] = useMutation(CREATE_NETWORTH)
-    const [ createFinance ] = useMutation(CREATE_FINANCE)
-      const [addUser, { error }] = useMutation(ADD_USER);
+    const [ createFinance ] = useMutation(ADD_FINANCE)
     const onboardingScreenDatas = onboardingScreenData(thisYear);
 
     const navigate = useNavigate();
@@ -68,51 +69,52 @@ export default function OnBoarding({ children }) {
     };
 
     const handleSubmitInfo = async (userDataState) => {
-        console.log(userDataState)
-    
-        if (!userDataState.firstName || !userDataState.lastName) {
-            console.error('Error: Required fields are empty');
-            setFirstNameError("Please enter your first name.");
-            setLastNameError("Please enter your last name.");
-            return;
-        }
-        try {
-            await updateUser({
-                variables: {
-                    firstName: userDataState.firstName.trim(),
-                    lastName: userDataState.lastName.trim(),
-                    birthday: userDataState.birthday,
-                    gender: userDataState.gender.trim(),
-                    location: userDataState.location.trim()
-                }
-            })
-            handleNextStep()
-            console.log('successfully saved user information!')
-        } catch (error) {
-            console.error('Error:', error)
-        }
+      console.log(userDataState)
+  
+      if (!userDataState.firstName || !userDataState.lastName) {
+          console.error('Error: Required fields are empty');
+          setFirstNameError("Please enter your first name.");
+          setLastNameError("Please enter your last name.");
+          return;
+      }
+      try {
+        await updateUser({
+          variables: {
+            firstName: userDataState.firstName.trim(),
+            lastName: userDataState.lastName.trim(),
+            birthday: userDataState.birthday,
+            gender: userDataState.gender.trim(),
+            location: userDataState.location.trim()
+          }
+        })
+        handleNextStep()
+        console.log('successfully saved user information!')
+      } catch (error) {
+        console.error('Error:', error)
+      }
     };
     const handleChangeUserInfo = (updatedUserDataState) => {
-        setUserDataState((prevUserDataState) => ({
-          ...prevUserDataState,
-          ...updatedUserDataState,
-        }));
+      setUserDataState((prevUserDataState) => ({
+        ...prevUserDataState,
+        ...updatedUserDataState,
+      }));
     };    
-    const handleSubmitGoal = async (formState, thisYear) => {
-        if(!thisYear || !formState.digital || !formState.cash || !formState.invested || !formState.saved) {
-            // console.log('need to fill out form')
-            return
+    const handleSubmitGoal = async (formState, thisYear, userId) => {
+      if(!thisYear || !formState.digital || !formState.cash || !formState.invested || !formState.saved) {
+        // console.log('need to fill out form')
+        return
+      }
+      try {
+        const year = parseInt(thisYear);
+        if (isNaN(year)) {
+            console.error('Invalid year:', year);
+            return; 
         }
-        try {
-            const year = parseInt(thisYear);
-            if (isNaN(year)) {
-                console.error('Invalid year:', year);
-                return; 
-            }
   
         await createGoals({
           variables: { 
             input: {
+              userId: userId,
               year: parseInt(year),
               digital: parseFloat(formState.digital),
               cash: parseFloat(formState.cash),
@@ -128,36 +130,36 @@ export default function OnBoarding({ children }) {
       }
     }
     const handleChangeUserGoal = (updatedUserGoalState) => {
-        setFormState((prevUserGoalState) => ({
-            ...prevUserGoalState,
-            ...updatedUserGoalState
-        }))
+      setFormState((prevUserGoalState) => ({
+          ...prevUserGoalState,
+          ...updatedUserGoalState
+      }))
     }
 
     const handleSubmitFinance = async (thisYear, userFinancial) => {
-        try {
-          await updateUser({
-            variables: {
-              incomeLevel: userFinancial.incomeLevel
-            }
-          })
-          await createFinance({
-            variables: { input: {
-              digital: parseFloat(userFinancial.currentDigital),
-              cash: parseFloat(userFinancial.currentCash),
-              invested: parseFloat(userFinancial.currentInvested),
-              saved: parseFloat(userFinancial.currentSaved)
-            }}
-          })
-          await createNetworth({
-            variables: {
-              year: parseFloat(thisYear),
-              digital: parseFloat(currentDigital),
-              cash: parseFloat(currentCash),
-              invested: parseFloat(currentInvested),
-              saved: parseFloat(currentSaved)
-            }
-          })
+      try {
+        await updateUser({
+          variables: {
+            incomeLevel: userFinancial.incomeLevel
+          }
+        })
+        await createFinance({
+          variables: { input: {
+            digital: parseFloat(userFinancial.currentDigital),
+            cash: parseFloat(userFinancial.currentCash),
+            invested: parseFloat(userFinancial.currentInvested),
+            saved: parseFloat(userFinancial.currentSaved)
+          }}
+        })
+        await createNetworth({
+          variables: {
+            year: parseFloat(thisYear),
+            digital: parseFloat(currentDigital),
+            cash: parseFloat(currentCash),
+            invested: parseFloat(currentInvested),
+            saved: parseFloat(currentSaved)
+          }
+        })
     
           // dispatch(updateCash(currentCash))
           // dispatch(updateDigital(currentDigital))
@@ -165,29 +167,29 @@ export default function OnBoarding({ children }) {
           // dispatch(updateSaved(currentSaved))
           // dispatch(updateNetworth());
     
-          await handleNextStep()
-          console.log('successful')
-        } catch (error) {
-          console.log('Error:', error)
-        }
+        await handleNextStep()
+        console.log('successful')
+      } catch (error) {
+        console.log('Error:', error)
+      }
     }
 
     const handleChangeUserFinances = (updatedUserFinanceState) => {
-        setUserFinancial((prevUserFinanceState) => ({
-            ...prevUserFinanceState,
-            ...updatedUserFinanceState
-        }))
+      setUserFinancial((prevUserFinanceState) => ({
+          ...prevUserFinanceState,
+          ...updatedUserFinanceState
+      }))
     }
 
     const handleButtonClick = () => {
-        if (step === 0) {
-          handleSubmitInfo(userDataState);
-        } else if (step > 0 && step < 7) {
-          handleSubmitGoal(formState, thisYear);
-        } else if (step === 7) {
-          handleChangeUserFinances(userFinancial, thisYear)
-        }
-      };
+      if (step === 0) {
+        handleSubmitInfo(userDataState);
+      } else if (step > 0 && step < 7) {
+        handleSubmitGoal(formState, thisYear);
+      } else if (step === 7) {
+        handleChangeUserFinances(userFinancial, thisYear)
+      }
+    };
     const leftContent = onboardingScreenDatas[step].leftContent || [];
     const rightContent = onboardingScreenDatas[step].rightContent || [];
 

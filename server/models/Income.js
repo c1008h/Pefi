@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const incomeSchema = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref:'User'
+    },
     amount: {
         type: Number,
         // required: true,

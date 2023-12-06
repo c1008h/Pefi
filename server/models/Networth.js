@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const networthSchema = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref:'User'
+    },
     year: {
         type: Number,
     },
@@ -20,12 +24,6 @@ const networthSchema = new Schema({
         type: Number,
     },
     networth: {
-        type: Number,
-    },
-    totalIncome: {
-        type: Number,
-    },
-    totalExpense: {
         type: Number,
     },
     createdAt: {

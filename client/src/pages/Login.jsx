@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useMutation } from '@apollo/client';
 import { authService } from "../utils/auth";
 import { Alert } from 'react-bootstrap'
-import { LOGIN_USER } from '../utils/mutations';
+import { LOGIN_A_USER } from "../utils/mutations";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../features/auth/authSlice'
 import { Container } from 'react-bootstrap'
@@ -15,7 +15,7 @@ export default function Login() {
 
   const { email, password } = formState;
 
-  const [login, { error }] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(LOGIN_A_USER);
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.user);

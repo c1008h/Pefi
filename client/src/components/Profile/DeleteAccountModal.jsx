@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import ModalTemplate from '../ModalTemplate'
+import ModalTemplate from '../modals/ModalTemplate';
 import { Button, Form } from 'react-bootstrap'
 import Select from 'react-select'
 import { useMutation } from '@apollo/client'
 import { deleteAccount } from '../../constants/deleting_reasons'
-import { CHECK_PASSWORD, DELETE_USER } from '../../utils/mutations'
+import { CHECK_PASSWORD, DELETE_A_USER } from '../../utils/mutations'
 import PropTypes from 'prop-types'; // Import PropTypes
 import { authService } from '../../utils/auth'
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,7 +17,7 @@ export default function DeleteAccountModal({ show, handleClose, userData }) {
     const [isPasswordCorrect, setIsPasswordCorrect] = useState(false); 
     const [userId, setUserId] = useState(userData?._id || '')
     const [email, setEmail] = useState(userData?.email || '')
-    const [deleteUser] = useMutation(DELETE_USER)
+    const [deleteUser] = useMutation(DELETE_A_USER)
     const [checkPassword] = useMutation(CHECK_PASSWORD)
 
     const dispatch = useDispatch();

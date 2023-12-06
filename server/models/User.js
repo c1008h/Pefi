@@ -6,68 +6,51 @@ const financeSchema = require('./Finance');
 const Networth = require('./Networth')
 const Goal = require('./Goals')
 
-const userSchema = new Schema(
-    {
-        firstName: {
-            type: String,
-            trim: true
-        },
-        lastName: {
-            type: String,
-            trim: true
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            match: [/.+@.+\..+/, 'Must use a valid email address'],
-        },
-        location: {
-            type: String,
-            trim: true
-        },
-        gender: {
-            type: String,
-            trim: true
-        },
-        incomeLevel: {
-            type: String,
-            trim: true
-        },
-        birthday: {
-            type: Date,
-            trim: true
-        },
-        password: {
-            type: String,
-            required: true,
-            minlength: 8
-        },
-        goalsGroup: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Goal'
-        }],
-        financeGroup: financeSchema,
-        networthGroup: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Networth'
-        }],
-        incomesGroup: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Incomes'
-        }],
-        expensesGroup: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Expenses'
-        }]
+const userSchema = new Schema({
+    firstName: {
+        type: String,
+        trim: true
     },
-    { timestamps: true } ,
-    {
-        toJSON: {
-          virtuals: true,
-        },
+    lastName: {
+        type: String,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: [/.+@.+\..+/, 'Must use a valid email address'],
+    },
+    location: {
+        type: String,
+        trim: true
+    },
+    gender: {
+        type: String,
+        trim: true
+    },
+    incomeLevel: {
+        type: String,
+        trim: true
+    },
+    birthday: {
+        type: Date,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 8
     }
-)
+},
+{ 
+    timestamps: true 
+},
+{
+    toJSON: {
+        virtuals: true,
+    },
+})
 
 userSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {

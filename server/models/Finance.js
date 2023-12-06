@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const financeSchema = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref:'User'
+    },
     digital: {
         type: Number,
     },

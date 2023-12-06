@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
-import { CREATE_EXPENSE } from '../../utils/mutations';
+import { ADD_EXPENSE } from '../../utils/mutations';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types'; // Import PropTypes
 import Select from 'react-select'
 import { genreList, frequencyOptions, moneyType } from '../../constants/genres'
-import ModalTemplate from '../ModalTemplate';
+import ModalTemplate from '../modals/ModalTemplate';
 
 export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, onSaveExpense, value }) {
   const [amount, setAmount] = useState()
@@ -16,7 +16,7 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, 
   const [type, setType] = useState()
   // const [showPrompt, setShowPrompt] = useState(false);
   const [reoccuring, setReoccuring] = useState(false)
-  const [createExpense] = useMutation(CREATE_EXPENSE)
+  const [addExpense] = useMutation(ADD_EXPENSE)
 
   console.log(date)
   // const handleDateChange = (newValue) => {
@@ -28,7 +28,7 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, 
     console.log('Inputting expense:', amount, frequency, category, type, date)
     
     try {
-      await createExpense({
+      await addExpense({
         variables: { input: {
           amount: parseFloat(amount),
           frequency: frequency,
@@ -40,7 +40,7 @@ export function ExpenseModal({ openExpenseForm, closeExpenseForm, onDateChange, 
 
       // await dispatch(addExpense({amount, frequency, category, type, date}));
       onSaveExpense({amount, frequency, category, type, date})
-      if(createExpense.error) { throw new Error('Something went wrong with creating expense.')}
+      if(addExpense.error) { throw new Error('Something went wrong with creating expense.')}
       window.location.reload();
 
     } catch (error) {

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
-import { CREATE_FINANCE } from '../utils/mutations'
+import { ADD_FINANCE } from '../utils/mutations'
 import { useMutation } from '@apollo/client';
 import { Loading, PleaseLogin, FormTemplate, FormLayout } from '../components/index';
 
@@ -16,7 +16,7 @@ export default function Finance() {
   const [invested, setInvested] = useState(0);
   const [saved, setSaved] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [createFinance] = useMutation(CREATE_FINANCE);
+  const [addFinance] = useMutation(ADD_FINANCE);
 
   const fields = [
     {
@@ -54,7 +54,7 @@ export default function Finance() {
     setIsEditMode(false); 
 
     try {
-      await createFinance({ 
+      await addFinance({ 
         variables: {  
           input: {
             digital: parseFloat(digital),

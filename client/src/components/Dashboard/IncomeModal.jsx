@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap'
 import { useMutation } from '@apollo/client';
-import { CREATE_INCOME } from '../../utils/mutations';
+import { ADD_INCOME } from '../../utils/mutations';
 import Select from 'react-select'
 import { frequencyOptions, incomeOptions, moneyType } from '../../constants/genres'
 import PropTypes from 'prop-types'; 
-import ModalTemplate from '../ModalTemplate';
+import ModalTemplate from '../modals/ModalTemplate';
 
 export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
     const [showPrompt, setShowPrompt] = useState(false);
@@ -17,7 +17,7 @@ export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
     const [date, setDate] = useState(value.format('MM/DD/YYYY'))
     const [note, setNote] = useState('');
     const [isRecurring, setIsRecurring] = useState(false);
-    const [createIncome] = useMutation(CREATE_INCOME)
+    const [addIncome] = useMutation(ADD_INCOME)
 
     const handleAddIncome = () => {
       setShowPrompt(true);
@@ -29,7 +29,7 @@ export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
       setShowPrompt(false);
 
       try {
-        await createIncome({
+        await addIncome({
           variables: { input: { 
             amount: parseFloat(amount.trim()),
             frequency: frequency,
@@ -40,7 +40,7 @@ export const IncomeModal = ({ closeIncomeForm, openIncomeForm, value }) => {
           }} 
         })
 
-        if(createIncome.error) { throw new Error('Something went wrong.')}
+        if(addIncome.error) { throw new Error('Something went wrong.')}
        
         window.location.reload();
       } catch (error) {

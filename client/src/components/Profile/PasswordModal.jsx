@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import { Form } from 'react-bootstrap'
-import ModalTemplate from '../ModalTemplate';
+import ModalTemplate from '../modals/ModalTemplate';
 
 export default function PasswordModal({ show, handleClose }) {
     const [currentPassword, setCurrentPassword] = useState('');

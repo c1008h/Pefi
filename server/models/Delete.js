@@ -10,11 +10,16 @@ const deleteSchema = new Schema({
         required: true,
         unique: true,
         match: [/.+@.+\..+/, 'Must use a valid email address'],
-
     },
     reason: {
         type: String,
         required: true
+    },
+    createdAccount: {
+        type: String
+    },
+    deletedAccount: {
+        type: String
     }
 },
     { timestamps: true } 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 // import { useSelector } from 'react-redux';
-import { REMOVE_EXPENSE, REMOVE_INCOME } from '../utils/mutations';
+// import { REMOVE_EXPENSE, REMOVE_INCOME } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth';
 // import { useDispatch } from 'react-redux';
@@ -29,22 +29,22 @@ export default function AccountHistory() {
     // const expenseState = useSelector((state) => state.finance.expenses);
     // const incomeState = useSelector((state) => state.finance.incomes)
 
-    useEffect(() => {
-        if (data) {
-            const { me } = data
-            setUserData(data.me)
-            setExpense(data.me.expensesGroup)
-            setIncome(data.me.incomesGroup)
+    // useEffect(() => {
+    //     if (data) {
+    //         const { me } = data
+    //         setUserData(data.me)
+    //         setExpense(data.me.expensesGroup)
+    //         setIncome(data.me.incomesGroup)
 
-            const combined = [
-                ...me.expensesGroup.map(item => ({ ...item, type: 'Expense' })),
-                ...me.incomesGroup.map(item => ({ ...item, type: 'Income' }))
-            ].sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date
+    //         const combined = [
+    //             ...me.expensesGroup.map(item => ({ ...item, type: 'Expense' })),
+    //             ...me.incomesGroup.map(item => ({ ...item, type: 'Income' }))
+    //         ].sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date
     
-            console.log('combined', combined)
-            setCombinedData(combined);
-        }
-    }, [data])
+    //         console.log('combined', combined)
+    //         setCombinedData(combined);
+    //     }
+    // }, [data])
 
     const handleDelete = async (_id, type) => {
         console.log(_id, type)
@@ -86,7 +86,7 @@ export default function AccountHistory() {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentItems.map((item) => (
+                    {/* {currentItems.map((item) => (
                         <tr key={item._id} className={item.type === 'Expense' ? 'type-show Expense' : 'type-show Income'}>
                             <td>{item.date}</td>
                             <td>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.amount)}</td>
@@ -96,7 +96,7 @@ export default function AccountHistory() {
                                 <ButtonTemplate title='X' onClick={() => handleDelete(item._id, item.type)} btnStyle='round'/>
                             </td>
                         </tr>
-                    ))}
+                    ))} */}
                 </tbody>
             </table>
 
